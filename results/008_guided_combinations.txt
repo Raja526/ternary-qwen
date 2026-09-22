@@ -1,0 +1,1950 @@
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+==============================================================================================================
+EXPERIMENT 008 — Qwen3.5-0.8B Sensitivity-Guided Block Combinations
+==============================================================================================================
+
+Configuration
+--------------------------------------------------------------------------------------------------------------
+Model              : Qwen/Qwen3.5-0.8B
+Device             : cuda
+Data type          : torch.float16
+Group size         : 128
+Maximum new tokens : 40
+Number test cases  : 13
+
+Environment
+--------------------------------------------------------------------------------------------------------------
+PyTorch            : 2.14.0+cu126
+CUDA runtime       : 12.6
+CUDA available     : True
+GPU                : Quadro P1000
+GPU capability     : (6, 1)
+Total VRAM         : 3.94 GB
+
+Loading tokenizer...
+
+GPU MEMORY — before model load
+Allocated : 0.00 MB
+Reserved  : 0.00 MB
+Free      : 3982.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.68 sec
+
+GPU MEMORY — after model load
+Allocated : 1435.10 MB
+Reserved  : 1452.00 MB
+Free      : 2526.94 MB
+Total     : 4031.88 MB
+
+Discovered component blocks
+--------------------------------------------------------------------------------------------------------------
+mlp            : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+linear_attn    : [0, 1, 2, 4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18, 20, 21, 22]
+self_attn      : [3, 7, 11, 15, 19, 23]
+
+Total parameters : 752,393,024
+
+Validating Experiment 008 test cases...
+All requested test cases are valid.
+
+==============================================================================================================
+FP16 REFERENCE
+==============================================================================================================
+
+PROMPT 1
+--------------------------------------------------------------------------------------------------------------
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+Imagine the sky as a giant, clear window. The reason it looks blue is a simple physics trick called **Rayleigh scattering**.
+
+Here is the simple breakdown:
+
+1
+
+Generated tokens : 40
+Generation time  : 3.336 sec
+Tokens/sec       : 11.99
+
+PROMPT 2
+--------------------------------------------------------------------------------------------------------------
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we can use the distributive property of multiplication. We can break down 23 into 20 and 3, and
+
+Generated tokens : 40
+Generation time  : 1.870 sec
+Tokens/sec       : 21.39
+
+PROMPT 3
+--------------------------------------------------------------------------------------------------------------
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the distance traveled by the train, we use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+Given:
+
+Generated tokens : 40
+Generation time  : 1.839 sec
+Tokens/sec       : 21.75
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 1/13 — MLP_2
+##############################################################################################################
+
+Selected blocks:
+  mlp            : [6, 12]
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.78 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+OVERALL TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Affected Linear layers : 6
+Affected parameters    : 22,020,096
+Model coverage         : 2.93%
+Mean relative error    : 0.525551
+Max relative error     : 0.527120
+
+COMPONENT BREAKDOWN
+--------------------------------------------------------------------------------------------------------------
+mlp             | Linear layers   6 | Parameters   22,020,096 | Coverage   2.93% | Mean error 0.5256 | Max error 0.5271
+
+TERNARIZED MATRICES
+--------------------------------------------------------------------------------------------------------------
+mlp             block  6 | model.layers.6.mlp.gate_proj
+    Parameters     : 3,670,016
+    Relative error : 0.523432
+mlp             block  6 | model.layers.6.mlp.up_proj
+    Parameters     : 3,670,016
+    Relative error : 0.527120
+mlp             block  6 | model.layers.6.mlp.down_proj
+    Parameters     : 3,670,016
+    Relative error : 0.525726
+mlp             block 12 | model.layers.12.mlp.gate_proj
+    Parameters     : 3,670,016
+    Relative error : 0.526205
+mlp             block 12 | model.layers.12.mlp.up_proj
+    Parameters     : 3,670,016
+    Relative error : 0.524517
+mlp             block 12 | model.layers.12.mlp.down_proj
+    Parameters     : 3,670,016
+    Relative error : 0.526305
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+The sky is blue because of a phenomenon called **scattering of light**.
+
+Here is the simple explanation:
+
+1.  **The Sun's Light**: The Sun shines
+
+Generated tokens : 40
+Generation time  : 1.820 sec
+Tokens/sec       : 21.98
+
+PROMPT 2
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we multiply the two numbers together: \( 17 \times 23 = 391 \).
+
+What is
+
+Generated tokens : 40
+Generation time  : 1.817 sec
+Tokens/sec       : 22.02
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find out how far the train travels, we can use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+Given
+
+Generated tokens : 40
+Generation time  : 1.819 sec
+Tokens/sec       : 21.99
+
+Aggregate throughput : 22.00 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next combination
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 2/13 — MLP_3
+##############################################################################################################
+
+Selected blocks:
+  mlp            : [6, 12, 18]
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.64 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+OVERALL TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Affected Linear layers : 9
+Affected parameters    : 33,030,144
+Model coverage         : 4.39%
+Mean relative error    : 0.523817
+Max relative error     : 0.527120
+
+COMPONENT BREAKDOWN
+--------------------------------------------------------------------------------------------------------------
+mlp             | Linear layers   9 | Parameters   33,030,144 | Coverage   4.39% | Mean error 0.5238 | Max error 0.5271
+
+TERNARIZED MATRICES
+--------------------------------------------------------------------------------------------------------------
+mlp             block  6 | model.layers.6.mlp.gate_proj
+    Parameters     : 3,670,016
+    Relative error : 0.523432
+mlp             block  6 | model.layers.6.mlp.up_proj
+    Parameters     : 3,670,016
+    Relative error : 0.527120
+mlp             block  6 | model.layers.6.mlp.down_proj
+    Parameters     : 3,670,016
+    Relative error : 0.525726
+mlp             block 12 | model.layers.12.mlp.gate_proj
+    Parameters     : 3,670,016
+    Relative error : 0.526205
+mlp             block 12 | model.layers.12.mlp.up_proj
+    Parameters     : 3,670,016
+    Relative error : 0.524517
+mlp             block 12 | model.layers.12.mlp.down_proj
+    Parameters     : 3,670,016
+    Relative error : 0.526305
+mlp             block 18 | model.layers.18.mlp.gate_proj
+    Parameters     : 3,670,016
+    Relative error : 0.524855
+mlp             block 18 | model.layers.18.mlp.up_proj
+    Parameters     : 3,670,016
+    Relative error : 0.518565
+mlp             block 18 | model.layers.18.mlp.down_proj
+    Parameters     : 3,670,016
+    Relative error : 0.517626
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+Here's a thinking process that leads to the explanation of why the sky is blue:
+
+1.  **Identify the core concept:** The phenomenon is "Sky is Blue" (
+
+Generated tokens : 40
+Generation time  : 1.814 sec
+Tokens/sec       : 22.05
+
+PROMPT 2
+What is 17 multiplied by 23?
+
+To find 17 multiplied by 23, we can use the following calculation:
+\[ 17 \times 23 = 391 \]
+This is because
+
+Generated tokens : 40
+Generation time  : 1.877 sec
+Tokens/sec       : 21.31
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find out how far the train travels, we can use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+Given
+
+Generated tokens : 40
+Generation time  : 1.872 sec
+Tokens/sec       : 21.37
+
+Aggregate throughput : 21.57 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next combination
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 3/13 — MLP_4
+##############################################################################################################
+
+Selected blocks:
+  mlp            : [6, 12, 18, 23]
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.65 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+OVERALL TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Affected Linear layers : 12
+Affected parameters    : 44,040,192
+Model coverage         : 5.85%
+Mean relative error    : 0.525004
+Max relative error     : 0.536022
+
+COMPONENT BREAKDOWN
+--------------------------------------------------------------------------------------------------------------
+mlp             | Linear layers  12 | Parameters   44,040,192 | Coverage   5.85% | Mean error 0.5250 | Max error 0.5360
+
+TERNARIZED MATRICES
+--------------------------------------------------------------------------------------------------------------
+mlp             block  6 | model.layers.6.mlp.gate_proj
+    Parameters     : 3,670,016
+    Relative error : 0.523432
+mlp             block  6 | model.layers.6.mlp.up_proj
+    Parameters     : 3,670,016
+    Relative error : 0.527120
+mlp             block  6 | model.layers.6.mlp.down_proj
+    Parameters     : 3,670,016
+    Relative error : 0.525726
+mlp             block 12 | model.layers.12.mlp.gate_proj
+    Parameters     : 3,670,016
+    Relative error : 0.526205
+mlp             block 12 | model.layers.12.mlp.up_proj
+    Parameters     : 3,670,016
+    Relative error : 0.524517
+mlp             block 12 | model.layers.12.mlp.down_proj
+    Parameters     : 3,670,016
+    Relative error : 0.526305
+mlp             block 18 | model.layers.18.mlp.gate_proj
+    Parameters     : 3,670,016
+    Relative error : 0.524855
+mlp             block 18 | model.layers.18.mlp.up_proj
+    Parameters     : 3,670,016
+    Relative error : 0.518565
+mlp             block 18 | model.layers.18.mlp.down_proj
+    Parameters     : 3,670,016
+    Relative error : 0.517626
+mlp             block 23 | model.layers.23.mlp.gate_proj
+    Parameters     : 3,670,016
+    Relative error : 0.527136
+mlp             block 23 | model.layers.23.mlp.up_proj
+    Parameters     : 3,670,016
+    Relative error : 0.522536
+mlp             block 23 | model.layers.23.mlp.down_proj
+    Parameters     : 3,670,016
+    Relative error : 0.536022
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+The sky is blue because of a phenomenon called **scattering**.
+
+When light hits the Earth, the atmosphere, and the other objects in the sky, it is not reflected; it is **
+
+Generated tokens : 40
+Generation time  : 1.883 sec
+Tokens/sec       : 21.24
+
+PROMPT 2
+What is 17 multiplied by 23?
+
+To find 17 multiplied by 23, we can use the following calculation:
+\[ 17 \times 23 = 391 \]
+
+Can you explain
+
+Generated tokens : 40
+Generation time  : 1.811 sec
+Tokens/sec       : 22.08
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To calculate how far the train travels, we use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+Given:
+
+
+Generated tokens : 40
+Generation time  : 1.811 sec
+Tokens/sec       : 22.09
+
+Aggregate throughput : 21.80 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next combination
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 4/13 — LINEAR_ATTN_2
+##############################################################################################################
+
+Selected blocks:
+  linear_attn    : [4, 8]
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.68 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+OVERALL TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Affected Linear layers : 6
+Affected parameters    : 20,971,520
+Model coverage         : 2.79%
+Mean relative error    : 0.524540
+Max relative error     : 0.536825
+
+COMPONENT BREAKDOWN
+--------------------------------------------------------------------------------------------------------------
+linear_attn     | Linear layers   6 | Parameters   20,971,520 | Coverage   2.79% | Mean error 0.5245 | Max error 0.5368
+
+TERNARIZED MATRICES
+--------------------------------------------------------------------------------------------------------------
+linear_attn     block  4 | model.layers.4.linear_attn.out_proj
+    Parameters     : 2,097,152
+    Relative error : 0.536825
+linear_attn     block  4 | model.layers.4.linear_attn.in_proj_qkv
+    Parameters     : 6,291,456
+    Relative error : 0.521296
+linear_attn     block  4 | model.layers.4.linear_attn.in_proj_z
+    Parameters     : 2,097,152
+    Relative error : 0.518173
+linear_attn     block  8 | model.layers.8.linear_attn.out_proj
+    Parameters     : 2,097,152
+    Relative error : 0.527005
+linear_attn     block  8 | model.layers.8.linear_attn.in_proj_qkv
+    Parameters     : 6,291,456
+    Relative error : 0.523189
+linear_attn     block  8 | model.layers.8.linear_attn.in_proj_z
+    Parameters     : 2,097,152
+    Relative error : 0.520750
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+Here is a simple explanation of why the sky is blue.
+
+### The Science: Why the Sky is Blue
+
+**1. The Sun's Light**
+The sun emits
+
+Generated tokens : 40
+Generation time  : 1.812 sec
+Tokens/sec       : 22.08
+
+PROMPT 2
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we multiply the two numbers together.
+
+17 × 23 = 391.
+
+Therefore, the answer is
+
+Generated tokens : 40
+Generation time  : 1.806 sec
+Tokens/sec       : 22.15
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the total distance traveled by the train, we can use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+
+
+Generated tokens : 40
+Generation time  : 1.818 sec
+Tokens/sec       : 22.00
+
+Aggregate throughput : 22.08 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next combination
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 5/13 — LINEAR_ATTN_3
+##############################################################################################################
+
+Selected blocks:
+  linear_attn    : [4, 8, 12]
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.64 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+OVERALL TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Affected Linear layers : 9
+Affected parameters    : 31,457,280
+Model coverage         : 4.18%
+Mean relative error    : 0.525032
+Max relative error     : 0.536825
+
+COMPONENT BREAKDOWN
+--------------------------------------------------------------------------------------------------------------
+linear_attn     | Linear layers   9 | Parameters   31,457,280 | Coverage   4.18% | Mean error 0.5250 | Max error 0.5368
+
+TERNARIZED MATRICES
+--------------------------------------------------------------------------------------------------------------
+linear_attn     block  4 | model.layers.4.linear_attn.out_proj
+    Parameters     : 2,097,152
+    Relative error : 0.536825
+linear_attn     block  4 | model.layers.4.linear_attn.in_proj_qkv
+    Parameters     : 6,291,456
+    Relative error : 0.521296
+linear_attn     block  4 | model.layers.4.linear_attn.in_proj_z
+    Parameters     : 2,097,152
+    Relative error : 0.518173
+linear_attn     block  8 | model.layers.8.linear_attn.out_proj
+    Parameters     : 2,097,152
+    Relative error : 0.527005
+linear_attn     block  8 | model.layers.8.linear_attn.in_proj_qkv
+    Parameters     : 6,291,456
+    Relative error : 0.523189
+linear_attn     block  8 | model.layers.8.linear_attn.in_proj_z
+    Parameters     : 2,097,152
+    Relative error : 0.520750
+linear_attn     block 12 | model.layers.12.linear_attn.out_proj
+    Parameters     : 2,097,152
+    Relative error : 0.531356
+linear_attn     block 12 | model.layers.12.linear_attn.in_proj_qkv
+    Parameters     : 6,291,456
+    Relative error : 0.524361
+linear_attn     block 12 | model.layers.12.linear_attn.in_proj_z
+    Parameters     : 2,097,152
+    Relative error : 0.522333
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+The sky's blue color is a fascinating phenomenon that can be explained through several key scientific principles. Here's a breakdown:
+
+### 1. **Rayleigh Scattering**
+
+Generated tokens : 40
+Generation time  : 1.807 sec
+Tokens/sec       : 22.14
+
+PROMPT 2
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we can use the rule of multiplication. The rule states that the product of two numbers is the product of their absolute values. Therefore
+
+Generated tokens : 40
+Generation time  : 1.808 sec
+Tokens/sec       : 22.13
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the distance traveled by the train, we can use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+Given
+
+Generated tokens : 40
+Generation time  : 1.800 sec
+Tokens/sec       : 22.22
+
+Aggregate throughput : 22.16 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next combination
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 6/13 — LINEAR_ATTN_4
+##############################################################################################################
+
+Selected blocks:
+  linear_attn    : [4, 8, 12, 16]
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.80 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+OVERALL TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Affected Linear layers : 12
+Affected parameters    : 41,943,040
+Model coverage         : 5.57%
+Mean relative error    : 0.526738
+Max relative error     : 0.549837
+
+COMPONENT BREAKDOWN
+--------------------------------------------------------------------------------------------------------------
+linear_attn     | Linear layers  12 | Parameters   41,943,040 | Coverage   5.57% | Mean error 0.5267 | Max error 0.5498
+
+TERNARIZED MATRICES
+--------------------------------------------------------------------------------------------------------------
+linear_attn     block  4 | model.layers.4.linear_attn.out_proj
+    Parameters     : 2,097,152
+    Relative error : 0.536825
+linear_attn     block  4 | model.layers.4.linear_attn.in_proj_qkv
+    Parameters     : 6,291,456
+    Relative error : 0.521296
+linear_attn     block  4 | model.layers.4.linear_attn.in_proj_z
+    Parameters     : 2,097,152
+    Relative error : 0.518173
+linear_attn     block  8 | model.layers.8.linear_attn.out_proj
+    Parameters     : 2,097,152
+    Relative error : 0.527005
+linear_attn     block  8 | model.layers.8.linear_attn.in_proj_qkv
+    Parameters     : 6,291,456
+    Relative error : 0.523189
+linear_attn     block  8 | model.layers.8.linear_attn.in_proj_z
+    Parameters     : 2,097,152
+    Relative error : 0.520750
+linear_attn     block 12 | model.layers.12.linear_attn.out_proj
+    Parameters     : 2,097,152
+    Relative error : 0.531356
+linear_attn     block 12 | model.layers.12.linear_attn.in_proj_qkv
+    Parameters     : 6,291,456
+    Relative error : 0.524361
+linear_attn     block 12 | model.layers.12.linear_attn.in_proj_z
+    Parameters     : 2,097,152
+    Relative error : 0.522333
+linear_attn     block 16 | model.layers.16.linear_attn.out_proj
+    Parameters     : 2,097,152
+    Relative error : 0.549837
+linear_attn     block 16 | model.layers.16.linear_attn.in_proj_qkv
+    Parameters     : 6,291,456
+    Relative error : 0.524481
+linear_attn     block 16 | model.layers.16.linear_attn.in_proj_z
+    Parameters     : 2,097,152
+    Relative error : 0.521251
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+The sky is blue because of a phenomenon called **Rayleigh scattering**, which occurs when sunlight passes through the atmosphere and is scattered by the air molecules.
+
+Here's a breakdown
+
+Generated tokens : 40
+Generation time  : 1.884 sec
+Tokens/sec       : 21.23
+
+PROMPT 2
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we can multiply them directly. 17 * 23 = 391.
+
+What is the value of 
+
+Generated tokens : 40
+Generation time  : 1.836 sec
+Tokens/sec       : 21.79
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+<think>
+
+</think>
+
+To find the total distance traveled by the train, we can use the fundamental relationship between speed and time:
+
+**Formula:**
+$$ \text{Distance} = \text
+
+Generated tokens : 40
+Generation time  : 1.811 sec
+Tokens/sec       : 22.09
+
+Aggregate throughput : 21.70 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next combination
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 7/13 — LINEAR_ATTN_5
+##############################################################################################################
+
+Selected blocks:
+  linear_attn    : [4, 8, 12, 16, 22]
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.68 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+OVERALL TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Affected Linear layers : 15
+Affected parameters    : 52,428,800
+Model coverage         : 6.97%
+Mean relative error    : 0.527839
+Max relative error     : 0.549837
+
+COMPONENT BREAKDOWN
+--------------------------------------------------------------------------------------------------------------
+linear_attn     | Linear layers  15 | Parameters   52,428,800 | Coverage   6.97% | Mean error 0.5278 | Max error 0.5498
+
+TERNARIZED MATRICES
+--------------------------------------------------------------------------------------------------------------
+linear_attn     block  4 | model.layers.4.linear_attn.out_proj
+    Parameters     : 2,097,152
+    Relative error : 0.536825
+linear_attn     block  4 | model.layers.4.linear_attn.in_proj_qkv
+    Parameters     : 6,291,456
+    Relative error : 0.521296
+linear_attn     block  4 | model.layers.4.linear_attn.in_proj_z
+    Parameters     : 2,097,152
+    Relative error : 0.518173
+linear_attn     block  8 | model.layers.8.linear_attn.out_proj
+    Parameters     : 2,097,152
+    Relative error : 0.527005
+linear_attn     block  8 | model.layers.8.linear_attn.in_proj_qkv
+    Parameters     : 6,291,456
+    Relative error : 0.523189
+linear_attn     block  8 | model.layers.8.linear_attn.in_proj_z
+    Parameters     : 2,097,152
+    Relative error : 0.520750
+linear_attn     block 12 | model.layers.12.linear_attn.out_proj
+    Parameters     : 2,097,152
+    Relative error : 0.531356
+linear_attn     block 12 | model.layers.12.linear_attn.in_proj_qkv
+    Parameters     : 6,291,456
+    Relative error : 0.524361
+linear_attn     block 12 | model.layers.12.linear_attn.in_proj_z
+    Parameters     : 2,097,152
+    Relative error : 0.522333
+linear_attn     block 16 | model.layers.16.linear_attn.out_proj
+    Parameters     : 2,097,152
+    Relative error : 0.549837
+linear_attn     block 16 | model.layers.16.linear_attn.in_proj_qkv
+    Parameters     : 6,291,456
+    Relative error : 0.524481
+linear_attn     block 16 | model.layers.16.linear_attn.in_proj_z
+    Parameters     : 2,097,152
+    Relative error : 0.521251
+linear_attn     block 22 | model.layers.22.linear_attn.out_proj
+    Parameters     : 2,097,152
+    Relative error : 0.545347
+linear_attn     block 22 | model.layers.22.linear_attn.in_proj_qkv
+    Parameters     : 6,291,456
+    Relative error : 0.524560
+linear_attn     block 22 | model.layers.22.linear_attn.in_proj_z
+    Parameters     : 2,097,152
+    Relative error : 0.526827
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+The sky is blue because of a phenomenon called **Rayleigh scattering**, which occurs when sunlight passes through the atmosphere and is scattered by the molecules in the air.
+
+Here's
+
+Generated tokens : 40
+Generation time  : 1.809 sec
+Tokens/sec       : 22.11
+
+PROMPT 2
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we can multiply them directly. 17 * 23 = 391.
+
+What is the value of 
+
+Generated tokens : 40
+Generation time  : 1.854 sec
+Tokens/sec       : 21.58
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+<think>
+
+</think>
+
+To find the total distance traveled by the train, we can use the basic formula:
+
+$$
+\text{Distance} = \text{Speed} \times \text
+
+Generated tokens : 40
+Generation time  : 1.817 sec
+Tokens/sec       : 22.02
+
+Aggregate throughput : 21.90 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next combination
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 8/13 — SELF_ATTN_2
+##############################################################################################################
+
+Selected blocks:
+  self_attn      : [3, 7]
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.67 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+OVERALL TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Affected Linear layers : 8
+Affected parameters    : 14,680,064
+Model coverage         : 1.95%
+Mean relative error    : 0.533149
+Max relative error     : 0.562900
+
+COMPONENT BREAKDOWN
+--------------------------------------------------------------------------------------------------------------
+self_attn       | Linear layers   8 | Parameters   14,680,064 | Coverage   1.95% | Mean error 0.5331 | Max error 0.5629
+
+TERNARIZED MATRICES
+--------------------------------------------------------------------------------------------------------------
+self_attn       block  3 | model.layers.3.self_attn.q_proj
+    Parameters     : 4,194,304
+    Relative error : 0.516713
+self_attn       block  3 | model.layers.3.self_attn.k_proj
+    Parameters     : 524,288
+    Relative error : 0.531421
+self_attn       block  3 | model.layers.3.self_attn.v_proj
+    Parameters     : 524,288
+    Relative error : 0.537959
+self_attn       block  3 | model.layers.3.self_attn.o_proj
+    Parameters     : 2,097,152
+    Relative error : 0.537334
+self_attn       block  7 | model.layers.7.self_attn.q_proj
+    Parameters     : 4,194,304
+    Relative error : 0.528918
+self_attn       block  7 | model.layers.7.self_attn.k_proj
+    Parameters     : 524,288
+    Relative error : 0.522142
+self_attn       block  7 | model.layers.7.self_attn.v_proj
+    Parameters     : 524,288
+    Relative error : 0.562900
+self_attn       block  7 | model.layers.7.self_attn.o_proj
+    Parameters     : 2,097,152
+    Relative error : 0.527805
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+The sky appears blue because of a phenomenon called **Rayleigh scattering**. Here is the simple explanation:
+
+1.  **What is Rayleigh Scattering?** It is a
+
+Generated tokens : 40
+Generation time  : 1.814 sec
+Tokens/sec       : 22.05
+
+PROMPT 2
+What is 17 multiplied by 23?
+17 * 23 = 391
+
+The answer is 391.
+
+The answer is 391.
+
+The answer is 391.
+
+
+
+Generated tokens : 40
+Generation time  : 1.804 sec
+Tokens/sec       : 22.17
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the distance the train travels, we can use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+Given:
+
+Generated tokens : 40
+Generation time  : 1.814 sec
+Tokens/sec       : 22.05
+
+Aggregate throughput : 22.09 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next combination
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 9/13 — SELF_ATTN_3
+##############################################################################################################
+
+Selected blocks:
+  self_attn      : [3, 7, 11]
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.68 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+OVERALL TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Affected Linear layers : 12
+Affected parameters    : 22,020,096
+Model coverage         : 2.93%
+Mean relative error    : 0.533322
+Max relative error     : 0.562900
+
+COMPONENT BREAKDOWN
+--------------------------------------------------------------------------------------------------------------
+self_attn       | Linear layers  12 | Parameters   22,020,096 | Coverage   2.93% | Mean error 0.5333 | Max error 0.5629
+
+TERNARIZED MATRICES
+--------------------------------------------------------------------------------------------------------------
+self_attn       block  3 | model.layers.3.self_attn.q_proj
+    Parameters     : 4,194,304
+    Relative error : 0.516713
+self_attn       block  3 | model.layers.3.self_attn.k_proj
+    Parameters     : 524,288
+    Relative error : 0.531421
+self_attn       block  3 | model.layers.3.self_attn.v_proj
+    Parameters     : 524,288
+    Relative error : 0.537959
+self_attn       block  3 | model.layers.3.self_attn.o_proj
+    Parameters     : 2,097,152
+    Relative error : 0.537334
+self_attn       block  7 | model.layers.7.self_attn.q_proj
+    Parameters     : 4,194,304
+    Relative error : 0.528918
+self_attn       block  7 | model.layers.7.self_attn.k_proj
+    Parameters     : 524,288
+    Relative error : 0.522142
+self_attn       block  7 | model.layers.7.self_attn.v_proj
+    Parameters     : 524,288
+    Relative error : 0.562900
+self_attn       block  7 | model.layers.7.self_attn.o_proj
+    Parameters     : 2,097,152
+    Relative error : 0.527805
+self_attn       block 11 | model.layers.11.self_attn.q_proj
+    Parameters     : 4,194,304
+    Relative error : 0.529132
+self_attn       block 11 | model.layers.11.self_attn.k_proj
+    Parameters     : 524,288
+    Relative error : 0.534590
+self_attn       block 11 | model.layers.11.self_attn.v_proj
+    Parameters     : 524,288
+    Relative error : 0.540774
+self_attn       block 11 | model.layers.11.self_attn.o_proj
+    Parameters     : 2,097,152
+    Relative error : 0.530172
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+It is important to clarify a common misconception before explaining the scientific reason: **The sky is not blue.**
+
+The sky is actually **white**.
+
+Here is the scientific breakdown
+
+Generated tokens : 40
+Generation time  : 1.870 sec
+Tokens/sec       : 21.40
+
+PROMPT 2
+What is 17 multiplied by 23?
+17 * 23 = 391
+
+17 * 23 = 391
+
+17 * 23 = 391
+
+17 *
+
+Generated tokens : 40
+Generation time  : 1.843 sec
+Tokens/sec       : 21.71
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+A) 150 km
+B) 150 km
+C) 150 km
+D) 150 km
+E) 150 km
+
+Generated tokens : 40
+Generation time  : 1.804 sec
+Tokens/sec       : 22.18
+
+Aggregate throughput : 21.75 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next combination
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 10/13 — SELF_ATTN_4
+##############################################################################################################
+
+Selected blocks:
+  self_attn      : [3, 7, 11, 15]
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.61 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+OVERALL TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Affected Linear layers : 16
+Affected parameters    : 29,360,128
+Model coverage         : 3.90%
+Mean relative error    : 0.536878
+Max relative error     : 0.584413
+
+COMPONENT BREAKDOWN
+--------------------------------------------------------------------------------------------------------------
+self_attn       | Linear layers  16 | Parameters   29,360,128 | Coverage   3.90% | Mean error 0.5369 | Max error 0.5844
+
+TERNARIZED MATRICES
+--------------------------------------------------------------------------------------------------------------
+self_attn       block  3 | model.layers.3.self_attn.q_proj
+    Parameters     : 4,194,304
+    Relative error : 0.516713
+self_attn       block  3 | model.layers.3.self_attn.k_proj
+    Parameters     : 524,288
+    Relative error : 0.531421
+self_attn       block  3 | model.layers.3.self_attn.v_proj
+    Parameters     : 524,288
+    Relative error : 0.537959
+self_attn       block  3 | model.layers.3.self_attn.o_proj
+    Parameters     : 2,097,152
+    Relative error : 0.537334
+self_attn       block  7 | model.layers.7.self_attn.q_proj
+    Parameters     : 4,194,304
+    Relative error : 0.528918
+self_attn       block  7 | model.layers.7.self_attn.k_proj
+    Parameters     : 524,288
+    Relative error : 0.522142
+self_attn       block  7 | model.layers.7.self_attn.v_proj
+    Parameters     : 524,288
+    Relative error : 0.562900
+self_attn       block  7 | model.layers.7.self_attn.o_proj
+    Parameters     : 2,097,152
+    Relative error : 0.527805
+self_attn       block 11 | model.layers.11.self_attn.q_proj
+    Parameters     : 4,194,304
+    Relative error : 0.529132
+self_attn       block 11 | model.layers.11.self_attn.k_proj
+    Parameters     : 524,288
+    Relative error : 0.534590
+self_attn       block 11 | model.layers.11.self_attn.v_proj
+    Parameters     : 524,288
+    Relative error : 0.540774
+self_attn       block 11 | model.layers.11.self_attn.o_proj
+    Parameters     : 2,097,152
+    Relative error : 0.530172
+self_attn       block 15 | model.layers.15.self_attn.q_proj
+    Parameters     : 4,194,304
+    Relative error : 0.525027
+self_attn       block 15 | model.layers.15.self_attn.k_proj
+    Parameters     : 524,288
+    Relative error : 0.539082
+self_attn       block 15 | model.layers.15.self_attn.v_proj
+    Parameters     : 524,288
+    Relative error : 0.584413
+self_attn       block 15 | model.layers.15.self_attn.o_proj
+    Parameters     : 2,097,152
+    Relative error : 0.541660
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+It is important to clarify a fundamental concept in astronomy before answering your question: **The sky is not blue.**
+
+The sky is not blue. The sky is a vast,
+
+Generated tokens : 40
+Generation time  : 1.811 sec
+Tokens/sec       : 22.09
+
+PROMPT 2
+What is 17 multiplied by 23?
+17 multiplied by 23 is 34.
+17 is 17.
+23 is 23.
+17 multiplied by 23 is 3
+
+Generated tokens : 40
+Generation time  : 1.813 sec
+Tokens/sec       : 22.07
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+A) 60 km
+B) 60 km
+C) 100 km
+D) 100 km
+The correct answer is 60 km.
+
+Generated tokens : 40
+Generation time  : 1.810 sec
+Tokens/sec       : 22.10
+
+Aggregate throughput : 22.08 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next combination
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 11/13 — MIXED_SMALL
+##############################################################################################################
+
+Selected blocks:
+  mlp            : [6]
+  linear_attn    : [4]
+  self_attn      : [3]
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.65 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+OVERALL TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Affected Linear layers : 10
+Affected parameters    : 28,835,840
+Model coverage         : 3.83%
+Mean relative error    : 0.527600
+Max relative error     : 0.537959
+
+COMPONENT BREAKDOWN
+--------------------------------------------------------------------------------------------------------------
+mlp             | Linear layers   3 | Parameters   11,010,048 | Coverage   1.46% | Mean error 0.5254 | Max error 0.5271
+linear_attn     | Linear layers   3 | Parameters   10,485,760 | Coverage   1.39% | Mean error 0.5254 | Max error 0.5368
+self_attn       | Linear layers   4 | Parameters    7,340,032 | Coverage   0.98% | Mean error 0.5309 | Max error 0.5380
+
+TERNARIZED MATRICES
+--------------------------------------------------------------------------------------------------------------
+self_attn       block  3 | model.layers.3.self_attn.q_proj
+    Parameters     : 4,194,304
+    Relative error : 0.516713
+self_attn       block  3 | model.layers.3.self_attn.k_proj
+    Parameters     : 524,288
+    Relative error : 0.531421
+self_attn       block  3 | model.layers.3.self_attn.v_proj
+    Parameters     : 524,288
+    Relative error : 0.537959
+self_attn       block  3 | model.layers.3.self_attn.o_proj
+    Parameters     : 2,097,152
+    Relative error : 0.537334
+linear_attn     block  4 | model.layers.4.linear_attn.out_proj
+    Parameters     : 2,097,152
+    Relative error : 0.536825
+linear_attn     block  4 | model.layers.4.linear_attn.in_proj_qkv
+    Parameters     : 6,291,456
+    Relative error : 0.521296
+linear_attn     block  4 | model.layers.4.linear_attn.in_proj_z
+    Parameters     : 2,097,152
+    Relative error : 0.518173
+mlp             block  6 | model.layers.6.mlp.gate_proj
+    Parameters     : 3,670,016
+    Relative error : 0.523432
+mlp             block  6 | model.layers.6.mlp.up_proj
+    Parameters     : 3,670,016
+    Relative error : 0.527120
+mlp             block  6 | model.layers.6.mlp.down_proj
+    Parameters     : 3,670,016
+    Relative error : 0.525726
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Topic:** Why the sky is blue.
+    *   **Requirement:** Explain in "simple
+
+Generated tokens : 40
+Generation time  : 1.820 sec
+Tokens/sec       : 21.98
+
+PROMPT 2
+What is 17 multiplied by 23?
+
+17 × 23 = 391
+
+What is 17 multiplied by 23?
+
+17 × 23 = 391
+
+What is 
+
+Generated tokens : 40
+Generation time  : 1.828 sec
+Tokens/sec       : 21.88
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+1. 60 km/h × 2.5 hours = 150 km.
+
+The train travels 150 km in 2.5 hours.
+
+1.
+
+Generated tokens : 40
+Generation time  : 1.881 sec
+Tokens/sec       : 21.26
+
+Aggregate throughput : 21.70 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next combination
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 12/13 — MIXED_MEDIUM
+##############################################################################################################
+
+Selected blocks:
+  mlp            : [6, 12]
+  linear_attn    : [4, 8]
+  self_attn      : [3, 7]
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.77 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+OVERALL TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Affected Linear layers : 20
+Affected parameters    : 57,671,680
+Model coverage         : 7.67%
+Mean relative error    : 0.528287
+Max relative error     : 0.562900
+
+COMPONENT BREAKDOWN
+--------------------------------------------------------------------------------------------------------------
+mlp             | Linear layers   6 | Parameters   22,020,096 | Coverage   2.93% | Mean error 0.5256 | Max error 0.5271
+linear_attn     | Linear layers   6 | Parameters   20,971,520 | Coverage   2.79% | Mean error 0.5245 | Max error 0.5368
+self_attn       | Linear layers   8 | Parameters   14,680,064 | Coverage   1.95% | Mean error 0.5331 | Max error 0.5629
+
+TERNARIZED MATRICES
+--------------------------------------------------------------------------------------------------------------
+self_attn       block  3 | model.layers.3.self_attn.q_proj
+    Parameters     : 4,194,304
+    Relative error : 0.516713
+self_attn       block  3 | model.layers.3.self_attn.k_proj
+    Parameters     : 524,288
+    Relative error : 0.531421
+self_attn       block  3 | model.layers.3.self_attn.v_proj
+    Parameters     : 524,288
+    Relative error : 0.537959
+self_attn       block  3 | model.layers.3.self_attn.o_proj
+    Parameters     : 2,097,152
+    Relative error : 0.537334
+linear_attn     block  4 | model.layers.4.linear_attn.out_proj
+    Parameters     : 2,097,152
+    Relative error : 0.536825
+linear_attn     block  4 | model.layers.4.linear_attn.in_proj_qkv
+    Parameters     : 6,291,456
+    Relative error : 0.521296
+linear_attn     block  4 | model.layers.4.linear_attn.in_proj_z
+    Parameters     : 2,097,152
+    Relative error : 0.518173
+mlp             block  6 | model.layers.6.mlp.gate_proj
+    Parameters     : 3,670,016
+    Relative error : 0.523432
+mlp             block  6 | model.layers.6.mlp.up_proj
+    Parameters     : 3,670,016
+    Relative error : 0.527120
+mlp             block  6 | model.layers.6.mlp.down_proj
+    Parameters     : 3,670,016
+    Relative error : 0.525726
+self_attn       block  7 | model.layers.7.self_attn.q_proj
+    Parameters     : 4,194,304
+    Relative error : 0.528918
+self_attn       block  7 | model.layers.7.self_attn.k_proj
+    Parameters     : 524,288
+    Relative error : 0.522142
+self_attn       block  7 | model.layers.7.self_attn.v_proj
+    Parameters     : 524,288
+    Relative error : 0.562900
+self_attn       block  7 | model.layers.7.self_attn.o_proj
+    Parameters     : 2,097,152
+    Relative error : 0.527805
+linear_attn     block  8 | model.layers.8.linear_attn.out_proj
+    Parameters     : 2,097,152
+    Relative error : 0.527005
+linear_attn     block  8 | model.layers.8.linear_attn.in_proj_qkv
+    Parameters     : 6,291,456
+    Relative error : 0.523189
+linear_attn     block  8 | model.layers.8.linear_attn.in_proj_z
+    Parameters     : 2,097,152
+    Relative error : 0.520750
+mlp             block 12 | model.layers.12.mlp.gate_proj
+    Parameters     : 3,670,016
+    Relative error : 0.526205
+mlp             block 12 | model.layers.12.mlp.up_proj
+    Parameters     : 3,670,016
+    Relative error : 0.524517
+mlp             block 12 | model.layers.12.mlp.down_proj
+    Parameters     : 3,670,016
+    Relative error : 0.526305
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+Thinking
+</think>
+
+The sky is blue because of the following reasons:
+
+1. **Atmospheric conditions**
+2. **Cloud cover**
+3. **Cloud cover**
+
+Generated tokens : 40
+Generation time  : 1.847 sec
+Tokens/sec       : 21.65
+
+PROMPT 2
+What is 17 multiplied by 23?
+17 multiplied by 23 is 17 times 23.
+17 times 23 is 17 times 23.
+17 times 23
+
+Generated tokens : 40
+Generation time  : 1.855 sec
+Tokens/sec       : 21.56
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+The answer is 60 km per hour for 2.5 hours.
+The answer is 60 km per hour for 2.5 hours.
+The answer is 6
+
+Generated tokens : 40
+Generation time  : 1.804 sec
+Tokens/sec       : 22.17
+
+Aggregate throughput : 21.79 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next combination
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 13/13 — MIXED_LARGE
+##############################################################################################################
+
+Selected blocks:
+  mlp            : [6, 12, 18]
+  linear_attn    : [4, 8, 12]
+  self_attn      : [3, 7, 11]
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.65 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+OVERALL TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Affected Linear layers : 30
+Affected parameters    : 86,507,520
+Model coverage         : 11.50%
+Mean relative error    : 0.527983
+Max relative error     : 0.562900
+
+COMPONENT BREAKDOWN
+--------------------------------------------------------------------------------------------------------------
+mlp             | Linear layers   9 | Parameters   33,030,144 | Coverage   4.39% | Mean error 0.5238 | Max error 0.5271
+linear_attn     | Linear layers   9 | Parameters   31,457,280 | Coverage   4.18% | Mean error 0.5250 | Max error 0.5368
+self_attn       | Linear layers  12 | Parameters   22,020,096 | Coverage   2.93% | Mean error 0.5333 | Max error 0.5629
+
+TERNARIZED MATRICES
+--------------------------------------------------------------------------------------------------------------
+self_attn       block  3 | model.layers.3.self_attn.q_proj
+    Parameters     : 4,194,304
+    Relative error : 0.516713
+self_attn       block  3 | model.layers.3.self_attn.k_proj
+    Parameters     : 524,288
+    Relative error : 0.531421
+self_attn       block  3 | model.layers.3.self_attn.v_proj
+    Parameters     : 524,288
+    Relative error : 0.537959
+self_attn       block  3 | model.layers.3.self_attn.o_proj
+    Parameters     : 2,097,152
+    Relative error : 0.537334
+linear_attn     block  4 | model.layers.4.linear_attn.out_proj
+    Parameters     : 2,097,152
+    Relative error : 0.536825
+linear_attn     block  4 | model.layers.4.linear_attn.in_proj_qkv
+    Parameters     : 6,291,456
+    Relative error : 0.521296
+linear_attn     block  4 | model.layers.4.linear_attn.in_proj_z
+    Parameters     : 2,097,152
+    Relative error : 0.518173
+mlp             block  6 | model.layers.6.mlp.gate_proj
+    Parameters     : 3,670,016
+    Relative error : 0.523432
+mlp             block  6 | model.layers.6.mlp.up_proj
+    Parameters     : 3,670,016
+    Relative error : 0.527120
+mlp             block  6 | model.layers.6.mlp.down_proj
+    Parameters     : 3,670,016
+    Relative error : 0.525726
+self_attn       block  7 | model.layers.7.self_attn.q_proj
+    Parameters     : 4,194,304
+    Relative error : 0.528918
+self_attn       block  7 | model.layers.7.self_attn.k_proj
+    Parameters     : 524,288
+    Relative error : 0.522142
+self_attn       block  7 | model.layers.7.self_attn.v_proj
+    Parameters     : 524,288
+    Relative error : 0.562900
+self_attn       block  7 | model.layers.7.self_attn.o_proj
+    Parameters     : 2,097,152
+    Relative error : 0.527805
+linear_attn     block  8 | model.layers.8.linear_attn.out_proj
+    Parameters     : 2,097,152
+    Relative error : 0.527005
+linear_attn     block  8 | model.layers.8.linear_attn.in_proj_qkv
+    Parameters     : 6,291,456
+    Relative error : 0.523189
+linear_attn     block  8 | model.layers.8.linear_attn.in_proj_z
+    Parameters     : 2,097,152
+    Relative error : 0.520750
+self_attn       block 11 | model.layers.11.self_attn.q_proj
+    Parameters     : 4,194,304
+    Relative error : 0.529132
+self_attn       block 11 | model.layers.11.self_attn.k_proj
+    Parameters     : 524,288
+    Relative error : 0.534590
+self_attn       block 11 | model.layers.11.self_attn.v_proj
+    Parameters     : 524,288
+    Relative error : 0.540774
+self_attn       block 11 | model.layers.11.self_attn.o_proj
+    Parameters     : 2,097,152
+    Relative error : 0.530172
+linear_attn     block 12 | model.layers.12.linear_attn.out_proj
+    Parameters     : 2,097,152
+    Relative error : 0.531356
+linear_attn     block 12 | model.layers.12.linear_attn.in_proj_qkv
+    Parameters     : 6,291,456
+    Relative error : 0.524361
+linear_attn     block 12 | model.layers.12.linear_attn.in_proj_z
+    Parameters     : 2,097,152
+    Relative error : 0.522333
+mlp             block 12 | model.layers.12.mlp.gate_proj
+    Parameters     : 3,670,016
+    Relative error : 0.526205
+mlp             block 12 | model.layers.12.mlp.up_proj
+    Parameters     : 3,670,016
+    Relative error : 0.524517
+mlp             block 12 | model.layers.12.mlp.down_proj
+    Parameters     : 3,670,016
+    Relative error : 0.526305
+mlp             block 18 | model.layers.18.mlp.gate_proj
+    Parameters     : 3,670,016
+    Relative error : 0.524855
+mlp             block 18 | model.layers.18.mlp.up_proj
+    Parameters     : 3,670,016
+    Relative error : 0.518565
+mlp             block 18 | model.layers.18.mlp.down_proj
+    Parameters     : 3,670,016
+    Relative error : 0.517626
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+I am sorry, but I cannot provide a detailed explanation of why the sky is blue. The sky is blue because of the **blue light** (the **blue light**
+
+Generated tokens : 40
+Generation time  : 1.813 sec
+Tokens/sec       : 22.06
+
+PROMPT 2
+What is 17 multiplied by 23?
+17 multiplied by 23 is 17.
+17 multiplied by 23 is 17.
+17 multiplied by 23 is 17.
+
+
+Generated tokens : 40
+Generation time  : 1.836 sec
+Tokens/sec       : 21.79
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+A) 60 km/h = 2.5 hours = 60 km/h = 2.5 hours = 60 km/h = 2.5 hours = 
+
+Generated tokens : 40
+Generation time  : 1.819 sec
+Tokens/sec       : 22.00
+
+Aggregate throughput : 21.95 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next combination
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+=============================================================================================================================
+EXPERIMENT 008 — SENSITIVITY-GUIDED COMBINATION SUMMARY
+=============================================================================================================================
+Case                      Linear        Parameters    Coverage    Mean Err     Max Err     Tok/s
+-----------------------------------------------------------------------------------------------------------------------------
+MLP_2                          6        22,020,096       2.93%      0.5256      0.5271     22.00
+MLP_3                          9        33,030,144       4.39%      0.5238      0.5271     21.57
+MLP_4                         12        44,040,192       5.85%      0.5250      0.5360     21.80
+LINEAR_ATTN_2                  6        20,971,520       2.79%      0.5245      0.5368     22.08
+LINEAR_ATTN_3                  9        31,457,280       4.18%      0.5250      0.5368     22.16
+LINEAR_ATTN_4                 12        41,943,040       5.57%      0.5267      0.5498     21.70
+LINEAR_ATTN_5                 15        52,428,800       6.97%      0.5278      0.5498     21.90
+SELF_ATTN_2                    8        14,680,064       1.95%      0.5331      0.5629     22.09
+SELF_ATTN_3                   12        22,020,096       2.93%      0.5333      0.5629     21.75
+SELF_ATTN_4                   16        29,360,128       3.90%      0.5369      0.5844     22.08
+MIXED_SMALL                   10        28,835,840       3.83%      0.5276      0.5380     21.70
+MIXED_MEDIUM                  20        57,671,680       7.67%      0.5283      0.5629     21.79
+MIXED_LARGE                   30        86,507,520      11.50%      0.5280      0.5629     21.95
+
+=============================================================================================================================
+TESTED BLOCK COMBINATIONS
+=============================================================================================================================
+
+MLP_2
+  mlp            : [6, 12]
+
+MLP_3
+  mlp            : [6, 12, 18]
+
+MLP_4
+  mlp            : [6, 12, 18, 23]
+
+LINEAR_ATTN_2
+  linear_attn    : [4, 8]
+
+LINEAR_ATTN_3
+  linear_attn    : [4, 8, 12]
+
+LINEAR_ATTN_4
+  linear_attn    : [4, 8, 12, 16]
+
+LINEAR_ATTN_5
+  linear_attn    : [4, 8, 12, 16, 22]
+
+SELF_ATTN_2
+  self_attn      : [3, 7]
+
+SELF_ATTN_3
+  self_attn      : [3, 7, 11]
+
+SELF_ATTN_4
+  self_attn      : [3, 7, 11, 15]
+
+MIXED_SMALL
+  mlp            : [6]
+  linear_attn    : [4]
+  self_attn      : [3]
+
+MIXED_MEDIUM
+  mlp            : [6, 12]
+  linear_attn    : [4, 8]
+  self_attn      : [3, 7]
+
+MIXED_LARGE
+  mlp            : [6, 12, 18]
+  linear_attn    : [4, 8, 12]
+  self_attn      : [3, 7, 11]
+
+==============================================================================================================
+IMPORTANT INTERPRETATION
+==============================================================================================================
+Experiment 008 uses the same ternary quantization method as Experiments 004-007.
+
+Group size       : 128
+Scale            : mean(abs(group))
+Threshold        : 0.5 * scale
+Codes            : {-1, 0, +1}
+Runtime storage  : reconstructed FP16
+
+Every combination starts from a fresh original FP16 model.
+
+Linear Attention block 0 is intentionally excluded from the guided combinations because Experiment 007 showed catastrophic generation degradation when that block alone was ternarized.
+
+The primary question is whether individually tolerated blocks remain functional when ternarized together.
+
+Generation throughput is only a runtime reference.
+It is NOT packed ternary inference throughput.
+
+Prompt quality remains a preliminary functional diagnostic rather than a formal benchmark.
+
+==============================================================================================================
+EXPERIMENT 008 COMPLETE
+==============================================================================================================
