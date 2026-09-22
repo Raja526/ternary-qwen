@@ -1,0 +1,27 @@
+.venv/
+__pycache__/
+*.pyc
+
+# Model files
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.gguf
+
+# Model/cache directories
+models/
+checkpoints/
+.cache/
+huggingface/
+
+# Experiment outputs
+outputs/
+logs/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store

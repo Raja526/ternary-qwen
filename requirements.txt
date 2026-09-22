@@ -1,0 +1,7 @@
+torch
+torchvision
+accelerate
+safetensors
+huggingface_hub
+sentencepiece
+git+https://github.com/huggingface/transformers.git@main
