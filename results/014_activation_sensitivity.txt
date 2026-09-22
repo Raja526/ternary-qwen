@@ -1,0 +1,266 @@
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+=======================================================================================================================================
+EXPERIMENT 014 — Qwen3.5-0.8B Activation-Aware Ternary Sensitivity
+=======================================================================================================================================
+
+Configuration
+---------------------------------------------------------------------------------------------------------------------------------------
+Model                  : Qwen/Qwen3.5-0.8B
+Device                 : cuda
+Data type              : torch.float16
+Group size             : 128
+Threshold multiplier   : 0.5
+Reconstruction scale   : mean(abs(non-zero selected weights))
+Calibration prompts    : 4
+
+Target blocks:
+  mlp            : [6, 12, 18]
+  linear_attn    : [4, 8, 12]
+  self_attn      : [3, 7, 11]
+
+Environment
+---------------------------------------------------------------------------------------------------------------------------------------
+PyTorch                : 2.14.0+cu126
+CUDA runtime           : 12.6
+CUDA available         : True
+GPU                    : Quadro P1000
+GPU capability         : (6, 1)
+Total VRAM             : 3.94 GB
+
+Loading tokenizer...
+
+GPU MEMORY — before model load
+Allocated : 0.00 MB
+Reserved  : 0.00 MB
+Free      : 3982.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.66 sec
+
+GPU MEMORY — after model load
+Allocated : 1435.10 MB
+Reserved  : 1452.00 MB
+Free      : 2526.94 MB
+Total     : 4031.88 MB
+
+Total model parameters : 752,393,024
+
+TARGET VALIDATION
+---------------------------------------------------------------------------------------------------------------------------------------
+Target Linear matrices : 30
+Target parameters      : 86,507,520
+Target model coverage  : 11.50%
+
+Boundary additions:
+  self_attn       block 11 | model.layers.11.self_attn.q_proj
+  self_attn       block 11 | model.layers.11.self_attn.k_proj
+  self_attn       block 11 | model.layers.11.self_attn.v_proj
+  self_attn       block 11 | model.layers.11.self_attn.o_proj
+  linear_attn     block 12 | model.layers.12.linear_attn.out_proj
+  linear_attn     block 12 | model.layers.12.linear_attn.in_proj_qkv
+  linear_attn     block 12 | model.layers.12.linear_attn.in_proj_z
+  mlp             block 18 | model.layers.18.mlp.gate_proj
+  mlp             block 18 | model.layers.18.mlp.up_proj
+  mlp             block 18 | model.layers.18.mlp.down_proj
+
+Preparing optimized ternary candidate weights...
+Ternary candidates prepared.
+
+Registering activation hooks...
+Registered 30 hooks.
+
+Running calibration prompts...
+
+Calibration prompt 1/4
+  Explain in simple terms why the sky is blue.
+  Input tokens: 11
+
+Calibration prompt 2/4
+  What is 17 multiplied by 23?
+  Input tokens: 11
+
+Calibration prompt 3/4
+  If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+  Input tokens: 23
+
+Calibration prompt 4/4
+  Write a short paragraph explaining why exercise is important.
+  Input tokens: 10
+
+
+===========================================================================================================================================================
+ACTIVATION-AWARE SENSITIVITY RANKING (HIGHER = MORE SENSITIVE)
+===========================================================================================================================================================
+Rank Component        Block  Boundary   Parameters   WeightErr      ActErr     Scale    Zero%   Calls Name
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+   1 self_attn            3        NO    2,097,152    0.485001    0.612963    1.3596    32.35       4 model.layers.3.self_attn.o_proj
+   2 linear_attn         12       YES    2,097,152    0.475911    0.590240    1.3672    32.68       4 model.layers.12.linear_attn.out_proj
+   3 linear_attn          8        NO    2,097,152    0.473357    0.567963    1.3564    32.09       4 model.layers.8.linear_attn.out_proj
+   4 self_attn            7        NO    2,097,152    0.475642    0.547750    1.3511    31.89       4 model.layers.7.self_attn.o_proj
+   5 linear_attn          4        NO    2,097,152    0.481715    0.544125    1.3702    32.87       4 model.layers.4.linear_attn.out_proj
+   6 mlp                 18       YES    3,670,016    0.465689    0.511013    1.3418    31.19       4 model.layers.18.mlp.down_proj
+   7 mlp                 12        NO    3,670,016    0.473938    0.505452    1.3500    31.68       4 model.layers.12.mlp.down_proj
+   8 mlp                  6        NO    3,670,016    0.473450    0.486868    1.3490    31.61       4 model.layers.6.mlp.down_proj
+   9 self_attn           11       YES    2,097,152    0.477683    0.478538    1.3534    31.88       4 model.layers.11.self_attn.o_proj
+  10 self_attn           11       YES      524,288    0.484244    0.470571    1.3768    33.12       4 model.layers.11.self_attn.v_proj
+  11 mlp                  6        NO    3,670,016    0.473525    0.453551    1.3550    31.93       4 model.layers.6.mlp.up_proj
+  12 self_attn            7        NO      524,288    0.502314    0.447242    1.4066    34.34       4 model.layers.7.self_attn.v_proj
+  13 mlp                 12        NO    3,670,016    0.471389    0.445556    1.3516    31.73       4 model.layers.12.mlp.up_proj
+  14 mlp                 18       YES    3,670,016    0.466088    0.420541    1.3444    31.29       4 model.layers.18.mlp.up_proj
+  15 self_attn            3        NO      524,288    0.478280    0.420493    1.3530    31.63       4 model.layers.3.self_attn.k_proj
+  16 self_attn           11       YES      524,288    0.480733    0.415185    1.3620    32.32       4 model.layers.11.self_attn.k_proj
+  17 self_attn            3        NO      524,288    0.482014    0.410187    1.3659    32.26       4 model.layers.3.self_attn.v_proj
+  18 linear_attn          8        NO    6,291,456    0.469887    0.373236    1.3519    31.80       4 model.layers.8.linear_attn.in_proj_qkv
+  19 self_attn            7        NO      524,288    0.469359    0.366557    1.3472    31.43       4 model.layers.7.self_attn.k_proj
+  20 linear_attn          4        NO    6,291,456    0.468664    0.341200    1.3472    31.46       4 model.layers.4.linear_attn.in_proj_qkv
+  21 linear_attn          4        NO    2,097,152    0.465655    0.336438    1.3444    31.33       4 model.layers.4.linear_attn.in_proj_z
+  22 linear_attn         12       YES    6,291,456    0.471060    0.332175    1.3533    31.89       4 model.layers.12.linear_attn.in_proj_qkv
+  23 mlp                 12        NO    3,670,016    0.473284    0.329540    1.3508    31.64       4 model.layers.12.mlp.gate_proj
+  24 linear_attn          8        NO    2,097,152    0.468032    0.317566    1.3465    31.42       4 model.layers.8.linear_attn.in_proj_z
+  25 self_attn           11       YES    4,194,304    0.476037    0.308501    1.3555    32.01       4 model.layers.11.self_attn.q_proj
+  26 mlp                  6        NO    3,670,016    0.470315    0.306835    1.3502    31.65       4 model.layers.6.mlp.gate_proj
+  27 linear_attn         12       YES    2,097,152    0.469540    0.306511    1.3487    31.57       4 model.layers.12.linear_attn.in_proj_z
+  28 mlp                 18       YES    3,670,016    0.472237    0.293683    1.3472    31.38       4 model.layers.18.mlp.gate_proj
+  29 self_attn            3        NO    4,194,304    0.464429    0.252555    1.3430    31.26       4 model.layers.3.self_attn.q_proj
+  30 self_attn            7        NO    4,194,304    0.475577    0.249251    1.3548    31.86       4 model.layers.7.self_attn.q_proj
+
+
+===========================================================================================================================================================
+WEIGHT-SPACE RECONSTRUCTION ERROR RANKING
+===========================================================================================================================================================
+Rank Component        Block  Boundary   WeightErr      ActErr Name
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+   1 self_attn            7        NO    0.502314    0.447242 model.layers.7.self_attn.v_proj
+   2 self_attn            3        NO    0.485001    0.612963 model.layers.3.self_attn.o_proj
+   3 self_attn           11       YES    0.484244    0.470571 model.layers.11.self_attn.v_proj
+   4 self_attn            3        NO    0.482014    0.410187 model.layers.3.self_attn.v_proj
+   5 linear_attn          4        NO    0.481715    0.544125 model.layers.4.linear_attn.out_proj
+   6 self_attn           11       YES    0.480733    0.415185 model.layers.11.self_attn.k_proj
+   7 self_attn            3        NO    0.478280    0.420493 model.layers.3.self_attn.k_proj
+   8 self_attn           11       YES    0.477683    0.478538 model.layers.11.self_attn.o_proj
+   9 self_attn           11       YES    0.476037    0.308501 model.layers.11.self_attn.q_proj
+  10 linear_attn         12       YES    0.475911    0.590240 model.layers.12.linear_attn.out_proj
+  11 self_attn            7        NO    0.475642    0.547750 model.layers.7.self_attn.o_proj
+  12 self_attn            7        NO    0.475577    0.249251 model.layers.7.self_attn.q_proj
+  13 mlp                 12        NO    0.473938    0.505452 model.layers.12.mlp.down_proj
+  14 mlp                  6        NO    0.473525    0.453551 model.layers.6.mlp.up_proj
+  15 mlp                  6        NO    0.473450    0.486868 model.layers.6.mlp.down_proj
+  16 linear_attn          8        NO    0.473357    0.567963 model.layers.8.linear_attn.out_proj
+  17 mlp                 12        NO    0.473284    0.329540 model.layers.12.mlp.gate_proj
+  18 mlp                 18       YES    0.472237    0.293683 model.layers.18.mlp.gate_proj
+  19 mlp                 12        NO    0.471389    0.445556 model.layers.12.mlp.up_proj
+  20 linear_attn         12       YES    0.471060    0.332175 model.layers.12.linear_attn.in_proj_qkv
+  21 mlp                  6        NO    0.470315    0.306835 model.layers.6.mlp.gate_proj
+  22 linear_attn          8        NO    0.469887    0.373236 model.layers.8.linear_attn.in_proj_qkv
+  23 linear_attn         12       YES    0.469540    0.306511 model.layers.12.linear_attn.in_proj_z
+  24 self_attn            7        NO    0.469359    0.366557 model.layers.7.self_attn.k_proj
+  25 linear_attn          4        NO    0.468664    0.341200 model.layers.4.linear_attn.in_proj_qkv
+  26 linear_attn          8        NO    0.468032    0.317566 model.layers.8.linear_attn.in_proj_z
+  27 mlp                 18       YES    0.466088    0.420541 model.layers.18.mlp.up_proj
+  28 mlp                 18       YES    0.465689    0.511013 model.layers.18.mlp.down_proj
+  29 linear_attn          4        NO    0.465655    0.336438 model.layers.4.linear_attn.in_proj_z
+  30 self_attn            3        NO    0.464429    0.252555 model.layers.3.self_attn.q_proj
+
+
+=======================================================================================================================================
+EXPERIMENT 013 BOUNDARY ADDITIONS — ACTIVATION METRICS
+=======================================================================================================================================
+linear_attn     block 12 | model.layers.12.linear_attn.in_proj_qkv                      | WeightErr 0.471060 | ActErr 0.332175
+linear_attn     block 12 | model.layers.12.linear_attn.in_proj_z                        | WeightErr 0.469540 | ActErr 0.306511
+linear_attn     block 12 | model.layers.12.linear_attn.out_proj                         | WeightErr 0.475911 | ActErr 0.590240
+mlp             block 18 | model.layers.18.mlp.down_proj                                | WeightErr 0.465689 | ActErr 0.511013
+mlp             block 18 | model.layers.18.mlp.gate_proj                                | WeightErr 0.472237 | ActErr 0.293683
+mlp             block 18 | model.layers.18.mlp.up_proj                                  | WeightErr 0.466088 | ActErr 0.420541
+self_attn       block 11 | model.layers.11.self_attn.k_proj                             | WeightErr 0.480733 | ActErr 0.415185
+self_attn       block 11 | model.layers.11.self_attn.o_proj                             | WeightErr 0.477683 | ActErr 0.478538
+self_attn       block 11 | model.layers.11.self_attn.q_proj                             | WeightErr 0.476037 | ActErr 0.308501
+self_attn       block 11 | model.layers.11.self_attn.v_proj                             | WeightErr 0.484244 | ActErr 0.470571
+
+
+=======================================================================================================================================
+COMPONENT ACTIVATION-DISTORTION SUMMARY
+=======================================================================================================================================
+
+mlp
+  Matrices             : 9
+  Mean weight error    : 0.471102
+  Mean activation error: 0.417004
+  Highest activation   : 0.511013
+  Highest matrix       : model.layers.18.mlp.down_proj
+
+linear_attn
+  Matrices             : 9
+  Mean weight error    : 0.471536
+  Mean activation error: 0.412162
+  Highest activation   : 0.590240
+  Highest matrix       : model.layers.12.linear_attn.out_proj
+
+self_attn
+  Matrices             : 12
+  Mean weight error    : 0.479276
+  Mean activation error: 0.414983
+  Highest activation   : 0.612963
+  Highest matrix       : model.layers.3.self_attn.o_proj
+
+
+=======================================================================================================================================
+WEIGHT ERROR vs ACTIVATION ERROR
+=======================================================================================================================================
+Pearson correlation : 0.391729
+
+Interpret carefully:
+A high correlation would mean the two metrics often rank matrices similarly.
+A low correlation would show that activation-aware sensitivity captures information not visible from weight reconstruction error alone.
+
+
+=======================================================================================================================================
+TOP 10 ACTIVATION-SENSITIVE MATRICES
+=======================================================================================================================================
+ 1. self_attn       block  3 | ActErr 0.612963 | WeightErr 0.485001 | model.layers.3.self_attn.o_proj
+ 2. linear_attn     block 12 | ActErr 0.590240 | WeightErr 0.475911 | model.layers.12.linear_attn.out_proj
+ 3. linear_attn     block  8 | ActErr 0.567963 | WeightErr 0.473357 | model.layers.8.linear_attn.out_proj
+ 4. self_attn       block  7 | ActErr 0.547750 | WeightErr 0.475642 | model.layers.7.self_attn.o_proj
+ 5. linear_attn     block  4 | ActErr 0.544125 | WeightErr 0.481715 | model.layers.4.linear_attn.out_proj
+ 6. mlp             block 18 | ActErr 0.511013 | WeightErr 0.465689 | model.layers.18.mlp.down_proj
+ 7. mlp             block 12 | ActErr 0.505452 | WeightErr 0.473938 | model.layers.12.mlp.down_proj
+ 8. mlp             block  6 | ActErr 0.486868 | WeightErr 0.473450 | model.layers.6.mlp.down_proj
+ 9. self_attn       block 11 | ActErr 0.478538 | WeightErr 0.477683 | model.layers.11.self_attn.o_proj
+10. self_attn       block 11 | ActErr 0.470571 | WeightErr 0.484244 | model.layers.11.self_attn.v_proj
+
+Cleaning temporary ternary candidate tensors...
+
+
+=======================================================================================================================================
+IMPORTANT INTERPRETATION
+=======================================================================================================================================
+Experiment 014 does NOT modify the model weights during calibration.
+
+The FP16 model supplies the real input activations seen by each target Linear matrix.
+
+For those same activations, the experiment compares the output of the original FP16 weight against its optimized ternary candidate.
+
+Activation distortion:
+  ||Y_fp16 - Y_ternary||_2
+  --------------------------
+       ||Y_fp16||_2
+
+This metric measures local output distortion under representative activations.
+
+It is NOT yet a proof that the activation metric predicts final generation quality.
+
+The calibration set contains only 4 prompts.
+
+Experiment 014 should therefore be interpreted as a sensitivity-metric study, not a formal model quality benchmark.
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 48.00 MB
+Free      : 3918.94 MB
+Total     : 4031.88 MB
+
+=======================================================================================================================================
+EXPERIMENT 014 COMPLETE
+=======================================================================================================================================
