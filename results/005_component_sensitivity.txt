@@ -1,0 +1,651 @@
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+====================================================================================================
+EXPERIMENT 005 — Qwen3.5-0.8B Component Sensitivity
+====================================================================================================
+
+Configuration
+----------------------------------------------------------------------------------------------------
+Model              : Qwen/Qwen3.5-0.8B
+Device             : cuda
+Data type          : torch.float16
+Group size         : 128
+Minimum parameters : 100,000
+
+Environment
+----------------------------------------------------------------------------------------------------
+PyTorch            : 2.14.0+cu126
+CUDA runtime       : 12.6
+CUDA available     : True
+GPU                : Quadro P1000
+GPU capability     : (6, 1)
+
+Loading tokenizer...
+
+Loading fresh original FP16 model...
+Model loaded in 2.65 sec
+Total parameters   : 752,393,024
+
+====================================================================================================
+FP16 REFERENCE GENERATION
+====================================================================================================
+
+PROMPT 1
+----------------------------------------------------------------------------------------------------
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+Imagine the sky as a giant, clear window. The reason it looks blue is a simple physics trick called **Rayleigh scattering**.
+
+Here is the simple breakdown:
+
+1.  **The Sun is a Hot, Bright
+
+Tokens/sec : 14.56
+
+PROMPT 2
+----------------------------------------------------------------------------------------------------
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we can use the distributive property of multiplication. We can break down 23 into 20 and 3, and then multiply each part by 17. So
+
+Tokens/sec : 23.65
+
+PROMPT 3
+----------------------------------------------------------------------------------------------------
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the distance traveled by the train, we use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+Given:
+- Speed = 60 km/h
+
+
+Tokens/sec : 23.70
+
+PROMPT 4
+----------------------------------------------------------------------------------------------------
+Write a short paragraph explaining why exercise is important.
+
+<think>
+
+</think>
+
+Exercise is essential for maintaining physical and mental well-being, as it strengthens the body's muscles and bones, improves cardiovascular health, and boosts mental clarity and mood. Regular physical activity helps manage stress, enhances cognitive function, and provides
+
+Tokens/sec : 23.68
+
+
+
+####################################################################################################
+COMPONENT TEST — MLP
+####################################################################################################
+
+Loading fresh original FP16 model...
+Model loaded in 2.63 sec
+
+Ternarizing component: mlp
+
+====================================================================================================
+MLP TERNARY STATISTICS
+====================================================================================================
+Candidate layers       : 72
+Candidate parameters   : 264,241,152
+Model coverage         : 35.12%
+Scale groups           : 2,064,384
+
+-1 weights             : 90,561,287 (34.27%)
+ 0 weights             : 83,200,065 (31.49%)
++1 weights             : 90,479,800 (34.24%)
+
+Mean relative error    : 0.523088
+Max relative error     : 0.544219
+
+TOP 5 ERROR LAYERS
+----------------------------------------------------------------------------------------------------
+1. model.layers.14.mlp.gate_proj
+   Parameters     : 3,670,016
+   Relative error : 0.544219
+   MAE            : 0.00439902
+   RMSE           : 0.00744258
+2. model.layers.14.mlp.down_proj
+   Parameters     : 3,670,016
+   Relative error : 0.540798
+   MAE            : 0.00278170
+   RMSE           : 0.00427451
+3. model.layers.15.mlp.gate_proj
+   Parameters     : 3,670,016
+   Relative error : 0.540287
+   MAE            : 0.00474709
+   RMSE           : 0.00768913
+4. model.layers.15.mlp.down_proj
+   Parameters     : 3,670,016
+   Relative error : 0.536507
+   MAE            : 0.00300691
+   RMSE           : 0.00460487
+5. model.layers.23.mlp.down_proj
+   Parameters     : 3,670,016
+   Relative error : 0.536022
+   MAE            : 0.00301276
+   RMSE           : 0.00459341
+
+====================================================================================================
+MLP-ONLY TERNARY GENERATION
+====================================================================================================
+
+PROMPT 1
+----------------------------------------------------------------------------------------------------
+Explain in simple terms why the sky is blue.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Generated tokens : 16
+Generation time  : 0.738 sec
+Tokens/sec       : 21.67
+
+PROMPT 2
+----------------------------------------------------------------------------------------------------
+What is 17 multiplied by 23?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Generated tokens : 50
+Generation time  : 2.191 sec
+Tokens/sec       : 22.82
+
+PROMPT 3
+----------------------------------------------------------------------------------------------------
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Generated tokens : 50
+Generation time  : 2.147 sec
+Tokens/sec       : 23.29
+
+PROMPT 4
+----------------------------------------------------------------------------------------------------
+Write a short paragraph explaining why exercise is important.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Generated tokens : 50
+Generation time  : 2.180 sec
+Tokens/sec       : 22.94
+
+Aggregate throughput : 22.88 tokens/sec
+Peak GPU memory      : 1472.06 MB
+
+
+
+####################################################################################################
+COMPONENT TEST — LINEAR_ATTN
+####################################################################################################
+
+Loading fresh original FP16 model...
+Model loaded in 2.65 sec
+
+Ternarizing component: linear_attn
+
+====================================================================================================
+LINEAR_ATTN TERNARY STATISTICS
+====================================================================================================
+Candidate layers       : 54
+Candidate parameters   : 188,743,680
+Model coverage         : 25.09%
+Scale groups           : 1,474,560
+
+-1 weights             : 64,397,070 (34.12%)
+ 0 weights             : 59,971,949 (31.77%)
++1 weights             : 64,374,661 (34.11%)
+
+Mean relative error    : 0.527400
+Max relative error     : 0.562875
+
+TOP 5 ERROR LAYERS
+----------------------------------------------------------------------------------------------------
+1. model.layers.17.linear_attn.out_proj
+   Parameters     : 2,097,152
+   Relative error : 0.562875
+   MAE            : 0.00382036
+   RMSE           : 0.00602550
+2. model.layers.18.linear_attn.out_proj
+   Parameters     : 2,097,152
+   Relative error : 0.557305
+   MAE            : 0.00358615
+   RMSE           : 0.00563413
+3. model.layers.20.linear_attn.out_proj
+   Parameters     : 2,097,152
+   Relative error : 0.555107
+   MAE            : 0.00375885
+   RMSE           : 0.00584399
+4. model.layers.16.linear_attn.out_proj
+   Parameters     : 2,097,152
+   Relative error : 0.549837
+   MAE            : 0.00390381
+   RMSE           : 0.00609170
+5. model.layers.21.linear_attn.out_proj
+   Parameters     : 2,097,152
+   Relative error : 0.546861
+   MAE            : 0.00412885
+   RMSE           : 0.00633650
+
+====================================================================================================
+LINEAR_ATTN-ONLY TERNARY GENERATION
+====================================================================================================
+
+PROMPT 1
+----------------------------------------------------------------------------------------------------
+Explain in simple terms why the sky is blue. standard standard use use use, the use use and the                       ......... ... * ( * * * * * * * * * *
+
+Generated tokens : 50
+Generation time  : 2.134 sec
+Tokens/sec       : 23.43
+
+PROMPT 2
+----------------------------------------------------------------------------------------------------
+What is 17 multiplied by 23??
+                 “ “ “ “ “ “ “ “ “ “ “ “
+4, find the     “ “ ...      
+
+Generated tokens : 50
+Generation time  : 2.122 sec
+Tokens/sec       : 23.56
+
+PROMPT 3
+----------------------------------------------------------------------------------------------------
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?, your... your... * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+Generated tokens : 50
+Generation time  : 2.152 sec
+Tokens/sec       : 23.23
+
+PROMPT 4
+----------------------------------------------------------------------------------------------------
+Write a short paragraph explaining why exercise is important. has has you you you you you you you you
+ article field you you you you you you you you you you have: has:
+:
+:
+:
+:
+:
+:
+:
+:: a, the:a:
+
+Generated tokens : 50
+Generation time  : 2.163 sec
+Tokens/sec       : 23.12
+
+Aggregate throughput : 23.33 tokens/sec
+Peak GPU memory      : 1472.06 MB
+
+
+
+####################################################################################################
+COMPONENT TEST — SELF_ATTN
+####################################################################################################
+
+Loading fresh original FP16 model...
+Model loaded in 2.60 sec
+
+Ternarizing component: self_attn
+
+====================================================================================================
+SELF_ATTN TERNARY STATISTICS
+====================================================================================================
+Candidate layers       : 24
+Candidate parameters   : 44,040,192
+Model coverage         : 5.85%
+Scale groups           : 344,064
+
+-1 weights             : 14,928,520 (33.90%)
+ 0 weights             : 14,194,786 (32.23%)
++1 weights             : 14,916,886 (33.87%)
+
+Mean relative error    : 0.546079
+Max relative error     : 0.623096
+
+TOP 5 ERROR LAYERS
+----------------------------------------------------------------------------------------------------
+1. model.layers.19.self_attn.v_proj
+   Parameters     : 524,288
+   Relative error : 0.623096
+   MAE            : 0.00682108
+   RMSE           : 0.01239775
+2. model.layers.23.self_attn.o_proj
+   Parameters     : 2,097,152
+   Relative error : 0.597954
+   MAE            : 0.00494516
+   RMSE           : 0.00828470
+3. model.layers.15.self_attn.v_proj
+   Parameters     : 524,288
+   Relative error : 0.584413
+   MAE            : 0.00570983
+   RMSE           : 0.00966851
+4. model.layers.23.self_attn.v_proj
+   Parameters     : 524,288
+   Relative error : 0.577461
+   MAE            : 0.00625968
+   RMSE           : 0.01071397
+5. model.layers.23.self_attn.k_proj
+   Parameters     : 524,288
+   Relative error : 0.574891
+   MAE            : 0.00340646
+   RMSE           : 0.00582116
+
+====================================================================================================
+SELF_ATTN-ONLY TERNARY GENERATION
+====================================================================================================
+
+PROMPT 1
+----------------------------------------------------------------------------------------------------
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+It is important to clarify a fundamental concept before providing the explanation: **The sky is not "blue" in the traditional, saturated blue sense.**
+
+The sky you are likely seeing is actually a **blue-grey sky** (
+
+Generated tokens : 50
+Generation time  : 2.161 sec
+Tokens/sec       : 23.14
+
+PROMPT 2
+----------------------------------------------------------------------------------------------------
+What is 17 multiplied by 23?
+
+17 x 23 = 17 x (20 + 20) = 17 x 20 + 17 x 20 = 270 + 170 = 37
+
+Generated tokens : 50
+Generation time  : 2.166 sec
+Tokens/sec       : 23.08
+
+PROMPT 3
+----------------------------------------------------------------------------------------------------
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+A. 100 km
+B. 100 km
+C. 10 km
+D. 100 km
+
+<think>
+
+</think>
+
+To determine the correct answer, let's break down the information given in
+
+Generated tokens : 50
+Generation time  : 2.161 sec
+Tokens/sec       : 23.13
+
+PROMPT 4
+----------------------------------------------------------------------------------------------------
+Write a short paragraph explaining why exercise is important.
+
+<think>
+
+</think>
+
+Based on the most recent and comprehensive research from the **International Journal of Sports Science and Medicine (IJSSM)**, which has been the primary source of information for the AI model, the following is the most recent and accurate summary
+
+Generated tokens : 50
+Generation time  : 2.184 sec
+Tokens/sec       : 22.90
+
+Aggregate throughput : 23.06 tokens/sec
+Peak GPU memory      : 1472.06 MB
+
+
+
+====================================================================================================
+EXPERIMENT 005 — COMPONENT COMPARISON
+====================================================================================================
+Component               Layers        Parameters    Coverage    Mean Err     Max Err       Tok/s
+------------------------------------------------------------------------------------------------
+mlp                         72       264,241,152      35.12%      0.5231      0.5442       22.88
+linear_attn                 54       188,743,680      25.09%      0.5274      0.5629       23.33
+self_attn                   24        44,040,192       5.85%      0.5461      0.6231       23.06
+
+====================================================================================================
+THEORETICAL COMPONENT STORAGE
+====================================================================================================
+
+mlp
+  Hybrid size       : 0.975 GiB
+  Compression       : 1.44x
+  Storage reduction : 30.46%
+
+linear_attn
+  Hybrid size       : 1.097 GiB
+  Compression       : 1.28x
+  Storage reduction : 21.75%
+
+self_attn
+  Hybrid size       : 1.330 GiB
+  Compression       : 1.05x
+  Storage reduction : 5.08%
+
+====================================================================================================
+IMPORTANT INTERPRETATION
+====================================================================================================
+Each component experiment started from a fresh original FP16 Qwen3.5-0.8B model.
+
+Only one component was ternarized at a time.
+
+Therefore differences in generation behavior can be used to identify which architectural components are most sensitive to the current group-wise ternarization method.
+
+Weights are still reconstructed into FP16 tensors. This experiment evaluates numerical sensitivity, not packed ternary inference performance.
+
+====================================================================================================
+EXPERIMENT 005 COMPLETE
+====================================================================================================
