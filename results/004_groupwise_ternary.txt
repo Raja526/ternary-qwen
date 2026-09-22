@@ -1,0 +1,455 @@
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+====================================================================================================
+EXPERIMENT 004 — Qwen3.5-0.8B Group-wise Ternary
+====================================================================================================
+
+Configuration
+----------------------------------------------------------------------------------------------------
+Model           : Qwen/Qwen3.5-0.8B
+Device          : cuda
+Data type       : torch.float16
+Group size      : 128
+Minimum weights : 100,000
+
+Environment
+----------------------------------------------------------------------------------------------------
+PyTorch         : 2.14.0+cu126
+CUDA runtime    : 12.6
+CUDA available  : True
+GPU             : Quadro P1000
+GPU capability  : (6, 1)
+
+Loading tokenizer...
+Loading FP16 model...
+
+Parameters      : 752,393,024
+Load time       : 2.61 sec
+
+====================================================================================================
+FP16 BASELINE GENERATION
+====================================================================================================
+
+PROMPT 1
+----------------------------------------------------------------------------------------------------
+Explain in simple terms why the sky is blue.
+
+OUTPUT:
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+Imagine the sky as a giant, clear window. The reason it looks blue is a simple physics trick called **Rayleigh scattering**.
+
+Here is the simple breakdown:
+
+1.  **The Sun is a Hot, Bright
+
+Generated tokens : 50
+Generation time  : 3.443 sec
+Tokens/sec       : 14.52
+
+PROMPT 2
+----------------------------------------------------------------------------------------------------
+What is 17 multiplied by 23?
+
+OUTPUT:
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we can use the distributive property of multiplication. We can break down 23 into 20 and 3, and then multiply each part by 17. So
+
+Generated tokens : 50
+Generation time  : 2.178 sec
+Tokens/sec       : 22.95
+
+PROMPT 3
+----------------------------------------------------------------------------------------------------
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+OUTPUT:
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the distance traveled by the train, we use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+Given:
+- Speed = 60 km/h
+
+
+Generated tokens : 50
+Generation time  : 2.122 sec
+Tokens/sec       : 23.56
+
+PROMPT 4
+----------------------------------------------------------------------------------------------------
+Write a short paragraph explaining why exercise is important.
+
+OUTPUT:
+Write a short paragraph explaining why exercise is important.
+
+<think>
+
+</think>
+
+Exercise is essential for maintaining physical and mental well-being, as it strengthens the body's muscles and bones, improves cardiovascular health, and boosts mental clarity and mood. Regular physical activity helps manage stress, enhances cognitive function, and provides
+
+Generated tokens : 50
+Generation time  : 2.122 sec
+Tokens/sec       : 23.56
+
+====================================================================================================
+GROUP-WISE TERNARIZATION
+====================================================================================================
+
+====================================================================================================
+GROUP-WISE TERNARY STATISTICS
+====================================================================================================
+Group size             : 128
+Candidate layers       : 150
+Candidate parameters   : 497,025,024
+Ternary coverage       : 66.06%
+Total scale groups     : 3,883,008
+
+-1 weights             : 169,886,877 (34.18%)
+ 0 weights             : 157,366,800 (31.66%)
++1 weights             : 169,771,347 (34.16%)
+
+====================================================================================================
+THEORETICAL PACKED STORAGE
+====================================================================================================
+Ternary weight bytes  : 118.50 MiB
+FP16 scale bytes      : 7.41 MiB
+Remaining FP16 bytes  : 487.08 MiB
+
+Original FP16         : 1.401 GiB
+Hybrid + scales       : 0.599 GiB
+Compression ratio     : 2.34x
+Storage reduction     : 57.29%
+
+====================================================================================================
+TOP 10 LAYERS BY RELATIVE QUANTIZATION ERROR
+====================================================================================================
+
+1. model.layers.19.self_attn.v_proj
+   Parameters     : 524,288
+   Groups         : 4,096
+   Alpha min      : 0.00485641
+   Alpha max      : 0.03322607
+   Alpha mean     : 0.01385158
+   Relative error : 0.623096
+   MAE            : 0.00682108
+   RMSE           : 0.01239775
+
+2. model.layers.23.self_attn.o_proj
+   Parameters     : 2,097,152
+   Groups         : 16,384
+   Alpha min      : 0.00479181
+   Alpha max      : 0.02297422
+   Alpha mean     : 0.00996738
+   Relative error : 0.597954
+   MAE            : 0.00494516
+   RMSE           : 0.00828470
+
+3. model.layers.15.self_attn.v_proj
+   Parameters     : 524,288
+   Groups         : 4,096
+   Alpha min      : 0.00320878
+   Alpha max      : 0.03249867
+   Alpha mean     : 0.01196119
+   Relative error : 0.584413
+   MAE            : 0.00570983
+   RMSE           : 0.00966851
+
+4. model.layers.23.self_attn.v_proj
+   Parameters     : 524,288
+   Groups         : 4,096
+   Alpha min      : 0.00371986
+   Alpha max      : 0.03314185
+   Alpha mean     : 0.01329164
+   Relative error : 0.577461
+   MAE            : 0.00625968
+   RMSE           : 0.01071397
+
+5. model.layers.23.self_attn.k_proj
+   Parameters     : 524,288
+   Groups         : 4,096
+   Alpha min      : 0.00147364
+   Alpha max      : 0.01953685
+   Alpha mean     : 0.00722461
+   Relative error : 0.574891
+   MAE            : 0.00340646
+   RMSE           : 0.00582116
+
+6. model.layers.7.self_attn.v_proj
+   Parameters     : 524,288
+   Groups         : 4,096
+   Alpha min      : 0.00182768
+   Alpha max      : 0.01780662
+   Alpha mean     : 0.00877605
+   Relative error : 0.562900
+   MAE            : 0.00419403
+   RMSE           : 0.00666995
+
+7. model.layers.17.linear_attn.out_proj
+   Parameters     : 2,097,152
+   Groups         : 16,384
+   Alpha min      : 0.00209979
+   Alpha max      : 0.03881460
+   Alpha mean     : 0.00794579
+   Relative error : 0.562875
+   MAE            : 0.00382036
+   RMSE           : 0.00602550
+
+8. model.layers.18.linear_attn.out_proj
+   Parameters     : 2,097,152
+   Groups         : 16,384
+   Alpha min      : 0.00179792
+   Alpha max      : 0.03305134
+   Alpha mean     : 0.00755598
+   Relative error : 0.557305
+   MAE            : 0.00358615
+   RMSE           : 0.00563413
+
+9. model.layers.20.linear_attn.out_proj
+   Parameters     : 2,097,152
+   Groups         : 16,384
+   Alpha min      : 0.00252866
+   Alpha max      : 0.03047211
+   Alpha mean     : 0.00793466
+   Relative error : 0.555107
+   MAE            : 0.00375885
+   RMSE           : 0.00584399
+
+10. model.layers.16.linear_attn.out_proj
+   Parameters     : 2,097,152
+   Groups         : 16,384
+   Alpha min      : 0.00216743
+   Alpha max      : 0.03056269
+   Alpha mean     : 0.00828093
+   Relative error : 0.549837
+   MAE            : 0.00390381
+   RMSE           : 0.00609170
+
+====================================================================================================
+GROUP-WISE TERNARY GENERATION
+====================================================================================================
+
+PROMPT 1
+----------------------------------------------------------------------------------------------------
+Explain in simple terms why the sky is blue.
+
+OUTPUT:
+Explain in simple terms why the sky is blue.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Generated tokens : 50
+Generation time  : 2.143 sec
+Tokens/sec       : 23.34
+
+PROMPT 2
+----------------------------------------------------------------------------------------------------
+What is 17 multiplied by 23?
+
+OUTPUT:
+What is 17 multiplied by 23?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Generated tokens : 50
+Generation time  : 2.133 sec
+Tokens/sec       : 23.45
+
+PROMPT 3
+----------------------------------------------------------------------------------------------------
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+OUTPUT:
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+                                                
+
+Generated tokens : 50
+Generation time  : 2.123 sec
+Tokens/sec       : 23.55
+
+PROMPT 4
+----------------------------------------------------------------------------------------------------
+Write a short paragraph explaining why exercise is important.
+
+OUTPUT:
+Write a short paragraph explaining why exercise is important.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Generated tokens : 50
+Generation time  : 2.148 sec
+Tokens/sec       : 23.28
+
+====================================================================================================
+FP16 vs GROUP-WISE TERNARY PERFORMANCE
+====================================================================================================
+FP16 throughput       : 20.27 tokens/sec
+Group-wise throughput : 23.40 tokens/sec
+Throughput change     : +15.44%
+
+Peak GPU memory       : 1472.06 MB
+
+====================================================================================================
+IMPORTANT INTERPRETATION
+====================================================================================================
+Experiment 004 uses group-wise ternary scaling with group size 128.
+
+Each group receives its own alpha scale instead of using one alpha for the entire matrix.
+
+The ternary weights are still reconstructed into FP16 tensors for normal PyTorch inference.
+
+Therefore generation quality can be compared with Experiment 003, but inference speed is NOT yet packed ternary inference speed.
+
+====================================================================================================
+EXPERIMENT 004 COMPLETE
+====================================================================================================
