@@ -1,0 +1,1382 @@
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+==============================================================================================================
+EXPERIMENT 009 — Qwen3.5-0.8B Projection-Level Ternary Sensitivity
+==============================================================================================================
+
+Configuration
+--------------------------------------------------------------------------------------------------------------
+Model              : Qwen/Qwen3.5-0.8B
+Device             : cuda
+Data type          : torch.float16
+Group size         : 128
+Maximum new tokens : 40
+Number test cases  : 14
+
+Environment
+--------------------------------------------------------------------------------------------------------------
+PyTorch            : 2.14.0+cu126
+CUDA runtime       : 12.6
+CUDA available     : True
+GPU                : Quadro P1000
+GPU capability     : (6, 1)
+Total VRAM         : 3.94 GB
+
+Loading tokenizer...
+
+GPU MEMORY — before model load
+Allocated : 0.00 MB
+Reserved  : 0.00 MB
+Free      : 3982.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.63 sec
+
+GPU MEMORY — after model load
+Allocated : 1435.10 MB
+Reserved  : 1452.00 MB
+Free      : 2526.94 MB
+Total     : 4031.88 MB
+
+Discovered projection matrices
+--------------------------------------------------------------------------------------------------------------
+linear_attn     block  4 | out_proj        |    2,097,152
+linear_attn     block  4 | in_proj_qkv     |    6,291,456
+linear_attn     block  4 | in_proj_z       |    2,097,152
+mlp             block  6 | gate_proj       |    3,670,016
+mlp             block  6 | up_proj         |    3,670,016
+mlp             block  6 | down_proj       |    3,670,016
+self_attn       block  7 | q_proj          |    4,194,304
+self_attn       block  7 | k_proj          |      524,288
+self_attn       block  7 | v_proj          |      524,288
+self_attn       block  7 | o_proj          |    2,097,152
+self_attn       block 15 | q_proj          |    4,194,304
+self_attn       block 15 | k_proj          |      524,288
+self_attn       block 15 | v_proj          |      524,288
+self_attn       block 15 | o_proj          |    2,097,152
+
+Total parameters : 752,393,024
+
+Validating Experiment 009 test cases...
+All projection-level test cases are valid.
+
+==============================================================================================================
+FP16 REFERENCE
+==============================================================================================================
+
+PROMPT 1
+--------------------------------------------------------------------------------------------------------------
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+Imagine the sky as a giant, clear window. The reason it looks blue is a simple physics trick called **Rayleigh scattering**.
+
+Here is the simple breakdown:
+
+1
+
+Generated tokens : 40
+Generation time  : 3.071 sec
+Tokens/sec       : 13.02
+
+PROMPT 2
+--------------------------------------------------------------------------------------------------------------
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we can use the distributive property of multiplication. We can break down 23 into 20 and 3, and
+
+Generated tokens : 40
+Generation time  : 1.773 sec
+Tokens/sec       : 22.57
+
+PROMPT 3
+--------------------------------------------------------------------------------------------------------------
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the distance traveled by the train, we use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+Given:
+
+Generated tokens : 40
+Generation time  : 1.746 sec
+Tokens/sec       : 22.92
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 1/14 — MLP_B6_GATE
+##############################################################################################################
+
+Component  : mlp
+Block      : 6
+Projection : gate_proj
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.65 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Matrix             : model.layers.6.mlp.gate_proj
+Parameters         : 3,670,016
+Model coverage     : 0.4878%
+Relative error     : 0.523432
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+The sky is blue because of a phenomenon called **Rayleigh scattering**. Here is the simple explanation:
+
+1.  **Smaller particles**: The air in the sky is
+
+Generated tokens : 40
+Generation time  : 1.784 sec
+Tokens/sec       : 22.42
+
+PROMPT 2
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we can use the distributive property of multiplication. We can break down 23 into 20 and 3, and
+
+Generated tokens : 40
+Generation time  : 1.798 sec
+Tokens/sec       : 22.25
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the total distance traveled by the train, we use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+Given
+
+Generated tokens : 40
+Generation time  : 1.773 sec
+Tokens/sec       : 22.56
+
+Aggregate throughput : 22.41 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next projection
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 2/14 — MLP_B6_UP
+##############################################################################################################
+
+Component  : mlp
+Block      : 6
+Projection : up_proj
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.71 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Matrix             : model.layers.6.mlp.up_proj
+Parameters         : 3,670,016
+Model coverage     : 0.4878%
+Relative error     : 0.527120
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+The sky is blue because of a phenomenon called **Rayleigh scattering**. Here is the simple breakdown of why it happens:
+
+1.  **The Sun is Bright**: The
+
+Generated tokens : 40
+Generation time  : 1.747 sec
+Tokens/sec       : 22.90
+
+PROMPT 2
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we can use the standard multiplication method. We multiply 17 by 23:
+\[ 17 \times 
+
+Generated tokens : 40
+Generation time  : 1.786 sec
+Tokens/sec       : 22.39
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the total distance traveled by the train, we need to multiply the speed by the time. The speed is 60 km per hour, and the time is 2.5 hours
+
+Generated tokens : 40
+Generation time  : 1.741 sec
+Tokens/sec       : 22.97
+
+Aggregate throughput : 22.75 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next projection
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 3/14 — MLP_B6_DOWN
+##############################################################################################################
+
+Component  : mlp
+Block      : 6
+Projection : down_proj
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.61 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Matrix             : model.layers.6.mlp.down_proj
+Parameters         : 3,670,016
+Model coverage     : 0.4878%
+Relative error     : 0.525726
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+To understand why the sky appears blue, we need to look at the relationship between light, the atmosphere, and the way it scatters.
+
+Here is the simple explanation:
+
+1
+
+Generated tokens : 40
+Generation time  : 1.772 sec
+Tokens/sec       : 22.58
+
+PROMPT 2
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we can use the distributive property of multiplication. We can break down 23 into its components: 20 and 
+
+Generated tokens : 40
+Generation time  : 1.778 sec
+Tokens/sec       : 22.49
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the total distance traveled by the train, we need to multiply the speed by the time. The speed is 60 km per hour, and the time is 2.5 hours
+
+Generated tokens : 40
+Generation time  : 1.827 sec
+Tokens/sec       : 21.89
+
+Aggregate throughput : 22.32 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next projection
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 4/14 — LINEAR_B4_OUT
+##############################################################################################################
+
+Component  : linear_attn
+Block      : 4
+Projection : out_proj
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.61 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Matrix             : model.layers.4.linear_attn.out_proj
+Parameters         : 2,097,152
+Model coverage     : 0.2787%
+Relative error     : 0.536825
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+Imagine the sky as a giant, clear window. Here is why it looks blue, explained simply:
+
+1.  **The Sun is a Tiny Ball**: The sun is
+
+Generated tokens : 40
+Generation time  : 1.755 sec
+Tokens/sec       : 22.79
+
+PROMPT 2
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we can use the distributive property of multiplication. We can break down 23 into 20 and 3, and
+
+Generated tokens : 40
+Generation time  : 1.751 sec
+Tokens/sec       : 22.85
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the distance traveled by the train, we use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+Given:
+
+Generated tokens : 40
+Generation time  : 1.747 sec
+Tokens/sec       : 22.89
+
+Aggregate throughput : 22.84 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next projection
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 5/14 — LINEAR_B4_QKV
+##############################################################################################################
+
+Component  : linear_attn
+Block      : 4
+Projection : in_proj_qkv
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.66 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Matrix             : model.layers.4.linear_attn.in_proj_qkv
+Parameters         : 6,291,456
+Model coverage     : 0.8362%
+Relative error     : 0.521296
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+The sky is blue because of a phenomenon called **Rayleigh scattering**. Here is the simple explanation:
+
+1.  **What happens?**
+    When sunlight hits the Earth
+
+Generated tokens : 40
+Generation time  : 1.788 sec
+Tokens/sec       : 22.37
+
+PROMPT 2
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we can use the distributive property of multiplication. We can break down 23 into 20 and 3, and
+
+Generated tokens : 40
+Generation time  : 1.774 sec
+Tokens/sec       : 22.54
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the distance traveled, we use the formula: Distance = Speed × Time. Given that the speed is 60 km/h and the time is 2.5 hours, the distance
+
+Generated tokens : 40
+Generation time  : 1.770 sec
+Tokens/sec       : 22.60
+
+Aggregate throughput : 22.50 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next projection
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 6/14 — LINEAR_B4_Z
+##############################################################################################################
+
+Component  : linear_attn
+Block      : 4
+Projection : in_proj_z
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.60 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Matrix             : model.layers.4.linear_attn.in_proj_z
+Parameters         : 2,097,152
+Model coverage     : 0.2787%
+Relative error     : 0.518173
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+**Why the sky is blue: A Simple Explanation**
+
+Imagine the sky is a giant, clear window. The sun is shining through it.
+
+1.  **The Sun is
+
+Generated tokens : 40
+Generation time  : 1.761 sec
+Tokens/sec       : 22.72
+
+PROMPT 2
+What is 17 multiplied by 23?
+
+17 multiplied by 23 is 391.
+
+What is 17 multiplied by 24?
+
+17 multiplied by 24 is 408.
+
+Generated tokens : 40
+Generation time  : 1.759 sec
+Tokens/sec       : 22.74
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the total distance traveled by the train, we can use the formula: Distance = Speed × Time. Given that the speed is 60 km/h and the time is 2.
+
+Generated tokens : 40
+Generation time  : 1.750 sec
+Tokens/sec       : 22.86
+
+Aggregate throughput : 22.77 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next projection
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 7/14 — SELF_B7_Q
+##############################################################################################################
+
+Component  : self_attn
+Block      : 7
+Projection : q_proj
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.68 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Matrix             : model.layers.7.self_attn.q_proj
+Parameters         : 4,194,304
+Model coverage     : 0.5575%
+Relative error     : 0.528918
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+The sky appears blue because of a phenomenon called **Rayleigh scattering**. Here is the simple explanation:
+
+1.  **The Sun's Light**: The Sun emits light in
+
+Generated tokens : 40
+Generation time  : 1.812 sec
+Tokens/sec       : 22.08
+
+PROMPT 2
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we can use the standard multiplication method. Let's break it down step by step:
+
+1.  **17 × 
+
+Generated tokens : 40
+Generation time  : 1.795 sec
+Tokens/sec       : 22.28
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the total distance traveled by the train, we can use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+
+
+Generated tokens : 40
+Generation time  : 1.804 sec
+Tokens/sec       : 22.17
+
+Aggregate throughput : 22.18 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next projection
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 8/14 — SELF_B7_K
+##############################################################################################################
+
+Component  : self_attn
+Block      : 7
+Projection : k_proj
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.76 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Matrix             : model.layers.7.self_attn.k_proj
+Parameters         : 524,288
+Model coverage     : 0.0697%
+Relative error     : 0.522142
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+The sky is blue because of a special way light behaves when it hits the Earth's atmosphere. Here is the simple explanation:
+
+1.  **Sunlight is White**:
+
+Generated tokens : 40
+Generation time  : 1.796 sec
+Tokens/sec       : 22.27
+
+PROMPT 2
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we can use the standard multiplication method. Let's break it down step by step:
+
+1. Write the numbers vertically:
+
+
+Generated tokens : 40
+Generation time  : 1.751 sec
+Tokens/sec       : 22.85
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the distance traveled by the train, we use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+Given:
+
+Generated tokens : 40
+Generation time  : 1.750 sec
+Tokens/sec       : 22.86
+
+Aggregate throughput : 22.66 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next projection
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 9/14 — SELF_B7_V
+##############################################################################################################
+
+Component  : self_attn
+Block      : 7
+Projection : v_proj
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.71 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Matrix             : model.layers.7.self_attn.v_proj
+Parameters         : 524,288
+Model coverage     : 0.0697%
+Relative error     : 0.562900
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+The sky looks blue because of a phenomenon called **Rayleigh scattering**. Here is the simple explanation:
+
+1.  **What happens when light hits the air?** Light travels
+
+Generated tokens : 40
+Generation time  : 1.794 sec
+Tokens/sec       : 22.30
+
+PROMPT 2
+What is 17 multiplied by 23?
+17 * 23 = 391
+
+**2. What is 17 multiplied by 23?**
+17 * 23 = 391
+
+
+
+Generated tokens : 40
+Generation time  : 1.897 sec
+Tokens/sec       : 21.08
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the distance traveled by the train, we use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+Given:
+
+Generated tokens : 40
+Generation time  : 1.810 sec
+Tokens/sec       : 22.10
+
+Aggregate throughput : 21.82 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next projection
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 10/14 — SELF_B7_O
+##############################################################################################################
+
+Component  : self_attn
+Block      : 7
+Projection : o_proj
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.60 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Matrix             : model.layers.7.self_attn.o_proj
+Parameters         : 2,097,152
+Model coverage     : 0.2787%
+Relative error     : 0.527805
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+The sky is blue because of a phenomenon called **Rayleigh scattering**. Here is the simple explanation:
+
+1.  **The Sun is a Hot, Bright Star**: The
+
+Generated tokens : 40
+Generation time  : 1.752 sec
+Tokens/sec       : 22.83
+
+PROMPT 2
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we can use the distributive property of multiplication. We can break down 23 into 20 and 3, and
+
+Generated tokens : 40
+Generation time  : 1.750 sec
+Tokens/sec       : 22.85
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the distance traveled by the train, we use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+Given:
+
+Generated tokens : 40
+Generation time  : 1.748 sec
+Tokens/sec       : 22.88
+
+Aggregate throughput : 22.85 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next projection
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 11/14 — SELF_B15_Q
+##############################################################################################################
+
+Component  : self_attn
+Block      : 15
+Projection : q_proj
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.72 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Matrix             : model.layers.15.self_attn.q_proj
+Parameters         : 4,194,304
+Model coverage     : 0.5575%
+Relative error     : 0.525027
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Topic:** Why the sky is blue.
+    *   **Target Audience:** Simple terms (
+
+Generated tokens : 40
+Generation time  : 1.834 sec
+Tokens/sec       : 21.81
+
+PROMPT 2
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we can use the standard multiplication method. We multiply 17 by 23:
+\[ 17 \times 
+
+Generated tokens : 40
+Generation time  : 1.793 sec
+Tokens/sec       : 22.31
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the distance, we use the formula: Distance = Speed × Time. Here, Speed = 60 km/h and Time = 2.5 hours. So, Distance = 
+
+Generated tokens : 40
+Generation time  : 1.793 sec
+Tokens/sec       : 22.30
+
+Aggregate throughput : 22.14 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next projection
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 12/14 — SELF_B15_K
+##############################################################################################################
+
+Component  : self_attn
+Block      : 15
+Projection : k_proj
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.67 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Matrix             : model.layers.15.self_attn.k_proj
+Parameters         : 524,288
+Model coverage     : 0.0697%
+Relative error     : 0.539082
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+Imagine the sky as a giant, clear window. The reason it looks blue is a simple physics trick called **Rayleigh scattering**.
+
+Here is the simple breakdown:
+
+1
+
+Generated tokens : 40
+Generation time  : 1.756 sec
+Tokens/sec       : 22.78
+
+PROMPT 2
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we can use the standard multiplication method. Let's break it down step by step:
+
+1. Write down the numbers:
+
+
+Generated tokens : 40
+Generation time  : 1.759 sec
+Tokens/sec       : 22.74
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the distance traveled by the train, we use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+Given:
+
+Generated tokens : 40
+Generation time  : 1.746 sec
+Tokens/sec       : 22.90
+
+Aggregate throughput : 22.81 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next projection
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 13/14 — SELF_B15_V
+##############################################################################################################
+
+Component  : self_attn
+Block      : 15
+Projection : v_proj
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.70 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Matrix             : model.layers.15.self_attn.v_proj
+Parameters         : 524,288
+Model coverage     : 0.0697%
+Relative error     : 0.584413
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+Imagine the sky as a giant, soft blanket made of tiny, colorful dots. These dots are made of tiny balls of **molecules** called **air molecules**.
+
+Here
+
+Generated tokens : 40
+Generation time  : 1.772 sec
+Tokens/sec       : 22.57
+
+PROMPT 2
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we can use the distributive property of multiplication. We can break down the multiplication into two parts:
+\[ 17 \
+
+Generated tokens : 40
+Generation time  : 1.787 sec
+Tokens/sec       : 22.38
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the distance traveled, we can use the formula: Distance = Speed × Time. Given that the speed is 60 km/h and the time is 2.5 hours, we
+
+Generated tokens : 40
+Generation time  : 1.758 sec
+Tokens/sec       : 22.76
+
+Aggregate throughput : 22.57 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next projection
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+##############################################################################################################
+TEST CASE 14/14 — SELF_B15_O
+##############################################################################################################
+
+Component  : self_attn
+Block      : 15
+Projection : o_proj
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.69 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+TERNARY STATS
+--------------------------------------------------------------------------------------------------------------
+Matrix             : model.layers.15.self_attn.o_proj
+Parameters         : 2,097,152
+Model coverage     : 0.2787%
+Relative error     : 0.541660
+
+GENERATION
+--------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+Imagine the sky as a giant, clear window. The reason it looks blue isn't because the sky is actually blue—it's because **the sun is shining on the Earth**,
+
+Generated tokens : 40
+Generation time  : 1.750 sec
+Tokens/sec       : 22.85
+
+PROMPT 2
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we can use the distributive property of multiplication. We can break down 23 into 20 and 3, and
+
+Generated tokens : 40
+Generation time  : 1.807 sec
+Tokens/sec       : 22.13
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the distance traveled, we can use the formula: Distance = Speed × Time. Here, the speed is 60 km/h and the time is 2.5 hours. So
+
+Generated tokens : 40
+Generation time  : 1.732 sec
+Tokens/sec       : 23.10
+
+Aggregate throughput : 22.69 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next projection
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+=============================================================================================================================
+EXPERIMENT 009 — PROJECTION-LEVEL SENSITIVITY SUMMARY
+=============================================================================================================================
+Case                Component        BlockProjection          Parameters   Coverage    Rel Err     Tok/s
+-----------------------------------------------------------------------------------------------------------------------------
+MLP_B6_GATE         mlp                  6gate_proj            3,670,016    0.4878%     0.5234     22.41
+MLP_B6_UP           mlp                  6up_proj              3,670,016    0.4878%     0.5271     22.75
+MLP_B6_DOWN         mlp                  6down_proj            3,670,016    0.4878%     0.5257     22.32
+LINEAR_B4_OUT       linear_attn          4out_proj             2,097,152    0.2787%     0.5368     22.84
+LINEAR_B4_QKV       linear_attn          4in_proj_qkv          6,291,456    0.8362%     0.5213     22.50
+LINEAR_B4_Z         linear_attn          4in_proj_z            2,097,152    0.2787%     0.5182     22.77
+SELF_B7_Q           self_attn            7q_proj               4,194,304    0.5575%     0.5289     22.18
+SELF_B7_K           self_attn            7k_proj                 524,288    0.0697%     0.5221     22.66
+SELF_B7_V           self_attn            7v_proj                 524,288    0.0697%     0.5629     21.82
+SELF_B7_O           self_attn            7o_proj               2,097,152    0.2787%     0.5278     22.85
+SELF_B15_Q          self_attn           15q_proj               4,194,304    0.5575%     0.5250     22.14
+SELF_B15_K          self_attn           15k_proj                 524,288    0.0697%     0.5391     22.81
+SELF_B15_V          self_attn           15v_proj                 524,288    0.0697%     0.5844     22.57
+SELF_B15_O          self_attn           15o_proj               2,097,152    0.2787%     0.5417     22.69
+
+=============================================================================================================================
+GROUPED BY COMPONENT / BLOCK
+=============================================================================================================================
+
+mlp — block 6
+--------------------------------------------------------------------------------
+gate_proj        | Parameters  3,670,016 | Coverage  0.4878% | Error 0.523432 | Tok/s 22.41
+up_proj          | Parameters  3,670,016 | Coverage  0.4878% | Error 0.527120 | Tok/s 22.75
+down_proj        | Parameters  3,670,016 | Coverage  0.4878% | Error 0.525726 | Tok/s 22.32
+
+linear_attn — block 4
+--------------------------------------------------------------------------------
+out_proj         | Parameters  2,097,152 | Coverage  0.2787% | Error 0.536825 | Tok/s 22.84
+in_proj_qkv      | Parameters  6,291,456 | Coverage  0.8362% | Error 0.521296 | Tok/s 22.50
+in_proj_z        | Parameters  2,097,152 | Coverage  0.2787% | Error 0.518173 | Tok/s 22.77
+
+self_attn — block 7
+--------------------------------------------------------------------------------
+q_proj           | Parameters  4,194,304 | Coverage  0.5575% | Error 0.528918 | Tok/s 22.18
+k_proj           | Parameters    524,288 | Coverage  0.0697% | Error 0.522142 | Tok/s 22.66
+v_proj           | Parameters    524,288 | Coverage  0.0697% | Error 0.562900 | Tok/s 21.82
+o_proj           | Parameters  2,097,152 | Coverage  0.2787% | Error 0.527805 | Tok/s 22.85
+
+self_attn — block 15
+--------------------------------------------------------------------------------
+q_proj           | Parameters  4,194,304 | Coverage  0.5575% | Error 0.525027 | Tok/s 22.14
+k_proj           | Parameters    524,288 | Coverage  0.0697% | Error 0.539082 | Tok/s 22.81
+v_proj           | Parameters    524,288 | Coverage  0.0697% | Error 0.584413 | Tok/s 22.57
+o_proj           | Parameters  2,097,152 | Coverage  0.2787% | Error 0.541660 | Tok/s 22.69
+
+==============================================================================================================
+IMPORTANT INTERPRETATION
+==============================================================================================================
+Experiment 009 changes only one projection matrix at a time.
+
+Group size       : 128
+Scale            : mean(abs(group))
+Threshold        : 0.5 * scale
+Codes            : {-1, 0, +1}
+Runtime storage  : reconstructed FP16
+
+The purpose is NOT to rank projections only by numerical reconstruction error.
+
+The main question is whether different projection types cause different functional degradation under the same ternary method.
+
+Throughput is only a runtime reference and must not be treated as packed ternary inference speed.
+
+The three prompts remain preliminary functional diagnostics rather than a formal quality benchmark.
+
+==============================================================================================================
+EXPERIMENT 009 COMPLETE
+==============================================================================================================
