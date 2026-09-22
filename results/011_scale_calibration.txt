@@ -1,0 +1,393 @@
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+========================================================================================================================
+EXPERIMENT 011 — Qwen3.5-0.8B Optimized Ternary Scale Calibration
+========================================================================================================================
+
+Configuration
+------------------------------------------------------------------------------------------------------------------------
+Model                  : Qwen/Qwen3.5-0.8B
+Device                 : cuda
+Data type              : torch.float16
+Group size             : 128
+Threshold multiplier   : 0.5
+Methods                : ['baseline', 'optimized']
+Maximum new tokens     : 40
+
+Target configuration:
+  mlp            : [6, 12]
+  linear_attn    : [4, 8]
+  self_attn      : [3, 7]
+
+Environment
+------------------------------------------------------------------------------------------------------------------------
+PyTorch                : 2.14.0+cu126
+CUDA runtime           : 12.6
+CUDA available         : True
+GPU                    : Quadro P1000
+GPU capability         : (6, 1)
+Total VRAM             : 3.94 GB
+
+Loading tokenizer...
+
+GPU MEMORY — before model load
+Allocated : 0.00 MB
+Reserved  : 0.00 MB
+Free      : 3982.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.57 sec
+
+GPU MEMORY — after model load
+Allocated : 1435.10 MB
+Reserved  : 1452.00 MB
+Free      : 2526.94 MB
+Total     : 4031.88 MB
+
+TARGET MATRICES
+------------------------------------------------------------------------------------------------------------------------
+self_attn       block  3 | model.layers.3.self_attn.q_proj                         |    4,194,304
+self_attn       block  3 | model.layers.3.self_attn.k_proj                         |      524,288
+self_attn       block  3 | model.layers.3.self_attn.v_proj                         |      524,288
+self_attn       block  3 | model.layers.3.self_attn.o_proj                         |    2,097,152
+linear_attn     block  4 | model.layers.4.linear_attn.out_proj                     |    2,097,152
+linear_attn     block  4 | model.layers.4.linear_attn.in_proj_qkv                  |    6,291,456
+linear_attn     block  4 | model.layers.4.linear_attn.in_proj_z                    |    2,097,152
+mlp             block  6 | model.layers.6.mlp.gate_proj                            |    3,670,016
+mlp             block  6 | model.layers.6.mlp.up_proj                              |    3,670,016
+mlp             block  6 | model.layers.6.mlp.down_proj                            |    3,670,016
+self_attn       block  7 | model.layers.7.self_attn.q_proj                         |    4,194,304
+self_attn       block  7 | model.layers.7.self_attn.k_proj                         |      524,288
+self_attn       block  7 | model.layers.7.self_attn.v_proj                         |      524,288
+self_attn       block  7 | model.layers.7.self_attn.o_proj                         |    2,097,152
+linear_attn     block  8 | model.layers.8.linear_attn.out_proj                     |    2,097,152
+linear_attn     block  8 | model.layers.8.linear_attn.in_proj_qkv                  |    6,291,456
+linear_attn     block  8 | model.layers.8.linear_attn.in_proj_z                    |    2,097,152
+mlp             block 12 | model.layers.12.mlp.gate_proj                           |    3,670,016
+mlp             block 12 | model.layers.12.mlp.up_proj                             |    3,670,016
+mlp             block 12 | model.layers.12.mlp.down_proj                           |    3,670,016
+
+Affected Linear layers : 20
+Affected parameters    : 57,671,680
+Model coverage         : 7.67%
+
+========================================================================================================================
+FP16 REFERENCE
+========================================================================================================================
+
+PROMPT 1
+------------------------------------------------------------------------------------------------------------------------
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+Imagine the sky as a giant, clear window. The reason it looks blue is a simple physics trick called **Rayleigh scattering**.
+
+Here is the simple breakdown:
+
+1
+
+Generated tokens : 40
+Generation time  : 3.027 sec
+Tokens/sec       : 13.22
+
+PROMPT 2
+------------------------------------------------------------------------------------------------------------------------
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we can use the distributive property of multiplication. We can break down 23 into 20 and 3, and
+
+Generated tokens : 40
+Generation time  : 1.732 sec
+Tokens/sec       : 23.10
+
+PROMPT 3
+------------------------------------------------------------------------------------------------------------------------
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the distance traveled by the train, we use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+Given:
+
+Generated tokens : 40
+Generation time  : 1.725 sec
+Tokens/sec       : 23.19
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+########################################################################################################################
+METHOD TEST 1/2 — BASELINE
+########################################################################################################################
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.79 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+TERNARY STATS
+------------------------------------------------------------------------------------------------------------------------
+Method                : baseline
+Affected Linear layers: 20
+Affected parameters   : 57,671,680
+Model coverage        : 7.67%
+Mean relative error   : 0.525436
+Max relative error    : 0.562900
+Mean scale ratio      : 1.000000
+-1 codes              : 19,718,858 (34.19%)
+ 0 codes              : 18,314,135 (31.76%)
++1 codes              : 19,638,687 (34.05%)
+
+MATRIX DETAILS
+------------------------------------------------------------------------------------------------------------------------
+self_attn       block  7 | model.layers.7.self_attn.v_proj                         | Err 0.562900 | Scale ratio 1.0000
+self_attn       block  3 | model.layers.3.self_attn.v_proj                         | Err 0.537959 | Scale ratio 1.0000
+self_attn       block  3 | model.layers.3.self_attn.o_proj                         | Err 0.537334 | Scale ratio 1.0000
+linear_attn     block  4 | model.layers.4.linear_attn.out_proj                     | Err 0.536825 | Scale ratio 1.0000
+self_attn       block  3 | model.layers.3.self_attn.k_proj                         | Err 0.531421 | Scale ratio 1.0000
+self_attn       block  7 | model.layers.7.self_attn.q_proj                         | Err 0.528918 | Scale ratio 1.0000
+self_attn       block  7 | model.layers.7.self_attn.o_proj                         | Err 0.527805 | Scale ratio 1.0000
+mlp             block  6 | model.layers.6.mlp.up_proj                              | Err 0.527120 | Scale ratio 1.0000
+linear_attn     block  8 | model.layers.8.linear_attn.out_proj                     | Err 0.527005 | Scale ratio 1.0000
+mlp             block 12 | model.layers.12.mlp.down_proj                           | Err 0.526305 | Scale ratio 1.0000
+mlp             block 12 | model.layers.12.mlp.gate_proj                           | Err 0.526205 | Scale ratio 1.0000
+mlp             block  6 | model.layers.6.mlp.down_proj                            | Err 0.525726 | Scale ratio 1.0000
+mlp             block 12 | model.layers.12.mlp.up_proj                             | Err 0.524517 | Scale ratio 1.0000
+mlp             block  6 | model.layers.6.mlp.gate_proj                            | Err 0.523432 | Scale ratio 1.0000
+linear_attn     block  8 | model.layers.8.linear_attn.in_proj_qkv                  | Err 0.523189 | Scale ratio 1.0000
+self_attn       block  7 | model.layers.7.self_attn.k_proj                         | Err 0.522142 | Scale ratio 1.0000
+linear_attn     block  4 | model.layers.4.linear_attn.in_proj_qkv                  | Err 0.521296 | Scale ratio 1.0000
+linear_attn     block  8 | model.layers.8.linear_attn.in_proj_z                    | Err 0.520750 | Scale ratio 1.0000
+linear_attn     block  4 | model.layers.4.linear_attn.in_proj_z                    | Err 0.518173 | Scale ratio 1.0000
+self_attn       block  3 | model.layers.3.self_attn.q_proj                         | Err 0.516713 | Scale ratio 1.0000
+
+GENERATION
+------------------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+Thinking
+</think>
+
+The sky is blue because of the following reasons:
+
+1. **Atmospheric conditions**
+2. **Cloud cover**
+3. **Cloud cover**
+
+Generated tokens : 40
+Generation time  : 1.774 sec
+Tokens/sec       : 22.54
+
+PROMPT 2
+What is 17 multiplied by 23?
+17 multiplied by 23 is 17 times 23.
+17 times 23 is 17 times 23.
+17 times 23
+
+Generated tokens : 40
+Generation time  : 1.778 sec
+Tokens/sec       : 22.50
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+The answer is 60 km per hour for 2.5 hours.
+The answer is 60 km per hour for 2.5 hours.
+The answer is 6
+
+Generated tokens : 40
+Generation time  : 1.748 sec
+Tokens/sec       : 22.89
+
+Aggregate throughput : 22.64 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next method
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+########################################################################################################################
+METHOD TEST 2/2 — OPTIMIZED
+########################################################################################################################
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.65 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+TERNARY STATS
+------------------------------------------------------------------------------------------------------------------------
+Method                : optimized
+Affected Linear layers: 20
+Affected parameters   : 57,671,680
+Model coverage        : 7.67%
+Mean relative error   : 0.472396
+Max relative error    : 0.502314
+Mean scale ratio      : 1.351844
+-1 codes              : 19,718,858 (34.19%)
+ 0 codes              : 18,314,135 (31.76%)
++1 codes              : 19,638,687 (34.05%)
+
+MATRIX DETAILS
+------------------------------------------------------------------------------------------------------------------------
+self_attn       block  7 | model.layers.7.self_attn.v_proj                         | Err 0.502314 | Scale ratio 1.4066
+self_attn       block  3 | model.layers.3.self_attn.o_proj                         | Err 0.485001 | Scale ratio 1.3596
+self_attn       block  3 | model.layers.3.self_attn.v_proj                         | Err 0.482014 | Scale ratio 1.3659
+linear_attn     block  4 | model.layers.4.linear_attn.out_proj                     | Err 0.481715 | Scale ratio 1.3702
+self_attn       block  3 | model.layers.3.self_attn.k_proj                         | Err 0.478280 | Scale ratio 1.3530
+self_attn       block  7 | model.layers.7.self_attn.o_proj                         | Err 0.475642 | Scale ratio 1.3511
+self_attn       block  7 | model.layers.7.self_attn.q_proj                         | Err 0.475577 | Scale ratio 1.3548
+mlp             block 12 | model.layers.12.mlp.down_proj                           | Err 0.473938 | Scale ratio 1.3500
+mlp             block  6 | model.layers.6.mlp.up_proj                              | Err 0.473525 | Scale ratio 1.3550
+mlp             block  6 | model.layers.6.mlp.down_proj                            | Err 0.473450 | Scale ratio 1.3490
+linear_attn     block  8 | model.layers.8.linear_attn.out_proj                     | Err 0.473357 | Scale ratio 1.3564
+mlp             block 12 | model.layers.12.mlp.gate_proj                           | Err 0.473284 | Scale ratio 1.3508
+mlp             block 12 | model.layers.12.mlp.up_proj                             | Err 0.471389 | Scale ratio 1.3516
+mlp             block  6 | model.layers.6.mlp.gate_proj                            | Err 0.470315 | Scale ratio 1.3502
+linear_attn     block  8 | model.layers.8.linear_attn.in_proj_qkv                  | Err 0.469887 | Scale ratio 1.3519
+self_attn       block  7 | model.layers.7.self_attn.k_proj                         | Err 0.469359 | Scale ratio 1.3472
+linear_attn     block  4 | model.layers.4.linear_attn.in_proj_qkv                  | Err 0.468664 | Scale ratio 1.3472
+linear_attn     block  8 | model.layers.8.linear_attn.in_proj_z                    | Err 0.468032 | Scale ratio 1.3465
+linear_attn     block  4 | model.layers.4.linear_attn.in_proj_z                    | Err 0.465655 | Scale ratio 1.3444
+self_attn       block  3 | model.layers.3.self_attn.q_proj                         | Err 0.464429 | Scale ratio 1.3430
+
+GENERATION
+------------------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+Wait, that's a common misconception. The sky is **blue** because of the **Rayleigh Scattering** (also known as **Rayleigh-Mie Scattering**
+
+Generated tokens : 40
+Generation time  : 1.714 sec
+Tokens/sec       : 23.33
+
+PROMPT 2
+What is 17 multiplied by 23?
+17 * 23 = 391
+
+The answer is 391.
+
+The answer is 391.
+
+The answer is 391.
+
+
+
+Generated tokens : 40
+Generation time  : 1.704 sec
+Tokens/sec       : 23.47
+
+PROMPT 3
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+A. 60 km/h x 2.5 h = 150 km
+B. 60 km/h x 2.5 h = 150 km
+
+Generated tokens : 40
+Generation time  : 1.708 sec
+Tokens/sec       : 23.42
+
+Aggregate throughput : 23.41 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+GPU MEMORY — ready for next method
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+=======================================================================================================================================
+EXPERIMENT 011 — OPTIMIZED TERNARY SCALE CALIBRATION SUMMARY
+=======================================================================================================================================
+Method             Mean Err     Max Err   Scale Ratio      -1 %       0 %      +1 %       Tok/s
+---------------------------------------------------------------------------------------------------------------------------------------
+baseline           0.525436    0.562900      1.000000     34.19     31.76     34.05       22.64
+optimized          0.472396    0.502314      1.351844     34.19     31.76     34.05       23.41
+
+Mean reconstruction error change:
+Baseline  : 0.525436
+Optimized : 0.472396
+Change    : -10.09%
+
+IMPORTANT:
+The optimized scale uses exactly the same ternary {-1,0,+1} assignments as the baseline.
+Only the reconstruction magnitude of the non-zero ternary weights is changed.
+Therefore the {-1,0,+1} percentages should be identical between the two methods.
+
+========================================================================================================================
+IMPORTANT INTERPRETATION
+========================================================================================================================
+Experiment 011 changes only the reconstruction scale.
+
+Group size       : 128
+Threshold        : 0.5 * initial_alpha
+Codes            : {-1, 0, +1}
+Baseline scale   : mean(abs(all group weights))
+Optimized scale  : mean(abs(non-zero selected weights))
+Runtime storage  : reconstructed FP16
+
+Target configuration is the MIXED_MEDIUM configuration used in Experiments 008 and 010.
+
+A lower numerical reconstruction error does not automatically mean better functional generation.
+
+Throughput remains a runtime reference and must NOT be treated as packed ternary inference speed.
+
+The three prompts remain preliminary functional diagnostics rather than a formal quality benchmark.
+
+========================================================================================================================
+EXPERIMENT 011 COMPLETE
+========================================================================================================================
