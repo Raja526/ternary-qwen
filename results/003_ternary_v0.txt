@@ -1,0 +1,419 @@
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+====================================================================================================
+EXPERIMENT 003 — Qwen3.5-0.8B Ternary-V0
+====================================================================================================
+
+Environment
+----------------------------------------------------------------------------------------------------
+PyTorch        : 2.14.0+cu126
+CUDA runtime   : 12.6
+CUDA available : True
+GPU            : Quadro P1000
+GPU capability : (6, 1)
+Total VRAM     : 3.94 GB
+
+Loading tokenizer...
+Loading FP16 model...
+
+Model            : Qwen/Qwen3.5-0.8B
+Device           : cuda
+Data type        : torch.float16
+Parameters       : 752,393,024
+Parameter memory : 1.401 GB
+Load time        : 2.68 sec
+
+====================================================================================================
+FP16 BASELINE GENERATION
+====================================================================================================
+
+PROMPT 1
+----------------------------------------------------------------------------------------------------
+Explain in simple terms why the sky is blue.
+
+OUTPUT:
+Explain in simple terms why the sky is blue.
+
+<think>
+
+</think>
+
+Imagine the sky as a giant, clear window. The reason it looks blue is a simple physics trick called **Rayleigh scattering**.
+
+Here is the simple breakdown:
+
+1.  **The Sun is a Hot, Bright
+
+Input tokens     : 11
+Generated tokens : 50
+Generation time  : 3.509 sec
+Tokens/sec       : 14.25
+
+PROMPT 2
+----------------------------------------------------------------------------------------------------
+What is 17 multiplied by 23?
+
+OUTPUT:
+What is 17 multiplied by 23?
+
+To find the product of 17 and 23, we can use the distributive property of multiplication. We can break down 23 into 20 and 3, and then multiply each part by 17. So
+
+Input tokens     : 11
+Generated tokens : 50
+Generation time  : 2.176 sec
+Tokens/sec       : 22.98
+
+PROMPT 3
+----------------------------------------------------------------------------------------------------
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+OUTPUT:
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+To find the distance traveled by the train, we use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+Given:
+- Speed = 60 km/h
+
+
+Input tokens     : 23
+Generated tokens : 50
+Generation time  : 2.219 sec
+Tokens/sec       : 22.53
+
+PROMPT 4
+----------------------------------------------------------------------------------------------------
+Write a short paragraph explaining why exercise is important.
+
+OUTPUT:
+Write a short paragraph explaining why exercise is important.
+
+<think>
+
+</think>
+
+Exercise is essential for maintaining physical and mental well-being, as it strengthens the body's muscles and bones, improves cardiovascular health, and boosts mental clarity and mood. Regular physical activity helps manage stress, enhances cognitive function, and provides
+
+Input tokens     : 10
+Generated tokens : 50
+Generation time  : 2.174 sec
+Tokens/sec       : 23.00
+
+====================================================================================================
+TERNARIZING SELECTED WEIGHTS
+====================================================================================================
+
+====================================================================================================
+TERNARY STATISTICS
+====================================================================================================
+Total parameters       : 752,393,024
+Candidate layers       : 150
+Candidate parameters   : 497,025,024
+Ternary coverage       : 66.06%
+
+-1 weights             : 164,215,896 (33.04%)
+ 0 weights             : 168,712,589 (33.94%)
++1 weights             : 164,096,539 (33.02%)
+
+Alpha minimum          : 0.00603742
+Alpha maximum          : 0.01753582
+Alpha average          : 0.00977518
+
+====================================================================================================
+THEORETICAL STORAGE
+====================================================================================================
+FP16 raw storage       : 1.401 GiB
+Hybrid theoretical     : 0.591 GiB
+Compression ratio      : 2.37x
+Storage reduction      : 57.80%
+
+NOTE: The model is still physically stored as FP16 in this experiment.
+
+====================================================================================================
+TOP 10 LAYERS BY RELATIVE QUANTIZATION ERROR
+====================================================================================================
+
+1. model.layers.19.self_attn.v_proj
+   Parameters     : 524,288
+   Alpha          : 0.01385158
+   Relative error : 0.651010
+   MAE            : 0.00706266
+   RMSE           : 0.01295316
+
+2. model.layers.14.mlp.gate_proj
+   Parameters     : 3,670,016
+   Alpha          : 0.00954085
+   Relative error : 0.647336
+   MAE            : 0.00490679
+   RMSE           : 0.00885278
+
+3. model.layers.23.self_attn.k_proj
+   Parameters     : 524,288
+   Alpha          : 0.00722461
+   Relative error : 0.628586
+   MAE            : 0.00363661
+   RMSE           : 0.00636487
+
+4. model.layers.23.self_attn.v_proj
+   Parameters     : 524,288
+   Alpha          : 0.01329164
+   Relative error : 0.624901
+   MAE            : 0.00672537
+   RMSE           : 0.01159416
+
+5. model.layers.23.self_attn.o_proj
+   Parameters     : 2,097,152
+   Alpha          : 0.00996738
+   Relative error : 0.620375
+   MAE            : 0.00506912
+   RMSE           : 0.00859535
+
+6. model.layers.15.self_attn.v_proj
+   Parameters     : 524,288
+   Alpha          : 0.01196119
+   Relative error : 0.617017
+   MAE            : 0.00595856
+   RMSE           : 0.01020791
+
+7. model.layers.23.self_attn.q_proj
+   Parameters     : 4,194,304
+   Alpha          : 0.01186334
+   Relative error : 0.615645
+   MAE            : 0.00596496
+   RMSE           : 0.01009738
+
+8. model.layers.15.mlp.gate_proj
+   Parameters     : 3,670,016
+   Alpha          : 0.01034201
+   Relative error : 0.612573
+   MAE            : 0.00513821
+   RMSE           : 0.00871787
+
+9. model.layers.20.linear_attn.in_proj_z
+   Parameters     : 2,097,152
+   Alpha          : 0.01271595
+   Relative error : 0.610330
+   MAE            : 0.00647969
+   RMSE           : 0.01071548
+
+10. model.layers.13.mlp.gate_proj
+   Parameters     : 3,670,016
+   Alpha          : 0.00909213
+   Relative error : 0.607277
+   MAE            : 0.00447391
+   RMSE           : 0.00754784
+
+====================================================================================================
+TERNARY-V0 GENERATION
+====================================================================================================
+
+PROMPT 1
+----------------------------------------------------------------------------------------------------
+Explain in simple terms why the sky is blue.
+
+OUTPUT:
+Explain in simple terms why the sky is blue.11111111111111111111111111111111111111111111111111
+
+Input tokens     : 11
+Generated tokens : 50
+Generation time  : 2.179 sec
+Tokens/sec       : 22.94
+
+PROMPT 2
+----------------------------------------------------------------------------------------------------
+What is 17 multiplied by 23?
+
+OUTPUT:
+What is 17 multiplied by 23?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Input tokens     : 11
+Generated tokens : 50
+Generation time  : 2.189 sec
+Tokens/sec       : 22.84
+
+PROMPT 3
+----------------------------------------------------------------------------------------------------
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+OUTPUT:
+If a train travels 60 km per hour for 2.5 hours, how far does it travel?
+
+ 
+
+ 
+
+
+  
+
+                                         
+
+Input tokens     : 23
+Generated tokens : 50
+Generation time  : 2.234 sec
+Tokens/sec       : 22.39
+
+PROMPT 4
+----------------------------------------------------------------------------------------------------
+Write a short paragraph explaining why exercise is important.
+
+OUTPUT:
+Write a short paragraph explaining why exercise is important.                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+Input tokens     : 10
+Generated tokens : 50
+Generation time  : 2.172 sec
+Tokens/sec       : 23.02
+
+====================================================================================================
+FP16 vs TERNARY-V0 PERFORMANCE
+====================================================================================================
+FP16 generated tokens : 200
+FP16 total time       : 10.078 sec
+FP16 throughput       : 19.85 tokens/sec
+
+Ternary tokens        : 200
+Ternary total time    : 8.774 sec
+Ternary throughput    : 22.79 tokens/sec
+
+Throughput change     : +14.86%
+
+====================================================================================================
+GPU MEMORY
+====================================================================================================
+Peak allocated        : 1472.06 MB
+Current allocated     : 1443.22 MB
+Current reserved      : 1480.00 MB
+
+====================================================================================================
+IMPORTANT INTERPRETATION
+====================================================================================================
+The selected model weights now contain only {-alpha, 0, +alpha} values.
+
+However, those values are still physically stored inside FP16 tensors.
+
+Therefore Experiment 003 measures the effect of TERNARY NUMERICAL CONSTRAINTS on model quality.
+
+It does NOT yet measure true packed 2-bit model size or ternary-kernel inference speed.
+
+Actual packing and optimized ternary inference will be evaluated in later experiments.
+
+====================================================================================================
+EXPERIMENT 003 COMPLETE
+====================================================================================================
