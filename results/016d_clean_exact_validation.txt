@@ -1,0 +1,506 @@
+==================================================================================================================================
+EXPERIMENT 016D — CLEAN EXACT-ANSWER VALIDATION
+==================================================================================================================================
+
+Model              : Qwen/Qwen3.5-0.8B
+Device             : cuda
+Dtype              : torch.float16
+Group size         : 128
+Threshold          : 0.5 * initial_alpha
+Max new tokens     : 16
+Exact prompts      : 10
+
+
+##################################################################################################################################
+VALIDATION CASE — FP16
+##################################################################################################################################
+
+Loading fresh FP16 model...
+Model loaded in 2.80 sec
+
+Configuration validation:
+Matrices           : 0
+Parameters         : 0
+
+----------------------------------------------------------------------------------------------------------------------------------
+[A1] arithmetic
+Prompt   : What is 24 multiplied by 17? Answer with only the final number.
+Expected : 408
+Output   : '488'
+Parsed   : 488
+Status   : WRONG
+Tokens   : 4
+Time     : 1.5967 sec
+Tok/s    : 2.51
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[A2] arithmetic
+Prompt   : What is 432 divided by 18? Answer with only the final number.
+Expected : 24
+Output   : '432 / 18 = 24'
+Parsed   : None
+Status   : FORMAT_FAIL
+Tokens   : 12
+Time     : 0.5431 sec
+Tok/s    : 22.09
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[A3] arithmetic
+Prompt   : What is 37 plus 58? Answer with only the final number.
+Expected : 95
+Output   : '195'
+Parsed   : 195
+Status   : WRONG
+Tokens   : 4
+Time     : 0.2143 sec
+Tok/s    : 18.66
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[A4] arithmetic
+Prompt   : What is 91 minus 46? Answer with only the final number.
+Expected : 45
+Output   : '45'
+Parsed   : 45
+Status   : PASS
+Tokens   : 3
+Time     : 0.1736 sec
+Tok/s    : 17.28
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[W1] word_problem
+Prompt   : A bus travels at 55 kilometers per hour for 4 hours. How many kilometers does it travel? Answer with only the final number.
+Expected : 220
+Output   : '55 * 4 = 220'
+Parsed   : None
+Status   : FORMAT_FAIL
+Tokens   : 11
+Time     : 0.7298 sec
+Tok/s    : 15.07
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[W2] word_problem
+Prompt   : A runner covers 8 kilometers per hour for 3 hours. How many kilometers does the runner cover in total? Answer with only the final number.
+Expected : 24
+Output   : '8 * 3 = 24'
+Parsed   : None
+Status   : FORMAT_FAIL
+Tokens   : 9
+Time     : 0.4647 sec
+Tok/s    : 19.37
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[W3] word_problem
+Prompt   : A box contains 12 rows of 9 apples. How many apples are in the box? Answer with only the final number.
+Expected : 108
+Output   : '162'
+Parsed   : 162
+Status   : WRONG
+Tokens   : 4
+Time     : 0.2582 sec
+Tok/s    : 15.49
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[F1] factual
+Prompt   : What planet is known as the Red Planet? Answer with only one word.
+Expected : mars
+Output   : 'Mars'
+Parsed   : mars
+Status   : PASS
+Tokens   : 3
+Time     : 0.1720 sec
+Tok/s    : 17.44
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[F2] factual
+Prompt   : What gas do humans need to breathe to survive? Answer with only one word.
+Expected : oxygen
+Output   : 'Oxygen'
+Parsed   : oxygen
+Status   : PASS
+Tokens   : 3
+Time     : 0.1729 sec
+Tok/s    : 17.36
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[F3] factual
+Prompt   : What is the process by which plants make food using sunlight called? Answer with only one word.
+Expected : photosynthesis
+Output   : 'Photosynthesis'
+Parsed   : photosynthesis
+Status   : PASS
+Tokens   : 3
+Time     : 0.1745 sec
+Tok/s    : 17.19
+Template : enable_thinking=False
+
+==================================================================================================================================
+SUMMARY — FP16
+==================================================================================================================================
+PASS              : 4
+WRONG             : 3
+FORMAT_FAIL       : 3
+TOTAL             : 10
+Strict accuracy   : 40.00%
+
+Category breakdown:
+arithmetic     PASS=1 WRONG=2 FORMAT_FAIL=1 TOTAL=4
+word_problem   PASS=0 WRONG=1 FORMAT_FAIL=2 TOTAL=3
+factual        PASS=3 WRONG=0 FORMAT_FAIL=0 TOTAL=3
+
+Generated tokens  : 56
+Generation time   : 4.4999 sec
+Aggregate tok/s   : 12.44
+Template mode(s)  : ['enable_thinking=False']
+
+
+##################################################################################################################################
+VALIDATION CASE — BLOCK_GUIDED_7_67
+##################################################################################################################################
+
+Loading fresh FP16 model...
+Model loaded in 2.66 sec
+
+Configuration validation:
+Matrices           : 20
+Parameters         : 57,671,680
+Coverage           : 7.6651%
+Mean rel. error    : 0.474791
+Max rel. error     : 0.502314
+Mean scale ratio   : 1.356793
+
+----------------------------------------------------------------------------------------------------------------------------------
+[A1] arithmetic
+Prompt   : What is 24 multiplied by 17? Answer with only the final number.
+Expected : 408
+Output   : '24 multiplied by 17 equals 408.\n\n**Note'
+Parsed   : None
+Status   : FORMAT_FAIL
+Tokens   : 16
+Time     : 0.6988 sec
+Tok/s    : 22.90
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[A2] arithmetic
+Prompt   : What is 432 divided by 18? Answer with only the final number.
+Expected : 24
+Output   : '432 ÷ 18 = 24\n\n**24'
+Parsed   : None
+Status   : FORMAT_FAIL
+Tokens   : 16
+Time     : 0.6992 sec
+Tok/s    : 22.88
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[A3] arithmetic
+Prompt   : What is 37 plus 58? Answer with only the final number.
+Expected : 95
+Output   : '37 + 58 = 91'
+Parsed   : None
+Status   : FORMAT_FAIL
+Tokens   : 11
+Time     : 0.4953 sec
+Tok/s    : 22.21
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[A4] arithmetic
+Prompt   : What is 91 minus 46? Answer with only the final number.
+Expected : 45
+Output   : '**91 - 46 = 45**\n\nThe question asks'
+Parsed   : None
+Status   : FORMAT_FAIL
+Tokens   : 16
+Time     : 0.7003 sec
+Tok/s    : 22.85
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[W1] word_problem
+Prompt   : A bus travels at 55 kilometers per hour for 4 hours. How many kilometers does it travel? Answer with only the final number.
+Expected : 220
+Output   : 'To find the total distance traveled by the bus, we multiply its speed by the'
+Parsed   : None
+Status   : FORMAT_FAIL
+Tokens   : 16
+Time     : 0.7457 sec
+Tok/s    : 21.46
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[W2] word_problem
+Prompt   : A runner covers 8 kilometers per hour for 3 hours. How many kilometers does the runner cover in total? Answer with only the final number.
+Expected : 24
+Output   : 'To find the total distance covered by the runner, we use the formula:'
+Parsed   : None
+Status   : FORMAT_FAIL
+Tokens   : 16
+Time     : 0.7465 sec
+Tok/s    : 21.43
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[W3] word_problem
+Prompt   : A box contains 12 rows of 9 apples. How many apples are in the box? Answer with only the final number.
+Expected : 108
+Output   : 'The box contains **12 rows** of 9 apples.\n\nTo find'
+Parsed   : None
+Status   : FORMAT_FAIL
+Tokens   : 16
+Time     : 0.7446 sec
+Tok/s    : 21.49
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[F1] factual
+Prompt   : What planet is known as the Red Planet? Answer with only one word.
+Expected : mars
+Output   : 'Earth'
+Parsed   : earth
+Status   : WRONG
+Tokens   : 2
+Time     : 0.1317 sec
+Tok/s    : 15.18
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[F2] factual
+Prompt   : What gas do humans need to breathe to survive? Answer with only one word.
+Expected : oxygen
+Output   : 'Oxygen'
+Parsed   : oxygen
+Status   : PASS
+Tokens   : 3
+Time     : 0.1722 sec
+Tok/s    : 17.42
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[F3] factual
+Prompt   : What is the process by which plants make food using sunlight called? Answer with only one word.
+Expected : photosynthesis
+Output   : 'Photosynthesis'
+Parsed   : photosynthesis
+Status   : PASS
+Tokens   : 3
+Time     : 0.1740 sec
+Tok/s    : 17.24
+Template : enable_thinking=False
+
+==================================================================================================================================
+SUMMARY — BLOCK_GUIDED_7_67
+==================================================================================================================================
+PASS              : 2
+WRONG             : 1
+FORMAT_FAIL       : 7
+TOTAL             : 10
+Strict accuracy   : 20.00%
+
+Category breakdown:
+arithmetic     PASS=0 WRONG=0 FORMAT_FAIL=4 TOTAL=4
+word_problem   PASS=0 WRONG=0 FORMAT_FAIL=3 TOTAL=3
+factual        PASS=2 WRONG=1 FORMAT_FAIL=0 TOTAL=3
+
+Generated tokens  : 115
+Generation time   : 5.3083 sec
+Aggregate tok/s   : 21.66
+Template mode(s)  : ['enable_thinking=False']
+
+
+##################################################################################################################################
+VALIDATION CASE — ACT_GUIDED_7_73
+##################################################################################################################################
+
+Loading fresh FP16 model...
+Model loaded in 2.73 sec
+
+Configuration validation:
+Matrices           : 18
+Parameters         : 58,195,968
+Coverage           : 7.7348%
+Mean rel. error    : 0.471810
+Max rel. error     : 0.482014
+Mean scale ratio   : 1.352041
+
+----------------------------------------------------------------------------------------------------------------------------------
+[A1] arithmetic
+Prompt   : What is 24 multiplied by 17? Answer with only the final number.
+Expected : 408
+Output   : '24 × 17 = 408'
+Parsed   : None
+Status   : FORMAT_FAIL
+Tokens   : 12
+Time     : 0.5385 sec
+Tok/s    : 22.28
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[A2] arithmetic
+Prompt   : What is 432 divided by 18? Answer with only the final number.
+Expected : 24
+Output   : 'To find the value of $432 \\div 18$, we'
+Parsed   : None
+Status   : FORMAT_FAIL
+Tokens   : 16
+Time     : 0.7040 sec
+Tok/s    : 22.73
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[A3] arithmetic
+Prompt   : What is 37 plus 58? Answer with only the final number.
+Expected : 95
+Output   : '37 + 58 = 95'
+Parsed   : None
+Status   : FORMAT_FAIL
+Tokens   : 11
+Time     : 0.5041 sec
+Tok/s    : 21.82
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[A4] arithmetic
+Prompt   : What is 91 minus 46? Answer with only the final number.
+Expected : 45
+Output   : '91 - 46 = 45'
+Parsed   : None
+Status   : FORMAT_FAIL
+Tokens   : 11
+Time     : 0.5107 sec
+Tok/s    : 21.54
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[W1] word_problem
+Prompt   : A bus travels at 55 kilometers per hour for 4 hours. How many kilometers does it travel? Answer with only the final number.
+Expected : 220
+Output   : 'To calculate the total distance traveled by the bus, we use the formula:'
+Parsed   : None
+Status   : FORMAT_FAIL
+Tokens   : 16
+Time     : 0.7512 sec
+Tok/s    : 21.30
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[W2] word_problem
+Prompt   : A runner covers 8 kilometers per hour for 3 hours. How many kilometers does the runner cover in total? Answer with only the final number.
+Expected : 24
+Output   : 'To find the total distance covered by the runner, we use the formula:'
+Parsed   : None
+Status   : FORMAT_FAIL
+Tokens   : 16
+Time     : 0.7513 sec
+Tok/s    : 21.30
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[W3] word_problem
+Prompt   : A box contains 12 rows of 9 apples. How many apples are in the box? Answer with only the final number.
+Expected : 108
+Output   : 'The box contains 12 rows, each with 9 apples. Therefore,'
+Parsed   : None
+Status   : FORMAT_FAIL
+Tokens   : 16
+Time     : 0.7678 sec
+Tok/s    : 20.84
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[F1] factual
+Prompt   : What planet is known as the Red Planet? Answer with only one word.
+Expected : mars
+Output   : 'Earth'
+Parsed   : earth
+Status   : WRONG
+Tokens   : 2
+Time     : 0.1321 sec
+Tok/s    : 15.14
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[F2] factual
+Prompt   : What gas do humans need to breathe to survive? Answer with only one word.
+Expected : oxygen
+Output   : 'Oxygen'
+Parsed   : oxygen
+Status   : PASS
+Tokens   : 3
+Time     : 0.1729 sec
+Tok/s    : 17.35
+Template : enable_thinking=False
+
+----------------------------------------------------------------------------------------------------------------------------------
+[F3] factual
+Prompt   : What is the process by which plants make food using sunlight called? Answer with only one word.
+Expected : photosynthesis
+Output   : 'Photosynthesis'
+Parsed   : photosynthesis
+Status   : PASS
+Tokens   : 3
+Time     : 0.1758 sec
+Tok/s    : 17.06
+Template : enable_thinking=False
+
+==================================================================================================================================
+SUMMARY — ACT_GUIDED_7_73
+==================================================================================================================================
+PASS              : 2
+WRONG             : 1
+FORMAT_FAIL       : 7
+TOTAL             : 10
+Strict accuracy   : 20.00%
+
+Category breakdown:
+arithmetic     PASS=0 WRONG=0 FORMAT_FAIL=4 TOTAL=4
+word_problem   PASS=0 WRONG=0 FORMAT_FAIL=3 TOTAL=3
+factual        PASS=2 WRONG=1 FORMAT_FAIL=0 TOTAL=3
+
+Generated tokens  : 106
+Generation time   : 5.0084 sec
+Aggregate tok/s   : 21.16
+Template mode(s)  : ['enable_thinking=False']
+
+
+==================================================================================================================================
+FINAL CLEAN EXACT-ANSWER COMPARISON
+==================================================================================================================================
+Configuration               PASS     WRONG    FORMAT      Accuracy       Tok/s
+----------------------------------------------------------------------------------------------------------------------------------
+FP16                           4         3         3        40.00%       12.44
+BLOCK_GUIDED_7_67              2         1         7        20.00%       21.66
+ACT_GUIDED_7_73                2         1         7        20.00%       21.16
+
+==================================================================================================================================
+PASS-COUNT RETENTION RELATIVE TO FP16
+==================================================================================================================================
+BLOCK_GUIDED_7_67       : 2/4 = 50.00%
+ACT_GUIDED_7_73         : 2/4 = 50.00%
+
+==================================================================================================================================
+SCIENTIFIC NOTES
+==================================================================================================================================
+1. Each configuration was evaluated from a fresh FP16 model load.
+2. The ternary method is frozen: group size 128, threshold 0.5 * initial mean-absolute scale, followed by optimized nonzero scale.
+3. Thinking was requested to be disabled through the Qwen chat template when supported.
+4. Generation is deterministic (do_sample=False).
+5. Exact prompts use a small generation budget to reduce post-answer degeneration.
+6. PASS requires a clean response matching the expected answer.
+7. WRONG means a clean answer was produced but its value was incorrect.
+8. FORMAT_FAIL means the model did not follow the requested short-answer format closely enough for strict automatic scoring.
+9. FORMAT_FAIL is kept separate from WRONG because instruction-following failure and factual/numerical error are different failure modes.
+10. Tokens/sec must not be interpreted as packed ternary acceleration because the ternary matrices are reconstructed and stored as FP16 tensors.
+
+==================================================================================================================================
+EXPERIMENT 016D COMPLETE
+==================================================================================================================================

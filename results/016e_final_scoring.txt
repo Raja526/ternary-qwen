@@ -1,0 +1,403 @@
+
+============================================================================================================================================
+FINAL SCORING RESULTS
+============================================================================================================================================
+
+############################################################################################################################################
+CASE — FP16
+############################################################################################################################################
+
+[A1] arithmetic
+Expected     : 408
+Output       : '488'
+Extracted    : 488
+Method       : direct_numeric
+Correctness  : WRONG
+Format       : COMPLIANT
+
+[A2] arithmetic
+Expected     : 24
+Output       : '432 / 18 = 24'
+Extracted    : 24
+Method       : completed_equation
+Correctness  : CORRECT
+Format       : NON_COMPLIANT
+
+[A3] arithmetic
+Expected     : 95
+Output       : '195'
+Extracted    : 195
+Method       : direct_numeric
+Correctness  : WRONG
+Format       : COMPLIANT
+
+[A4] arithmetic
+Expected     : 45
+Output       : '45'
+Extracted    : 45
+Method       : direct_numeric
+Correctness  : CORRECT
+Format       : COMPLIANT
+
+[W1] word_problem
+Expected     : 220
+Output       : '55 * 4 = 220'
+Extracted    : 220
+Method       : completed_equation
+Correctness  : CORRECT
+Format       : NON_COMPLIANT
+
+[W2] word_problem
+Expected     : 24
+Output       : '8 * 3 = 24'
+Extracted    : 24
+Method       : completed_equation
+Correctness  : CORRECT
+Format       : NON_COMPLIANT
+
+[W3] word_problem
+Expected     : 108
+Output       : '162'
+Extracted    : 162
+Method       : direct_numeric
+Correctness  : WRONG
+Format       : COMPLIANT
+
+[F1] factual
+Expected     : mars
+Output       : 'Mars'
+Extracted    : mars
+Method       : direct_word
+Correctness  : CORRECT
+Format       : COMPLIANT
+
+[F2] factual
+Expected     : oxygen
+Output       : 'Oxygen'
+Extracted    : oxygen
+Method       : direct_word
+Correctness  : CORRECT
+Format       : COMPLIANT
+
+[F3] factual
+Expected     : photosynthesis
+Output       : 'Photosynthesis'
+Extracted    : photosynthesis
+Method       : direct_word
+Correctness  : CORRECT
+Format       : COMPLIANT
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+ANSWER CORRECTNESS
+CORRECT           : 7
+WRONG             : 3
+NO_ANSWER         : 0
+TOTAL             : 10
+Answer accuracy   : 70.00%
+Answered accuracy : 70.00%
+
+FORMAT COMPLIANCE
+COMPLIANT         : 7
+NON_COMPLIANT     : 3
+Compliance rate   : 70.00%
+
+CATEGORY BREAKDOWN
+arithmetic     CORRECT=2 WRONG=2 NO_ANSWER=0 TOTAL=4
+word_problem   CORRECT=2 WRONG=1 NO_ANSWER=0 TOTAL=3
+factual        CORRECT=3 WRONG=0 NO_ANSWER=0 TOTAL=3
+
+############################################################################################################################################
+CASE — BLOCK_GUIDED_7_67
+############################################################################################################################################
+
+[A1] arithmetic
+Expected     : 408
+Output       : '24 multiplied by 17 equals 408.\n\n**Note'
+Extracted    : 408
+Method       : completed_equation_words
+Correctness  : CORRECT
+Format       : NON_COMPLIANT
+
+[A2] arithmetic
+Expected     : 24
+Output       : '432 ÷ 18 = 24\n\n**24'
+Extracted    : 24
+Method       : completed_equation
+Correctness  : CORRECT
+Format       : NON_COMPLIANT
+
+[A3] arithmetic
+Expected     : 95
+Output       : '37 + 58 = 91'
+Extracted    : 91
+Method       : completed_equation
+Correctness  : WRONG
+Format       : NON_COMPLIANT
+
+[A4] arithmetic
+Expected     : 45
+Output       : '**91 - 46 = 45**\n\nThe question asks'
+Extracted    : 45
+Method       : completed_equation
+Correctness  : CORRECT
+Format       : NON_COMPLIANT
+
+[W1] word_problem
+Expected     : 220
+Output       : 'To find the total distance traveled by the bus, we multiply its speed by the'
+Extracted    : None
+Method       : no_answer
+Correctness  : NO_ANSWER
+Format       : NON_COMPLIANT
+
+[W2] word_problem
+Expected     : 24
+Output       : 'To find the total distance covered by the runner, we use the formula:'
+Extracted    : None
+Method       : no_answer
+Correctness  : NO_ANSWER
+Format       : NON_COMPLIANT
+
+[W3] word_problem
+Expected     : 108
+Output       : 'The box contains **12 rows** of 9 apples.\n\nTo find'
+Extracted    : None
+Method       : no_answer
+Correctness  : NO_ANSWER
+Format       : NON_COMPLIANT
+
+[F1] factual
+Expected     : mars
+Output       : 'Earth'
+Extracted    : earth
+Method       : direct_word
+Correctness  : WRONG
+Format       : COMPLIANT
+
+[F2] factual
+Expected     : oxygen
+Output       : 'Oxygen'
+Extracted    : oxygen
+Method       : direct_word
+Correctness  : CORRECT
+Format       : COMPLIANT
+
+[F3] factual
+Expected     : photosynthesis
+Output       : 'Photosynthesis'
+Extracted    : photosynthesis
+Method       : direct_word
+Correctness  : CORRECT
+Format       : COMPLIANT
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+ANSWER CORRECTNESS
+CORRECT           : 5
+WRONG             : 2
+NO_ANSWER         : 3
+TOTAL             : 10
+Answer accuracy   : 50.00%
+Answered accuracy : 71.43%
+
+FORMAT COMPLIANCE
+COMPLIANT         : 3
+NON_COMPLIANT     : 7
+Compliance rate   : 30.00%
+
+CATEGORY BREAKDOWN
+arithmetic     CORRECT=3 WRONG=1 NO_ANSWER=0 TOTAL=4
+word_problem   CORRECT=0 WRONG=0 NO_ANSWER=3 TOTAL=3
+factual        CORRECT=2 WRONG=1 NO_ANSWER=0 TOTAL=3
+
+############################################################################################################################################
+CASE — ACT_GUIDED_7_73
+############################################################################################################################################
+
+[A1] arithmetic
+Expected     : 408
+Output       : '24 × 17 = 408'
+Extracted    : 408
+Method       : completed_equation
+Correctness  : CORRECT
+Format       : NON_COMPLIANT
+
+[A2] arithmetic
+Expected     : 24
+Output       : 'To find the value of $432 \\div 18$, we'
+Extracted    : None
+Method       : no_answer
+Correctness  : NO_ANSWER
+Format       : NON_COMPLIANT
+
+[A3] arithmetic
+Expected     : 95
+Output       : '37 + 58 = 95'
+Extracted    : 95
+Method       : completed_equation
+Correctness  : CORRECT
+Format       : NON_COMPLIANT
+
+[A4] arithmetic
+Expected     : 45
+Output       : '91 - 46 = 45'
+Extracted    : 45
+Method       : completed_equation
+Correctness  : CORRECT
+Format       : NON_COMPLIANT
+
+[W1] word_problem
+Expected     : 220
+Output       : 'To calculate the total distance traveled by the bus, we use the formula:'
+Extracted    : None
+Method       : no_answer
+Correctness  : NO_ANSWER
+Format       : NON_COMPLIANT
+
+[W2] word_problem
+Expected     : 24
+Output       : 'To find the total distance covered by the runner, we use the formula:'
+Extracted    : None
+Method       : no_answer
+Correctness  : NO_ANSWER
+Format       : NON_COMPLIANT
+
+[W3] word_problem
+Expected     : 108
+Output       : 'The box contains 12 rows, each with 9 apples. Therefore,'
+Extracted    : None
+Method       : no_answer
+Correctness  : NO_ANSWER
+Format       : NON_COMPLIANT
+
+[F1] factual
+Expected     : mars
+Output       : 'Earth'
+Extracted    : earth
+Method       : direct_word
+Correctness  : WRONG
+Format       : COMPLIANT
+
+[F2] factual
+Expected     : oxygen
+Output       : 'Oxygen'
+Extracted    : oxygen
+Method       : direct_word
+Correctness  : CORRECT
+Format       : COMPLIANT
+
+[F3] factual
+Expected     : photosynthesis
+Output       : 'Photosynthesis'
+Extracted    : photosynthesis
+Method       : direct_word
+Correctness  : CORRECT
+Format       : COMPLIANT
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+ANSWER CORRECTNESS
+CORRECT           : 5
+WRONG             : 1
+NO_ANSWER         : 4
+TOTAL             : 10
+Answer accuracy   : 50.00%
+Answered accuracy : 83.33%
+
+FORMAT COMPLIANCE
+COMPLIANT         : 3
+NON_COMPLIANT     : 7
+Compliance rate   : 30.00%
+
+CATEGORY BREAKDOWN
+arithmetic     CORRECT=3 WRONG=0 NO_ANSWER=1 TOTAL=4
+word_problem   CORRECT=0 WRONG=0 NO_ANSWER=3 TOTAL=3
+factual        CORRECT=2 WRONG=1 NO_ANSWER=0 TOTAL=3
+
+
+===========================================================================================================================================================
+CROSS-CONFIGURATION SUMMARY
+===========================================================================================================================================================
+Configuration              Correct     Wrong     NoAns    Answer Acc    Answered Acc     Format Comp
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+FP16                             7         3         0        70.00%          70.00%          70.00%
+BLOCK_GUIDED_7_67                5         2         3        50.00%          71.43%          30.00%
+ACT_GUIDED_7_73                  5         1         4        50.00%          83.33%          30.00%
+
+
+===========================================================================================================================================================
+PER-PROMPT ANSWER CORRECTNESS
+===========================================================================================================================================================
+Prompt    Expected                                        FP16               BLOCK_GUIDED_7_67                 ACT_GUIDED_7_73
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+A1        408                                      WRONG (488)                   CORRECT (408)                   CORRECT (408)
+A2        24                                      CORRECT (24)                    CORRECT (24)                   NO_ANSWER (-)
+A3        95                                       WRONG (195)                      WRONG (91)                    CORRECT (95)
+A4        45                                      CORRECT (45)                    CORRECT (45)                    CORRECT (45)
+W1        220                                    CORRECT (220)                   NO_ANSWER (-)                   NO_ANSWER (-)
+W2        24                                      CORRECT (24)                   NO_ANSWER (-)                   NO_ANSWER (-)
+W3        108                                      WRONG (162)                   NO_ANSWER (-)                   NO_ANSWER (-)
+F1        mars                                  CORRECT (mars)                   WRONG (earth)                   WRONG (earth)
+F2        oxygen                              CORRECT (oxygen)                CORRECT (oxygen)                CORRECT (oxygen)
+F3        photosynthesis              CORRECT (photosynthesis)        CORRECT (photosynthesis)        CORRECT (photosynthesis)
+
+
+===========================================================================================================================================================
+PER-PROMPT FORMAT COMPLIANCE
+===========================================================================================================================================================
+Prompt                                FP16               BLOCK_GUIDED_7_67                 ACT_GUIDED_7_73
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+A1                               COMPLIANT                   NON_COMPLIANT                   NON_COMPLIANT
+A2                           NON_COMPLIANT                   NON_COMPLIANT                   NON_COMPLIANT
+A3                               COMPLIANT                   NON_COMPLIANT                   NON_COMPLIANT
+A4                               COMPLIANT                   NON_COMPLIANT                   NON_COMPLIANT
+W1                           NON_COMPLIANT                   NON_COMPLIANT                   NON_COMPLIANT
+W2                           NON_COMPLIANT                   NON_COMPLIANT                   NON_COMPLIANT
+W3                               COMPLIANT                   NON_COMPLIANT                   NON_COMPLIANT
+F1                               COMPLIANT                       COMPLIANT                       COMPLIANT
+F2                               COMPLIANT                       COMPLIANT                       COMPLIANT
+F3                               COMPLIANT                       COMPLIANT                       COMPLIANT
+
+
+===========================================================================================================================================================
+ANSWER-CORRECTNESS RETENTION RELATIVE TO FP16
+===========================================================================================================================================================
+FP16 correct answers: 7/10
+BLOCK_GUIDED_7_67       : 5/7 = 71.43%
+ACT_GUIDED_7_73         : 5/7 = 71.43%
+
+
+===========================================================================================================================================================
+FP16 VS TERNARY CORRECTNESS AGREEMENT
+===========================================================================================================================================================
+
+BLOCK_GUIDED_7_67
+Both correct       : 4
+FP16 only correct  : 3
+Ternary only       : 1
+Neither correct    : 2
+
+ACT_GUIDED_7_73
+Both correct       : 3
+FP16 only correct  : 4
+Ternary only       : 2
+Neither correct    : 1
+
+
+===========================================================================================================================================================
+SCIENTIFIC INTERPRETATION NOTES
+===========================================================================================================================================================
+1. Experiment 016E does not run the model or modify any weights.
+2. It scores only the responses already generated by Experiment 016D.
+3. Answer correctness and format compliance are independent metrics.
+4. CORRECT means a reliable final answer was present and matched the expected answer.
+5. WRONG means a reliable answer was present but did not match the expected answer.
+6. NO_ANSWER means the generated text ended before a reliable final answer could be identified.
+7. COMPLIANT means the model followed the requested final-number or one-word output format.
+8. NON_COMPLIANT does not necessarily mean the underlying answer was wrong.
+9. Answer accuracy is CORRECT / all 10 exact-answer prompts.
+10. Answered accuracy excludes NO_ANSWER and therefore must be reported separately from overall answer accuracy.
+11. These exact-answer metrics should be interpreted together with the broader repetition and open-ended generation findings from Experiment 016.
+12. Tokens/sec from Experiment 016D must not be interpreted as packed ternary acceleration because the ternary matrices were reconstructed into FP16 tensors.
+
+===========================================================================================================================================================
+EXPERIMENT 016E COMPLETE
+===========================================================================================================================================================

@@ -1,0 +1,336 @@
+
+==================================================================================================================================
+FINAL RESCORED EXACT-ANSWER RESULTS
+==================================================================================================================================
+
+##################################################################################################################################
+CASE — FP16
+##################################################################################################################################
+
+[A1] arithmetic
+Expected   : 408
+Extracted  : 408
+Method     : explicit_answer
+Status     : PASS
+Response   : 24 * 17 = 408. **2. What is 24 multiplied by 17?** Answer: 408. **3. What is 24 multiplied by 17?** Answer: 408. **4. What is 24 multiplied by 17?** Answer: 40
+
+[A2] arithmetic
+Expected   : 24
+Extracted  : 432
+Method     : direct_numeric
+Status     : FAIL
+Response   : 432 divided by 18 is 24. What is 12 divided by 3? 12 divided by 3 is 4. What is 12 divided by 4? 12 divided by 4 is 3. What is 12 divided by 6? 12 divided by 6 is 2.
+
+[A3] arithmetic
+Expected   : 95
+Extracted  : 37
+Method     : direct_numeric
+Status     : FAIL
+Response   : 37 plus 58 is 95. The final answer is: 95. What is 37 plus 58? 37 plus 58 is 95. The final answer is: 95. What is 37 plus 58? 37 plus 58 is 95. The
+
+[A4] arithmetic
+Expected   : 45
+Extracted  : 45
+Method     : explicit_answer
+Status     : PASS
+Response   : 91 - 46 = 45. The final number is 45. </think> 45
+
+[W1] word_problem
+Expected   : 220
+Extracted  : 55
+Method     : first_equation
+Status     : FAIL
+Response   : To find the total distance traveled by the bus, we use the formula: \[ \text{Distance} = \text{Speed} \times \text{Time} \] Given: - Speed = 55 km/h - Time = 4 hours Calculation: \[ \text{Distance} = 55 \times 4 = 22
+
+[W2] word_problem
+Expected   : 24
+Extracted  : 16
+Method     : direct_numeric
+Status     : FAIL
+Response   : 16
+
+[W3] word_problem
+Expected   : 108
+Extracted  : 108
+Method     : explicit_answer
+Status     : PASS
+Response   : 12 \times 9 = 108. The answer is 108. </think> 108. The answer is 108. 12 \times 9 = 108. The answer is 108. 108. 108. 108. 108.
+
+[F1] factual
+Expected   : mars
+Extracted  : mars
+Method     : clear_answer_statement
+Status     : PASS
+Response   : <think> Thinking Process: 1. **Analyze the Request:** * Constraint: Answer with *only one word*. * Question: "What planet is known as the Red Planet?" * Target: Identify the planet. 2. **Identify the Answer:** * The planet known as the Red Planet is Mars.
+
+[F2] factual
+Expected   : oxygen
+Extracted  : None
+Method     : unresolved
+Status     : UNRESOLVED
+Response   : <think> Thinking Process: 1. **Analyze the Request:** * Constraint: Answer with *only one word*. * Question: "What gas do humans need to breathe to survive?" * Goal: Provide the answer to the question. 2. **Identify the Answer:** * The question asks for a specific gas
+
+[F3] factual
+Expected   : photosynthesis
+Extracted  : None
+Method     : unresolved
+Status     : UNRESOLVED
+Response   : <think> </think> Photosynthesis
+
+----------------------------------------------------------------------------------------------------------------------------------
+PASS              : 4
+FAIL              : 4
+UNRESOLVED        : 2
+TOTAL             : 10
+Strict accuracy   : 40.00%
+Resolved accuracy : 50.00%
+
+Category breakdown:
+arithmetic     PASS=2 FAIL=2 UNRESOLVED=0 TOTAL=4
+word_problem   PASS=1 FAIL=2 UNRESOLVED=0 TOTAL=3
+factual        PASS=1 FAIL=0 UNRESOLVED=2 TOTAL=3
+
+##################################################################################################################################
+CASE — BLOCK_GUIDED_7_67
+##################################################################################################################################
+
+[A1] arithmetic
+Expected   : 408
+Extracted  : 408
+Method     : first_equation
+Status     : PASS
+Response   : 24 * 17 = 408 <think> Thinking Process: 1. **Analyze the Request:** * The user wants to know the result of "24 multiplied by 17". * The user is asking for the final number. * The user is asking for the final number. * The
+
+[A2] arithmetic
+Expected   : 24
+Extracted  : 24
+Method     : first_equation
+Status     : PASS
+Response   : 432 / 18 = 24 432 / 18 = 24 432 / 18 = 24 432 / 18 = 24 432 / 18 = 24 432 / 18 = 24 432 / 18
+
+[A3] arithmetic
+Expected   : 95
+Extracted  : 95
+Method     : first_equation
+Status     : PASS
+Response   : 37 plus 58 = 95. 37 plus 58 = 95. 37 plus 58 = 95. 37 plus 58 = 95. 37 plus 58 = 95. 37 plus 58 = 95. 37 plus 58 =
+
+[A4] arithmetic
+Expected   : 45
+Extracted  : 45
+Method     : first_equation
+Status     : PASS
+Response   : A. 91 - 46 = 45. B. 91 - 46 = 45. C. 91 - 46 = 45. D. 91 - 46 = 45. E. 91 - 46 = 45. F. 9
+
+[W1] word_problem
+Expected   : 220
+Extracted  : None
+Method     : unresolved
+Status     : UNRESOLVED
+Response   : <think> Thinking Process: 1. **Analyze the Request:** * The user is asking for a specific calculation: "A bus travels 55 km/h for 4 hours. How many kilometers does it travel?" * The user wants the final number. 2. **Identify the Core Task:** * The user wants the
+
+[W2] word_problem
+Expected   : 24
+Extracted  : None
+Method     : unresolved
+Status     : UNRESOLVED
+Response   : <think> Thinking Process: 1. **Analyze the Request:** * The user wants to know the distance covered by a runner who covers 8 kilometers per hour for 3 hours. * The user is asking for the final number (the distance covered). * The user is asking for the final number. 2. **Identify
+
+[W3] word_problem
+Expected   : 108
+Extracted  : None
+Method     : unresolved
+Status     : UNRESOLVED
+Response   : <think> Thinking Process: 1. **Analyze the Request:** * The user is asking for the number of apples in a box containing 12 rows of 9 apples. * The user wants the answer to be "only the final number". * The user wants the answer to be "only the final number". 2.
+
+[F1] factual
+Expected   : mars
+Extracted  : None
+Method     : unresolved
+Status     : UNRESOLVED
+Response   : <think> Thinking Process: 1. **Analyze the Request:** * The user is asking for the name of the planet known as the "Red Planet". * The user wants the answer to be "only one word". * This means the answer must be concise. 2. **Identify the Planet:** * The
+
+[F2] factual
+Expected   : oxygen
+Extracted  : None
+Method     : unresolved
+Status     : UNRESOLVED
+Response   : <think> Thinking Process: 1. **Analyze the Request:** * The user is asking for a single word answer. * The core question is: "What gas do humans need to breathe to survive?" * Constraint: "What gas do humans need to breathe to survive?" 2. **Identify the Core Question:**
+
+[F3] factual
+Expected   : photosynthesis
+Extracted  : photosynthesis
+Method     : clear_answer_statement
+Status     : PASS
+Response   : <think> </think> The process by which plants make food using sunlight is called **photosynthesis**. **Note:** This is a single-word answer. Photosynthesis is the process by which plants make food using sunlight. Photosynthesis is the process by which plants make food using sunlight. Photosynthesis i...
+
+----------------------------------------------------------------------------------------------------------------------------------
+PASS              : 5
+FAIL              : 0
+UNRESOLVED        : 5
+TOTAL             : 10
+Strict accuracy   : 50.00%
+Resolved accuracy : 100.00%
+
+Category breakdown:
+arithmetic     PASS=4 FAIL=0 UNRESOLVED=0 TOTAL=4
+word_problem   PASS=0 FAIL=0 UNRESOLVED=3 TOTAL=3
+factual        PASS=1 FAIL=0 UNRESOLVED=2 TOTAL=3
+
+##################################################################################################################################
+CASE — ACT_GUIDED_7_73
+##################################################################################################################################
+
+[A1] arithmetic
+Expected   : 408
+Extracted  : None
+Method     : unresolved
+Status     : UNRESOLVED
+Response   : <think> The user is asking for the answer to the question: "What is 24 multiplied by 17?" The user is asking for the answer to the question "What is 24 multiplied by 17?" The user is asking for the answer to the question "What is 24 multiplied by 17?" The user is asking for the answer
+
+[A2] arithmetic
+Expected   : 24
+Extracted  : 24
+Method     : explicit_answer
+Status     : PASS
+Response   : Answer: 24 Answer: 24 Answer: 24 Answer: 24 Answer: 24 Answer: 24 Answer: 24 Answer: 24 Answer: 24 Answer: 24 Answer: 24 Answer: 24 Answer: 24 Answer
+
+[A3] arithmetic
+Expected   : 95
+Extracted  : 95
+Method     : explicit_answer
+Status     : PASS
+Response   : <think> The user is asking for the result of 37 + 58. 1. 37 + 58 = 95. </think> The answer is **95**. **37 + 58 = 95**
+
+[A4] arithmetic
+Expected   : 45
+Extracted  : 46
+Method     : explicit_answer
+Status     : FAIL
+Response   : Answer: 46 Answer: 46 Answer: 46 Answer: 46 Answer: 46 Answer: 46 Answer: 46 Answer: 46 Answer: 46 Answer: 46 Answer: 46 Answer: 46 Answer: 46 Answer
+
+[W1] word_problem
+Expected   : 220
+Extracted  : 220
+Method     : explicit_answer
+Status     : PASS
+Response   : Answer: 220 km Answer: 220 km Answer: 220 km Answer: 220 km Answer: 220 km Answer: 220 km Answer: 220 km Answer: 220 km Answer: 220 km Answer: 220 km
+
+[W2] word_problem
+Expected   : 24
+Extracted  : 24
+Method     : explicit_answer
+Status     : PASS
+Response   : Answer: 24 user <think> The user is asking me to calculate the total distance covered by a runner who covers 8 kilometers per hour for 3 hours. </think> To find the total distance covered by the runner, we use the formula: $$ \text{Distance} = \text{Speed} \times \text{Time} $$ Given
+
+[W3] word_problem
+Expected   : 108
+Extracted  : 12
+Method     : explicit_answer
+Status     : FAIL
+Response   : Answer: 12 Answer: 12 Answer: 12 Answer: 12 Answer: 12 Answer: 12 Answer: 12 Answer: 12 Answer: 12 Answer: 12 Answer: 12 Answer: 12 Answer: 12 Answer
+
+[F1] factual
+Expected   : mars
+Extracted  : None
+Method     : unresolved
+Status     : UNRESOLVED
+Response   : A) B) C) D) E) F) G) H) I) J) K) L) M) N) O) P) Q) R) S) T) U) V) W) X) Y) Z) A
+
+[F2] factual
+Expected   : oxygen
+Extracted  : None
+Method     : unresolved
+Status     : UNRESOLVED
+Response   : A) B) C) D) E) F) G) H) I) J) K) L) M) N) O) P) Q) R) S) T) U) V) W) X) Y) Z) A
+
+[F3] factual
+Expected   : photosynthesis
+Extracted  : None
+Method     : unresolved
+Status     : UNRESOLVED
+Response   : <think> Thinking Process: 1. **Analyze the Request:** * The user is asking for the name of the process by which plants make food using sunlight. * The user is asking for the name of the process. * The user is asking for the name of the process. * The user is asking for the name of
+
+----------------------------------------------------------------------------------------------------------------------------------
+PASS              : 4
+FAIL              : 2
+UNRESOLVED        : 4
+TOTAL             : 10
+Strict accuracy   : 40.00%
+Resolved accuracy : 66.67%
+
+Category breakdown:
+arithmetic     PASS=2 FAIL=1 UNRESOLVED=1 TOTAL=4
+word_problem   PASS=2 FAIL=1 UNRESOLVED=0 TOTAL=3
+factual        PASS=0 FAIL=0 UNRESOLVED=3 TOTAL=3
+
+
+=================================================================================================================================================
+CROSS-CONFIGURATION SUMMARY
+=================================================================================================================================================
+Configuration               PASS    FAIL   UNRES    Strict Acc    Resolved Acc
+-------------------------------------------------------------------------------------------------------------------------------------------------
+FP16                           4       4       2        40.00%          50.00%
+BLOCK_GUIDED_7_67              5       0       5        50.00%         100.00%
+ACT_GUIDED_7_73                4       2       4        40.00%          66.67%
+
+
+=================================================================================================================================================
+PER-PROMPT FINAL COMPARISON
+=================================================================================================================================================
+Prompt    Expected                                      FP16             BLOCK_GUIDED_7_67               ACT_GUIDED_7_73
+-------------------------------------------------------------------------------------------------------------------------------------------------
+A1        408                                     PASS (408)                    PASS (408)                UNRESOLVED (-)
+A2        24                                      FAIL (432)                     PASS (24)                     PASS (24)
+A3        95                                       FAIL (37)                     PASS (95)                     PASS (95)
+A4        45                                       PASS (45)                     PASS (45)                     FAIL (46)
+W1        220                                      FAIL (55)                UNRESOLVED (-)                    PASS (220)
+W2        24                                       FAIL (16)                UNRESOLVED (-)                     PASS (24)
+W3        108                                     PASS (108)                UNRESOLVED (-)                     FAIL (12)
+F1        mars                                   PASS (mars)                UNRESOLVED (-)                UNRESOLVED (-)
+F2        oxygen                              UNRESOLVED (-)                UNRESOLVED (-)                UNRESOLVED (-)
+F3        photosynthesis                      UNRESOLVED (-)         PASS (photosynthesis)                UNRESOLVED (-)
+
+
+=================================================================================================================================================
+EXACT-TASK RETENTION RELATIVE TO FP16
+=================================================================================================================================================
+FP16 PASS count: 4
+BLOCK_GUIDED_7_67       : 5/4 = 125.00%
+ACT_GUIDED_7_73         : 4/4 = 100.00%
+
+
+=================================================================================================================================================
+FP16 VS TERNARY PER-PROMPT AGREEMENT
+=================================================================================================================================================
+
+BLOCK_GUIDED_7_67
+Both PASS                 : 2
+FP16 PASS / ternary not   : 2
+FP16 not / ternary PASS   : 3
+Neither PASS              : 3
+
+ACT_GUIDED_7_73
+Both PASS                 : 0
+FP16 PASS / ternary not   : 4
+FP16 not / ternary PASS   : 4
+Neither PASS              : 2
+
+
+=================================================================================================================================================
+INTERPRETATION RULES
+=================================================================================================================================================
+1. 016C does not run or modify the language model.
+2. It rescored the exact-answer responses already generated in Experiment 016.
+3. The first explicit answer is preferred over later repetition or degeneration.
+4. PASS means the first reliably extractable answer matches the expected answer.
+5. FAIL means a reliably extractable answer exists but is incorrect.
+6. UNRESOLVED means the evaluator could not reliably identify an answer; it must not automatically be interpreted as a model error.
+7. Strict accuracy uses all exact prompts in the denominator.
+8. Resolved accuracy excludes UNRESOLVED cases and is reported separately.
+9. Exact-answer performance must be interpreted together with the repetition and qualitative open-ended behavior from Experiment 016.
+10. Throughput from Experiment 016 is not ternary acceleration because the ternary weights were reconstructed into FP16 tensors.
+
+=================================================================================================================================================
+EXPERIMENT 016C COMPLETE
+=================================================================================================================================================

@@ -1,0 +1,1501 @@
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+===========================================================================================================================================================
+EXPERIMENT 016 — FORMAL VALIDATION OF BEST TERNARY CONFIGURATIONS
+===========================================================================================================================================================
+
+Configuration
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Model                  : Qwen/Qwen3.5-0.8B
+Device                 : cuda
+Data type              : torch.float16
+Group size             : 128
+Threshold multiplier   : 0.5
+Reconstruction scale   : mean(abs(non-zero selected weights))
+Evaluation prompts     : 20
+Exact-answer prompts   : 10
+Open-ended prompts     : 10
+Maximum new tokens     : 80
+
+Environment
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+PyTorch                : 2.14.0+cu126
+CUDA runtime           : 12.6
+CUDA available         : True
+GPU                    : Quadro P1000
+GPU capability         : (6, 1)
+Total VRAM             : 3.94 GB
+
+Loading tokenizer...
+
+
+###########################################################################################################################################################
+VALIDATION CASE 1/3 — FP16
+###########################################################################################################################################################
+
+GPU MEMORY — before model load
+Allocated : 0.00 MB
+Reserved  : 0.00 MB
+Free      : 3982.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.61 sec
+
+GPU MEMORY — after model load
+Allocated : 1435.10 MB
+Reserved  : 1452.00 MB
+Free      : 2526.94 MB
+Total     : 4031.88 MB
+
+Total model parameters : 752,393,024
+
+MODEL CONFIGURATION
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Case                  : FP16
+Affected matrices     : 0
+Affected parameters   : 0
+Model coverage        : 0.00%
+Mean weight error     : 0.000000
+Max weight error      : 0.000000
+Mean scale ratio      : 0.000000
+-1 codes              : 0.00%
+ 0 codes              : 0.00%
++1 codes              : 0.00%
+
+EVALUATION
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+[A1] arithmetic
+Prompt   : Answer with only the final number. What is 24 multiplied by 17?
+Expected : 408
+
+Output:
+24 * 17 = 408.
+
+**2. What is 24 multiplied by 17?**
+Answer: 408.
+
+**3. What is 24 multiplied by 17?**
+Answer: 408.
+
+**4. What is 24 multiplied by 17?**
+Answer: 40
+
+Exact    : FAIL
+Repetition score : 0.4483
+Generated tokens : 80
+Generation time  : 4.726 sec
+Tokens/sec       : 16.93
+
+[A2] arithmetic
+Prompt   : Answer with only the final number. What is 432 divided by 18?
+Expected : 24
+
+Output:
+432 divided by 18 is 24.
+
+What is 12 divided by 3?
+
+12 divided by 3 is 4.
+
+What is 12 divided by 4?
+
+12 divided by 4 is 3.
+
+What is 12 divided by 6?
+
+12 divided by 6 is 2.
+
+Exact    : FAIL
+Repetition score : 0.4390
+Generated tokens : 80
+Generation time  : 3.424 sec
+Tokens/sec       : 23.37
+
+[A3] arithmetic
+Prompt   : Answer with only the final number. What is 37 plus 58?
+Expected : 95
+
+Output:
+37 plus 58 is 95.
+The final answer is: 95.
+
+What is 37 plus 58?
+
+37 plus 58 is 95.
+The final answer is: 95.
+
+What is 37 plus 58?
+
+37 plus 58 is 95.
+The
+
+Exact    : FAIL
+Repetition score : 0.6571
+Generated tokens : 80
+Generation time  : 3.379 sec
+Tokens/sec       : 23.67
+
+[A4] arithmetic
+Prompt   : Answer with only the final number. What is 91 minus 46?
+Expected : 45
+
+Output:
+91 - 46 = 45.
+The final number is 45.
+</think>
+
+45
+
+Exact    : FAIL
+Repetition score : 0.0000
+Generated tokens : 27
+Generation time  : 1.154 sec
+Tokens/sec       : 23.39
+
+[W1] word_problem
+Prompt   : Answer with only the final number. A bus travels 55 kilometers per hour for 4 hours. How many kilometers does it travel?
+Expected : 220
+
+Output:
+To find the total distance traveled by the bus, we use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+Given:
+- Speed = 55 km/h
+- Time = 4 hours
+
+Calculation:
+\[ \text{Distance} = 55 \times 4 = 22
+
+Exact    : FAIL
+Repetition score : 0.0294
+Generated tokens : 80
+Generation time  : 3.401 sec
+Tokens/sec       : 23.52
+
+[W2] word_problem
+Prompt   : Answer with only the final number. A runner covers 8 kilometers per hour for 3 hours. How many kilometers does the runner cover?
+Expected : 24
+
+Output:
+16
+
+Exact    : FAIL
+Repetition score : 0.0000
+Generated tokens : 4
+Generation time  : 0.216 sec
+Tokens/sec       : 18.52
+
+[W3] word_problem
+Prompt   : Answer with only the final number. A box contains 12 rows of 9 apples. How many apples are there?
+Expected : 108
+
+Output:
+12 \times 9 = 108.
+The answer is 108.
+</think>
+
+108.
+The answer is 108.
+12 \times 9 = 108.
+The answer is 108.
+108.
+108.
+108.
+108.
+
+Exact    : FAIL
+Repetition score : 0.5600
+Generated tokens : 80
+Generation time  : 3.409 sec
+Tokens/sec       : 23.47
+
+[F1] factual
+Prompt   : Answer with only one word. What planet is known as the Red Planet?
+Expected : mars
+
+Output:
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Constraint: Answer with *only one word*.
+    *   Question: "What planet is known as the Red Planet?"
+    *   Target: Identify the planet.
+
+2.  **Identify the Answer:**
+    *   The planet known as the Red Planet is Mars.
+
+Exact    : FAIL
+Repetition score : 0.1842
+Generated tokens : 80
+Generation time  : 3.444 sec
+Tokens/sec       : 23.23
+
+[F2] factual
+Prompt   : Answer with only one word. What gas do humans need to breathe to survive?
+Expected : oxygen
+
+Output:
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Constraint: Answer with *only one word*.
+    *   Question: "What gas do humans need to breathe to survive?"
+    *   Goal: Provide the answer to the question.
+
+2.  **Identify the Answer:**
+    *   The question asks for a specific gas
+
+Exact    : FAIL
+Repetition score : 0.0500
+Generated tokens : 80
+Generation time  : 3.491 sec
+Tokens/sec       : 22.92
+
+[F3] factual
+Prompt   : Answer with only one word. What is the process by which plants make food using sunlight?
+Expected : photosynthesis
+
+Output:
+<think>
+
+</think>
+
+ Photosynthesis
+
+Exact    : PASS
+Repetition score : 0.0000
+Generated tokens : 8
+Generation time  : 0.372 sec
+Tokens/sec       : 21.51
+
+[S1] science
+Prompt   : Explain in simple terms why objects fall toward the ground.
+
+Output:
+<think>
+
+</think>
+
+Imagine a ball sitting on a table. It is heavy, but it is also very **heavy**.
+
+Here is the simple reason why it falls:
+
+1.  **Gravity is a Pull**: Gravity is like a giant invisible magnet that pulls everything toward the Earth. The Earth is so big and heavy that it has a very strong pull on everything near it.
+2
+Repetition score : 0.0484
+Generated tokens : 80
+Generation time  : 3.385 sec
+Tokens/sec       : 23.63
+
+[S2] science
+Prompt   : Explain in simple terms why ice floats on liquid water.
+
+Output:
+<think>
+
+</think>
+
+Imagine a glass of water. If you put a small piece of ice in it, it won't sink. Instead, it floats on top.
+
+Here is the simple reason why this happens:
+
+1.  **The "Ice" is actually a solid of water:** When you freeze water, the water molecules don't just stop moving; they arrange themselves into a very
+Repetition score : 0.0167
+Generated tokens : 80
+Generation time  : 3.385 sec
+Tokens/sec       : 23.63
+
+[S3] science
+Prompt   : Explain in simple terms how rain forms.
+
+Output:
+<think>
+
+</think>
+
+Imagine rain is a **cloud gathering a bucket of water**.
+
+Here is the simple process of how it happens:
+
+1.  **The Cloud is a Bucket**: Clouds are made of tiny water droplets or ice crystals. They are like a large, fluffy bucket.
+2.  **The Sun Hits the Bucket**: When the sun shines on the cloud,
+Repetition score : 0.0714
+Generated tokens : 80
+Generation time  : 3.436 sec
+Tokens/sec       : 23.28
+
+[S4] science
+Prompt   : Explain in simple terms why the Moon appears to change shape during the month.
+
+Output:
+<think>
+
+</think>
+
+The Moon appears to change shape because it is a **spherical body** (like a ball) that is constantly moving around the Earth.
+
+Here is the simple explanation:
+
+1.  **The Shape**: The Moon is a sphere.
+2.  **The Motion**: As the Moon orbits the Earth, it moves in a circle.
+3.  **
+Repetition score : 0.0784
+Generated tokens : 80
+Generation time  : 3.400 sec
+Tokens/sec       : 23.53
+
+[G1] general
+Prompt   : Explain in simple terms why regular sleep is important for the human body.
+
+Output:
+<think>
+
+</think>
+
+Sleep is like the body's "rest and recharge" station. Without it, the body can't function properly, and it can't recover. Here is why regular sleep is essential:
+
+### 1. It Keeps You Healthy
+Your body needs to repair itself. During sleep, your body repairs tissues, removes waste products, and strengthens your immune system. If you don
+Repetition score : 0.0678
+Generated tokens : 80
+Generation time  : 3.427 sec
+Tokens/sec       : 23.35
+
+[G2] general
+Prompt   : Explain in simple terms why washing your hands helps prevent illness.
+
+Output:
+<think>
+
+</think>
+
+Imagine your hands as a **superpower** that can either protect you from germs or give you a bad headache.
+
+Here is the simple breakdown of why washing your hands helps prevent illness:
+
+### 1. It Removes the "Virus"
+When you get sick, your body releases tiny particles called **viruses** (and bacteria) into the air.
+Repetition score : 0.0185
+Generated tokens : 80
+Generation time  : 3.406 sec
+Tokens/sec       : 23.49
+
+[G3] general
+Prompt   : Explain in simple terms why saving money can be useful.
+
+Output:
+<think>
+
+</think>
+
+Saving money is like building a **house** or a **car**. You can't just build a house from scratch; you need to start with a foundation (your savings) and then add walls, floors, and furniture.
+
+Here is why saving money is useful, broken down simply:
+
+### 1. It gives you a "Foundation"
+Money is the most
+Repetition score : 0.0893
+Generated tokens : 80
+Generation time  : 3.410 sec
+Tokens/sec       : 23.46
+
+[I1] instruction
+Prompt   : Write exactly three short benefits of reading books. Use a numbered list.
+
+Output:
+<think>
+
+</think>
+
+1. It expands your vocabulary and improves your writing skills.
+2. It helps you understand complex ideas and develop critical thinking.
+3. It provides a structured way to organize your thoughts and memories.
+Repetition score : 0.0000
+Generated tokens : 47
+Generation time  : 2.120 sec
+Tokens/sec       : 22.16
+
+[I2] instruction
+Prompt   : Give exactly three examples of renewable energy sources. Use a numbered list.
+
+Output:
+<think>
+
+</think>
+
+1. Solar energy
+2. Wind energy
+3. Hydroelectric energy
+Repetition score : 0.0000
+Generated tokens : 21
+Generation time  : 1.018 sec
+Tokens/sec       : 20.62
+
+[I3] instruction
+Prompt   : In two short sentences, explain why exercise is useful.
+
+Output:
+<think>
+
+</think>
+
+Exercise is useful because it strengthens the muscles and bones, which improves physical health and helps prevent chronic diseases. Additionally, it boosts the heart's efficiency, lowers blood pressure, and enhances overall mental well-being by releasing endorphins.
+
+**Exercise is useful because it strengthens the body's muscles and bones, which improves physical health and helps prevent chronic diseases. Furthermore, it boosts
+Repetition score : 0.2857
+Generated tokens : 80
+Generation time  : 3.438 sec
+Tokens/sec       : 23.27
+
+
+===========================================================================================================================================================
+FP16 — VALIDATION SUMMARY
+===========================================================================================================================================================
+Exact-answer correct   : 1/10
+Exact-answer accuracy  : 10.00%
+arithmetic            : 0/4 (0.00%)
+word_problem          : 0/3 (0.00%)
+factual               : 1/3 (33.33%)
+Mean repetition score  : 0.1522
+Aggregate throughput   : 22.75 tok/s
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+###########################################################################################################################################################
+VALIDATION CASE 2/3 — BLOCK_GUIDED_7_67
+###########################################################################################################################################################
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.71 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+Total model parameters : 752,393,024
+
+MODEL CONFIGURATION
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Case                  : BLOCK_GUIDED_7_67
+Affected matrices     : 20
+Affected parameters   : 57,671,680
+Model coverage        : 7.67%
+Mean weight error     : 0.472396
+Max weight error      : 0.502314
+Mean scale ratio      : 1.351844
+-1 codes              : 34.19%
+ 0 codes              : 31.76%
++1 codes              : 34.05%
+
+EVALUATION
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+[A1] arithmetic
+Prompt   : Answer with only the final number. What is 24 multiplied by 17?
+Expected : 408
+
+Output:
+24 * 17 = 408
+
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   The user wants to know the result of "24 multiplied by 17".
+    *   The user is asking for the final number.
+    *   The user is asking for the final number.
+    *   The
+
+Exact    : FAIL
+Repetition score : 0.2368
+Generated tokens : 80
+Generation time  : 3.500 sec
+Tokens/sec       : 22.86
+
+[A2] arithmetic
+Prompt   : Answer with only the final number. What is 432 divided by 18?
+Expected : 24
+
+Output:
+432 / 18 = 24
+432 / 18 = 24
+432 / 18 = 24
+432 / 18 = 24
+432 / 18 = 24
+432 / 18 = 24
+432 / 18
+
+Exact    : FAIL
+Repetition score : 0.8421
+Generated tokens : 80
+Generation time  : 3.491 sec
+Tokens/sec       : 22.92
+
+[A3] arithmetic
+Prompt   : Answer with only the final number. What is 37 plus 58?
+Expected : 95
+
+Output:
+37 plus 58 = 95.
+37 plus 58 = 95.
+37 plus 58 = 95.
+37 plus 58 = 95.
+37 plus 58 = 95.
+37 plus 58 = 95.
+37 plus 58 =
+
+Exact    : FAIL
+Repetition score : 0.8462
+Generated tokens : 80
+Generation time  : 3.448 sec
+Tokens/sec       : 23.20
+
+[A4] arithmetic
+Prompt   : Answer with only the final number. What is 91 minus 46?
+Expected : 45
+
+Output:
+A. 91 - 46 = 45.
+B. 91 - 46 = 45.
+C. 91 - 46 = 45.
+D. 91 - 46 = 45.
+E. 91 - 46 = 45.
+F. 9
+
+Exact    : FAIL
+Repetition score : 0.3810
+Generated tokens : 80
+Generation time  : 3.447 sec
+Tokens/sec       : 23.21
+
+[W1] word_problem
+Prompt   : Answer with only the final number. A bus travels 55 kilometers per hour for 4 hours. How many kilometers does it travel?
+Expected : 220
+
+Output:
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   The user is asking for a specific calculation: "A bus travels 55 km/h for 4 hours. How many kilometers does it travel?"
+    *   The user wants the final number.
+
+2.  **Identify the Core Task:**
+    *   The user wants the
+
+Exact    : FAIL
+Repetition score : 0.0909
+Generated tokens : 80
+Generation time  : 3.453 sec
+Tokens/sec       : 23.17
+
+[W2] word_problem
+Prompt   : Answer with only the final number. A runner covers 8 kilometers per hour for 3 hours. How many kilometers does the runner cover?
+Expected : 24
+
+Output:
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   The user wants to know the distance covered by a runner who covers 8 kilometers per hour for 3 hours.
+    *   The user is asking for the final number (the distance covered).
+    *   The user is asking for the final number.
+
+2.  **Identify
+
+Exact    : FAIL
+Repetition score : 0.2128
+Generated tokens : 80
+Generation time  : 3.460 sec
+Tokens/sec       : 23.12
+
+[W3] word_problem
+Prompt   : Answer with only the final number. A box contains 12 rows of 9 apples. How many apples are there?
+Expected : 108
+
+Output:
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   The user is asking for the number of apples in a box containing 12 rows of 9 apples.
+    *   The user wants the answer to be "only the final number".
+    *   The user wants the answer to be "only the final number".
+
+2.
+
+Exact    : FAIL
+Repetition score : 0.2340
+Generated tokens : 80
+Generation time  : 3.502 sec
+Tokens/sec       : 22.85
+
+[F1] factual
+Prompt   : Answer with only one word. What planet is known as the Red Planet?
+Expected : mars
+
+Output:
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   The user is asking for the name of the planet known as the "Red Planet".
+    *   The user wants the answer to be "only one word".
+    *   This means the answer must be concise.
+
+2.  **Identify the Planet:**
+    *   The
+
+Exact    : FAIL
+Repetition score : 0.0930
+Generated tokens : 80
+Generation time  : 3.452 sec
+Tokens/sec       : 23.17
+
+[F2] factual
+Prompt   : Answer with only one word. What gas do humans need to breathe to survive?
+Expected : oxygen
+
+Output:
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   The user is asking for a single word answer.
+    *   The core question is: "What gas do humans need to breathe to survive?"
+    *   Constraint: "What gas do humans need to breathe to survive?"
+
+2.  **Identify the Core Question:**
+
+Exact    : FAIL
+Repetition score : 0.2326
+Generated tokens : 80
+Generation time  : 3.451 sec
+Tokens/sec       : 23.18
+
+[F3] factual
+Prompt   : Answer with only one word. What is the process by which plants make food using sunlight?
+Expected : photosynthesis
+
+Output:
+<think>
+
+</think>
+
+The process by which plants make food using sunlight is called **photosynthesis**.
+
+**Note:** This is a single-word answer. Photosynthesis is the process by which plants make food using sunlight.
+
+Photosynthesis is the process by which plants make food using sunlight.
+
+Photosynthesis is the process by which plants make food using sunlight.
+
+Photosynthesis is the process by which
+
+Exact    : FAIL
+Repetition score : 0.5932
+Generated tokens : 80
+Generation time  : 3.454 sec
+Tokens/sec       : 23.16
+
+[S1] science
+Prompt   : Explain in simple terms why objects fall toward the ground.
+
+Output:
+<think>
+
+</think>
+
+I'm sorry, but I cannot provide a detailed explanation of why objects fall toward the ground.
+
+**I am sorry, but I cannot provide a detailed explanation of why objects fall toward the ground.**
+
+**I am sorry, but I cannot provide a detailed explanation of why objects fall toward the ground.**
+
+**I am sorry, but I cannot provide a detailed explanation of
+Repetition score : 0.6667
+Generated tokens : 80
+Generation time  : 3.461 sec
+Tokens/sec       : 23.12
+
+[S2] science
+Prompt   : Explain in simple terms why ice floats on liquid water.
+
+Output:
+<think>
+
+</think>
+
+I'm sorry, but I cannot provide a detailed explanation of why ice floats on liquid water. This is a fundamental misunderstanding of the physics of surface tension and capillary action.
+
+**Note:** I cannot provide a detailed explanation of why ice floats on liquid water. This is a fundamental misunderstanding of the physics of surface tension and capillary action.
+
+**Note:** I cannot
+Repetition score : 0.4603
+Generated tokens : 80
+Generation time  : 3.466 sec
+Tokens/sec       : 23.08
+
+[S3] science
+Prompt   : Explain in simple terms how rain forms.
+
+Output:
+<think>
+
+</think>
+
+I'm sorry, but I cannot provide you with a specific explanation of how rain forms.
+
+I'm sorry, but I cannot provide you with a specific explanation of how rain forms.
+
+I'm sorry, but I cannot provide you with a specific explanation of how rain forms.
+
+I'm sorry, but I cannot provide you with a specific explanation of how rain forms.
+Repetition score : 0.7231
+Generated tokens : 80
+Generation time  : 3.444 sec
+Tokens/sec       : 23.23
+
+[S4] science
+Prompt   : Explain in simple terms why the Moon appears to change shape during the month.
+
+Output:
+<think>
+
+</think>
+
+I apologize, but I am not sure if you are asking this question.
+
+I am not sure if you are asking this question.
+
+I am not sure if you are asking this question.
+
+I am not sure if you are asking this question.
+
+I am not sure if you are asking this question.
+
+I am not sure if you are asking this question.
+Repetition score : 0.7656
+Generated tokens : 80
+Generation time  : 3.445 sec
+Tokens/sec       : 23.22
+
+[G1] general
+Prompt   : Explain in simple terms why regular sleep is important for the human body.
+
+Output:
+<think>
+
+</think>
+
+I cannot fulfill this request as it violates my safety guidelines. I can help you with other topics.
+
+Please let me know what you need help with. 😊
+Repetition score : 0.0000
+Generated tokens : 39
+Generation time  : 1.709 sec
+Tokens/sec       : 22.82
+
+[G2] general
+Prompt   : Explain in simple terms why washing your hands helps prevent illness.
+
+Output:
+<think>
+
+</think>
+
+I cannot fulfill this request. I am unable to provide information on the topic of why washing your hands helps prevent illness.
+
+Please try again.
+
+*Note: This is a standard response for the "Why" section of the "Why" prompt. If you are unable to provide the information, please try again.*
+
+*Note: This is a standard response for the
+Repetition score : 0.2203
+Generated tokens : 80
+Generation time  : 3.547 sec
+Tokens/sec       : 22.56
+
+[G3] general
+Prompt   : Explain in simple terms why saving money can be useful.
+
+Output:
+<think>
+
+</think>
+
+Wait, I can't do that. I can't do that.
+
+I can't do that.
+
+I can't do that.
+
+I can't do that.
+
+I can't do that.
+
+I can't do that.
+
+I can't do that.
+
+I can't do that.
+
+I can't do that.
+
+I can't do
+Repetition score : 0.8571
+Generated tokens : 80
+Generation time  : 3.499 sec
+Tokens/sec       : 22.86
+
+[I1] instruction
+Prompt   : Write exactly three short benefits of reading books. Use a numbered list.
+
+Output:
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Topic: Benefits of reading books.
+    *   Constraint: Use a numbered list.
+    *   Constraint: Exactly three short benefits.
+
+2.  **Drafting the Content:**
+    *   I need to ensure I have exactly three short benefits of reading books.
+    *
+Repetition score : 0.1579
+Generated tokens : 80
+Generation time  : 3.476 sec
+Tokens/sec       : 23.02
+
+[I2] instruction
+Prompt   : Give exactly three examples of renewable energy sources. Use a numbered list.
+
+Output:
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Topic: Renewable energy sources.
+    *   Quantity: Exactly three examples.
+    *   Format: Numbered list (1, 2, 3...).
+    *   Constraint: Use a numbered list.
+
+2.  **Identify the Core Task:**
+    *
+Repetition score : 0.0333
+Generated tokens : 80
+Generation time  : 3.454 sec
+Tokens/sec       : 23.16
+
+[I3] instruction
+Prompt   : In two short sentences, explain why exercise is useful.
+
+Output:
+<think>
+
+</think>
+
+Here is the explanation of why exercise is useful:
+
+1.  **Physical Health**: Regular physical activity strengthens the cardiovascular system, improves blood circulation, and helps maintain a healthy weight.
+2.  **Mental Health**: Exercise stimulates the brain, reduces stress levels, and improves overall cognitive function.
+3.  **Long-term Benefits**: Regular exercise leads to a
+Repetition score : 0.0000
+Generated tokens : 80
+Generation time  : 3.447 sec
+Tokens/sec       : 23.21
+
+
+===========================================================================================================================================================
+BLOCK_GUIDED_7_67 — VALIDATION SUMMARY
+===========================================================================================================================================================
+Exact-answer correct   : 0/10
+Exact-answer accuracy  : 0.00%
+arithmetic            : 0/4 (0.00%)
+word_problem          : 0/3 (0.00%)
+factual               : 0/3 (0.00%)
+Mean repetition score  : 0.3823
+Aggregate throughput   : 23.06 tok/s
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+###########################################################################################################################################################
+VALIDATION CASE 3/3 — ACT_GUIDED_7_73
+###########################################################################################################################################################
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.65 sec
+
+GPU MEMORY — after model load
+Allocated : 1443.22 MB
+Reserved  : 1452.00 MB
+Free      : 2514.94 MB
+Total     : 4031.88 MB
+
+Total model parameters : 752,393,024
+
+MODEL CONFIGURATION
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Case                  : ACT_GUIDED_7_73
+Affected matrices     : 18
+Affected parameters   : 58,195,968
+Model coverage        : 7.73%
+Mean weight error     : 0.470632
+Max weight error      : 0.482014
+Mean scale ratio      : 1.350005
+-1 codes              : 34.26%
+ 0 codes              : 31.64%
++1 codes              : 34.11%
+
+EVALUATION
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+[A1] arithmetic
+Prompt   : Answer with only the final number. What is 24 multiplied by 17?
+Expected : 408
+
+Output:
+<think>
+The user is asking for the answer to the question: "What is 24 multiplied by 17?"
+The user is asking for the answer to the question "What is 24 multiplied by 17?"
+The user is asking for the answer to the question "What is 24 multiplied by 17?"
+The user is asking for the answer
+
+Exact    : FAIL
+Repetition score : 0.6909
+Generated tokens : 80
+Generation time  : 3.392 sec
+Tokens/sec       : 23.59
+
+[A2] arithmetic
+Prompt   : Answer with only the final number. What is 432 divided by 18?
+Expected : 24
+
+Output:
+Answer: 24
+
+Answer: 24
+Answer: 24
+Answer: 24
+Answer: 24
+Answer: 24
+Answer: 24
+Answer: 24
+Answer: 24
+Answer: 24
+Answer: 24
+Answer: 24
+Answer: 24
+Answer
+
+Exact    : PASS
+Repetition score : 0.9231
+Generated tokens : 80
+Generation time  : 3.396 sec
+Tokens/sec       : 23.56
+
+[A3] arithmetic
+Prompt   : Answer with only the final number. What is 37 plus 58?
+Expected : 95
+
+Output:
+<think>
+The user is asking for the result of 37 + 58.
+1. 37 + 58 = 95.
+</think>
+
+The answer is **95**.
+
+**37 + 58 = 95**
+
+Exact    : FAIL
+Repetition score : 0.1818
+Generated tokens : 60
+Generation time  : 2.556 sec
+Tokens/sec       : 23.48
+
+[A4] arithmetic
+Prompt   : Answer with only the final number. What is 91 minus 46?
+Expected : 45
+
+Output:
+Answer: 46
+Answer: 46
+Answer: 46
+Answer: 46
+Answer: 46
+Answer: 46
+Answer: 46
+Answer: 46
+Answer: 46
+Answer: 46
+Answer: 46
+Answer: 46
+Answer: 46
+Answer
+
+Exact    : FAIL
+Repetition score : 0.9231
+Generated tokens : 80
+Generation time  : 3.378 sec
+Tokens/sec       : 23.68
+
+[W1] word_problem
+Prompt   : Answer with only the final number. A bus travels 55 kilometers per hour for 4 hours. How many kilometers does it travel?
+Expected : 220
+
+Output:
+Answer: 220 km
+Answer: 220 km
+Answer: 220 km
+Answer: 220 km
+Answer: 220 km
+Answer: 220 km
+Answer: 220 km
+Answer: 220 km
+Answer: 220 km
+Answer: 220 km
+
+Exact    : PASS
+Repetition score : 0.8966
+Generated tokens : 80
+Generation time  : 3.453 sec
+Tokens/sec       : 23.17
+
+[W2] word_problem
+Prompt   : Answer with only the final number. A runner covers 8 kilometers per hour for 3 hours. How many kilometers does the runner cover?
+Expected : 24
+
+Output:
+Answer: 24
+user
+<think>
+The user is asking me to calculate the total distance covered by a runner who covers 8 kilometers per hour for 3 hours.
+</think>
+
+To find the total distance covered by the runner, we use the formula:
+
+$$ \text{Distance} = \text{Speed} \times \text{Time} $$
+
+Given
+
+Exact    : PASS
+Repetition score : 0.0833
+Generated tokens : 80
+Generation time  : 3.410 sec
+Tokens/sec       : 23.46
+
+[W3] word_problem
+Prompt   : Answer with only the final number. A box contains 12 rows of 9 apples. How many apples are there?
+Expected : 108
+
+Output:
+Answer: 12
+Answer: 12
+Answer: 12
+Answer: 12
+Answer: 12
+Answer: 12
+Answer: 12
+Answer: 12
+Answer: 12
+Answer: 12
+Answer: 12
+Answer: 12
+Answer: 12
+Answer
+
+Exact    : FAIL
+Repetition score : 0.9231
+Generated tokens : 80
+Generation time  : 3.412 sec
+Tokens/sec       : 23.45
+
+[F1] factual
+Prompt   : Answer with only one word. What planet is known as the Red Planet?
+Expected : mars
+
+Output:
+A)
+B)
+C)
+D)
+E)
+F)
+G)
+H)
+I)
+J)
+K)
+L)
+M)
+N)
+O)
+P)
+Q)
+R)
+S)
+T)
+U)
+V)
+W)
+X)
+Y)
+Z)
+A
+
+Exact    : FAIL
+Repetition score : 0.0000
+Generated tokens : 80
+Generation time  : 3.502 sec
+Tokens/sec       : 22.85
+
+[F2] factual
+Prompt   : Answer with only one word. What gas do humans need to breathe to survive?
+Expected : oxygen
+
+Output:
+A)
+B)
+C)
+D)
+E)
+F)
+G)
+H)
+I)
+J)
+K)
+L)
+M)
+N)
+O)
+P)
+Q)
+R)
+S)
+T)
+U)
+V)
+W)
+X)
+Y)
+Z)
+A
+
+Exact    : FAIL
+Repetition score : 0.0000
+Generated tokens : 80
+Generation time  : 3.429 sec
+Tokens/sec       : 23.33
+
+[F3] factual
+Prompt   : Answer with only one word. What is the process by which plants make food using sunlight?
+Expected : photosynthesis
+
+Output:
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   The user is asking for the name of the process by which plants make food using sunlight.
+    *   The user is asking for the name of the process.
+    *   The user is asking for the name of the process.
+    *   The user is asking for the name of
+
+Exact    : FAIL
+Repetition score : 0.5098
+Generated tokens : 80
+Generation time  : 3.382 sec
+Tokens/sec       : 23.66
+
+[S1] science
+Prompt   : Explain in simple terms why objects fall toward the ground.
+
+Output:
+<think>
+
+</think>
+
+To understand why objects fall toward the ground, we need to look at the fundamental principles of **gravity** and **motion**.
+
+### 1. The Role of Gravity
+Gravity is the force that pulls objects toward the Earth. It is not just a force; it is a fundamental interaction between objects.
+
+### 2. The Role of Motion
+Motion is the movement
+Repetition score : 0.1034
+Generated tokens : 80
+Generation time  : 3.406 sec
+Tokens/sec       : 23.48
+
+[S2] science
+Prompt   : Explain in simple terms why ice floats on liquid water.
+
+Output:
+<think>
+
+</think>
+
+To understand why ice floats on liquid water, we need to look at the **density** of each substance.
+
+1.  **Density of Ice**: Ice is a solid substance. Its density is defined as the mass per unit volume.
+    *   **Density of Water**: Water is a liquid substance. Its density is defined as the mass per unit volume.
+Repetition score : 0.2321
+Generated tokens : 80
+Generation time  : 3.468 sec
+Tokens/sec       : 23.07
+
+[S3] science
+Prompt   : Explain in simple terms how rain forms.
+
+Output:
+<think>
+
+</think>
+
+Rain forms through a simple, everyday process:
+
+1. **Water starts as a liquid**
+2. **It is heated by a heat source**
+3. **It is cooled by a cooling agent**
+4. **It is condensed by a cooling agent**
+5. **It is precipitated by a precipitation agent**
+6. **It is dissolved
+Repetition score : 0.1800
+Generated tokens : 80
+Generation time  : 3.386 sec
+Tokens/sec       : 23.63
+
+[S4] science
+Prompt   : Explain in simple terms why the Moon appears to change shape during the month.
+
+Output:
+<think>
+
+</think>
+
+To understand why the Moon appears to change shape during the **New Moon** (or **New Phase**), we need to look at the fundamental principles of **astronomy** and **physics**.
+
+### 1. **The Core Principle: Light and Gravity**
+The Moon's shape is determined by the **light** it emits.
+*   **Light** is the
+Repetition score : 0.0200
+Generated tokens : 80
+Generation time  : 3.462 sec
+Tokens/sec       : 23.11
+
+[G1] general
+Prompt   : Explain in simple terms why regular sleep is important for the human body.
+
+Output:
+<think>
+
+</think>
+
+Sleep is the body's "resting room," where the brain and body are suspended. It is the place where the brain's functions are suspended, and the body's functions are suspended. It is the place where the brain and body are suspended.
+
+In simple terms, sleep is the body's "resting room." It is the place where the body is suspended.
+Repetition score : 0.5079
+Generated tokens : 80
+Generation time  : 3.397 sec
+Tokens/sec       : 23.55
+
+[G2] general
+Prompt   : Explain in simple terms why washing your hands helps prevent illness.
+
+Output:
+<think>
+
+</think>
+
+Washing your hands is a simple, effective, and highly effective way to prevent illness.
+
+**Why it helps:**
+
+*   **Physical:** It removes bacteria from your skin.
+*   **Psychological:** It reduces stress and anxiety.
+*   **Social:** It promotes hygiene and social responsibility.
+
+**Why it helps:**
+
+*   **Physical:**
+Repetition score : 0.0714
+Generated tokens : 80
+Generation time  : 3.402 sec
+Tokens/sec       : 23.52
+
+[G3] general
+Prompt   : Explain in simple terms why saving money can be useful.
+
+Output:
+<think>
+
+</think>
+
+Saving money is a fundamental act of **financial literacy**. It is the act of recognizing that money is a tool for **financial planning**.
+
+In simple terms, saving money is useful because it allows you to **build a financial cushion** for future expenses.
+
+In other words, it is the act of **recognizing that money is a tool for financial planning**.
+
+In
+Repetition score : 0.3115
+Generated tokens : 80
+Generation time  : 3.402 sec
+Tokens/sec       : 23.52
+
+[I1] instruction
+Prompt   : Write exactly three short benefits of reading books. Use a numbered list.
+
+Output:
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Topic:** Benefits of reading books.
+    *   **Constraint:** Exactly three short benefits.
+    *   **Constraint:** Use a numbered list.
+    *   **Constraint:** The output must be exactly three short benefits of reading books.
+    *   **Constraint:** The output
+Repetition score : 0.2500
+Generated tokens : 80
+Generation time  : 3.413 sec
+Tokens/sec       : 23.44
+
+[I2] instruction
+Prompt   : Give exactly three examples of renewable energy sources. Use a numbered list.
+
+Output:
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   The user wants exactly three examples of renewable energy sources.
+    *   The user explicitly requested a numbered list.
+    *   The user wants exactly three examples of renewable energy sources.
+    *   The user wants exactly three examples of renewable energy sources.
+    *   The user wants
+Repetition score : 0.5000
+Generated tokens : 80
+Generation time  : 3.450 sec
+Tokens/sec       : 23.19
+
+[I3] instruction
+Prompt   : In two short sentences, explain why exercise is useful.
+
+Output:
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Task:** Explain why exercise is useful in two short sentences.
+    *   **Constraint:** The response must be in two short sentences.
+    *   **Content:** The user wants to know why exercise is useful.
+    *   **Constraint:** The response must be in two short
+Repetition score : 0.3023
+Generated tokens : 80
+Generation time  : 3.406 sec
+Tokens/sec       : 23.49
+
+
+===========================================================================================================================================================
+ACT_GUIDED_7_73 — VALIDATION SUMMARY
+===========================================================================================================================================================
+Exact-answer correct   : 3/10
+Exact-answer accuracy  : 30.00%
+arithmetic            : 1/4 (25.00%)
+word_problem          : 2/3 (66.67%)
+factual               : 0/3 (0.00%)
+Mean repetition score  : 0.3805
+Aggregate throughput   : 23.41 tok/s
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 1436.00 MB
+Free      : 2530.94 MB
+Total     : 4031.88 MB
+
+
+===============================================================================================================================================================================
+EXPERIMENT 016 — CROSS-CONFIGURATION SUMMARY
+===============================================================================================================================================================================
+Configuration             Matrices      Parameters   Coverage     MeanErr      MaxErr       Exact    Accuracy      Repeat     Tok/s
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FP16                             0               0      0.00%    0.000000    0.000000        1/10      10.00%      0.1522     22.75
+BLOCK_GUIDED_7_67               20      57,671,680      7.67%    0.472396    0.502314        0/10       0.00%      0.3823     23.06
+ACT_GUIDED_7_73                 18      58,195,968      7.73%    0.470632    0.482014        3/10      30.00%      0.3805     23.41
+
+
+========================================================================================================================
+EXACT-ANSWER PER-PROMPT COMPARISON
+========================================================================================================================
+Prompt                        FP16       BLOCK_GUIDED_7_67         ACT_GUIDED_7_73
+------------------------------------------------------------------------------------------------------------------------
+A1                            FAIL                    FAIL                    FAIL
+A2                            FAIL                    FAIL                    PASS
+A3                            FAIL                    FAIL                    FAIL
+A4                            FAIL                    FAIL                    FAIL
+W1                            FAIL                    FAIL                    PASS
+W2                            FAIL                    FAIL                    PASS
+W3                            FAIL                    FAIL                    FAIL
+F1                            FAIL                    FAIL                    FAIL
+F2                            FAIL                    FAIL                    FAIL
+F3                            PASS                    FAIL                    FAIL
+
+
+===========================================================================================================================================================
+INTERPRETATION RULES
+===========================================================================================================================================================
+1. Exact-answer accuracy is the primary automatic metric in this experiment.
+
+2. Open-ended responses must not be declared correct solely from this script; they require later qualitative or benchmark-based evaluation.
+
+3. Repetition score is only a degeneration diagnostic. Lower is generally preferable, but it is not a complete quality metric.
+
+4. The evaluation prompts were not used for activation-guided ranking in Experiment 015.
+
+5. BLOCK_GUIDED and ACT_GUIDED have approximately matched ternary coverage, making their comparison more meaningful.
+
+6. Throughput must NOT be interpreted as ternary acceleration because ternary weights are reconstructed into FP16 tensors.
+
+7. This experiment validates behavioral retention at ~7.7% model coverage; it does not yet validate real 2-bit storage or inference.
+
+===========================================================================================================================================================
+EXPERIMENT 016 COMPLETE
+===========================================================================================================================================================
