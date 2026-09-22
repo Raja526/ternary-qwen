@@ -1,0 +1,1014 @@
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+=================================================================================================================================================
+EXPERIMENT 015 — Qwen3.5-0.8B Activation-Guided Matrix-Level Ternary Selection
+=================================================================================================================================================
+
+Configuration
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Model                  : Qwen/Qwen3.5-0.8B
+Device                 : cuda
+Data type              : torch.float16
+Group size             : 128
+Threshold multiplier   : 0.5
+Reconstruction scale   : mean(abs(non-zero selected weights))
+Calibration prompts    : 6
+Evaluation prompts     : 5
+Maximum new tokens     : 60
+
+Environment
+-------------------------------------------------------------------------------------------------------------------------------------------------
+PyTorch                : 2.14.0+cu126
+CUDA runtime           : 12.6
+CUDA available         : True
+GPU                    : Quadro P1000
+GPU capability         : (6, 1)
+Total VRAM             : 3.94 GB
+
+Loading tokenizer...
+
+
+=================================================================================================================================================
+PHASE 1 — BUILD ACTIVATION-AWARE MATRIX RANKING
+=================================================================================================================================================
+
+GPU MEMORY — before model load
+Allocated : 0.00 MB
+Reserved  : 0.00 MB
+Free      : 3982.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.61 sec
+
+GPU MEMORY — after model load
+Allocated : 1435.10 MB
+Reserved  : 1452.00 MB
+Free      : 2526.94 MB
+Total     : 4031.88 MB
+
+Total model parameters : 752,393,024
+
+CANDIDATE POOL
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Candidate matrices     : 30
+Candidate parameters   : 86,507,520
+Candidate coverage     : 11.50%
+
+Preparing optimized ternary candidate weights...
+Candidate preparation complete.
+
+Registered 30 activation hooks.
+
+Running independent calibration set...
+
+Calibration 1/6
+  Prompt      : Describe what causes ocean tides.
+  Input tokens: 7
+
+Calibration 2/6
+  Prompt      : What is 14 multiplied by 27?
+  Input tokens: 11
+
+Calibration 3/6
+  Prompt      : A car travels 72 km per hour for 3 hours. How far does it travel?
+  Input tokens: 20
+
+Calibration 4/6
+  Prompt      : Explain why getting enough sleep is important.
+  Input tokens: 9
+
+Calibration 5/6
+  Prompt      : What is photosynthesis?
+  Input tokens: 5
+
+Calibration 6/6
+  Prompt      : What is 144 divided by 12?
+  Input tokens: 12
+
+
+================================================================================================================================================================
+ACTIVATION-GUIDED MATRIX RANKING (LOWEST DISTORTION FIRST)
+================================================================================================================================================================
+Rank Component        Block   Parameters      ActErr   WeightErr     Scale    Zero% Name
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+   1 self_attn            7    4,194,304    0.249842    0.475577    1.3548    31.86 model.layers.7.self_attn.q_proj
+   2 self_attn            3    4,194,304    0.250458    0.464429    1.3430    31.26 model.layers.3.self_attn.q_proj
+   3 mlp                 18    3,670,016    0.296969    0.472237    1.3472    31.38 model.layers.18.mlp.gate_proj
+   4 linear_attn         12    2,097,152    0.307628    0.469540    1.3487    31.57 model.layers.12.linear_attn.in_proj_z
+   5 self_attn           11    4,194,304    0.312047    0.476037    1.3555    32.01 model.layers.11.self_attn.q_proj
+   6 mlp                  6    3,670,016    0.315680    0.470315    1.3502    31.65 model.layers.6.mlp.gate_proj
+   7 linear_attn          8    2,097,152    0.317953    0.468032    1.3465    31.42 model.layers.8.linear_attn.in_proj_z
+   8 linear_attn         12    6,291,456    0.331012    0.471060    1.3533    31.89 model.layers.12.linear_attn.in_proj_qkv
+   9 linear_attn          4    2,097,152    0.331055    0.465655    1.3444    31.33 model.layers.4.linear_attn.in_proj_z
+  10 mlp                 12    3,670,016    0.334395    0.473284    1.3508    31.64 model.layers.12.mlp.gate_proj
+  11 linear_attn          4    6,291,456    0.334395    0.468664    1.3472    31.46 model.layers.4.linear_attn.in_proj_qkv
+  12 linear_attn          8    6,291,456    0.368358    0.469887    1.3519    31.80 model.layers.8.linear_attn.in_proj_qkv
+  13 self_attn            7      524,288    0.368869    0.469359    1.3472    31.43 model.layers.7.self_attn.k_proj
+  14 self_attn            3      524,288    0.410189    0.482014    1.3659    32.26 model.layers.3.self_attn.v_proj
+  15 self_attn           11      524,288    0.419051    0.480733    1.3620    32.32 model.layers.11.self_attn.k_proj
+  16 mlp                 18    3,670,016    0.424101    0.466088    1.3444    31.29 model.layers.18.mlp.up_proj
+  17 self_attn            3      524,288    0.426499    0.478280    1.3530    31.63 model.layers.3.self_attn.k_proj
+  18 mlp                 12    3,670,016    0.447199    0.471389    1.3516    31.73 model.layers.12.mlp.up_proj
+  19 self_attn            7      524,288    0.451309    0.502314    1.4066    34.34 model.layers.7.self_attn.v_proj
+  20 mlp                  6    3,670,016    0.453985    0.473525    1.3550    31.93 model.layers.6.mlp.up_proj
+  21 self_attn           11    2,097,152    0.454695    0.477683    1.3534    31.88 model.layers.11.self_attn.o_proj
+  22 self_attn           11      524,288    0.470978    0.484244    1.3768    33.12 model.layers.11.self_attn.v_proj
+  23 mlp                  6    3,670,016    0.485564    0.473450    1.3490    31.61 model.layers.6.mlp.down_proj
+  24 mlp                 12    3,670,016    0.501318    0.473938    1.3500    31.68 model.layers.12.mlp.down_proj
+  25 mlp                 18    3,670,016    0.514805    0.465689    1.3418    31.19 model.layers.18.mlp.down_proj
+  26 self_attn            7    2,097,152    0.539499    0.475642    1.3511    31.89 model.layers.7.self_attn.o_proj
+  27 linear_attn          8    2,097,152    0.558706    0.473357    1.3564    32.09 model.layers.8.linear_attn.out_proj
+  28 linear_attn          4    2,097,152    0.573619    0.481715    1.3702    32.87 model.layers.4.linear_attn.out_proj
+  29 linear_attn         12    2,097,152    0.588635    0.475911    1.3672    32.68 model.layers.12.linear_attn.out_proj
+  30 self_attn            3    2,097,152    0.610239    0.485001    1.3596    32.35 model.layers.3.self_attn.o_proj
+
+
+=================================================================================================================================================
+ACTIVATION-GUIDED PARAMETER BUDGETS
+=================================================================================================================================================
+
+ACT_GUIDED_7_67
+  Target coverage : 7.67%
+  Actual coverage : 7.73%
+  Matrices        : 18
+  Parameters      : 58,195,968
+  Selected:
+    self_attn       block  7 | ActErr 0.249842 | model.layers.7.self_attn.q_proj
+    self_attn       block  3 | ActErr 0.250458 | model.layers.3.self_attn.q_proj
+    mlp             block 18 | ActErr 0.296969 | model.layers.18.mlp.gate_proj
+    linear_attn     block 12 | ActErr 0.307628 | model.layers.12.linear_attn.in_proj_z
+    self_attn       block 11 | ActErr 0.312047 | model.layers.11.self_attn.q_proj
+    mlp             block  6 | ActErr 0.315680 | model.layers.6.mlp.gate_proj
+    linear_attn     block  8 | ActErr 0.317953 | model.layers.8.linear_attn.in_proj_z
+    linear_attn     block 12 | ActErr 0.331012 | model.layers.12.linear_attn.in_proj_qkv
+    linear_attn     block  4 | ActErr 0.331055 | model.layers.4.linear_attn.in_proj_z
+    mlp             block 12 | ActErr 0.334395 | model.layers.12.mlp.gate_proj
+    linear_attn     block  4 | ActErr 0.334395 | model.layers.4.linear_attn.in_proj_qkv
+    linear_attn     block  8 | ActErr 0.368358 | model.layers.8.linear_attn.in_proj_qkv
+    self_attn       block  7 | ActErr 0.368869 | model.layers.7.self_attn.k_proj
+    self_attn       block  3 | ActErr 0.410189 | model.layers.3.self_attn.v_proj
+    self_attn       block 11 | ActErr 0.419051 | model.layers.11.self_attn.k_proj
+    mlp             block 18 | ActErr 0.424101 | model.layers.18.mlp.up_proj
+    self_attn       block  3 | ActErr 0.426499 | model.layers.3.self_attn.k_proj
+    mlp             block 12 | ActErr 0.447199 | model.layers.12.mlp.up_proj
+
+ACT_GUIDED_9_0
+  Target coverage : 9.00%
+  Actual coverage : 9.13%
+  Matrices        : 23
+  Parameters      : 68,681,728
+  Selected:
+    self_attn       block  7 | ActErr 0.249842 | model.layers.7.self_attn.q_proj
+    self_attn       block  3 | ActErr 0.250458 | model.layers.3.self_attn.q_proj
+    mlp             block 18 | ActErr 0.296969 | model.layers.18.mlp.gate_proj
+    linear_attn     block 12 | ActErr 0.307628 | model.layers.12.linear_attn.in_proj_z
+    self_attn       block 11 | ActErr 0.312047 | model.layers.11.self_attn.q_proj
+    mlp             block  6 | ActErr 0.315680 | model.layers.6.mlp.gate_proj
+    linear_attn     block  8 | ActErr 0.317953 | model.layers.8.linear_attn.in_proj_z
+    linear_attn     block 12 | ActErr 0.331012 | model.layers.12.linear_attn.in_proj_qkv
+    linear_attn     block  4 | ActErr 0.331055 | model.layers.4.linear_attn.in_proj_z
+    mlp             block 12 | ActErr 0.334395 | model.layers.12.mlp.gate_proj
+    linear_attn     block  4 | ActErr 0.334395 | model.layers.4.linear_attn.in_proj_qkv
+    linear_attn     block  8 | ActErr 0.368358 | model.layers.8.linear_attn.in_proj_qkv
+    self_attn       block  7 | ActErr 0.368869 | model.layers.7.self_attn.k_proj
+    self_attn       block  3 | ActErr 0.410189 | model.layers.3.self_attn.v_proj
+    self_attn       block 11 | ActErr 0.419051 | model.layers.11.self_attn.k_proj
+    mlp             block 18 | ActErr 0.424101 | model.layers.18.mlp.up_proj
+    self_attn       block  3 | ActErr 0.426499 | model.layers.3.self_attn.k_proj
+    mlp             block 12 | ActErr 0.447199 | model.layers.12.mlp.up_proj
+    self_attn       block  7 | ActErr 0.451309 | model.layers.7.self_attn.v_proj
+    mlp             block  6 | ActErr 0.453985 | model.layers.6.mlp.up_proj
+    self_attn       block 11 | ActErr 0.454695 | model.layers.11.self_attn.o_proj
+    self_attn       block 11 | ActErr 0.470978 | model.layers.11.self_attn.v_proj
+    mlp             block  6 | ActErr 0.485564 | model.layers.6.mlp.down_proj
+
+ACT_GUIDED_10_5
+  Target coverage : 10.50%
+  Actual coverage : 10.66%
+  Matrices        : 27
+  Parameters      : 80,216,064
+  Selected:
+    self_attn       block  7 | ActErr 0.249842 | model.layers.7.self_attn.q_proj
+    self_attn       block  3 | ActErr 0.250458 | model.layers.3.self_attn.q_proj
+    mlp             block 18 | ActErr 0.296969 | model.layers.18.mlp.gate_proj
+    linear_attn     block 12 | ActErr 0.307628 | model.layers.12.linear_attn.in_proj_z
+    self_attn       block 11 | ActErr 0.312047 | model.layers.11.self_attn.q_proj
+    mlp             block  6 | ActErr 0.315680 | model.layers.6.mlp.gate_proj
+    linear_attn     block  8 | ActErr 0.317953 | model.layers.8.linear_attn.in_proj_z
+    linear_attn     block 12 | ActErr 0.331012 | model.layers.12.linear_attn.in_proj_qkv
+    linear_attn     block  4 | ActErr 0.331055 | model.layers.4.linear_attn.in_proj_z
+    mlp             block 12 | ActErr 0.334395 | model.layers.12.mlp.gate_proj
+    linear_attn     block  4 | ActErr 0.334395 | model.layers.4.linear_attn.in_proj_qkv
+    linear_attn     block  8 | ActErr 0.368358 | model.layers.8.linear_attn.in_proj_qkv
+    self_attn       block  7 | ActErr 0.368869 | model.layers.7.self_attn.k_proj
+    self_attn       block  3 | ActErr 0.410189 | model.layers.3.self_attn.v_proj
+    self_attn       block 11 | ActErr 0.419051 | model.layers.11.self_attn.k_proj
+    mlp             block 18 | ActErr 0.424101 | model.layers.18.mlp.up_proj
+    self_attn       block  3 | ActErr 0.426499 | model.layers.3.self_attn.k_proj
+    mlp             block 12 | ActErr 0.447199 | model.layers.12.mlp.up_proj
+    self_attn       block  7 | ActErr 0.451309 | model.layers.7.self_attn.v_proj
+    mlp             block  6 | ActErr 0.453985 | model.layers.6.mlp.up_proj
+    self_attn       block 11 | ActErr 0.454695 | model.layers.11.self_attn.o_proj
+    self_attn       block 11 | ActErr 0.470978 | model.layers.11.self_attn.v_proj
+    mlp             block  6 | ActErr 0.485564 | model.layers.6.mlp.down_proj
+    mlp             block 12 | ActErr 0.501318 | model.layers.12.mlp.down_proj
+    mlp             block 18 | ActErr 0.514805 | model.layers.18.mlp.down_proj
+    self_attn       block  7 | ActErr 0.539499 | model.layers.7.self_attn.o_proj
+    linear_attn     block  8 | ActErr 0.558706 | model.layers.8.linear_attn.out_proj
+
+ACT_GUIDED_11_5
+  Target coverage : 11.50%
+  Actual coverage : 11.50%
+  Matrices        : 30
+  Parameters      : 86,507,520
+  Selected:
+    self_attn       block  7 | ActErr 0.249842 | model.layers.7.self_attn.q_proj
+    self_attn       block  3 | ActErr 0.250458 | model.layers.3.self_attn.q_proj
+    mlp             block 18 | ActErr 0.296969 | model.layers.18.mlp.gate_proj
+    linear_attn     block 12 | ActErr 0.307628 | model.layers.12.linear_attn.in_proj_z
+    self_attn       block 11 | ActErr 0.312047 | model.layers.11.self_attn.q_proj
+    mlp             block  6 | ActErr 0.315680 | model.layers.6.mlp.gate_proj
+    linear_attn     block  8 | ActErr 0.317953 | model.layers.8.linear_attn.in_proj_z
+    linear_attn     block 12 | ActErr 0.331012 | model.layers.12.linear_attn.in_proj_qkv
+    linear_attn     block  4 | ActErr 0.331055 | model.layers.4.linear_attn.in_proj_z
+    mlp             block 12 | ActErr 0.334395 | model.layers.12.mlp.gate_proj
+    linear_attn     block  4 | ActErr 0.334395 | model.layers.4.linear_attn.in_proj_qkv
+    linear_attn     block  8 | ActErr 0.368358 | model.layers.8.linear_attn.in_proj_qkv
+    self_attn       block  7 | ActErr 0.368869 | model.layers.7.self_attn.k_proj
+    self_attn       block  3 | ActErr 0.410189 | model.layers.3.self_attn.v_proj
+    self_attn       block 11 | ActErr 0.419051 | model.layers.11.self_attn.k_proj
+    mlp             block 18 | ActErr 0.424101 | model.layers.18.mlp.up_proj
+    self_attn       block  3 | ActErr 0.426499 | model.layers.3.self_attn.k_proj
+    mlp             block 12 | ActErr 0.447199 | model.layers.12.mlp.up_proj
+    self_attn       block  7 | ActErr 0.451309 | model.layers.7.self_attn.v_proj
+    mlp             block  6 | ActErr 0.453985 | model.layers.6.mlp.up_proj
+    self_attn       block 11 | ActErr 0.454695 | model.layers.11.self_attn.o_proj
+    self_attn       block 11 | ActErr 0.470978 | model.layers.11.self_attn.v_proj
+    mlp             block  6 | ActErr 0.485564 | model.layers.6.mlp.down_proj
+    mlp             block 12 | ActErr 0.501318 | model.layers.12.mlp.down_proj
+    mlp             block 18 | ActErr 0.514805 | model.layers.18.mlp.down_proj
+    self_attn       block  7 | ActErr 0.539499 | model.layers.7.self_attn.o_proj
+    linear_attn     block  8 | ActErr 0.558706 | model.layers.8.linear_attn.out_proj
+    linear_attn     block  4 | ActErr 0.573619 | model.layers.4.linear_attn.out_proj
+    linear_attn     block 12 | ActErr 0.588635 | model.layers.12.linear_attn.out_proj
+    self_attn       block  3 | ActErr 0.610239 | model.layers.3.self_attn.o_proj
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 48.00 MB
+Free      : 3918.94 MB
+Total     : 4031.88 MB
+
+
+=================================================================================================================================================
+PHASE 2 — FP16 REFERENCE ON UNSEEN EVALUATION SET
+=================================================================================================================================================
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 48.00 MB
+Free      : 3918.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.70 sec
+
+GPU MEMORY — after model load
+Allocated : 1445.10 MB
+Reserved  : 1460.00 MB
+Free      : 2506.94 MB
+Total     : 4031.88 MB
+
+EVALUATION PROMPT 1
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Explain in simple terms why we see lightning before we hear thunder.
+
+<think>
+
+</think>
+
+Imagine you are walking down a long, quiet street. Suddenly, a big storm is coming. You see a bright flash of lightning, but you don't hear a loud bang until a few seconds later.
+
+Here is the simple reason why:
+
+1.  **Light
+
+Generated tokens : 60
+Generation time  : 2.625 sec
+Tokens/sec       : 22.86
+
+EVALUATION PROMPT 2
+-------------------------------------------------------------------------------------------------------------------------------------------------
+What is 19 multiplied by 26?
+
+To find the product of 19 and 26, we can use the distributive property of multiplication. We can break down 26 into 20 and 6, and then multiply each part by 19:
+\[ 19 \times 26 =
+
+Generated tokens : 60
+Generation time  : 2.559 sec
+Tokens/sec       : 23.45
+
+EVALUATION PROMPT 3
+-------------------------------------------------------------------------------------------------------------------------------------------------
+A cyclist travels 18 km per hour for 2.5 hours. How far does the cyclist travel?
+
+To find the distance traveled by the cyclist, we use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+Given:
+- Speed = 18 km/h
+- Time = 2.5 hours
+
+Sub
+
+Generated tokens : 60
+Generation time  : 2.552 sec
+Tokens/sec       : 23.51
+
+EVALUATION PROMPT 4
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Explain in simple terms why drinking enough water is important.
+
+<think>
+
+</think>
+
+Drinking enough water is like giving your body a **clean, clean-up job**. Without it, your body can't do its daily tasks, and you risk getting sick.
+
+Here is why it is so important, broken down simply:
+
+### 1. It keeps
+
+Generated tokens : 60
+Generation time  : 2.560 sec
+Tokens/sec       : 23.44
+
+EVALUATION PROMPT 5
+-------------------------------------------------------------------------------------------------------------------------------------------------
+What is 225 divided by 15?
+
+To find the quotient of 225 divided by 15, we can use the long division method. Let's break it down step by step:
+
+1. **Set up the division:**
+   \[
+   225 \div 15
+   \
+
+Generated tokens : 60
+Generation time  : 2.551 sec
+Tokens/sec       : 23.52
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 48.00 MB
+Free      : 3918.94 MB
+Total     : 4031.88 MB
+
+
+#################################################################################################################################################
+ACTIVATION-GUIDED TEST 1/4 — ACT_GUIDED_7_67
+#################################################################################################################################################
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 48.00 MB
+Free      : 3918.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.73 sec
+
+GPU MEMORY — after model load
+Allocated : 1445.10 MB
+Reserved  : 1460.00 MB
+Free      : 2506.94 MB
+Total     : 4031.88 MB
+
+TERNARY CONFIGURATION
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Case                  : ACT_GUIDED_7_67
+Target coverage       : 7.67%
+Actual coverage       : 7.73%
+Affected matrices     : 18
+Affected parameters   : 58,195,968
+Mean weight error     : 0.470632
+Max weight error      : 0.482014
+Mean scale ratio      : 1.350005
+-1 codes              : 34.26%
+ 0 codes              : 31.64%
++1 codes              : 34.11%
+
+SELECTED MATRICES
+-------------------------------------------------------------------------------------------------------------------------------------------------
+ 1. self_attn       block  7 | ActErr 0.249842 | model.layers.7.self_attn.q_proj
+ 2. self_attn       block  3 | ActErr 0.250458 | model.layers.3.self_attn.q_proj
+ 3. mlp             block 18 | ActErr 0.296969 | model.layers.18.mlp.gate_proj
+ 4. linear_attn     block 12 | ActErr 0.307628 | model.layers.12.linear_attn.in_proj_z
+ 5. self_attn       block 11 | ActErr 0.312047 | model.layers.11.self_attn.q_proj
+ 6. mlp             block  6 | ActErr 0.315680 | model.layers.6.mlp.gate_proj
+ 7. linear_attn     block  8 | ActErr 0.317953 | model.layers.8.linear_attn.in_proj_z
+ 8. linear_attn     block 12 | ActErr 0.331012 | model.layers.12.linear_attn.in_proj_qkv
+ 9. linear_attn     block  4 | ActErr 0.331055 | model.layers.4.linear_attn.in_proj_z
+10. mlp             block 12 | ActErr 0.334395 | model.layers.12.mlp.gate_proj
+11. linear_attn     block  4 | ActErr 0.334395 | model.layers.4.linear_attn.in_proj_qkv
+12. linear_attn     block  8 | ActErr 0.368358 | model.layers.8.linear_attn.in_proj_qkv
+13. self_attn       block  7 | ActErr 0.368869 | model.layers.7.self_attn.k_proj
+14. self_attn       block  3 | ActErr 0.410189 | model.layers.3.self_attn.v_proj
+15. self_attn       block 11 | ActErr 0.419051 | model.layers.11.self_attn.k_proj
+16. mlp             block 18 | ActErr 0.424101 | model.layers.18.mlp.up_proj
+17. self_attn       block  3 | ActErr 0.426499 | model.layers.3.self_attn.k_proj
+18. mlp             block 12 | ActErr 0.447199 | model.layers.12.mlp.up_proj
+
+UNSEEN EVALUATION
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why we see lightning before we hear thunder.
+
+<think>
+
+</think>
+
+To understand why lightning happens before thunder, we need to look at the **physics of the atmosphere**.
+
+### 1. **The Basics of Lightning**
+Lightning is a natural phenomenon that occurs in the atmosphere. It is a **natural electrical discharge** that occurs in
+
+Generated tokens : 60
+Generation time  : 2.631 sec
+Tokens/sec       : 22.80
+
+PROMPT 2
+What is 19 multiplied by 26?
+
+19 * 26 = 494
+
+### 19 * 26 = 494
+
+### 19 * 26 = 494
+
+### 19 * 26 = 494
+
+### 19 *
+
+Generated tokens : 60
+Generation time  : 2.544 sec
+Tokens/sec       : 23.59
+
+PROMPT 3
+A cyclist travels 18 km per hour for 2.5 hours. How far does the cyclist travel?
+
+<think>
+
+To find the total distance traveled by the cyclist, we can use the formula:
+
+$$ \text{Distance} = \text{Speed} \times \text{Time} $$
+
+Given:
+- Speed = 18 km/h
+- Time = 2.5
+
+Generated tokens : 60
+Generation time  : 2.552 sec
+Tokens/sec       : 23.52
+
+PROMPT 4
+Explain in simple terms why drinking enough water is important.
+
+<think>
+
+</think>
+
+Drinking enough water is a fundamental human need because it directly impacts your body's **metabolic rate**, which is the number of calories you burn per hour.
+
+- **Metabolic rate** is the number of calories you burn per hour.
+- **Metabolic rate
+
+Generated tokens : 60
+Generation time  : 2.558 sec
+Tokens/sec       : 23.45
+
+PROMPT 5
+What is 225 divided by 15?
+
+To find the value of 225 divided by 15, we can use the formula:
+\[ \frac{225}{15} = 15 \]
+This is because 225 divided by 15 is equal to 15.
+
+Generated tokens : 60
+Generation time  : 2.586 sec
+Tokens/sec       : 23.20
+
+Aggregate throughput : 23.31 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 48.00 MB
+Free      : 3918.94 MB
+Total     : 4031.88 MB
+
+
+#################################################################################################################################################
+ACTIVATION-GUIDED TEST 2/4 — ACT_GUIDED_9_0
+#################################################################################################################################################
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 48.00 MB
+Free      : 3918.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.71 sec
+
+GPU MEMORY — after model load
+Allocated : 1445.10 MB
+Reserved  : 1460.00 MB
+Free      : 2506.94 MB
+Total     : 4031.88 MB
+
+TERNARY CONFIGURATION
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Case                  : ACT_GUIDED_9_0
+Target coverage       : 9.00%
+Actual coverage       : 9.13%
+Affected matrices     : 23
+Affected parameters   : 68,681,728
+Mean weight error     : 0.471498
+Max weight error      : 0.502314
+Mean scale ratio      : 1.350959
+-1 codes              : 34.22%
+ 0 codes              : 31.69%
++1 codes              : 34.09%
+
+SELECTED MATRICES
+-------------------------------------------------------------------------------------------------------------------------------------------------
+ 1. self_attn       block  7 | ActErr 0.249842 | model.layers.7.self_attn.q_proj
+ 2. self_attn       block  3 | ActErr 0.250458 | model.layers.3.self_attn.q_proj
+ 3. mlp             block 18 | ActErr 0.296969 | model.layers.18.mlp.gate_proj
+ 4. linear_attn     block 12 | ActErr 0.307628 | model.layers.12.linear_attn.in_proj_z
+ 5. self_attn       block 11 | ActErr 0.312047 | model.layers.11.self_attn.q_proj
+ 6. mlp             block  6 | ActErr 0.315680 | model.layers.6.mlp.gate_proj
+ 7. linear_attn     block  8 | ActErr 0.317953 | model.layers.8.linear_attn.in_proj_z
+ 8. linear_attn     block 12 | ActErr 0.331012 | model.layers.12.linear_attn.in_proj_qkv
+ 9. linear_attn     block  4 | ActErr 0.331055 | model.layers.4.linear_attn.in_proj_z
+10. mlp             block 12 | ActErr 0.334395 | model.layers.12.mlp.gate_proj
+11. linear_attn     block  4 | ActErr 0.334395 | model.layers.4.linear_attn.in_proj_qkv
+12. linear_attn     block  8 | ActErr 0.368358 | model.layers.8.linear_attn.in_proj_qkv
+13. self_attn       block  7 | ActErr 0.368869 | model.layers.7.self_attn.k_proj
+14. self_attn       block  3 | ActErr 0.410189 | model.layers.3.self_attn.v_proj
+15. self_attn       block 11 | ActErr 0.419051 | model.layers.11.self_attn.k_proj
+16. mlp             block 18 | ActErr 0.424101 | model.layers.18.mlp.up_proj
+17. self_attn       block  3 | ActErr 0.426499 | model.layers.3.self_attn.k_proj
+18. mlp             block 12 | ActErr 0.447199 | model.layers.12.mlp.up_proj
+19. self_attn       block  7 | ActErr 0.451309 | model.layers.7.self_attn.v_proj
+20. mlp             block  6 | ActErr 0.453985 | model.layers.6.mlp.up_proj
+21. self_attn       block 11 | ActErr 0.454695 | model.layers.11.self_attn.o_proj
+22. self_attn       block 11 | ActErr 0.470978 | model.layers.11.self_attn.v_proj
+23. mlp             block  6 | ActErr 0.485564 | model.layers.6.mlp.down_proj
+
+UNSEEN EVALUATION
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why we see lightning before we hear thunder.
+
+<think>
+
+</think>
+
+To understand why lightning occurs before thunder, we must look at the fundamental physics of **electrical discharge**.
+
+### The Core Concept: Lightning vs. Thunder
+Lightning and thunder are not the same thing. They are two different phenomena that occur at the same time.
+
+
+
+Generated tokens : 60
+Generation time  : 2.579 sec
+Tokens/sec       : 23.26
+
+PROMPT 2
+What is 19 multiplied by 26?
+A) 19
+B) 26
+C) 19
+D) 26
+E) 19
+F) 26
+G) 19
+H) 26
+I) 19
+J) 26
+
+Generated tokens : 60
+Generation time  : 2.686 sec
+Tokens/sec       : 22.33
+
+PROMPT 3
+A cyclist travels 18 km per hour for 2.5 hours. How far does the cyclist travel?
+
+To find the distance traveled by the cyclist, we can use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+
+Given:
+- Speed = 18 km/h
+- Time = 2.5 hours
+
+
+
+Generated tokens : 60
+Generation time  : 2.740 sec
+Tokens/sec       : 21.90
+
+PROMPT 4
+Explain in simple terms why drinking enough water is important.
+
+<think>
+
+</think>
+
+Drinking enough water is a fundamental biological requirement for human survival and well-being. It is not merely about hydration; it is about maintaining the body's internal environment.
+
+**Why drinking water is important:**
+
+*   **Maintaining homeostasis:** Water helps regulate body
+
+Generated tokens : 60
+Generation time  : 2.723 sec
+Tokens/sec       : 22.03
+
+PROMPT 5
+What is 225 divided by 15?
+A) 225
+B) 15
+C) 225
+D) 15
+E) 225
+F) 15
+G) 225
+H) 15
+I) 225
+
+
+Generated tokens : 60
+Generation time  : 2.678 sec
+Tokens/sec       : 22.40
+
+Aggregate throughput : 22.38 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 48.00 MB
+Free      : 3918.94 MB
+Total     : 4031.88 MB
+
+
+#################################################################################################################################################
+ACTIVATION-GUIDED TEST 3/4 — ACT_GUIDED_10_5
+#################################################################################################################################################
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 48.00 MB
+Free      : 3918.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.68 sec
+
+GPU MEMORY — after model load
+Allocated : 1445.10 MB
+Reserved  : 1460.00 MB
+Free      : 2506.94 MB
+Total     : 4031.88 MB
+
+TERNARY CONFIGURATION
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Case                  : ACT_GUIDED_10_5
+Target coverage       : 10.50%
+Actual coverage       : 10.66%
+Affected matrices     : 27
+Affected parameters   : 80,216,064
+Mean weight error     : 0.471501
+Max weight error      : 0.502314
+Mean scale ratio      : 1.350644
+-1 codes              : 34.21%
+ 0 codes              : 31.68%
++1 codes              : 34.10%
+
+SELECTED MATRICES
+-------------------------------------------------------------------------------------------------------------------------------------------------
+ 1. self_attn       block  7 | ActErr 0.249842 | model.layers.7.self_attn.q_proj
+ 2. self_attn       block  3 | ActErr 0.250458 | model.layers.3.self_attn.q_proj
+ 3. mlp             block 18 | ActErr 0.296969 | model.layers.18.mlp.gate_proj
+ 4. linear_attn     block 12 | ActErr 0.307628 | model.layers.12.linear_attn.in_proj_z
+ 5. self_attn       block 11 | ActErr 0.312047 | model.layers.11.self_attn.q_proj
+ 6. mlp             block  6 | ActErr 0.315680 | model.layers.6.mlp.gate_proj
+ 7. linear_attn     block  8 | ActErr 0.317953 | model.layers.8.linear_attn.in_proj_z
+ 8. linear_attn     block 12 | ActErr 0.331012 | model.layers.12.linear_attn.in_proj_qkv
+ 9. linear_attn     block  4 | ActErr 0.331055 | model.layers.4.linear_attn.in_proj_z
+10. mlp             block 12 | ActErr 0.334395 | model.layers.12.mlp.gate_proj
+11. linear_attn     block  4 | ActErr 0.334395 | model.layers.4.linear_attn.in_proj_qkv
+12. linear_attn     block  8 | ActErr 0.368358 | model.layers.8.linear_attn.in_proj_qkv
+13. self_attn       block  7 | ActErr 0.368869 | model.layers.7.self_attn.k_proj
+14. self_attn       block  3 | ActErr 0.410189 | model.layers.3.self_attn.v_proj
+15. self_attn       block 11 | ActErr 0.419051 | model.layers.11.self_attn.k_proj
+16. mlp             block 18 | ActErr 0.424101 | model.layers.18.mlp.up_proj
+17. self_attn       block  3 | ActErr 0.426499 | model.layers.3.self_attn.k_proj
+18. mlp             block 12 | ActErr 0.447199 | model.layers.12.mlp.up_proj
+19. self_attn       block  7 | ActErr 0.451309 | model.layers.7.self_attn.v_proj
+20. mlp             block  6 | ActErr 0.453985 | model.layers.6.mlp.up_proj
+21. self_attn       block 11 | ActErr 0.454695 | model.layers.11.self_attn.o_proj
+22. self_attn       block 11 | ActErr 0.470978 | model.layers.11.self_attn.v_proj
+23. mlp             block  6 | ActErr 0.485564 | model.layers.6.mlp.down_proj
+24. mlp             block 12 | ActErr 0.501318 | model.layers.12.mlp.down_proj
+25. mlp             block 18 | ActErr 0.514805 | model.layers.18.mlp.down_proj
+26. self_attn       block  7 | ActErr 0.539499 | model.layers.7.self_attn.o_proj
+27. linear_attn     block  8 | ActErr 0.558706 | model.layers.8.linear_attn.out_proj
+
+UNSEEN EVALUATION
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why we see lightning before we hear thunder.
+
+<think>
+
+</think>
+
+**Lightning and Thunder are not the same thing.**
+
+**Lightning** is a **discharge** of an **electrically charged** **particle** **of** **a** **gas** **of** **a** **gas** **of** **a
+
+Generated tokens : 60
+Generation time  : 2.828 sec
+Tokens/sec       : 21.22
+
+PROMPT 2
+What is 19 multiplied by 26?
+19 * 26 = 488
+
+## 19 * 26 = 488
+
+## 19 * 26 = 488
+
+## 19 * 26 = 488
+
+## 19 *
+
+Generated tokens : 60
+Generation time  : 3.170 sec
+Tokens/sec       : 18.93
+
+PROMPT 3
+A cyclist travels 18 km per hour for 2.5 hours. How far does the cyclist travel?
+
+To find the distance traveled by the cyclist, we can use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+
+Given:
+- Speed = 18 km/h
+- Time = 2.5 hours
+
+
+
+Generated tokens : 60
+Generation time  : 3.144 sec
+Tokens/sec       : 19.08
+
+PROMPT 4
+Explain in simple terms why drinking enough water is important.
+
+<think>
+
+</think>
+
+Drinking enough water is a fundamental pillar of human health and well-being. It is not merely about hydration; it is about the **sustained intake of water**, which is the key to maintaining a healthy body.
+
+**Why drinking enough water is important:**
+
+1
+
+Generated tokens : 60
+Generation time  : 2.761 sec
+Tokens/sec       : 21.73
+
+PROMPT 5
+What is 225 divided by 15?
+225 divided by 15 is 15.
+
+## 225 divided by 15 is 15.
+
+## 225 divided by 15 is 15.
+
+## 225 divided by 15 is 1
+
+Generated tokens : 60
+Generation time  : 3.100 sec
+Tokens/sec       : 19.35
+
+Aggregate throughput : 20.00 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 48.00 MB
+Free      : 3918.94 MB
+Total     : 4031.88 MB
+
+
+#################################################################################################################################################
+ACTIVATION-GUIDED TEST 4/4 — ACT_GUIDED_11_5
+#################################################################################################################################################
+
+GPU MEMORY — before model load
+Allocated : 8.12 MB
+Reserved  : 48.00 MB
+Free      : 3918.94 MB
+Total     : 4031.88 MB
+
+Loading fresh FP16 model...
+Model loaded in 2.72 sec
+
+GPU MEMORY — after model load
+Allocated : 1445.10 MB
+Reserved  : 1460.00 MB
+Free      : 2506.94 MB
+Total     : 4031.88 MB
+
+TERNARY CONFIGURATION
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Case                  : ACT_GUIDED_11_5
+Target coverage       : 11.50%
+Actual coverage       : 11.50%
+Affected matrices     : 30
+Affected parameters   : 86,507,520
+Mean weight error     : 0.472183
+Max weight error      : 0.502314
+Mean scale ratio      : 1.351735
+-1 codes              : 34.18%
+ 0 codes              : 31.75%
++1 codes              : 34.07%
+
+SELECTED MATRICES
+-------------------------------------------------------------------------------------------------------------------------------------------------
+ 1. self_attn       block  7 | ActErr 0.249842 | model.layers.7.self_attn.q_proj
+ 2. self_attn       block  3 | ActErr 0.250458 | model.layers.3.self_attn.q_proj
+ 3. mlp             block 18 | ActErr 0.296969 | model.layers.18.mlp.gate_proj
+ 4. linear_attn     block 12 | ActErr 0.307628 | model.layers.12.linear_attn.in_proj_z
+ 5. self_attn       block 11 | ActErr 0.312047 | model.layers.11.self_attn.q_proj
+ 6. mlp             block  6 | ActErr 0.315680 | model.layers.6.mlp.gate_proj
+ 7. linear_attn     block  8 | ActErr 0.317953 | model.layers.8.linear_attn.in_proj_z
+ 8. linear_attn     block 12 | ActErr 0.331012 | model.layers.12.linear_attn.in_proj_qkv
+ 9. linear_attn     block  4 | ActErr 0.331055 | model.layers.4.linear_attn.in_proj_z
+10. mlp             block 12 | ActErr 0.334395 | model.layers.12.mlp.gate_proj
+11. linear_attn     block  4 | ActErr 0.334395 | model.layers.4.linear_attn.in_proj_qkv
+12. linear_attn     block  8 | ActErr 0.368358 | model.layers.8.linear_attn.in_proj_qkv
+13. self_attn       block  7 | ActErr 0.368869 | model.layers.7.self_attn.k_proj
+14. self_attn       block  3 | ActErr 0.410189 | model.layers.3.self_attn.v_proj
+15. self_attn       block 11 | ActErr 0.419051 | model.layers.11.self_attn.k_proj
+16. mlp             block 18 | ActErr 0.424101 | model.layers.18.mlp.up_proj
+17. self_attn       block  3 | ActErr 0.426499 | model.layers.3.self_attn.k_proj
+18. mlp             block 12 | ActErr 0.447199 | model.layers.12.mlp.up_proj
+19. self_attn       block  7 | ActErr 0.451309 | model.layers.7.self_attn.v_proj
+20. mlp             block  6 | ActErr 0.453985 | model.layers.6.mlp.up_proj
+21. self_attn       block 11 | ActErr 0.454695 | model.layers.11.self_attn.o_proj
+22. self_attn       block 11 | ActErr 0.470978 | model.layers.11.self_attn.v_proj
+23. mlp             block  6 | ActErr 0.485564 | model.layers.6.mlp.down_proj
+24. mlp             block 12 | ActErr 0.501318 | model.layers.12.mlp.down_proj
+25. mlp             block 18 | ActErr 0.514805 | model.layers.18.mlp.down_proj
+26. self_attn       block  7 | ActErr 0.539499 | model.layers.7.self_attn.o_proj
+27. linear_attn     block  8 | ActErr 0.558706 | model.layers.8.linear_attn.out_proj
+28. linear_attn     block  4 | ActErr 0.573619 | model.layers.4.linear_attn.out_proj
+29. linear_attn     block 12 | ActErr 0.588635 | model.layers.12.linear_attn.out_proj
+30. self_attn       block  3 | ActErr 0.610239 | model.layers.3.self_attn.o_proj
+
+UNSEEN EVALUATION
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+PROMPT 1
+Explain in simple terms why we see lightning before we hear thunder.
+
+<think>
+
+</think>
+
+I cannot provide a detailed explanation of why lightning occurs before thunder, as this is a **scientific fact** that is often misunderstood.
+
+However, I will provide you with a **simple explanation** of why we see lightning before thunder.
+
+**Lightning** is caused by
+
+Generated tokens : 60
+Generation time  : 2.640 sec
+Tokens/sec       : 22.73
+
+PROMPT 2
+What is 19 multiplied by 26?
+19 multiplied by 26 is 488.
+
+### 19 multiplied by 26 is 488.
+
+### 19 multiplied by 26 is 488.
+
+### 19 multiplied by 26 is 48
+
+Generated tokens : 60
+Generation time  : 2.614 sec
+Tokens/sec       : 22.95
+
+PROMPT 3
+A cyclist travels 18 km per hour for 2.5 hours. How far does the cyclist travel?
+
+To find the distance traveled by the cyclist, we can use the formula:
+\[ \text{Distance} = \text{Speed} \times \text{Time} \]
+
+Given:
+- Speed = 18 km/h
+- Time = 2.5 hours
+
+
+
+Generated tokens : 60
+Generation time  : 2.678 sec
+Tokens/sec       : 22.40
+
+PROMPT 4
+Explain in simple terms why drinking enough water is important.
+
+<think>
+
+</think>
+
+I cannot provide a detailed explanation of why drinking enough water is important, as I am an AI.
+
+However, I can explain the importance of **drinking enough water** in the context of **why drinking enough water is important**.
+
+**Why drinking enough water is important
+
+Generated tokens : 60
+Generation time  : 2.777 sec
+Tokens/sec       : 21.61
+
+PROMPT 5
+What is 225 divided by 15?
+225 divided by 15 is 15.
+225 divided by 15 is 15.
+225 divided by 15 is 15.
+225 divided by 15 is 15.
+225
+
+Generated tokens : 60
+Generation time  : 2.567 sec
+Tokens/sec       : 23.37
+
+Aggregate throughput : 22.60 tokens/sec
+
+Releasing model...
+
+GPU MEMORY — after model cleanup
+Allocated : 8.12 MB
+Reserved  : 48.00 MB
+Free      : 3918.94 MB
+Total     : 4031.88 MB
+
+
+=====================================================================================================================================================================
+EXPERIMENT 015 — ACTIVATION-GUIDED SELECTION SUMMARY
+=====================================================================================================================================================================
+Case                        Target    Actual  Matrices      Parameters     MeanErr      MaxErr     Scale     Zero%     Tok/s
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ACT_GUIDED_7_67              7.67%     7.73%        18      58,195,968    0.470632    0.482014    1.3500     31.64     23.31
+ACT_GUIDED_9_0               9.00%     9.13%        23      68,681,728    0.471498    0.502314    1.3510     31.69     22.38
+ACT_GUIDED_10_5             10.50%    10.66%        27      80,216,064    0.471501    0.502314    1.3506     31.68     20.00
+ACT_GUIDED_11_5             11.50%    11.50%        30      86,507,520    0.472183    0.502314    1.3517     31.75     22.60
+
+=================================================================================================================================================
+SCIENTIFIC INTERPRETATION NOTES
+=================================================================================================================================================
+1. Matrix ranking was built using calibration prompts that are separate from the evaluation prompts.
+
+2. Lower activation distortion was used as the matrix-selection criterion.
+
+3. The optimized ternary quantizer itself was unchanged.
+
+4. Coverage is controlled by total selected parameters, but exact coverage can differ from the requested budget because matrices are indivisible.
+
+5. Generation quality must be analyzed from the unseen evaluation outputs.
+
+6. Throughput is NOT packed ternary speed because selected weights are reconstructed into FP16 tensors.
+
+7. A successful result would show that activation-guided matrix selection can maintain useful generation at coverage where block-level selection degraded.
+
+=================================================================================================================================================
+EXPERIMENT 015 COMPLETE
+=================================================================================================================================================
