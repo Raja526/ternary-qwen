@@ -1,0 +1,2762 @@
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+==========================================================================================
+EXPERIMENT 021 — q_proj INTERACTION ATTRIBUTION
+==========================================================================================
+
+Frozen FP16 baseline: 166/299 = 55.52%
+
+Total model parameters: 752,393,024
+
+Conditions:
+
+A — q_only
+    model.layers.3.self_attn.q_proj
+    parameters=4,194,304 coverage=0.5575%
+
+B — k_plus_q
+    model.layers.3.self_attn.k_proj
+    model.layers.3.self_attn.q_proj
+    parameters=4,718,592 coverage=0.6271%
+
+C — out_plus_q
+    model.layers.4.linear_attn.out_proj
+    model.layers.3.self_attn.q_proj
+    parameters=6,291,456 coverage=0.8362%
+
+D — qkv_plus_q
+    model.layers.4.linear_attn.in_proj_qkv
+    model.layers.3.self_attn.q_proj
+    parameters=10,485,760 coverage=1.3937%
+
+E — k_out_q
+    model.layers.3.self_attn.k_proj
+    model.layers.4.linear_attn.out_proj
+    model.layers.3.self_attn.q_proj
+    parameters=6,815,744 coverage=0.9059%
+
+F — k_qkv_q
+    model.layers.3.self_attn.k_proj
+    model.layers.4.linear_attn.in_proj_qkv
+    model.layers.3.self_attn.q_proj
+    parameters=11,010,048 coverage=1.4633%
+
+G — out_qkv_q
+    model.layers.4.linear_attn.out_proj
+    model.layers.4.linear_attn.in_proj_qkv
+    model.layers.3.self_attn.q_proj
+    parameters=12,582,912 coverage=1.6724%
+
+H — k_out_qkv_q
+    model.layers.3.self_attn.k_proj
+    model.layers.4.linear_attn.out_proj
+    model.layers.4.linear_attn.in_proj_qkv
+    model.layers.3.self_attn.q_proj
+    parameters=13,107,200 coverage=1.7421%
+
+==========================================================================================
+CONDITION A — q_only
+==========================================================================================
+  model.layers.3.self_attn.q_proj
+
+Matrix count     : 1
+Parameters       : 4,194,304
+Coverage         : 0.5575%
+Mean error       : 0.464429375
+Max error        : 0.464429375
+Mean scale ratio : 1.342975946
+[001/299] id=Mercury_SC_407695 gold=D fp16=A ternary=D CORRECT
+[002/299] id=Mercury_7103565 gold=C fp16=C ternary=C CORRECT
+[003/299] id=MDSA_2009_5_16 gold=D fp16=B ternary=B WRONG
+[004/299] id=Mercury_7027230 gold=A fp16=A ternary=B WRONG
+[005/299] id=Mercury_SC_405487 gold=B fp16=B ternary=B CORRECT
+[006/299] id=Mercury_7032743 gold=C fp16=A ternary=A WRONG
+[007/299] id=Mercury_7205135 gold=C fp16=C ternary=C CORRECT
+[008/299] id=MDSA_2007_4_52 gold=C fp16=C ternary=B WRONG
+[009/299] id=Mercury_7103215 gold=C fp16=C ternary=C CORRECT
+[010/299] id=Mercury_192168 gold=D fp16=A ternary=A WRONG
+[011/299] id=Mercury_SC_412337 gold=D fp16=A ternary=D CORRECT
+[012/299] id=Mercury_7162838 gold=D fp16=D ternary=D CORRECT
+[013/299] id=Mercury_7159775 gold=A fp16=B ternary=B WRONG
+[014/299] id=Mercury_7195440 gold=B fp16=B ternary=B CORRECT
+[015/299] id=Mercury_7017990 gold=A fp16=A ternary=A CORRECT
+[016/299] id=TIMSS_2007_4_pg90 gold=C fp16=B ternary=B WRONG
+[017/299] id=Mercury_7198380 gold=D fp16=A ternary=B WRONG
+[018/299] id=NAEP_2005_8_S11+14 gold=B fp16=D ternary=D WRONG
+[019/299] id=Mercury_192290 gold=D fp16=B ternary=B WRONG
+[020/299] id=Mercury_7192990 gold=A fp16=A ternary=A CORRECT
+[021/299] id=Mercury_7217053 gold=B fp16=A ternary=B CORRECT
+[022/299] id=Mercury_7179358 gold=B fp16=A ternary=B CORRECT
+[023/299] id=MCAS_2005_8_5 gold=D fp16=B ternary=D CORRECT
+[024/299] id=MCAS_2000_8_10 gold=B fp16=B ternary=B CORRECT
+[025/299] id=Mercury_7187915 gold=A fp16=A ternary=D WRONG
+[026/299] id=Mercury_7189823 gold=A fp16=A ternary=A CORRECT
+[027/299] id=Mercury_405454 gold=D fp16=A ternary=D CORRECT
+[028/299] id=MCAS_2012_5_8 gold=B fp16=B ternary=B CORRECT
+[029/299] id=Mercury_SC_LBS10040 gold=D fp16=D ternary=D CORRECT
+[030/299] id=Mercury_7115063 gold=A fp16=A ternary=A CORRECT
+[031/299] id=MCAS_2015_8_7 gold=B fp16=A ternary=A WRONG
+[032/299] id=Mercury_184765 gold=B fp16=B ternary=B CORRECT
+[033/299] id=ACTAAP_2013_7_17 gold=D fp16=D ternary=D CORRECT
+[034/299] id=Mercury_7248238 gold=D fp16=B ternary=B WRONG
+[035/299] id=Mercury_SC_410964 gold=D fp16=D ternary=D CORRECT
+[036/299] id=NYSEDREGENTS_2014_4_4 gold=A fp16=A ternary=A CORRECT
+[037/299] id=MCAS_8_2015_11 gold=A fp16=A ternary=A CORRECT
+[038/299] id=Mercury_7183733 gold=B fp16=B ternary=B CORRECT
+[039/299] id=MDSA_2010_5_18 gold=D fp16=D ternary=D CORRECT
+[040/299] id=LEAP__7_10354 gold=D fp16=D ternary=D CORRECT
+[041/299] id=Mercury_7282608 gold=C fp16=B ternary=B WRONG
+[042/299] id=Mercury_7071365 gold=D fp16=B ternary=B WRONG
+[043/299] id=Mercury_SC_407169 gold=D fp16=D ternary=D CORRECT
+[044/299] id=ACTAAP_2007_7_5 gold=B fp16=B ternary=B CORRECT
+[045/299] id=Mercury_7207358 gold=C fp16=C ternary=A WRONG
+[046/299] id=Mercury_7245893 gold=B fp16=B ternary=B CORRECT
+[047/299] id=Mercury_7223038 gold=C fp16=B ternary=B WRONG
+[048/299] id=Mercury_SC_415541 gold=D fp16=D ternary=D CORRECT
+[049/299] id=Mercury_7236023 gold=B fp16=A ternary=A WRONG
+[050/299] id=Mercury_417146 gold=A fp16=A ternary=A CORRECT
+[051/299] id=Mercury_7128695 gold=C fp16=A ternary=A WRONG
+[052/299] id=Mercury_7270008 gold=C fp16=C ternary=C CORRECT
+[053/299] id=Mercury_7242743 gold=D fp16=D ternary=D CORRECT
+[054/299] id=Mercury_SC_400655 gold=A fp16=A ternary=A CORRECT
+[055/299] id=Mercury_7100695 gold=D fp16=A ternary=A WRONG
+[056/299] id=MSA_2013_8_3 gold=D fp16=D ternary=D CORRECT
+[057/299] id=NYSEDREGENTS_2014_4_19 gold=B fp16=B ternary=B CORRECT
+[058/299] id=MCAS_2013_8_29432 gold=B fp16=B ternary=D WRONG
+[059/299] id=Mercury_7042700 gold=D fp16=A ternary=B WRONG
+[060/299] id=Mercury_7201705 gold=A fp16=A ternary=A CORRECT
+[061/299] id=MCAS_1998_8_13 gold=D fp16=A ternary=A WRONG
+[062/299] id=Mercury_7138513 gold=A fp16=D ternary=D WRONG
+[063/299] id=Mercury_SC_401663 gold=B fp16=B ternary=B CORRECT
+[064/299] id=NCEOGA_2013_8_4 gold=D fp16=D ternary=D CORRECT
+[065/299] id=Mercury_7235813 gold=D fp16=B ternary=B WRONG
+[066/299] id=Mercury_7011270 gold=B fp16=A ternary=B CORRECT
+[067/299] id=Mercury_7228603 gold=C fp16=C ternary=B WRONG
+[068/299] id=Mercury_SC_400339 gold=C fp16=A ternary=A WRONG
+[069/299] id=Mercury_SC_406705 gold=B fp16=B ternary=B CORRECT
+[070/299] id=MCAS_2010_5_11998 gold=A fp16=A ternary=A CORRECT
+[071/299] id=Mercury_7029505 gold=C fp16=C ternary=C CORRECT
+[072/299] id=Mercury_SC_401286 gold=B fp16=B ternary=B CORRECT
+[073/299] id=Mercury_7120908 gold=D fp16=D ternary=D CORRECT
+[074/299] id=MCAS_2010_8_12010 gold=C fp16=C ternary=B WRONG
+[075/299] id=Mercury_7008138 gold=B fp16=B ternary=A WRONG
+[076/299] id=Mercury_7018148 gold=B fp16=B ternary=D WRONG
+[077/299] id=MCAS_2004_8_28 gold=A fp16=A ternary=A CORRECT
+[078/299] id=Mercury_176015 gold=D fp16=A ternary=A WRONG
+[079/299] id=Mercury_7189035 gold=D fp16=A ternary=B WRONG
+[080/299] id=Mercury_7207410 gold=C fp16=B ternary=B WRONG
+[081/299] id=Mercury_7233678 gold=A fp16=A ternary=A CORRECT
+[082/299] id=Mercury_SC_402101 gold=D fp16=B ternary=B WRONG
+[083/299] id=Mercury_SC_402104 gold=D fp16=D ternary=D CORRECT
+[084/299] id=Mercury_7183015 gold=A fp16=A ternary=A CORRECT
+[085/299] id=Mercury_7238963 gold=A fp16=D ternary=A CORRECT
+[086/299] id=NYSEDREGENTS_2014_4_14 gold=A fp16=A ternary=A CORRECT
+[087/299] id=Mercury_7004410 gold=B fp16=B ternary=B CORRECT
+[088/299] id=Mercury_SC_406939 gold=C fp16=B ternary=B WRONG
+[089/299] id=Mercury_7270200 gold=A fp16=A ternary=A CORRECT
+[090/299] id=NYSEDREGENTS_2014_8_20 gold=2 fp16=2 ternary=2 CORRECT
+[091/299] id=Mercury_7135310 gold=C fp16=A ternary=A WRONG
+[092/299] id=Mercury_400885 gold=D fp16=A ternary=A WRONG
+[093/299] id=Mercury_412551 gold=D fp16=D ternary=D CORRECT
+[094/299] id=Mercury_7193043 gold=B fp16=A ternary=A WRONG
+[095/299] id=Mercury_7181685 gold=A fp16=A ternary=A CORRECT
+[096/299] id=LEAP_2006_8_10412 gold=B fp16=A ternary=A WRONG
+[097/299] id=Mercury_7215180 gold=C fp16=C ternary=C CORRECT
+[098/299] id=NYSEDREGENTS_2014_8_38 gold=1 fp16=2 ternary=2 WRONG
+[099/299] id=Mercury_7145513 gold=B fp16=A ternary=B CORRECT
+[100/299] id=MEA_2010_8_11 gold=A fp16=A ternary=A CORRECT
+[101/299] id=Mercury_7241115 gold=C fp16=A ternary=B WRONG
+[102/299] id=NYSEDREGENTS_2014_4_17 gold=C fp16=A ternary=B WRONG
+[103/299] id=NYSEDREGENTS_2014_4_13 gold=B fp16=B ternary=B CORRECT
+[104/299] id=Mercury_7033653 gold=C fp16=C ternary=C CORRECT
+[105/299] id=AKDE&ED_2008_8_44 gold=A fp16=A ternary=A CORRECT
+[106/299] id=Mercury_SC_415026 gold=C fp16=A ternary=C CORRECT
+[107/299] id=Mercury_7219415 gold=C fp16=C ternary=B WRONG
+[108/299] id=Mercury_400934 gold=C fp16=A ternary=D WRONG
+[109/299] id=Mercury_7139493 gold=B fp16=B ternary=B CORRECT
+[110/299] id=Mercury_7032340 gold=D fp16=B ternary=B WRONG
+[111/299] id=MEAP_2005_5_1 gold=C fp16=C ternary=C CORRECT
+[112/299] id=ACTAAP_2007_7_25 gold=A fp16=D ternary=D WRONG
+[113/299] id=Mercury_SC_415348 gold=D fp16=B ternary=B WRONG
+[114/299] id=Mercury_7171938 gold=D fp16=B ternary=B WRONG
+[115/299] id=NYSEDREGENTS_2014_4_1 gold=B fp16=B ternary=B CORRECT
+[116/299] id=Mercury_7185133 gold=A fp16=A ternary=A CORRECT
+[117/299] id=Mercury_SC_411306 gold=D fp16=D ternary=D CORRECT
+[118/299] id=Mercury_SC_LBS10666 gold=B fp16=B ternary=B CORRECT
+[119/299] id=Mercury_SC_401294 gold=B fp16=C ternary=B CORRECT
+[120/299] id=MCAS_2005_5_21 gold=D fp16=D ternary=D CORRECT
+[121/299] id=MCAS_2004_9_13 gold=D fp16=A ternary=A WRONG
+[122/299] id=Mercury_7251685 gold=B fp16=B ternary=B CORRECT
+[123/299] id=MDSA_2011_5_20 gold=D fp16=D ternary=D CORRECT
+[124/299] id=MCAS_2006_5_29 gold=D fp16=D ternary=D CORRECT
+[125/299] id=VASoL_2008_5_19 gold=D fp16=A ternary=A WRONG
+[126/299] id=Mercury_7246348 gold=A fp16=D ternary=D WRONG
+[127/299] id=MCAS_2006_9_33 gold=D fp16=D ternary=D CORRECT
+[128/299] id=Mercury_SC_LBS10598 gold=A fp16=A ternary=A CORRECT
+[129/299] id=MDSA_2008_5_24 gold=C fp16=A ternary=A WRONG
+[130/299] id=Mercury_7141400 gold=A fp16=D ternary=D WRONG
+[131/299] id=Mercury_SC_415366 gold=B fp16=B ternary=B CORRECT
+[132/299] id=Mercury_408809 gold=C fp16=D ternary=D WRONG
+[133/299] id=MDSA_2007_5_39 gold=D fp16=D ternary=A WRONG
+[134/299] id=Mercury_7164850 gold=A fp16=A ternary=B WRONG
+[135/299] id=MCAS_2006_9_31-v1 gold=C fp16=C ternary=C CORRECT
+[136/299] id=MCAS_2002_5_6 gold=D fp16=A ternary=A WRONG
+[137/299] id=MEA_2016_5_6 gold=C fp16=C ternary=C CORRECT
+[138/299] id=Mercury_180058 gold=A fp16=D ternary=A CORRECT
+[139/299] id=Mercury_7133858 gold=B fp16=B ternary=B CORRECT
+[140/299] id=Mercury_7130603 gold=C fp16=A ternary=A WRONG
+[141/299] id=Mercury_7018008 gold=A fp16=A ternary=A CORRECT
+[142/299] id=AIMS_2009_4_29 gold=D fp16=B ternary=B WRONG
+[143/299] id=Mercury_189490 gold=A fp16=A ternary=A CORRECT
+[144/299] id=Mercury_7138688 gold=D fp16=D ternary=D CORRECT
+[145/299] id=Mercury_409529 gold=B fp16=B ternary=B CORRECT
+[146/299] id=Mercury_7092295 gold=C fp16=A ternary=B WRONG
+[147/299] id=Mercury_7044678 gold=A fp16=A ternary=A CORRECT
+[148/299] id=MCAS_1998_4_8 gold=B fp16=B ternary=B CORRECT
+[149/299] id=LEAP_2004_8_10397 gold=B fp16=B ternary=B CORRECT
+[150/299] id=Mercury_7112753 gold=B fp16=B ternary=B CORRECT
+[151/299] id=Mercury_7097318 gold=D fp16=A ternary=A WRONG
+[152/299] id=Mercury_7158673 gold=D fp16=D ternary=D CORRECT
+[153/299] id=Mercury_7038273 gold=A fp16=A ternary=A CORRECT
+[154/299] id=ACTAAP_2010_5_10 gold=A fp16=A ternary=A CORRECT
+[155/299] id=VASoL_2008_5_28 gold=C fp16=C ternary=C CORRECT
+[156/299] id=Mercury_177818 gold=C fp16=C ternary=C CORRECT
+[157/299] id=NYSEDREGENTS_2014_8_12 gold=1 fp16=2 ternary=2 WRONG
+[158/299] id=Mercury_7139790 gold=C fp16=C ternary=D WRONG
+[159/299] id=MCAS_2003_8_25 gold=B fp16=A ternary=A WRONG
+[160/299] id=Mercury_7003955 gold=D fp16=A ternary=A WRONG
+[161/299] id=Mercury_176838 gold=A fp16=D ternary=D WRONG
+[162/299] id=Mercury_SC_407314 gold=A fp16=A ternary=D WRONG
+[163/299] id=Mercury_SC_400845 gold=B fp16=A ternary=D WRONG
+[164/299] id=Mercury_7245193 gold=C fp16=C ternary=C CORRECT
+[165/299] id=Mercury_7068863 gold=C fp16=D ternary=D WRONG
+[166/299] id=NCEOGA_2013_8_38 gold=C fp16=A ternary=A WRONG
+[167/299] id=Mercury_7090720 gold=B fp16=D ternary=B CORRECT
+[168/299] id=MCAS_2006_9_35 gold=A fp16=D ternary=D WRONG
+[169/299] id=Mercury_7144795 gold=D fp16=C ternary=B WRONG
+[170/299] id=Mercury_SC_LBS10915 gold=B fp16=B ternary=B CORRECT
+[171/299] id=MCAS_2009_8_5 gold=D fp16=A ternary=A WRONG
+[172/299] id=Mercury_7175455 gold=D fp16=D ternary=D CORRECT
+[173/299] id=Mercury_7100608 gold=B fp16=B ternary=B CORRECT
+[174/299] id=Mercury_177398 gold=B fp16=A ternary=A WRONG
+[175/299] id=Mercury_SC_415491 gold=C fp16=D ternary=B WRONG
+[176/299] id=Mercury_SC_400047 gold=B fp16=B ternary=B CORRECT
+[177/299] id=Mercury_7218750 gold=C fp16=A ternary=A WRONG
+[178/299] id=Mercury_7115395 gold=A fp16=A ternary=A CORRECT
+[179/299] id=Mercury_7205555 gold=A fp16=A ternary=A CORRECT
+[180/299] id=Mercury_7093975 gold=D fp16=D ternary=D CORRECT
+[181/299] id=MCAS_2012_5_23632 gold=C fp16=C ternary=C CORRECT
+[182/299] id=Mercury_7130883 gold=B fp16=B ternary=B CORRECT
+[183/299] id=Mercury_416648 gold=A fp16=A ternary=B WRONG
+[184/299] id=Mercury_7006790 gold=B fp16=B ternary=B CORRECT
+[185/299] id=Mercury_SC_401244 gold=D fp16=D ternary=D CORRECT
+[186/299] id=Mercury_7141908 gold=C fp16=A ternary=B WRONG
+[187/299] id=Mercury_7186148 gold=B fp16=A ternary=A WRONG
+[188/299] id=Mercury_7124338 gold=D fp16=D ternary=D CORRECT
+[189/299] id=Mercury_184258 gold=A fp16=A ternary=A CORRECT
+[190/299] id=Mercury_SC_400178 gold=C fp16=A ternary=D WRONG
+[191/299] id=Mercury_7007875 gold=B fp16=A ternary=A WRONG
+[192/299] id=Mercury_7221865 gold=C fp16=B ternary=B WRONG
+[193/299] id=Mercury_7269238 gold=D fp16=D ternary=D CORRECT
+[194/299] id=NCEOGA_2013_8_40 gold=C fp16=C ternary=A WRONG
+[195/299] id=Mercury_SC_415735 gold=C fp16=C ternary=C CORRECT
+[196/299] id=Mercury_7115273 gold=C fp16=C ternary=D WRONG
+[197/299] id=Mercury_7233660 gold=C fp16=D ternary=D WRONG
+[198/299] id=Mercury_7026198 gold=A fp16=A ternary=A CORRECT
+[199/299] id=Mercury_7044100 gold=C fp16=A ternary=A WRONG
+[200/299] id=Mercury_SC_408859 gold=A fp16=A ternary=A CORRECT
+[201/299] id=LEAP_2012_8_10441 gold=C fp16=A ternary=A WRONG
+[202/299] id=Mercury_7220378 gold=C fp16=C ternary=B WRONG
+[203/299] id=TIMSS_2003_8_pg14 gold=B fp16=D ternary=D WRONG
+[204/299] id=Mercury_SC_405973 gold=B fp16=B ternary=D WRONG
+[205/299] id=OHAT_2011_8_3 gold=D fp16=D ternary=D CORRECT
+[206/299] id=Mercury_412683 gold=D fp16=A ternary=A WRONG
+[207/299] id=MCAS_1998_8_2 gold=C fp16=C ternary=C CORRECT
+[208/299] id=Mercury_7005478 gold=B fp16=A ternary=B CORRECT
+[209/299] id=Mercury_7105123 gold=C fp16=C ternary=C CORRECT
+[210/299] id=Mercury_7154263 gold=B fp16=A ternary=B CORRECT
+[211/299] id=TIMSS_2003_8_pg29 gold=E fp16=A ternary=B WRONG
+[212/299] id=Mercury_7245053 gold=B fp16=B ternary=B CORRECT
+[213/299] id=TIMSS_2007_4_pg26 gold=B fp16=A ternary=D WRONG
+[214/299] id=NYSEDREGENTS_2014_4_9 gold=A fp16=D ternary=D WRONG
+[215/299] id=Mercury_414131 gold=C fp16=B ternary=B WRONG
+[216/299] id=Mercury_SC_407574 gold=A fp16=D ternary=D WRONG
+[217/299] id=Mercury_7018515 gold=C fp16=A ternary=A WRONG
+[218/299] id=TIMSS_2003_8_pg31 gold=B fp16=B ternary=B CORRECT
+[219/299] id=Mercury_7015435 gold=A fp16=A ternary=A CORRECT
+[220/299] id=Mercury_7166880 gold=D fp16=A ternary=B WRONG
+[221/299] id=Mercury_7251668 gold=D fp16=A ternary=A WRONG
+[222/299] id=Mercury_415263 gold=C fp16=C ternary=D WRONG
+[223/299] id=MEA_2013_5_3 gold=D fp16=D ternary=D CORRECT
+[224/299] id=Mercury_7205345 gold=D fp16=D ternary=D CORRECT
+[225/299] id=Mercury_7250023 gold=A fp16=A ternary=A CORRECT
+[226/299] id=ACTAAP_2009_5_5 gold=B fp16=D ternary=D WRONG
+[227/299] id=Mercury_406781 gold=C fp16=A ternary=A WRONG
+[228/299] id=Mercury_7086013 gold=D fp16=B ternary=B WRONG
+[229/299] id=Mercury_7057313 gold=A fp16=A ternary=A CORRECT
+[230/299] id=Mercury_SC_LBS10472 gold=B fp16=D ternary=B CORRECT
+[231/299] id=Mercury_7190155 gold=B fp16=B ternary=B CORRECT
+[232/299] id=Mercury_7081760 gold=B fp16=C ternary=C WRONG
+[233/299] id=Mercury_7075145 gold=A fp16=A ternary=A CORRECT
+[234/299] id=Mercury_7037573 gold=D fp16=C ternary=C WRONG
+[235/299] id=NYSEDREGENTS_2014_8_41 gold=4 fp16=2 ternary=3 WRONG
+[236/299] id=Mercury_SC_408700 gold=C fp16=C ternary=C CORRECT
+[237/299] id=Mercury_7284043 gold=C fp16=D ternary=D WRONG
+[238/299] id=Mercury_7103180 gold=B fp16=B ternary=B CORRECT
+[239/299] id=Mercury_7099768 gold=D fp16=C ternary=C WRONG
+[240/299] id=Mercury_7133648 gold=C fp16=A ternary=A WRONG
+[241/299] id=NYSEDREGENTS_2014_4_22 gold=A fp16=A ternary=A CORRECT
+[242/299] id=NYSEDREGENTS_2014_4_28 gold=B fp16=A ternary=B CORRECT
+[243/299] id=Mercury_SC_406029 gold=D fp16=C ternary=B WRONG
+[244/299] id=Mercury_7267593 gold=A fp16=A ternary=B WRONG
+[245/299] id=Mercury_7085820 gold=D fp16=D ternary=D CORRECT
+[246/299] id=MCAS_2011_5_17673 gold=A fp16=B ternary=A CORRECT
+[247/299] id=Mercury_7090738 gold=A fp16=A ternary=A CORRECT
+[248/299] id=Mercury_7234483 gold=B fp16=B ternary=B CORRECT
+[249/299] id=NYSEDREGENTS_2014_4_20 gold=D fp16=D ternary=D CORRECT
+[250/299] id=Mercury_7141698 gold=B fp16=B ternary=B CORRECT
+[251/299] id=Mercury_SC_415354 gold=C fp16=A ternary=D WRONG
+[252/299] id=NYSEDREGENTS_2014_4_2 gold=D fp16=D ternary=D CORRECT
+[253/299] id=Mercury_7187058 gold=A fp16=A ternary=A CORRECT
+[254/299] id=Mercury_7221095 gold=A fp16=A ternary=A CORRECT
+[255/299] id=Mercury_7143518 gold=D fp16=D ternary=D CORRECT
+[256/299] id=Mercury_7014368 gold=C fp16=C ternary=C CORRECT
+[257/299] id=Mercury_7018445 gold=D fp16=D ternary=D CORRECT
+[258/299] id=MCAS_2014_8_17 gold=D fp16=A ternary=A WRONG
+[259/299] id=Mercury_180443 gold=C fp16=A ternary=C CORRECT
+[260/299] id=Mercury_7120890 gold=A fp16=A ternary=A CORRECT
+[261/299] id=Mercury_7159268 gold=A fp16=B ternary=B WRONG
+[262/299] id=MCAS_1999_8_22 gold=B fp16=B ternary=B CORRECT
+[263/299] id=Mercury_SC_415397 gold=C fp16=C ternary=C CORRECT
+[264/299] id=Mercury_7042735 gold=C fp16=A ternary=B WRONG
+[265/299] id=Mercury_SC_400172 gold=A fp16=B ternary=B WRONG
+[266/299] id=Mercury_7008120 gold=A fp16=A ternary=A CORRECT
+[267/299] id=Mercury_7267995 gold=C fp16=C ternary=C CORRECT
+[268/299] id=Mercury_7038133 gold=B fp16=A ternary=D WRONG
+[269/299] id=Mercury_7026443 gold=D fp16=A ternary=D CORRECT
+[270/299] id=Mercury_7099103 gold=D fp16=D ternary=D CORRECT
+[271/299] id=Mercury_7207620 gold=A fp16=A ternary=B WRONG
+[272/299] id=NCEOGA_2013_5_43 gold=B fp16=B ternary=B CORRECT
+[273/299] id=Mercury_7166180 gold=B fp16=B ternary=B CORRECT
+[274/299] id=Mercury_7168123 gold=B fp16=B ternary=B CORRECT
+[275/299] id=MCAS_2012_8_23636 gold=D fp16=A ternary=A WRONG
+[276/299] id=MCAS_2013_8_29421 gold=A fp16=B ternary=B WRONG
+[277/299] id=Mercury_400397 gold=C fp16=D ternary=D WRONG
+[278/299] id=Mercury_184013 gold=C fp16=A ternary=A WRONG
+[279/299] id=MDSA_2007_8_15 gold=C fp16=A ternary=D WRONG
+[280/299] id=Mercury_SC_401714 gold=B fp16=B ternary=B CORRECT
+[281/299] id=Mercury_7246925 gold=D fp16=A ternary=A WRONG
+[282/299] id=Mercury_400905 gold=D fp16=D ternary=A WRONG
+[283/299] id=Mercury_7131828 gold=C fp16=A ternary=B WRONG
+[284/299] id=Mercury_7166530 gold=B fp16=B ternary=B CORRECT
+[285/299] id=Mercury_7074865 gold=C fp16=B ternary=B WRONG
+[286/299] id=Mercury_7246995 gold=C fp16=A ternary=C CORRECT
+[287/299] id=TIMSS_2011_8_pg63 gold=C fp16=C ternary=C CORRECT
+[288/299] id=Mercury_SC_400612 gold=C fp16=B ternary=B WRONG
+[289/299] id=MEA_2016_5_7 gold=B fp16=B ternary=B CORRECT
+[290/299] id=ACTAAP_2011_5_3 gold=C fp16=D ternary=D WRONG
+[291/299] id=Mercury_7264023 gold=D fp16=A ternary=D CORRECT
+[292/299] id=Mercury_SC_400050 gold=C fp16=A ternary=A WRONG
+[293/299] id=MCAS_2003_5_31 gold=D fp16=A ternary=A WRONG
+[294/299] id=Mercury_LBS10399 gold=D fp16=B ternary=B WRONG
+[295/299] id=Mercury_7090598 gold=C fp16=A ternary=B WRONG
+[296/299] id=OHAT_2007_5_24 gold=B fp16=B ternary=B CORRECT
+[297/299] id=Mercury_SC_402239 gold=C fp16=B ternary=B WRONG
+[298/299] id=Mercury_7245088 gold=D fp16=D ternary=D CORRECT
+[299/299] id=Mercury_7082145 gold=D fp16=D ternary=D CORRECT
+
+CONDITION A RESULT
+Correct              : 165/299
+Accuracy             : 55.18%
+Delta vs FP16        : -0.33 pp
+Prediction agreement : 77.26%
+Changed predictions  : 68
+FP16 only correct    : 23
+Ternary only correct : 22
+McNemar exact p      : 1
+
+====================================================================================================================================
+EXPERIMENT 021 — q_proj INTERACTION ATTRIBUTION
+====================================================================================================================================
+
+FP16 baseline: 166/299 (55.52%)
+
+ID   Condition          Matrices      Params     Cov%   Correct     Acc%     Delta    Agree%  Changed   FPonly   Tonly      McNemar p
+------------------------------------------------------------------------------------------------------------------------------------
+A    q_only                    1   4,194,304   0.5575       165    55.18    -0.33    77.26       68       23      22              1
+
+==========================================================================================
+CONDITION B — k_plus_q
+==========================================================================================
+  model.layers.3.self_attn.k_proj
+  model.layers.3.self_attn.q_proj
+
+Matrix count     : 2
+Parameters       : 4,718,592
+Coverage         : 0.6271%
+Mean error       : 0.465968374
+Max error        : 0.478280364
+Mean scale ratio : 1.344090970
+[001/299] id=Mercury_SC_407695 gold=D fp16=A ternary=D CORRECT
+[002/299] id=Mercury_7103565 gold=C fp16=C ternary=C CORRECT
+[003/299] id=MDSA_2009_5_16 gold=D fp16=B ternary=B WRONG
+[004/299] id=Mercury_7027230 gold=A fp16=A ternary=A CORRECT
+[005/299] id=Mercury_SC_405487 gold=B fp16=B ternary=B CORRECT
+[006/299] id=Mercury_7032743 gold=C fp16=A ternary=A WRONG
+[007/299] id=Mercury_7205135 gold=C fp16=C ternary=C CORRECT
+[008/299] id=MDSA_2007_4_52 gold=C fp16=C ternary=B WRONG
+[009/299] id=Mercury_7103215 gold=C fp16=C ternary=C CORRECT
+[010/299] id=Mercury_192168 gold=D fp16=A ternary=B WRONG
+[011/299] id=Mercury_SC_412337 gold=D fp16=A ternary=A WRONG
+[012/299] id=Mercury_7162838 gold=D fp16=D ternary=D CORRECT
+[013/299] id=Mercury_7159775 gold=A fp16=B ternary=B WRONG
+[014/299] id=Mercury_7195440 gold=B fp16=B ternary=B CORRECT
+[015/299] id=Mercury_7017990 gold=A fp16=A ternary=A CORRECT
+[016/299] id=TIMSS_2007_4_pg90 gold=C fp16=B ternary=B WRONG
+[017/299] id=Mercury_7198380 gold=D fp16=A ternary=A WRONG
+[018/299] id=NAEP_2005_8_S11+14 gold=B fp16=D ternary=D WRONG
+[019/299] id=Mercury_192290 gold=D fp16=B ternary=B WRONG
+[020/299] id=Mercury_7192990 gold=A fp16=A ternary=A CORRECT
+[021/299] id=Mercury_7217053 gold=B fp16=A ternary=B CORRECT
+[022/299] id=Mercury_7179358 gold=B fp16=A ternary=A WRONG
+[023/299] id=MCAS_2005_8_5 gold=D fp16=B ternary=C WRONG
+[024/299] id=MCAS_2000_8_10 gold=B fp16=B ternary=B CORRECT
+[025/299] id=Mercury_7187915 gold=A fp16=A ternary=D WRONG
+[026/299] id=Mercury_7189823 gold=A fp16=A ternary=A CORRECT
+[027/299] id=Mercury_405454 gold=D fp16=A ternary=D CORRECT
+[028/299] id=MCAS_2012_5_8 gold=B fp16=B ternary=B CORRECT
+[029/299] id=Mercury_SC_LBS10040 gold=D fp16=D ternary=D CORRECT
+[030/299] id=Mercury_7115063 gold=A fp16=A ternary=A CORRECT
+[031/299] id=MCAS_2015_8_7 gold=B fp16=A ternary=D WRONG
+[032/299] id=Mercury_184765 gold=B fp16=B ternary=B CORRECT
+[033/299] id=ACTAAP_2013_7_17 gold=D fp16=D ternary=D CORRECT
+[034/299] id=Mercury_7248238 gold=D fp16=B ternary=B WRONG
+[035/299] id=Mercury_SC_410964 gold=D fp16=D ternary=D CORRECT
+[036/299] id=NYSEDREGENTS_2014_4_4 gold=A fp16=A ternary=A CORRECT
+[037/299] id=MCAS_8_2015_11 gold=A fp16=A ternary=A CORRECT
+[038/299] id=Mercury_7183733 gold=B fp16=B ternary=B CORRECT
+[039/299] id=MDSA_2010_5_18 gold=D fp16=D ternary=D CORRECT
+[040/299] id=LEAP__7_10354 gold=D fp16=D ternary=D CORRECT
+[041/299] id=Mercury_7282608 gold=C fp16=B ternary=B WRONG
+[042/299] id=Mercury_7071365 gold=D fp16=B ternary=B WRONG
+[043/299] id=Mercury_SC_407169 gold=D fp16=D ternary=D CORRECT
+[044/299] id=ACTAAP_2007_7_5 gold=B fp16=B ternary=B CORRECT
+[045/299] id=Mercury_7207358 gold=C fp16=C ternary=C CORRECT
+[046/299] id=Mercury_7245893 gold=B fp16=B ternary=B CORRECT
+[047/299] id=Mercury_7223038 gold=C fp16=B ternary=B WRONG
+[048/299] id=Mercury_SC_415541 gold=D fp16=D ternary=D CORRECT
+[049/299] id=Mercury_7236023 gold=B fp16=A ternary=B CORRECT
+[050/299] id=Mercury_417146 gold=A fp16=A ternary=A CORRECT
+[051/299] id=Mercury_7128695 gold=C fp16=A ternary=A WRONG
+[052/299] id=Mercury_7270008 gold=C fp16=C ternary=C CORRECT
+[053/299] id=Mercury_7242743 gold=D fp16=D ternary=D CORRECT
+[054/299] id=Mercury_SC_400655 gold=A fp16=A ternary=A CORRECT
+[055/299] id=Mercury_7100695 gold=D fp16=A ternary=D CORRECT
+[056/299] id=MSA_2013_8_3 gold=D fp16=D ternary=D CORRECT
+[057/299] id=NYSEDREGENTS_2014_4_19 gold=B fp16=B ternary=B CORRECT
+[058/299] id=MCAS_2013_8_29432 gold=B fp16=B ternary=D WRONG
+[059/299] id=Mercury_7042700 gold=D fp16=A ternary=B WRONG
+[060/299] id=Mercury_7201705 gold=A fp16=A ternary=A CORRECT
+[061/299] id=MCAS_1998_8_13 gold=D fp16=A ternary=A WRONG
+[062/299] id=Mercury_7138513 gold=A fp16=D ternary=D WRONG
+[063/299] id=Mercury_SC_401663 gold=B fp16=B ternary=B CORRECT
+[064/299] id=NCEOGA_2013_8_4 gold=D fp16=D ternary=D CORRECT
+[065/299] id=Mercury_7235813 gold=D fp16=B ternary=B WRONG
+[066/299] id=Mercury_7011270 gold=B fp16=A ternary=B CORRECT
+[067/299] id=Mercury_7228603 gold=C fp16=C ternary=B WRONG
+[068/299] id=Mercury_SC_400339 gold=C fp16=A ternary=A WRONG
+[069/299] id=Mercury_SC_406705 gold=B fp16=B ternary=B CORRECT
+[070/299] id=MCAS_2010_5_11998 gold=A fp16=A ternary=A CORRECT
+[071/299] id=Mercury_7029505 gold=C fp16=C ternary=C CORRECT
+[072/299] id=Mercury_SC_401286 gold=B fp16=B ternary=B CORRECT
+[073/299] id=Mercury_7120908 gold=D fp16=D ternary=D CORRECT
+[074/299] id=MCAS_2010_8_12010 gold=C fp16=C ternary=B WRONG
+[075/299] id=Mercury_7008138 gold=B fp16=B ternary=B CORRECT
+[076/299] id=Mercury_7018148 gold=B fp16=B ternary=D WRONG
+[077/299] id=MCAS_2004_8_28 gold=A fp16=A ternary=A CORRECT
+[078/299] id=Mercury_176015 gold=D fp16=A ternary=A WRONG
+[079/299] id=Mercury_7189035 gold=D fp16=A ternary=B WRONG
+[080/299] id=Mercury_7207410 gold=C fp16=B ternary=B WRONG
+[081/299] id=Mercury_7233678 gold=A fp16=A ternary=A CORRECT
+[082/299] id=Mercury_SC_402101 gold=D fp16=B ternary=B WRONG
+[083/299] id=Mercury_SC_402104 gold=D fp16=D ternary=D CORRECT
+[084/299] id=Mercury_7183015 gold=A fp16=A ternary=A CORRECT
+[085/299] id=Mercury_7238963 gold=A fp16=D ternary=A CORRECT
+[086/299] id=NYSEDREGENTS_2014_4_14 gold=A fp16=A ternary=A CORRECT
+[087/299] id=Mercury_7004410 gold=B fp16=B ternary=B CORRECT
+[088/299] id=Mercury_SC_406939 gold=C fp16=B ternary=B WRONG
+[089/299] id=Mercury_7270200 gold=A fp16=A ternary=A CORRECT
+[090/299] id=NYSEDREGENTS_2014_8_20 gold=2 fp16=2 ternary=2 CORRECT
+[091/299] id=Mercury_7135310 gold=C fp16=A ternary=A WRONG
+[092/299] id=Mercury_400885 gold=D fp16=A ternary=A WRONG
+[093/299] id=Mercury_412551 gold=D fp16=D ternary=D CORRECT
+[094/299] id=Mercury_7193043 gold=B fp16=A ternary=A WRONG
+[095/299] id=Mercury_7181685 gold=A fp16=A ternary=A CORRECT
+[096/299] id=LEAP_2006_8_10412 gold=B fp16=A ternary=B CORRECT
+[097/299] id=Mercury_7215180 gold=C fp16=C ternary=C CORRECT
+[098/299] id=NYSEDREGENTS_2014_8_38 gold=1 fp16=2 ternary=2 WRONG
+[099/299] id=Mercury_7145513 gold=B fp16=A ternary=A WRONG
+[100/299] id=MEA_2010_8_11 gold=A fp16=A ternary=B WRONG
+[101/299] id=Mercury_7241115 gold=C fp16=A ternary=B WRONG
+[102/299] id=NYSEDREGENTS_2014_4_17 gold=C fp16=A ternary=B WRONG
+[103/299] id=NYSEDREGENTS_2014_4_13 gold=B fp16=B ternary=B CORRECT
+[104/299] id=Mercury_7033653 gold=C fp16=C ternary=C CORRECT
+[105/299] id=AKDE&ED_2008_8_44 gold=A fp16=A ternary=A CORRECT
+[106/299] id=Mercury_SC_415026 gold=C fp16=A ternary=C CORRECT
+[107/299] id=Mercury_7219415 gold=C fp16=C ternary=B WRONG
+[108/299] id=Mercury_400934 gold=C fp16=A ternary=D WRONG
+[109/299] id=Mercury_7139493 gold=B fp16=B ternary=B CORRECT
+[110/299] id=Mercury_7032340 gold=D fp16=B ternary=B WRONG
+[111/299] id=MEAP_2005_5_1 gold=C fp16=C ternary=C CORRECT
+[112/299] id=ACTAAP_2007_7_25 gold=A fp16=D ternary=D WRONG
+[113/299] id=Mercury_SC_415348 gold=D fp16=B ternary=B WRONG
+[114/299] id=Mercury_7171938 gold=D fp16=B ternary=B WRONG
+[115/299] id=NYSEDREGENTS_2014_4_1 gold=B fp16=B ternary=B CORRECT
+[116/299] id=Mercury_7185133 gold=A fp16=A ternary=A CORRECT
+[117/299] id=Mercury_SC_411306 gold=D fp16=D ternary=D CORRECT
+[118/299] id=Mercury_SC_LBS10666 gold=B fp16=B ternary=B CORRECT
+[119/299] id=Mercury_SC_401294 gold=B fp16=C ternary=B CORRECT
+[120/299] id=MCAS_2005_5_21 gold=D fp16=D ternary=D CORRECT
+[121/299] id=MCAS_2004_9_13 gold=D fp16=A ternary=A WRONG
+[122/299] id=Mercury_7251685 gold=B fp16=B ternary=B CORRECT
+[123/299] id=MDSA_2011_5_20 gold=D fp16=D ternary=D CORRECT
+[124/299] id=MCAS_2006_5_29 gold=D fp16=D ternary=D CORRECT
+[125/299] id=VASoL_2008_5_19 gold=D fp16=A ternary=A WRONG
+[126/299] id=Mercury_7246348 gold=A fp16=D ternary=D WRONG
+[127/299] id=MCAS_2006_9_33 gold=D fp16=D ternary=D CORRECT
+[128/299] id=Mercury_SC_LBS10598 gold=A fp16=A ternary=B WRONG
+[129/299] id=MDSA_2008_5_24 gold=C fp16=A ternary=A WRONG
+[130/299] id=Mercury_7141400 gold=A fp16=D ternary=D WRONG
+[131/299] id=Mercury_SC_415366 gold=B fp16=B ternary=B CORRECT
+[132/299] id=Mercury_408809 gold=C fp16=D ternary=D WRONG
+[133/299] id=MDSA_2007_5_39 gold=D fp16=D ternary=D CORRECT
+[134/299] id=Mercury_7164850 gold=A fp16=A ternary=B WRONG
+[135/299] id=MCAS_2006_9_31-v1 gold=C fp16=C ternary=C CORRECT
+[136/299] id=MCAS_2002_5_6 gold=D fp16=A ternary=A WRONG
+[137/299] id=MEA_2016_5_6 gold=C fp16=C ternary=C CORRECT
+[138/299] id=Mercury_180058 gold=A fp16=D ternary=D WRONG
+[139/299] id=Mercury_7133858 gold=B fp16=B ternary=B CORRECT
+[140/299] id=Mercury_7130603 gold=C fp16=A ternary=A WRONG
+[141/299] id=Mercury_7018008 gold=A fp16=A ternary=A CORRECT
+[142/299] id=AIMS_2009_4_29 gold=D fp16=B ternary=B WRONG
+[143/299] id=Mercury_189490 gold=A fp16=A ternary=A CORRECT
+[144/299] id=Mercury_7138688 gold=D fp16=D ternary=D CORRECT
+[145/299] id=Mercury_409529 gold=B fp16=B ternary=B CORRECT
+[146/299] id=Mercury_7092295 gold=C fp16=A ternary=B WRONG
+[147/299] id=Mercury_7044678 gold=A fp16=A ternary=A CORRECT
+[148/299] id=MCAS_1998_4_8 gold=B fp16=B ternary=B CORRECT
+[149/299] id=LEAP_2004_8_10397 gold=B fp16=B ternary=B CORRECT
+[150/299] id=Mercury_7112753 gold=B fp16=B ternary=B CORRECT
+[151/299] id=Mercury_7097318 gold=D fp16=A ternary=A WRONG
+[152/299] id=Mercury_7158673 gold=D fp16=D ternary=D CORRECT
+[153/299] id=Mercury_7038273 gold=A fp16=A ternary=B WRONG
+[154/299] id=ACTAAP_2010_5_10 gold=A fp16=A ternary=A CORRECT
+[155/299] id=VASoL_2008_5_28 gold=C fp16=C ternary=C CORRECT
+[156/299] id=Mercury_177818 gold=C fp16=C ternary=C CORRECT
+[157/299] id=NYSEDREGENTS_2014_8_12 gold=1 fp16=2 ternary=2 WRONG
+[158/299] id=Mercury_7139790 gold=C fp16=C ternary=D WRONG
+[159/299] id=MCAS_2003_8_25 gold=B fp16=A ternary=A WRONG
+[160/299] id=Mercury_7003955 gold=D fp16=A ternary=A WRONG
+[161/299] id=Mercury_176838 gold=A fp16=D ternary=D WRONG
+[162/299] id=Mercury_SC_407314 gold=A fp16=A ternary=A CORRECT
+[163/299] id=Mercury_SC_400845 gold=B fp16=A ternary=D WRONG
+[164/299] id=Mercury_7245193 gold=C fp16=C ternary=C CORRECT
+[165/299] id=Mercury_7068863 gold=C fp16=D ternary=D WRONG
+[166/299] id=NCEOGA_2013_8_38 gold=C fp16=A ternary=A WRONG
+[167/299] id=Mercury_7090720 gold=B fp16=D ternary=B CORRECT
+[168/299] id=MCAS_2006_9_35 gold=A fp16=D ternary=D WRONG
+[169/299] id=Mercury_7144795 gold=D fp16=C ternary=B WRONG
+[170/299] id=Mercury_SC_LBS10915 gold=B fp16=B ternary=B CORRECT
+[171/299] id=MCAS_2009_8_5 gold=D fp16=A ternary=A WRONG
+[172/299] id=Mercury_7175455 gold=D fp16=D ternary=D CORRECT
+[173/299] id=Mercury_7100608 gold=B fp16=B ternary=B CORRECT
+[174/299] id=Mercury_177398 gold=B fp16=A ternary=B CORRECT
+[175/299] id=Mercury_SC_415491 gold=C fp16=D ternary=B WRONG
+[176/299] id=Mercury_SC_400047 gold=B fp16=B ternary=B CORRECT
+[177/299] id=Mercury_7218750 gold=C fp16=A ternary=A WRONG
+[178/299] id=Mercury_7115395 gold=A fp16=A ternary=A CORRECT
+[179/299] id=Mercury_7205555 gold=A fp16=A ternary=A CORRECT
+[180/299] id=Mercury_7093975 gold=D fp16=D ternary=D CORRECT
+[181/299] id=MCAS_2012_5_23632 gold=C fp16=C ternary=C CORRECT
+[182/299] id=Mercury_7130883 gold=B fp16=B ternary=B CORRECT
+[183/299] id=Mercury_416648 gold=A fp16=A ternary=B WRONG
+[184/299] id=Mercury_7006790 gold=B fp16=B ternary=B CORRECT
+[185/299] id=Mercury_SC_401244 gold=D fp16=D ternary=D CORRECT
+[186/299] id=Mercury_7141908 gold=C fp16=A ternary=B WRONG
+[187/299] id=Mercury_7186148 gold=B fp16=A ternary=A WRONG
+[188/299] id=Mercury_7124338 gold=D fp16=D ternary=A WRONG
+[189/299] id=Mercury_184258 gold=A fp16=A ternary=A CORRECT
+[190/299] id=Mercury_SC_400178 gold=C fp16=A ternary=D WRONG
+[191/299] id=Mercury_7007875 gold=B fp16=A ternary=A WRONG
+[192/299] id=Mercury_7221865 gold=C fp16=B ternary=B WRONG
+[193/299] id=Mercury_7269238 gold=D fp16=D ternary=D CORRECT
+[194/299] id=NCEOGA_2013_8_40 gold=C fp16=C ternary=A WRONG
+[195/299] id=Mercury_SC_415735 gold=C fp16=C ternary=C CORRECT
+[196/299] id=Mercury_7115273 gold=C fp16=C ternary=D WRONG
+[197/299] id=Mercury_7233660 gold=C fp16=D ternary=D WRONG
+[198/299] id=Mercury_7026198 gold=A fp16=A ternary=A CORRECT
+[199/299] id=Mercury_7044100 gold=C fp16=A ternary=A WRONG
+[200/299] id=Mercury_SC_408859 gold=A fp16=A ternary=A CORRECT
+[201/299] id=LEAP_2012_8_10441 gold=C fp16=A ternary=A WRONG
+[202/299] id=Mercury_7220378 gold=C fp16=C ternary=B WRONG
+[203/299] id=TIMSS_2003_8_pg14 gold=B fp16=D ternary=D WRONG
+[204/299] id=Mercury_SC_405973 gold=B fp16=B ternary=B CORRECT
+[205/299] id=OHAT_2011_8_3 gold=D fp16=D ternary=D CORRECT
+[206/299] id=Mercury_412683 gold=D fp16=A ternary=A WRONG
+[207/299] id=MCAS_1998_8_2 gold=C fp16=C ternary=C CORRECT
+[208/299] id=Mercury_7005478 gold=B fp16=A ternary=B CORRECT
+[209/299] id=Mercury_7105123 gold=C fp16=C ternary=C CORRECT
+[210/299] id=Mercury_7154263 gold=B fp16=A ternary=B CORRECT
+[211/299] id=TIMSS_2003_8_pg29 gold=E fp16=A ternary=B WRONG
+[212/299] id=Mercury_7245053 gold=B fp16=B ternary=B CORRECT
+[213/299] id=TIMSS_2007_4_pg26 gold=B fp16=A ternary=D WRONG
+[214/299] id=NYSEDREGENTS_2014_4_9 gold=A fp16=D ternary=D WRONG
+[215/299] id=Mercury_414131 gold=C fp16=B ternary=B WRONG
+[216/299] id=Mercury_SC_407574 gold=A fp16=D ternary=D WRONG
+[217/299] id=Mercury_7018515 gold=C fp16=A ternary=A WRONG
+[218/299] id=TIMSS_2003_8_pg31 gold=B fp16=B ternary=B CORRECT
+[219/299] id=Mercury_7015435 gold=A fp16=A ternary=A CORRECT
+[220/299] id=Mercury_7166880 gold=D fp16=A ternary=B WRONG
+[221/299] id=Mercury_7251668 gold=D fp16=A ternary=A WRONG
+[222/299] id=Mercury_415263 gold=C fp16=C ternary=C CORRECT
+[223/299] id=MEA_2013_5_3 gold=D fp16=D ternary=D CORRECT
+[224/299] id=Mercury_7205345 gold=D fp16=D ternary=D CORRECT
+[225/299] id=Mercury_7250023 gold=A fp16=A ternary=A CORRECT
+[226/299] id=ACTAAP_2009_5_5 gold=B fp16=D ternary=D WRONG
+[227/299] id=Mercury_406781 gold=C fp16=A ternary=A WRONG
+[228/299] id=Mercury_7086013 gold=D fp16=B ternary=B WRONG
+[229/299] id=Mercury_7057313 gold=A fp16=A ternary=A CORRECT
+[230/299] id=Mercury_SC_LBS10472 gold=B fp16=D ternary=B CORRECT
+[231/299] id=Mercury_7190155 gold=B fp16=B ternary=B CORRECT
+[232/299] id=Mercury_7081760 gold=B fp16=C ternary=C WRONG
+[233/299] id=Mercury_7075145 gold=A fp16=A ternary=A CORRECT
+[234/299] id=Mercury_7037573 gold=D fp16=C ternary=C WRONG
+[235/299] id=NYSEDREGENTS_2014_8_41 gold=4 fp16=2 ternary=3 WRONG
+[236/299] id=Mercury_SC_408700 gold=C fp16=C ternary=C CORRECT
+[237/299] id=Mercury_7284043 gold=C fp16=D ternary=D WRONG
+[238/299] id=Mercury_7103180 gold=B fp16=B ternary=B CORRECT
+[239/299] id=Mercury_7099768 gold=D fp16=C ternary=C WRONG
+[240/299] id=Mercury_7133648 gold=C fp16=A ternary=A WRONG
+[241/299] id=NYSEDREGENTS_2014_4_22 gold=A fp16=A ternary=A CORRECT
+[242/299] id=NYSEDREGENTS_2014_4_28 gold=B fp16=A ternary=B CORRECT
+[243/299] id=Mercury_SC_406029 gold=D fp16=C ternary=C WRONG
+[244/299] id=Mercury_7267593 gold=A fp16=A ternary=B WRONG
+[245/299] id=Mercury_7085820 gold=D fp16=D ternary=D CORRECT
+[246/299] id=MCAS_2011_5_17673 gold=A fp16=B ternary=B WRONG
+[247/299] id=Mercury_7090738 gold=A fp16=A ternary=A CORRECT
+[248/299] id=Mercury_7234483 gold=B fp16=B ternary=B CORRECT
+[249/299] id=NYSEDREGENTS_2014_4_20 gold=D fp16=D ternary=D CORRECT
+[250/299] id=Mercury_7141698 gold=B fp16=B ternary=B CORRECT
+[251/299] id=Mercury_SC_415354 gold=C fp16=A ternary=D WRONG
+[252/299] id=NYSEDREGENTS_2014_4_2 gold=D fp16=D ternary=D CORRECT
+[253/299] id=Mercury_7187058 gold=A fp16=A ternary=A CORRECT
+[254/299] id=Mercury_7221095 gold=A fp16=A ternary=A CORRECT
+[255/299] id=Mercury_7143518 gold=D fp16=D ternary=D CORRECT
+[256/299] id=Mercury_7014368 gold=C fp16=C ternary=C CORRECT
+[257/299] id=Mercury_7018445 gold=D fp16=D ternary=D CORRECT
+[258/299] id=MCAS_2014_8_17 gold=D fp16=A ternary=A WRONG
+[259/299] id=Mercury_180443 gold=C fp16=A ternary=C CORRECT
+[260/299] id=Mercury_7120890 gold=A fp16=A ternary=A CORRECT
+[261/299] id=Mercury_7159268 gold=A fp16=B ternary=B WRONG
+[262/299] id=MCAS_1999_8_22 gold=B fp16=B ternary=B CORRECT
+[263/299] id=Mercury_SC_415397 gold=C fp16=C ternary=C CORRECT
+[264/299] id=Mercury_7042735 gold=C fp16=A ternary=B WRONG
+[265/299] id=Mercury_SC_400172 gold=A fp16=B ternary=B WRONG
+[266/299] id=Mercury_7008120 gold=A fp16=A ternary=A CORRECT
+[267/299] id=Mercury_7267995 gold=C fp16=C ternary=C CORRECT
+[268/299] id=Mercury_7038133 gold=B fp16=A ternary=D WRONG
+[269/299] id=Mercury_7026443 gold=D fp16=A ternary=B WRONG
+[270/299] id=Mercury_7099103 gold=D fp16=D ternary=D CORRECT
+[271/299] id=Mercury_7207620 gold=A fp16=A ternary=A CORRECT
+[272/299] id=NCEOGA_2013_5_43 gold=B fp16=B ternary=B CORRECT
+[273/299] id=Mercury_7166180 gold=B fp16=B ternary=B CORRECT
+[274/299] id=Mercury_7168123 gold=B fp16=B ternary=D WRONG
+[275/299] id=MCAS_2012_8_23636 gold=D fp16=A ternary=A WRONG
+[276/299] id=MCAS_2013_8_29421 gold=A fp16=B ternary=B WRONG
+[277/299] id=Mercury_400397 gold=C fp16=D ternary=D WRONG
+[278/299] id=Mercury_184013 gold=C fp16=A ternary=A WRONG
+[279/299] id=MDSA_2007_8_15 gold=C fp16=A ternary=D WRONG
+[280/299] id=Mercury_SC_401714 gold=B fp16=B ternary=B CORRECT
+[281/299] id=Mercury_7246925 gold=D fp16=A ternary=A WRONG
+[282/299] id=Mercury_400905 gold=D fp16=D ternary=A WRONG
+[283/299] id=Mercury_7131828 gold=C fp16=A ternary=B WRONG
+[284/299] id=Mercury_7166530 gold=B fp16=B ternary=B CORRECT
+[285/299] id=Mercury_7074865 gold=C fp16=B ternary=C CORRECT
+[286/299] id=Mercury_7246995 gold=C fp16=A ternary=C CORRECT
+[287/299] id=TIMSS_2011_8_pg63 gold=C fp16=C ternary=C CORRECT
+[288/299] id=Mercury_SC_400612 gold=C fp16=B ternary=B WRONG
+[289/299] id=MEA_2016_5_7 gold=B fp16=B ternary=B CORRECT
+[290/299] id=ACTAAP_2011_5_3 gold=C fp16=D ternary=D WRONG
+[291/299] id=Mercury_7264023 gold=D fp16=A ternary=D CORRECT
+[292/299] id=Mercury_SC_400050 gold=C fp16=A ternary=A WRONG
+[293/299] id=MCAS_2003_5_31 gold=D fp16=A ternary=A WRONG
+[294/299] id=Mercury_LBS10399 gold=D fp16=B ternary=B WRONG
+[295/299] id=Mercury_7090598 gold=C fp16=A ternary=B WRONG
+[296/299] id=OHAT_2007_5_24 gold=B fp16=B ternary=B CORRECT
+[297/299] id=Mercury_SC_402239 gold=C fp16=B ternary=B WRONG
+[298/299] id=Mercury_7245088 gold=D fp16=D ternary=D CORRECT
+[299/299] id=Mercury_7082145 gold=D fp16=D ternary=D CORRECT
+
+CONDITION B RESULT
+Correct              : 166/299
+Accuracy             : 55.52%
+Delta vs FP16        : +0.00 pp
+Prediction agreement : 78.26%
+Changed predictions  : 65
+FP16 only correct    : 20
+Ternary only correct : 20
+McNemar exact p      : 1
+
+====================================================================================================================================
+EXPERIMENT 021 — q_proj INTERACTION ATTRIBUTION
+====================================================================================================================================
+
+FP16 baseline: 166/299 (55.52%)
+
+ID   Condition          Matrices      Params     Cov%   Correct     Acc%     Delta    Agree%  Changed   FPonly   Tonly      McNemar p
+------------------------------------------------------------------------------------------------------------------------------------
+A    q_only                    1   4,194,304   0.5575       165    55.18    -0.33    77.26       68       23      22              1
+B    k_plus_q                  2   4,718,592   0.6271       166    55.52    +0.00    78.26       65       20      20              1
+
+==========================================================================================
+CONDITION C — out_plus_q
+==========================================================================================
+  model.layers.4.linear_attn.out_proj
+  model.layers.3.self_attn.q_proj
+
+Matrix count     : 2
+Parameters       : 6,291,456
+Coverage         : 0.8362%
+Mean error       : 0.470191135
+Max error        : 0.481714656
+Mean scale ratio : 1.352050924
+[001/299] id=Mercury_SC_407695 gold=D fp16=A ternary=D CORRECT
+[002/299] id=Mercury_7103565 gold=C fp16=C ternary=A WRONG
+[003/299] id=MDSA_2009_5_16 gold=D fp16=B ternary=B WRONG
+[004/299] id=Mercury_7027230 gold=A fp16=A ternary=B WRONG
+[005/299] id=Mercury_SC_405487 gold=B fp16=B ternary=B CORRECT
+[006/299] id=Mercury_7032743 gold=C fp16=A ternary=A WRONG
+[007/299] id=Mercury_7205135 gold=C fp16=C ternary=C CORRECT
+[008/299] id=MDSA_2007_4_52 gold=C fp16=C ternary=B WRONG
+[009/299] id=Mercury_7103215 gold=C fp16=C ternary=C CORRECT
+[010/299] id=Mercury_192168 gold=D fp16=A ternary=B WRONG
+[011/299] id=Mercury_SC_412337 gold=D fp16=A ternary=A WRONG
+[012/299] id=Mercury_7162838 gold=D fp16=D ternary=D CORRECT
+[013/299] id=Mercury_7159775 gold=A fp16=B ternary=B WRONG
+[014/299] id=Mercury_7195440 gold=B fp16=B ternary=B CORRECT
+[015/299] id=Mercury_7017990 gold=A fp16=A ternary=A CORRECT
+[016/299] id=TIMSS_2007_4_pg90 gold=C fp16=B ternary=B WRONG
+[017/299] id=Mercury_7198380 gold=D fp16=A ternary=A WRONG
+[018/299] id=NAEP_2005_8_S11+14 gold=B fp16=D ternary=D WRONG
+[019/299] id=Mercury_192290 gold=D fp16=B ternary=B WRONG
+[020/299] id=Mercury_7192990 gold=A fp16=A ternary=A CORRECT
+[021/299] id=Mercury_7217053 gold=B fp16=A ternary=B CORRECT
+[022/299] id=Mercury_7179358 gold=B fp16=A ternary=B CORRECT
+[023/299] id=MCAS_2005_8_5 gold=D fp16=B ternary=C WRONG
+[024/299] id=MCAS_2000_8_10 gold=B fp16=B ternary=B CORRECT
+[025/299] id=Mercury_7187915 gold=A fp16=A ternary=A CORRECT
+[026/299] id=Mercury_7189823 gold=A fp16=A ternary=A CORRECT
+[027/299] id=Mercury_405454 gold=D fp16=A ternary=B WRONG
+[028/299] id=MCAS_2012_5_8 gold=B fp16=B ternary=B CORRECT
+[029/299] id=Mercury_SC_LBS10040 gold=D fp16=D ternary=D CORRECT
+[030/299] id=Mercury_7115063 gold=A fp16=A ternary=A CORRECT
+[031/299] id=MCAS_2015_8_7 gold=B fp16=A ternary=A WRONG
+[032/299] id=Mercury_184765 gold=B fp16=B ternary=B CORRECT
+[033/299] id=ACTAAP_2013_7_17 gold=D fp16=D ternary=B WRONG
+[034/299] id=Mercury_7248238 gold=D fp16=B ternary=B WRONG
+[035/299] id=Mercury_SC_410964 gold=D fp16=D ternary=D CORRECT
+[036/299] id=NYSEDREGENTS_2014_4_4 gold=A fp16=A ternary=A CORRECT
+[037/299] id=MCAS_8_2015_11 gold=A fp16=A ternary=A CORRECT
+[038/299] id=Mercury_7183733 gold=B fp16=B ternary=B CORRECT
+[039/299] id=MDSA_2010_5_18 gold=D fp16=D ternary=D CORRECT
+[040/299] id=LEAP__7_10354 gold=D fp16=D ternary=A WRONG
+[041/299] id=Mercury_7282608 gold=C fp16=B ternary=B WRONG
+[042/299] id=Mercury_7071365 gold=D fp16=B ternary=B WRONG
+[043/299] id=Mercury_SC_407169 gold=D fp16=D ternary=D CORRECT
+[044/299] id=ACTAAP_2007_7_5 gold=B fp16=B ternary=B CORRECT
+[045/299] id=Mercury_7207358 gold=C fp16=C ternary=A WRONG
+[046/299] id=Mercury_7245893 gold=B fp16=B ternary=B CORRECT
+[047/299] id=Mercury_7223038 gold=C fp16=B ternary=B WRONG
+[048/299] id=Mercury_SC_415541 gold=D fp16=D ternary=A WRONG
+[049/299] id=Mercury_7236023 gold=B fp16=A ternary=B CORRECT
+[050/299] id=Mercury_417146 gold=A fp16=A ternary=A CORRECT
+[051/299] id=Mercury_7128695 gold=C fp16=A ternary=A WRONG
+[052/299] id=Mercury_7270008 gold=C fp16=C ternary=C CORRECT
+[053/299] id=Mercury_7242743 gold=D fp16=D ternary=D CORRECT
+[054/299] id=Mercury_SC_400655 gold=A fp16=A ternary=A CORRECT
+[055/299] id=Mercury_7100695 gold=D fp16=A ternary=A WRONG
+[056/299] id=MSA_2013_8_3 gold=D fp16=D ternary=D CORRECT
+[057/299] id=NYSEDREGENTS_2014_4_19 gold=B fp16=B ternary=B CORRECT
+[058/299] id=MCAS_2013_8_29432 gold=B fp16=B ternary=B CORRECT
+[059/299] id=Mercury_7042700 gold=D fp16=A ternary=B WRONG
+[060/299] id=Mercury_7201705 gold=A fp16=A ternary=A CORRECT
+[061/299] id=MCAS_1998_8_13 gold=D fp16=A ternary=A WRONG
+[062/299] id=Mercury_7138513 gold=A fp16=D ternary=D WRONG
+[063/299] id=Mercury_SC_401663 gold=B fp16=B ternary=B CORRECT
+[064/299] id=NCEOGA_2013_8_4 gold=D fp16=D ternary=B WRONG
+[065/299] id=Mercury_7235813 gold=D fp16=B ternary=A WRONG
+[066/299] id=Mercury_7011270 gold=B fp16=A ternary=B CORRECT
+[067/299] id=Mercury_7228603 gold=C fp16=C ternary=B WRONG
+[068/299] id=Mercury_SC_400339 gold=C fp16=A ternary=B WRONG
+[069/299] id=Mercury_SC_406705 gold=B fp16=B ternary=B CORRECT
+[070/299] id=MCAS_2010_5_11998 gold=A fp16=A ternary=A CORRECT
+[071/299] id=Mercury_7029505 gold=C fp16=C ternary=C CORRECT
+[072/299] id=Mercury_SC_401286 gold=B fp16=B ternary=D WRONG
+[073/299] id=Mercury_7120908 gold=D fp16=D ternary=D CORRECT
+[074/299] id=MCAS_2010_8_12010 gold=C fp16=C ternary=B WRONG
+[075/299] id=Mercury_7008138 gold=B fp16=B ternary=A WRONG
+[076/299] id=Mercury_7018148 gold=B fp16=B ternary=B CORRECT
+[077/299] id=MCAS_2004_8_28 gold=A fp16=A ternary=A CORRECT
+[078/299] id=Mercury_176015 gold=D fp16=A ternary=A WRONG
+[079/299] id=Mercury_7189035 gold=D fp16=A ternary=B WRONG
+[080/299] id=Mercury_7207410 gold=C fp16=B ternary=B WRONG
+[081/299] id=Mercury_7233678 gold=A fp16=A ternary=A CORRECT
+[082/299] id=Mercury_SC_402101 gold=D fp16=B ternary=B WRONG
+[083/299] id=Mercury_SC_402104 gold=D fp16=D ternary=D CORRECT
+[084/299] id=Mercury_7183015 gold=A fp16=A ternary=A CORRECT
+[085/299] id=Mercury_7238963 gold=A fp16=D ternary=A CORRECT
+[086/299] id=NYSEDREGENTS_2014_4_14 gold=A fp16=A ternary=A CORRECT
+[087/299] id=Mercury_7004410 gold=B fp16=B ternary=B CORRECT
+[088/299] id=Mercury_SC_406939 gold=C fp16=B ternary=B WRONG
+[089/299] id=Mercury_7270200 gold=A fp16=A ternary=A CORRECT
+[090/299] id=NYSEDREGENTS_2014_8_20 gold=2 fp16=2 ternary=2 CORRECT
+[091/299] id=Mercury_7135310 gold=C fp16=A ternary=A WRONG
+[092/299] id=Mercury_400885 gold=D fp16=A ternary=A WRONG
+[093/299] id=Mercury_412551 gold=D fp16=D ternary=D CORRECT
+[094/299] id=Mercury_7193043 gold=B fp16=A ternary=A WRONG
+[095/299] id=Mercury_7181685 gold=A fp16=A ternary=A CORRECT
+[096/299] id=LEAP_2006_8_10412 gold=B fp16=A ternary=B CORRECT
+[097/299] id=Mercury_7215180 gold=C fp16=C ternary=C CORRECT
+[098/299] id=NYSEDREGENTS_2014_8_38 gold=1 fp16=2 ternary=2 WRONG
+[099/299] id=Mercury_7145513 gold=B fp16=A ternary=A WRONG
+[100/299] id=MEA_2010_8_11 gold=A fp16=A ternary=B WRONG
+[101/299] id=Mercury_7241115 gold=C fp16=A ternary=A WRONG
+[102/299] id=NYSEDREGENTS_2014_4_17 gold=C fp16=A ternary=B WRONG
+[103/299] id=NYSEDREGENTS_2014_4_13 gold=B fp16=B ternary=B CORRECT
+[104/299] id=Mercury_7033653 gold=C fp16=C ternary=C CORRECT
+[105/299] id=AKDE&ED_2008_8_44 gold=A fp16=A ternary=A CORRECT
+[106/299] id=Mercury_SC_415026 gold=C fp16=A ternary=C CORRECT
+[107/299] id=Mercury_7219415 gold=C fp16=C ternary=B WRONG
+[108/299] id=Mercury_400934 gold=C fp16=A ternary=A WRONG
+[109/299] id=Mercury_7139493 gold=B fp16=B ternary=B CORRECT
+[110/299] id=Mercury_7032340 gold=D fp16=B ternary=B WRONG
+[111/299] id=MEAP_2005_5_1 gold=C fp16=C ternary=C CORRECT
+[112/299] id=ACTAAP_2007_7_25 gold=A fp16=D ternary=B WRONG
+[113/299] id=Mercury_SC_415348 gold=D fp16=B ternary=B WRONG
+[114/299] id=Mercury_7171938 gold=D fp16=B ternary=B WRONG
+[115/299] id=NYSEDREGENTS_2014_4_1 gold=B fp16=B ternary=B CORRECT
+[116/299] id=Mercury_7185133 gold=A fp16=A ternary=D WRONG
+[117/299] id=Mercury_SC_411306 gold=D fp16=D ternary=D CORRECT
+[118/299] id=Mercury_SC_LBS10666 gold=B fp16=B ternary=B CORRECT
+[119/299] id=Mercury_SC_401294 gold=B fp16=C ternary=B CORRECT
+[120/299] id=MCAS_2005_5_21 gold=D fp16=D ternary=B WRONG
+[121/299] id=MCAS_2004_9_13 gold=D fp16=A ternary=B WRONG
+[122/299] id=Mercury_7251685 gold=B fp16=B ternary=B CORRECT
+[123/299] id=MDSA_2011_5_20 gold=D fp16=D ternary=D CORRECT
+[124/299] id=MCAS_2006_5_29 gold=D fp16=D ternary=D CORRECT
+[125/299] id=VASoL_2008_5_19 gold=D fp16=A ternary=A WRONG
+[126/299] id=Mercury_7246348 gold=A fp16=D ternary=D WRONG
+[127/299] id=MCAS_2006_9_33 gold=D fp16=D ternary=D CORRECT
+[128/299] id=Mercury_SC_LBS10598 gold=A fp16=A ternary=A CORRECT
+[129/299] id=MDSA_2008_5_24 gold=C fp16=A ternary=A WRONG
+[130/299] id=Mercury_7141400 gold=A fp16=D ternary=A CORRECT
+[131/299] id=Mercury_SC_415366 gold=B fp16=B ternary=B CORRECT
+[132/299] id=Mercury_408809 gold=C fp16=D ternary=D WRONG
+[133/299] id=MDSA_2007_5_39 gold=D fp16=D ternary=A WRONG
+[134/299] id=Mercury_7164850 gold=A fp16=A ternary=B WRONG
+[135/299] id=MCAS_2006_9_31-v1 gold=C fp16=C ternary=A WRONG
+[136/299] id=MCAS_2002_5_6 gold=D fp16=A ternary=A WRONG
+[137/299] id=MEA_2016_5_6 gold=C fp16=C ternary=C CORRECT
+[138/299] id=Mercury_180058 gold=A fp16=D ternary=A CORRECT
+[139/299] id=Mercury_7133858 gold=B fp16=B ternary=B CORRECT
+[140/299] id=Mercury_7130603 gold=C fp16=A ternary=A WRONG
+[141/299] id=Mercury_7018008 gold=A fp16=A ternary=A CORRECT
+[142/299] id=AIMS_2009_4_29 gold=D fp16=B ternary=B WRONG
+[143/299] id=Mercury_189490 gold=A fp16=A ternary=A CORRECT
+[144/299] id=Mercury_7138688 gold=D fp16=D ternary=D CORRECT
+[145/299] id=Mercury_409529 gold=B fp16=B ternary=B CORRECT
+[146/299] id=Mercury_7092295 gold=C fp16=A ternary=B WRONG
+[147/299] id=Mercury_7044678 gold=A fp16=A ternary=A CORRECT
+[148/299] id=MCAS_1998_4_8 gold=B fp16=B ternary=B CORRECT
+[149/299] id=LEAP_2004_8_10397 gold=B fp16=B ternary=B CORRECT
+[150/299] id=Mercury_7112753 gold=B fp16=B ternary=B CORRECT
+[151/299] id=Mercury_7097318 gold=D fp16=A ternary=A WRONG
+[152/299] id=Mercury_7158673 gold=D fp16=D ternary=D CORRECT
+[153/299] id=Mercury_7038273 gold=A fp16=A ternary=B WRONG
+[154/299] id=ACTAAP_2010_5_10 gold=A fp16=A ternary=A CORRECT
+[155/299] id=VASoL_2008_5_28 gold=C fp16=C ternary=B WRONG
+[156/299] id=Mercury_177818 gold=C fp16=C ternary=A WRONG
+[157/299] id=NYSEDREGENTS_2014_8_12 gold=1 fp16=2 ternary=2 WRONG
+[158/299] id=Mercury_7139790 gold=C fp16=C ternary=D WRONG
+[159/299] id=MCAS_2003_8_25 gold=B fp16=A ternary=A WRONG
+[160/299] id=Mercury_7003955 gold=D fp16=A ternary=A WRONG
+[161/299] id=Mercury_176838 gold=A fp16=D ternary=D WRONG
+[162/299] id=Mercury_SC_407314 gold=A fp16=A ternary=A CORRECT
+[163/299] id=Mercury_SC_400845 gold=B fp16=A ternary=D WRONG
+[164/299] id=Mercury_7245193 gold=C fp16=C ternary=C CORRECT
+[165/299] id=Mercury_7068863 gold=C fp16=D ternary=A WRONG
+[166/299] id=NCEOGA_2013_8_38 gold=C fp16=A ternary=C CORRECT
+[167/299] id=Mercury_7090720 gold=B fp16=D ternary=B CORRECT
+[168/299] id=MCAS_2006_9_35 gold=A fp16=D ternary=D WRONG
+[169/299] id=Mercury_7144795 gold=D fp16=C ternary=A WRONG
+[170/299] id=Mercury_SC_LBS10915 gold=B fp16=B ternary=B CORRECT
+[171/299] id=MCAS_2009_8_5 gold=D fp16=A ternary=A WRONG
+[172/299] id=Mercury_7175455 gold=D fp16=D ternary=D CORRECT
+[173/299] id=Mercury_7100608 gold=B fp16=B ternary=B CORRECT
+[174/299] id=Mercury_177398 gold=B fp16=A ternary=B CORRECT
+[175/299] id=Mercury_SC_415491 gold=C fp16=D ternary=B WRONG
+[176/299] id=Mercury_SC_400047 gold=B fp16=B ternary=B CORRECT
+[177/299] id=Mercury_7218750 gold=C fp16=A ternary=A WRONG
+[178/299] id=Mercury_7115395 gold=A fp16=A ternary=A CORRECT
+[179/299] id=Mercury_7205555 gold=A fp16=A ternary=A CORRECT
+[180/299] id=Mercury_7093975 gold=D fp16=D ternary=D CORRECT
+[181/299] id=MCAS_2012_5_23632 gold=C fp16=C ternary=A WRONG
+[182/299] id=Mercury_7130883 gold=B fp16=B ternary=B CORRECT
+[183/299] id=Mercury_416648 gold=A fp16=A ternary=B WRONG
+[184/299] id=Mercury_7006790 gold=B fp16=B ternary=B CORRECT
+[185/299] id=Mercury_SC_401244 gold=D fp16=D ternary=C WRONG
+[186/299] id=Mercury_7141908 gold=C fp16=A ternary=B WRONG
+[187/299] id=Mercury_7186148 gold=B fp16=A ternary=A WRONG
+[188/299] id=Mercury_7124338 gold=D fp16=D ternary=A WRONG
+[189/299] id=Mercury_184258 gold=A fp16=A ternary=A CORRECT
+[190/299] id=Mercury_SC_400178 gold=C fp16=A ternary=A WRONG
+[191/299] id=Mercury_7007875 gold=B fp16=A ternary=A WRONG
+[192/299] id=Mercury_7221865 gold=C fp16=B ternary=B WRONG
+[193/299] id=Mercury_7269238 gold=D fp16=D ternary=D CORRECT
+[194/299] id=NCEOGA_2013_8_40 gold=C fp16=C ternary=A WRONG
+[195/299] id=Mercury_SC_415735 gold=C fp16=C ternary=C CORRECT
+[196/299] id=Mercury_7115273 gold=C fp16=C ternary=D WRONG
+[197/299] id=Mercury_7233660 gold=C fp16=D ternary=D WRONG
+[198/299] id=Mercury_7026198 gold=A fp16=A ternary=A CORRECT
+[199/299] id=Mercury_7044100 gold=C fp16=A ternary=A WRONG
+[200/299] id=Mercury_SC_408859 gold=A fp16=A ternary=A CORRECT
+[201/299] id=LEAP_2012_8_10441 gold=C fp16=A ternary=A WRONG
+[202/299] id=Mercury_7220378 gold=C fp16=C ternary=A WRONG
+[203/299] id=TIMSS_2003_8_pg14 gold=B fp16=D ternary=D WRONG
+[204/299] id=Mercury_SC_405973 gold=B fp16=B ternary=B CORRECT
+[205/299] id=OHAT_2011_8_3 gold=D fp16=D ternary=B WRONG
+[206/299] id=Mercury_412683 gold=D fp16=A ternary=A WRONG
+[207/299] id=MCAS_1998_8_2 gold=C fp16=C ternary=C CORRECT
+[208/299] id=Mercury_7005478 gold=B fp16=A ternary=B CORRECT
+[209/299] id=Mercury_7105123 gold=C fp16=C ternary=B WRONG
+[210/299] id=Mercury_7154263 gold=B fp16=A ternary=B CORRECT
+[211/299] id=TIMSS_2003_8_pg29 gold=E fp16=A ternary=B WRONG
+[212/299] id=Mercury_7245053 gold=B fp16=B ternary=B CORRECT
+[213/299] id=TIMSS_2007_4_pg26 gold=B fp16=A ternary=D WRONG
+[214/299] id=NYSEDREGENTS_2014_4_9 gold=A fp16=D ternary=D WRONG
+[215/299] id=Mercury_414131 gold=C fp16=B ternary=B WRONG
+[216/299] id=Mercury_SC_407574 gold=A fp16=D ternary=D WRONG
+[217/299] id=Mercury_7018515 gold=C fp16=A ternary=A WRONG
+[218/299] id=TIMSS_2003_8_pg31 gold=B fp16=B ternary=B CORRECT
+[219/299] id=Mercury_7015435 gold=A fp16=A ternary=A CORRECT
+[220/299] id=Mercury_7166880 gold=D fp16=A ternary=B WRONG
+[221/299] id=Mercury_7251668 gold=D fp16=A ternary=A WRONG
+[222/299] id=Mercury_415263 gold=C fp16=C ternary=A WRONG
+[223/299] id=MEA_2013_5_3 gold=D fp16=D ternary=D CORRECT
+[224/299] id=Mercury_7205345 gold=D fp16=D ternary=D CORRECT
+[225/299] id=Mercury_7250023 gold=A fp16=A ternary=A CORRECT
+[226/299] id=ACTAAP_2009_5_5 gold=B fp16=D ternary=D WRONG
+[227/299] id=Mercury_406781 gold=C fp16=A ternary=A WRONG
+[228/299] id=Mercury_7086013 gold=D fp16=B ternary=B WRONG
+[229/299] id=Mercury_7057313 gold=A fp16=A ternary=A CORRECT
+[230/299] id=Mercury_SC_LBS10472 gold=B fp16=D ternary=B CORRECT
+[231/299] id=Mercury_7190155 gold=B fp16=B ternary=D WRONG
+[232/299] id=Mercury_7081760 gold=B fp16=C ternary=C WRONG
+[233/299] id=Mercury_7075145 gold=A fp16=A ternary=A CORRECT
+[234/299] id=Mercury_7037573 gold=D fp16=C ternary=C WRONG
+[235/299] id=NYSEDREGENTS_2014_8_41 gold=4 fp16=2 ternary=2 WRONG
+[236/299] id=Mercury_SC_408700 gold=C fp16=C ternary=C CORRECT
+[237/299] id=Mercury_7284043 gold=C fp16=D ternary=D WRONG
+[238/299] id=Mercury_7103180 gold=B fp16=B ternary=B CORRECT
+[239/299] id=Mercury_7099768 gold=D fp16=C ternary=A WRONG
+[240/299] id=Mercury_7133648 gold=C fp16=A ternary=A WRONG
+[241/299] id=NYSEDREGENTS_2014_4_22 gold=A fp16=A ternary=A CORRECT
+[242/299] id=NYSEDREGENTS_2014_4_28 gold=B fp16=A ternary=B CORRECT
+[243/299] id=Mercury_SC_406029 gold=D fp16=C ternary=C WRONG
+[244/299] id=Mercury_7267593 gold=A fp16=A ternary=B WRONG
+[245/299] id=Mercury_7085820 gold=D fp16=D ternary=B WRONG
+[246/299] id=MCAS_2011_5_17673 gold=A fp16=B ternary=B WRONG
+[247/299] id=Mercury_7090738 gold=A fp16=A ternary=A CORRECT
+[248/299] id=Mercury_7234483 gold=B fp16=B ternary=B CORRECT
+[249/299] id=NYSEDREGENTS_2014_4_20 gold=D fp16=D ternary=D CORRECT
+[250/299] id=Mercury_7141698 gold=B fp16=B ternary=B CORRECT
+[251/299] id=Mercury_SC_415354 gold=C fp16=A ternary=D WRONG
+[252/299] id=NYSEDREGENTS_2014_4_2 gold=D fp16=D ternary=D CORRECT
+[253/299] id=Mercury_7187058 gold=A fp16=A ternary=A CORRECT
+[254/299] id=Mercury_7221095 gold=A fp16=A ternary=A CORRECT
+[255/299] id=Mercury_7143518 gold=D fp16=D ternary=D CORRECT
+[256/299] id=Mercury_7014368 gold=C fp16=C ternary=C CORRECT
+[257/299] id=Mercury_7018445 gold=D fp16=D ternary=D CORRECT
+[258/299] id=MCAS_2014_8_17 gold=D fp16=A ternary=A WRONG
+[259/299] id=Mercury_180443 gold=C fp16=A ternary=A WRONG
+[260/299] id=Mercury_7120890 gold=A fp16=A ternary=A CORRECT
+[261/299] id=Mercury_7159268 gold=A fp16=B ternary=B WRONG
+[262/299] id=MCAS_1999_8_22 gold=B fp16=B ternary=B CORRECT
+[263/299] id=Mercury_SC_415397 gold=C fp16=C ternary=C CORRECT
+[264/299] id=Mercury_7042735 gold=C fp16=A ternary=B WRONG
+[265/299] id=Mercury_SC_400172 gold=A fp16=B ternary=B WRONG
+[266/299] id=Mercury_7008120 gold=A fp16=A ternary=A CORRECT
+[267/299] id=Mercury_7267995 gold=C fp16=C ternary=C CORRECT
+[268/299] id=Mercury_7038133 gold=B fp16=A ternary=D WRONG
+[269/299] id=Mercury_7026443 gold=D fp16=A ternary=B WRONG
+[270/299] id=Mercury_7099103 gold=D fp16=D ternary=D CORRECT
+[271/299] id=Mercury_7207620 gold=A fp16=A ternary=A CORRECT
+[272/299] id=NCEOGA_2013_5_43 gold=B fp16=B ternary=B CORRECT
+[273/299] id=Mercury_7166180 gold=B fp16=B ternary=B CORRECT
+[274/299] id=Mercury_7168123 gold=B fp16=B ternary=B CORRECT
+[275/299] id=MCAS_2012_8_23636 gold=D fp16=A ternary=A WRONG
+[276/299] id=MCAS_2013_8_29421 gold=A fp16=B ternary=B WRONG
+[277/299] id=Mercury_400397 gold=C fp16=D ternary=D WRONG
+[278/299] id=Mercury_184013 gold=C fp16=A ternary=A WRONG
+[279/299] id=MDSA_2007_8_15 gold=C fp16=A ternary=A WRONG
+[280/299] id=Mercury_SC_401714 gold=B fp16=B ternary=B CORRECT
+[281/299] id=Mercury_7246925 gold=D fp16=A ternary=A WRONG
+[282/299] id=Mercury_400905 gold=D fp16=D ternary=A WRONG
+[283/299] id=Mercury_7131828 gold=C fp16=A ternary=A WRONG
+[284/299] id=Mercury_7166530 gold=B fp16=B ternary=B CORRECT
+[285/299] id=Mercury_7074865 gold=C fp16=B ternary=B WRONG
+[286/299] id=Mercury_7246995 gold=C fp16=A ternary=C CORRECT
+[287/299] id=TIMSS_2011_8_pg63 gold=C fp16=C ternary=C CORRECT
+[288/299] id=Mercury_SC_400612 gold=C fp16=B ternary=B WRONG
+[289/299] id=MEA_2016_5_7 gold=B fp16=B ternary=B CORRECT
+[290/299] id=ACTAAP_2011_5_3 gold=C fp16=D ternary=B WRONG
+[291/299] id=Mercury_7264023 gold=D fp16=A ternary=D CORRECT
+[292/299] id=Mercury_SC_400050 gold=C fp16=A ternary=A WRONG
+[293/299] id=MCAS_2003_5_31 gold=D fp16=A ternary=A WRONG
+[294/299] id=Mercury_LBS10399 gold=D fp16=B ternary=B WRONG
+[295/299] id=Mercury_7090598 gold=C fp16=A ternary=B WRONG
+[296/299] id=OHAT_2007_5_24 gold=B fp16=B ternary=B CORRECT
+[297/299] id=Mercury_SC_402239 gold=C fp16=B ternary=B WRONG
+[298/299] id=Mercury_7245088 gold=D fp16=D ternary=D CORRECT
+[299/299] id=Mercury_7082145 gold=D fp16=D ternary=B WRONG
+
+CONDITION C RESULT
+Correct              : 148/299
+Accuracy             : 49.50%
+Delta vs FP16        : -6.02 pp
+Prediction agreement : 71.91%
+Changed predictions  : 84
+FP16 only correct    : 38
+Ternary only correct : 20
+McNemar exact p      : 0.0247460358424
+
+====================================================================================================================================
+EXPERIMENT 021 — q_proj INTERACTION ATTRIBUTION
+====================================================================================================================================
+
+FP16 baseline: 166/299 (55.52%)
+
+ID   Condition          Matrices      Params     Cov%   Correct     Acc%     Delta    Agree%  Changed   FPonly   Tonly      McNemar p
+------------------------------------------------------------------------------------------------------------------------------------
+A    q_only                    1   4,194,304   0.5575       165    55.18    -0.33    77.26       68       23      22              1
+B    k_plus_q                  2   4,718,592   0.6271       166    55.52    +0.00    78.26       65       20      20              1
+C    out_plus_q                2   6,291,456   0.8362       148    49.50    -6.02    71.91       84       38      20       0.024746
+
+==========================================================================================
+CONDITION D — qkv_plus_q
+==========================================================================================
+  model.layers.4.linear_attn.in_proj_qkv
+  model.layers.3.self_attn.q_proj
+
+Matrix count     : 2
+Parameters       : 10,485,760
+Coverage         : 1.3937%
+Mean error       : 0.466970353
+Max error        : 0.468664338
+Mean scale ratio : 1.345483760
+[001/299] id=Mercury_SC_407695 gold=D fp16=A ternary=D CORRECT
+[002/299] id=Mercury_7103565 gold=C fp16=C ternary=A WRONG
+[003/299] id=MDSA_2009_5_16 gold=D fp16=B ternary=B WRONG
+[004/299] id=Mercury_7027230 gold=A fp16=A ternary=A CORRECT
+[005/299] id=Mercury_SC_405487 gold=B fp16=B ternary=B CORRECT
+[006/299] id=Mercury_7032743 gold=C fp16=A ternary=A WRONG
+[007/299] id=Mercury_7205135 gold=C fp16=C ternary=C CORRECT
+[008/299] id=MDSA_2007_4_52 gold=C fp16=C ternary=B WRONG
+[009/299] id=Mercury_7103215 gold=C fp16=C ternary=C CORRECT
+[010/299] id=Mercury_192168 gold=D fp16=A ternary=A WRONG
+[011/299] id=Mercury_SC_412337 gold=D fp16=A ternary=A WRONG
+[012/299] id=Mercury_7162838 gold=D fp16=D ternary=D CORRECT
+[013/299] id=Mercury_7159775 gold=A fp16=B ternary=B WRONG
+[014/299] id=Mercury_7195440 gold=B fp16=B ternary=B CORRECT
+[015/299] id=Mercury_7017990 gold=A fp16=A ternary=A CORRECT
+[016/299] id=TIMSS_2007_4_pg90 gold=C fp16=B ternary=B WRONG
+[017/299] id=Mercury_7198380 gold=D fp16=A ternary=A WRONG
+[018/299] id=NAEP_2005_8_S11+14 gold=B fp16=D ternary=D WRONG
+[019/299] id=Mercury_192290 gold=D fp16=B ternary=B WRONG
+[020/299] id=Mercury_7192990 gold=A fp16=A ternary=A CORRECT
+[021/299] id=Mercury_7217053 gold=B fp16=A ternary=B CORRECT
+[022/299] id=Mercury_7179358 gold=B fp16=A ternary=A WRONG
+[023/299] id=MCAS_2005_8_5 gold=D fp16=B ternary=D CORRECT
+[024/299] id=MCAS_2000_8_10 gold=B fp16=B ternary=B CORRECT
+[025/299] id=Mercury_7187915 gold=A fp16=A ternary=D WRONG
+[026/299] id=Mercury_7189823 gold=A fp16=A ternary=A CORRECT
+[027/299] id=Mercury_405454 gold=D fp16=A ternary=D CORRECT
+[028/299] id=MCAS_2012_5_8 gold=B fp16=B ternary=B CORRECT
+[029/299] id=Mercury_SC_LBS10040 gold=D fp16=D ternary=D CORRECT
+[030/299] id=Mercury_7115063 gold=A fp16=A ternary=A CORRECT
+[031/299] id=MCAS_2015_8_7 gold=B fp16=A ternary=A WRONG
+[032/299] id=Mercury_184765 gold=B fp16=B ternary=B CORRECT
+[033/299] id=ACTAAP_2013_7_17 gold=D fp16=D ternary=D CORRECT
+[034/299] id=Mercury_7248238 gold=D fp16=B ternary=B WRONG
+[035/299] id=Mercury_SC_410964 gold=D fp16=D ternary=D CORRECT
+[036/299] id=NYSEDREGENTS_2014_4_4 gold=A fp16=A ternary=A CORRECT
+[037/299] id=MCAS_8_2015_11 gold=A fp16=A ternary=A CORRECT
+[038/299] id=Mercury_7183733 gold=B fp16=B ternary=B CORRECT
+[039/299] id=MDSA_2010_5_18 gold=D fp16=D ternary=D CORRECT
+[040/299] id=LEAP__7_10354 gold=D fp16=D ternary=D CORRECT
+[041/299] id=Mercury_7282608 gold=C fp16=B ternary=B WRONG
+[042/299] id=Mercury_7071365 gold=D fp16=B ternary=B WRONG
+[043/299] id=Mercury_SC_407169 gold=D fp16=D ternary=D CORRECT
+[044/299] id=ACTAAP_2007_7_5 gold=B fp16=B ternary=B CORRECT
+[045/299] id=Mercury_7207358 gold=C fp16=C ternary=A WRONG
+[046/299] id=Mercury_7245893 gold=B fp16=B ternary=B CORRECT
+[047/299] id=Mercury_7223038 gold=C fp16=B ternary=B WRONG
+[048/299] id=Mercury_SC_415541 gold=D fp16=D ternary=D CORRECT
+[049/299] id=Mercury_7236023 gold=B fp16=A ternary=D WRONG
+[050/299] id=Mercury_417146 gold=A fp16=A ternary=A CORRECT
+[051/299] id=Mercury_7128695 gold=C fp16=A ternary=A WRONG
+[052/299] id=Mercury_7270008 gold=C fp16=C ternary=B WRONG
+[053/299] id=Mercury_7242743 gold=D fp16=D ternary=D CORRECT
+[054/299] id=Mercury_SC_400655 gold=A fp16=A ternary=A CORRECT
+[055/299] id=Mercury_7100695 gold=D fp16=A ternary=A WRONG
+[056/299] id=MSA_2013_8_3 gold=D fp16=D ternary=D CORRECT
+[057/299] id=NYSEDREGENTS_2014_4_19 gold=B fp16=B ternary=B CORRECT
+[058/299] id=MCAS_2013_8_29432 gold=B fp16=B ternary=D WRONG
+[059/299] id=Mercury_7042700 gold=D fp16=A ternary=B WRONG
+[060/299] id=Mercury_7201705 gold=A fp16=A ternary=A CORRECT
+[061/299] id=MCAS_1998_8_13 gold=D fp16=A ternary=A WRONG
+[062/299] id=Mercury_7138513 gold=A fp16=D ternary=D WRONG
+[063/299] id=Mercury_SC_401663 gold=B fp16=B ternary=B CORRECT
+[064/299] id=NCEOGA_2013_8_4 gold=D fp16=D ternary=D CORRECT
+[065/299] id=Mercury_7235813 gold=D fp16=B ternary=A WRONG
+[066/299] id=Mercury_7011270 gold=B fp16=A ternary=A WRONG
+[067/299] id=Mercury_7228603 gold=C fp16=C ternary=D WRONG
+[068/299] id=Mercury_SC_400339 gold=C fp16=A ternary=A WRONG
+[069/299] id=Mercury_SC_406705 gold=B fp16=B ternary=B CORRECT
+[070/299] id=MCAS_2010_5_11998 gold=A fp16=A ternary=A CORRECT
+[071/299] id=Mercury_7029505 gold=C fp16=C ternary=A WRONG
+[072/299] id=Mercury_SC_401286 gold=B fp16=B ternary=B CORRECT
+[073/299] id=Mercury_7120908 gold=D fp16=D ternary=D CORRECT
+[074/299] id=MCAS_2010_8_12010 gold=C fp16=C ternary=B WRONG
+[075/299] id=Mercury_7008138 gold=B fp16=B ternary=A WRONG
+[076/299] id=Mercury_7018148 gold=B fp16=B ternary=D WRONG
+[077/299] id=MCAS_2004_8_28 gold=A fp16=A ternary=A CORRECT
+[078/299] id=Mercury_176015 gold=D fp16=A ternary=A WRONG
+[079/299] id=Mercury_7189035 gold=D fp16=A ternary=B WRONG
+[080/299] id=Mercury_7207410 gold=C fp16=B ternary=B WRONG
+[081/299] id=Mercury_7233678 gold=A fp16=A ternary=A CORRECT
+[082/299] id=Mercury_SC_402101 gold=D fp16=B ternary=B WRONG
+[083/299] id=Mercury_SC_402104 gold=D fp16=D ternary=D CORRECT
+[084/299] id=Mercury_7183015 gold=A fp16=A ternary=A CORRECT
+[085/299] id=Mercury_7238963 gold=A fp16=D ternary=A CORRECT
+[086/299] id=NYSEDREGENTS_2014_4_14 gold=A fp16=A ternary=A CORRECT
+[087/299] id=Mercury_7004410 gold=B fp16=B ternary=B CORRECT
+[088/299] id=Mercury_SC_406939 gold=C fp16=B ternary=B WRONG
+[089/299] id=Mercury_7270200 gold=A fp16=A ternary=A CORRECT
+[090/299] id=NYSEDREGENTS_2014_8_20 gold=2 fp16=2 ternary=2 CORRECT
+[091/299] id=Mercury_7135310 gold=C fp16=A ternary=A WRONG
+[092/299] id=Mercury_400885 gold=D fp16=A ternary=A WRONG
+[093/299] id=Mercury_412551 gold=D fp16=D ternary=D CORRECT
+[094/299] id=Mercury_7193043 gold=B fp16=A ternary=A WRONG
+[095/299] id=Mercury_7181685 gold=A fp16=A ternary=A CORRECT
+[096/299] id=LEAP_2006_8_10412 gold=B fp16=A ternary=B CORRECT
+[097/299] id=Mercury_7215180 gold=C fp16=C ternary=C CORRECT
+[098/299] id=NYSEDREGENTS_2014_8_38 gold=1 fp16=2 ternary=2 WRONG
+[099/299] id=Mercury_7145513 gold=B fp16=A ternary=B CORRECT
+[100/299] id=MEA_2010_8_11 gold=A fp16=A ternary=A CORRECT
+[101/299] id=Mercury_7241115 gold=C fp16=A ternary=A WRONG
+[102/299] id=NYSEDREGENTS_2014_4_17 gold=C fp16=A ternary=B WRONG
+[103/299] id=NYSEDREGENTS_2014_4_13 gold=B fp16=B ternary=B CORRECT
+[104/299] id=Mercury_7033653 gold=C fp16=C ternary=C CORRECT
+[105/299] id=AKDE&ED_2008_8_44 gold=A fp16=A ternary=A CORRECT
+[106/299] id=Mercury_SC_415026 gold=C fp16=A ternary=A WRONG
+[107/299] id=Mercury_7219415 gold=C fp16=C ternary=B WRONG
+[108/299] id=Mercury_400934 gold=C fp16=A ternary=A WRONG
+[109/299] id=Mercury_7139493 gold=B fp16=B ternary=B CORRECT
+[110/299] id=Mercury_7032340 gold=D fp16=B ternary=B WRONG
+[111/299] id=MEAP_2005_5_1 gold=C fp16=C ternary=C CORRECT
+[112/299] id=ACTAAP_2007_7_25 gold=A fp16=D ternary=D WRONG
+[113/299] id=Mercury_SC_415348 gold=D fp16=B ternary=B WRONG
+[114/299] id=Mercury_7171938 gold=D fp16=B ternary=B WRONG
+[115/299] id=NYSEDREGENTS_2014_4_1 gold=B fp16=B ternary=B CORRECT
+[116/299] id=Mercury_7185133 gold=A fp16=A ternary=A CORRECT
+[117/299] id=Mercury_SC_411306 gold=D fp16=D ternary=D CORRECT
+[118/299] id=Mercury_SC_LBS10666 gold=B fp16=B ternary=B CORRECT
+[119/299] id=Mercury_SC_401294 gold=B fp16=C ternary=B CORRECT
+[120/299] id=MCAS_2005_5_21 gold=D fp16=D ternary=D CORRECT
+[121/299] id=MCAS_2004_9_13 gold=D fp16=A ternary=B WRONG
+[122/299] id=Mercury_7251685 gold=B fp16=B ternary=B CORRECT
+[123/299] id=MDSA_2011_5_20 gold=D fp16=D ternary=D CORRECT
+[124/299] id=MCAS_2006_5_29 gold=D fp16=D ternary=D CORRECT
+[125/299] id=VASoL_2008_5_19 gold=D fp16=A ternary=A WRONG
+[126/299] id=Mercury_7246348 gold=A fp16=D ternary=D WRONG
+[127/299] id=MCAS_2006_9_33 gold=D fp16=D ternary=D CORRECT
+[128/299] id=Mercury_SC_LBS10598 gold=A fp16=A ternary=A CORRECT
+[129/299] id=MDSA_2008_5_24 gold=C fp16=A ternary=A WRONG
+[130/299] id=Mercury_7141400 gold=A fp16=D ternary=D WRONG
+[131/299] id=Mercury_SC_415366 gold=B fp16=B ternary=B CORRECT
+[132/299] id=Mercury_408809 gold=C fp16=D ternary=D WRONG
+[133/299] id=MDSA_2007_5_39 gold=D fp16=D ternary=D CORRECT
+[134/299] id=Mercury_7164850 gold=A fp16=A ternary=D WRONG
+[135/299] id=MCAS_2006_9_31-v1 gold=C fp16=C ternary=A WRONG
+[136/299] id=MCAS_2002_5_6 gold=D fp16=A ternary=A WRONG
+[137/299] id=MEA_2016_5_6 gold=C fp16=C ternary=C CORRECT
+[138/299] id=Mercury_180058 gold=A fp16=D ternary=D WRONG
+[139/299] id=Mercury_7133858 gold=B fp16=B ternary=B CORRECT
+[140/299] id=Mercury_7130603 gold=C fp16=A ternary=A WRONG
+[141/299] id=Mercury_7018008 gold=A fp16=A ternary=A CORRECT
+[142/299] id=AIMS_2009_4_29 gold=D fp16=B ternary=B WRONG
+[143/299] id=Mercury_189490 gold=A fp16=A ternary=A CORRECT
+[144/299] id=Mercury_7138688 gold=D fp16=D ternary=D CORRECT
+[145/299] id=Mercury_409529 gold=B fp16=B ternary=B CORRECT
+[146/299] id=Mercury_7092295 gold=C fp16=A ternary=B WRONG
+[147/299] id=Mercury_7044678 gold=A fp16=A ternary=A CORRECT
+[148/299] id=MCAS_1998_4_8 gold=B fp16=B ternary=B CORRECT
+[149/299] id=LEAP_2004_8_10397 gold=B fp16=B ternary=B CORRECT
+[150/299] id=Mercury_7112753 gold=B fp16=B ternary=B CORRECT
+[151/299] id=Mercury_7097318 gold=D fp16=A ternary=A WRONG
+[152/299] id=Mercury_7158673 gold=D fp16=D ternary=D CORRECT
+[153/299] id=Mercury_7038273 gold=A fp16=A ternary=B WRONG
+[154/299] id=ACTAAP_2010_5_10 gold=A fp16=A ternary=A CORRECT
+[155/299] id=VASoL_2008_5_28 gold=C fp16=C ternary=B WRONG
+[156/299] id=Mercury_177818 gold=C fp16=C ternary=C CORRECT
+[157/299] id=NYSEDREGENTS_2014_8_12 gold=1 fp16=2 ternary=2 WRONG
+[158/299] id=Mercury_7139790 gold=C fp16=C ternary=D WRONG
+[159/299] id=MCAS_2003_8_25 gold=B fp16=A ternary=A WRONG
+[160/299] id=Mercury_7003955 gold=D fp16=A ternary=A WRONG
+[161/299] id=Mercury_176838 gold=A fp16=D ternary=D WRONG
+[162/299] id=Mercury_SC_407314 gold=A fp16=A ternary=D WRONG
+[163/299] id=Mercury_SC_400845 gold=B fp16=A ternary=D WRONG
+[164/299] id=Mercury_7245193 gold=C fp16=C ternary=D WRONG
+[165/299] id=Mercury_7068863 gold=C fp16=D ternary=A WRONG
+[166/299] id=NCEOGA_2013_8_38 gold=C fp16=A ternary=A WRONG
+[167/299] id=Mercury_7090720 gold=B fp16=D ternary=B CORRECT
+[168/299] id=MCAS_2006_9_35 gold=A fp16=D ternary=D WRONG
+[169/299] id=Mercury_7144795 gold=D fp16=C ternary=D CORRECT
+[170/299] id=Mercury_SC_LBS10915 gold=B fp16=B ternary=B CORRECT
+[171/299] id=MCAS_2009_8_5 gold=D fp16=A ternary=A WRONG
+[172/299] id=Mercury_7175455 gold=D fp16=D ternary=D CORRECT
+[173/299] id=Mercury_7100608 gold=B fp16=B ternary=B CORRECT
+[174/299] id=Mercury_177398 gold=B fp16=A ternary=B CORRECT
+[175/299] id=Mercury_SC_415491 gold=C fp16=D ternary=B WRONG
+[176/299] id=Mercury_SC_400047 gold=B fp16=B ternary=B CORRECT
+[177/299] id=Mercury_7218750 gold=C fp16=A ternary=A WRONG
+[178/299] id=Mercury_7115395 gold=A fp16=A ternary=A CORRECT
+[179/299] id=Mercury_7205555 gold=A fp16=A ternary=A CORRECT
+[180/299] id=Mercury_7093975 gold=D fp16=D ternary=D CORRECT
+[181/299] id=MCAS_2012_5_23632 gold=C fp16=C ternary=C CORRECT
+[182/299] id=Mercury_7130883 gold=B fp16=B ternary=B CORRECT
+[183/299] id=Mercury_416648 gold=A fp16=A ternary=B WRONG
+[184/299] id=Mercury_7006790 gold=B fp16=B ternary=B CORRECT
+[185/299] id=Mercury_SC_401244 gold=D fp16=D ternary=D CORRECT
+[186/299] id=Mercury_7141908 gold=C fp16=A ternary=B WRONG
+[187/299] id=Mercury_7186148 gold=B fp16=A ternary=A WRONG
+[188/299] id=Mercury_7124338 gold=D fp16=D ternary=A WRONG
+[189/299] id=Mercury_184258 gold=A fp16=A ternary=A CORRECT
+[190/299] id=Mercury_SC_400178 gold=C fp16=A ternary=A WRONG
+[191/299] id=Mercury_7007875 gold=B fp16=A ternary=A WRONG
+[192/299] id=Mercury_7221865 gold=C fp16=B ternary=B WRONG
+[193/299] id=Mercury_7269238 gold=D fp16=D ternary=D CORRECT
+[194/299] id=NCEOGA_2013_8_40 gold=C fp16=C ternary=D WRONG
+[195/299] id=Mercury_SC_415735 gold=C fp16=C ternary=C CORRECT
+[196/299] id=Mercury_7115273 gold=C fp16=C ternary=D WRONG
+[197/299] id=Mercury_7233660 gold=C fp16=D ternary=D WRONG
+[198/299] id=Mercury_7026198 gold=A fp16=A ternary=A CORRECT
+[199/299] id=Mercury_7044100 gold=C fp16=A ternary=A WRONG
+[200/299] id=Mercury_SC_408859 gold=A fp16=A ternary=A CORRECT
+[201/299] id=LEAP_2012_8_10441 gold=C fp16=A ternary=A WRONG
+[202/299] id=Mercury_7220378 gold=C fp16=C ternary=A WRONG
+[203/299] id=TIMSS_2003_8_pg14 gold=B fp16=D ternary=D WRONG
+[204/299] id=Mercury_SC_405973 gold=B fp16=B ternary=D WRONG
+[205/299] id=OHAT_2011_8_3 gold=D fp16=D ternary=D CORRECT
+[206/299] id=Mercury_412683 gold=D fp16=A ternary=B WRONG
+[207/299] id=MCAS_1998_8_2 gold=C fp16=C ternary=C CORRECT
+[208/299] id=Mercury_7005478 gold=B fp16=A ternary=B CORRECT
+[209/299] id=Mercury_7105123 gold=C fp16=C ternary=B WRONG
+[210/299] id=Mercury_7154263 gold=B fp16=A ternary=B CORRECT
+[211/299] id=TIMSS_2003_8_pg29 gold=E fp16=A ternary=B WRONG
+[212/299] id=Mercury_7245053 gold=B fp16=B ternary=B CORRECT
+[213/299] id=TIMSS_2007_4_pg26 gold=B fp16=A ternary=D WRONG
+[214/299] id=NYSEDREGENTS_2014_4_9 gold=A fp16=D ternary=D WRONG
+[215/299] id=Mercury_414131 gold=C fp16=B ternary=B WRONG
+[216/299] id=Mercury_SC_407574 gold=A fp16=D ternary=D WRONG
+[217/299] id=Mercury_7018515 gold=C fp16=A ternary=A WRONG
+[218/299] id=TIMSS_2003_8_pg31 gold=B fp16=B ternary=B CORRECT
+[219/299] id=Mercury_7015435 gold=A fp16=A ternary=A CORRECT
+[220/299] id=Mercury_7166880 gold=D fp16=A ternary=B WRONG
+[221/299] id=Mercury_7251668 gold=D fp16=A ternary=A WRONG
+[222/299] id=Mercury_415263 gold=C fp16=C ternary=D WRONG
+[223/299] id=MEA_2013_5_3 gold=D fp16=D ternary=D CORRECT
+[224/299] id=Mercury_7205345 gold=D fp16=D ternary=D CORRECT
+[225/299] id=Mercury_7250023 gold=A fp16=A ternary=A CORRECT
+[226/299] id=ACTAAP_2009_5_5 gold=B fp16=D ternary=D WRONG
+[227/299] id=Mercury_406781 gold=C fp16=A ternary=A WRONG
+[228/299] id=Mercury_7086013 gold=D fp16=B ternary=B WRONG
+[229/299] id=Mercury_7057313 gold=A fp16=A ternary=A CORRECT
+[230/299] id=Mercury_SC_LBS10472 gold=B fp16=D ternary=B CORRECT
+[231/299] id=Mercury_7190155 gold=B fp16=B ternary=B CORRECT
+[232/299] id=Mercury_7081760 gold=B fp16=C ternary=C WRONG
+[233/299] id=Mercury_7075145 gold=A fp16=A ternary=A CORRECT
+[234/299] id=Mercury_7037573 gold=D fp16=C ternary=C WRONG
+[235/299] id=NYSEDREGENTS_2014_8_41 gold=4 fp16=2 ternary=3 WRONG
+[236/299] id=Mercury_SC_408700 gold=C fp16=C ternary=C CORRECT
+[237/299] id=Mercury_7284043 gold=C fp16=D ternary=D WRONG
+[238/299] id=Mercury_7103180 gold=B fp16=B ternary=B CORRECT
+[239/299] id=Mercury_7099768 gold=D fp16=C ternary=A WRONG
+[240/299] id=Mercury_7133648 gold=C fp16=A ternary=A WRONG
+[241/299] id=NYSEDREGENTS_2014_4_22 gold=A fp16=A ternary=A CORRECT
+[242/299] id=NYSEDREGENTS_2014_4_28 gold=B fp16=A ternary=B CORRECT
+[243/299] id=Mercury_SC_406029 gold=D fp16=C ternary=B WRONG
+[244/299] id=Mercury_7267593 gold=A fp16=A ternary=B WRONG
+[245/299] id=Mercury_7085820 gold=D fp16=D ternary=B WRONG
+[246/299] id=MCAS_2011_5_17673 gold=A fp16=B ternary=A CORRECT
+[247/299] id=Mercury_7090738 gold=A fp16=A ternary=A CORRECT
+[248/299] id=Mercury_7234483 gold=B fp16=B ternary=B CORRECT
+[249/299] id=NYSEDREGENTS_2014_4_20 gold=D fp16=D ternary=D CORRECT
+[250/299] id=Mercury_7141698 gold=B fp16=B ternary=B CORRECT
+[251/299] id=Mercury_SC_415354 gold=C fp16=A ternary=D WRONG
+[252/299] id=NYSEDREGENTS_2014_4_2 gold=D fp16=D ternary=D CORRECT
+[253/299] id=Mercury_7187058 gold=A fp16=A ternary=A CORRECT
+[254/299] id=Mercury_7221095 gold=A fp16=A ternary=A CORRECT
+[255/299] id=Mercury_7143518 gold=D fp16=D ternary=D CORRECT
+[256/299] id=Mercury_7014368 gold=C fp16=C ternary=C CORRECT
+[257/299] id=Mercury_7018445 gold=D fp16=D ternary=D CORRECT
+[258/299] id=MCAS_2014_8_17 gold=D fp16=A ternary=A WRONG
+[259/299] id=Mercury_180443 gold=C fp16=A ternary=A WRONG
+[260/299] id=Mercury_7120890 gold=A fp16=A ternary=A CORRECT
+[261/299] id=Mercury_7159268 gold=A fp16=B ternary=B WRONG
+[262/299] id=MCAS_1999_8_22 gold=B fp16=B ternary=B CORRECT
+[263/299] id=Mercury_SC_415397 gold=C fp16=C ternary=C CORRECT
+[264/299] id=Mercury_7042735 gold=C fp16=A ternary=B WRONG
+[265/299] id=Mercury_SC_400172 gold=A fp16=B ternary=B WRONG
+[266/299] id=Mercury_7008120 gold=A fp16=A ternary=A CORRECT
+[267/299] id=Mercury_7267995 gold=C fp16=C ternary=D WRONG
+[268/299] id=Mercury_7038133 gold=B fp16=A ternary=D WRONG
+[269/299] id=Mercury_7026443 gold=D fp16=A ternary=D CORRECT
+[270/299] id=Mercury_7099103 gold=D fp16=D ternary=D CORRECT
+[271/299] id=Mercury_7207620 gold=A fp16=A ternary=B WRONG
+[272/299] id=NCEOGA_2013_5_43 gold=B fp16=B ternary=B CORRECT
+[273/299] id=Mercury_7166180 gold=B fp16=B ternary=B CORRECT
+[274/299] id=Mercury_7168123 gold=B fp16=B ternary=B CORRECT
+[275/299] id=MCAS_2012_8_23636 gold=D fp16=A ternary=A WRONG
+[276/299] id=MCAS_2013_8_29421 gold=A fp16=B ternary=B WRONG
+[277/299] id=Mercury_400397 gold=C fp16=D ternary=D WRONG
+[278/299] id=Mercury_184013 gold=C fp16=A ternary=A WRONG
+[279/299] id=MDSA_2007_8_15 gold=C fp16=A ternary=D WRONG
+[280/299] id=Mercury_SC_401714 gold=B fp16=B ternary=B CORRECT
+[281/299] id=Mercury_7246925 gold=D fp16=A ternary=A WRONG
+[282/299] id=Mercury_400905 gold=D fp16=D ternary=A WRONG
+[283/299] id=Mercury_7131828 gold=C fp16=A ternary=A WRONG
+[284/299] id=Mercury_7166530 gold=B fp16=B ternary=D WRONG
+[285/299] id=Mercury_7074865 gold=C fp16=B ternary=B WRONG
+[286/299] id=Mercury_7246995 gold=C fp16=A ternary=A WRONG
+[287/299] id=TIMSS_2011_8_pg63 gold=C fp16=C ternary=D WRONG
+[288/299] id=Mercury_SC_400612 gold=C fp16=B ternary=B WRONG
+[289/299] id=MEA_2016_5_7 gold=B fp16=B ternary=B CORRECT
+[290/299] id=ACTAAP_2011_5_3 gold=C fp16=D ternary=D WRONG
+[291/299] id=Mercury_7264023 gold=D fp16=A ternary=D CORRECT
+[292/299] id=Mercury_SC_400050 gold=C fp16=A ternary=A WRONG
+[293/299] id=MCAS_2003_5_31 gold=D fp16=A ternary=A WRONG
+[294/299] id=Mercury_LBS10399 gold=D fp16=B ternary=B WRONG
+[295/299] id=Mercury_7090598 gold=C fp16=A ternary=A WRONG
+[296/299] id=OHAT_2007_5_24 gold=B fp16=B ternary=B CORRECT
+[297/299] id=Mercury_SC_402239 gold=C fp16=B ternary=B WRONG
+[298/299] id=Mercury_7245088 gold=D fp16=D ternary=D CORRECT
+[299/299] id=Mercury_7082145 gold=D fp16=D ternary=D CORRECT
+
+CONDITION D RESULT
+Correct              : 150/299
+Accuracy             : 50.17%
+Delta vs FP16        : -5.35 pp
+Prediction agreement : 75.25%
+Changed predictions  : 74
+FP16 only correct    : 34
+Ternary only correct : 18
+McNemar exact p      : 0.0364834000084
+
+====================================================================================================================================
+EXPERIMENT 021 — q_proj INTERACTION ATTRIBUTION
+====================================================================================================================================
+
+FP16 baseline: 166/299 (55.52%)
+
+ID   Condition          Matrices      Params     Cov%   Correct     Acc%     Delta    Agree%  Changed   FPonly   Tonly      McNemar p
+------------------------------------------------------------------------------------------------------------------------------------
+A    q_only                    1   4,194,304   0.5575       165    55.18    -0.33    77.26       68       23      22              1
+B    k_plus_q                  2   4,718,592   0.6271       166    55.52    +0.00    78.26       65       20      20              1
+C    out_plus_q                2   6,291,456   0.8362       148    49.50    -6.02    71.91       84       38      20       0.024746
+D    qkv_plus_q                2  10,485,760   1.3937       150    50.17    -5.35    75.25       74       34      18      0.0364834
+
+==========================================================================================
+CONDITION E — k_out_q
+==========================================================================================
+  model.layers.3.self_attn.k_proj
+  model.layers.4.linear_attn.out_proj
+  model.layers.3.self_attn.q_proj
+
+Matrix count     : 3
+Parameters       : 6,815,744
+Coverage         : 0.9059%
+Mean error       : 0.470813384
+Max error        : 0.481714656
+Mean scale ratio : 1.352124788
+[001/299] id=Mercury_SC_407695 gold=D fp16=A ternary=D CORRECT
+[002/299] id=Mercury_7103565 gold=C fp16=C ternary=C CORRECT
+[003/299] id=MDSA_2009_5_16 gold=D fp16=B ternary=B WRONG
+[004/299] id=Mercury_7027230 gold=A fp16=A ternary=B WRONG
+[005/299] id=Mercury_SC_405487 gold=B fp16=B ternary=B CORRECT
+[006/299] id=Mercury_7032743 gold=C fp16=A ternary=A WRONG
+[007/299] id=Mercury_7205135 gold=C fp16=C ternary=C CORRECT
+[008/299] id=MDSA_2007_4_52 gold=C fp16=C ternary=B WRONG
+[009/299] id=Mercury_7103215 gold=C fp16=C ternary=C CORRECT
+[010/299] id=Mercury_192168 gold=D fp16=A ternary=B WRONG
+[011/299] id=Mercury_SC_412337 gold=D fp16=A ternary=A WRONG
+[012/299] id=Mercury_7162838 gold=D fp16=D ternary=D CORRECT
+[013/299] id=Mercury_7159775 gold=A fp16=B ternary=B WRONG
+[014/299] id=Mercury_7195440 gold=B fp16=B ternary=B CORRECT
+[015/299] id=Mercury_7017990 gold=A fp16=A ternary=B WRONG
+[016/299] id=TIMSS_2007_4_pg90 gold=C fp16=B ternary=B WRONG
+[017/299] id=Mercury_7198380 gold=D fp16=A ternary=A WRONG
+[018/299] id=NAEP_2005_8_S11+14 gold=B fp16=D ternary=D WRONG
+[019/299] id=Mercury_192290 gold=D fp16=B ternary=B WRONG
+[020/299] id=Mercury_7192990 gold=A fp16=A ternary=A CORRECT
+[021/299] id=Mercury_7217053 gold=B fp16=A ternary=B CORRECT
+[022/299] id=Mercury_7179358 gold=B fp16=A ternary=B CORRECT
+[023/299] id=MCAS_2005_8_5 gold=D fp16=B ternary=C WRONG
+[024/299] id=MCAS_2000_8_10 gold=B fp16=B ternary=B CORRECT
+[025/299] id=Mercury_7187915 gold=A fp16=A ternary=B WRONG
+[026/299] id=Mercury_7189823 gold=A fp16=A ternary=A CORRECT
+[027/299] id=Mercury_405454 gold=D fp16=A ternary=B WRONG
+[028/299] id=MCAS_2012_5_8 gold=B fp16=B ternary=B CORRECT
+[029/299] id=Mercury_SC_LBS10040 gold=D fp16=D ternary=D CORRECT
+[030/299] id=Mercury_7115063 gold=A fp16=A ternary=A CORRECT
+[031/299] id=MCAS_2015_8_7 gold=B fp16=A ternary=B CORRECT
+[032/299] id=Mercury_184765 gold=B fp16=B ternary=B CORRECT
+[033/299] id=ACTAAP_2013_7_17 gold=D fp16=D ternary=B WRONG
+[034/299] id=Mercury_7248238 gold=D fp16=B ternary=B WRONG
+[035/299] id=Mercury_SC_410964 gold=D fp16=D ternary=D CORRECT
+[036/299] id=NYSEDREGENTS_2014_4_4 gold=A fp16=A ternary=A CORRECT
+[037/299] id=MCAS_8_2015_11 gold=A fp16=A ternary=A CORRECT
+[038/299] id=Mercury_7183733 gold=B fp16=B ternary=B CORRECT
+[039/299] id=MDSA_2010_5_18 gold=D fp16=D ternary=D CORRECT
+[040/299] id=LEAP__7_10354 gold=D fp16=D ternary=D CORRECT
+[041/299] id=Mercury_7282608 gold=C fp16=B ternary=B WRONG
+[042/299] id=Mercury_7071365 gold=D fp16=B ternary=B WRONG
+[043/299] id=Mercury_SC_407169 gold=D fp16=D ternary=D CORRECT
+[044/299] id=ACTAAP_2007_7_5 gold=B fp16=B ternary=B CORRECT
+[045/299] id=Mercury_7207358 gold=C fp16=C ternary=C CORRECT
+[046/299] id=Mercury_7245893 gold=B fp16=B ternary=B CORRECT
+[047/299] id=Mercury_7223038 gold=C fp16=B ternary=B WRONG
+[048/299] id=Mercury_SC_415541 gold=D fp16=D ternary=D CORRECT
+[049/299] id=Mercury_7236023 gold=B fp16=A ternary=B CORRECT
+[050/299] id=Mercury_417146 gold=A fp16=A ternary=A CORRECT
+[051/299] id=Mercury_7128695 gold=C fp16=A ternary=A WRONG
+[052/299] id=Mercury_7270008 gold=C fp16=C ternary=C CORRECT
+[053/299] id=Mercury_7242743 gold=D fp16=D ternary=D CORRECT
+[054/299] id=Mercury_SC_400655 gold=A fp16=A ternary=A CORRECT
+[055/299] id=Mercury_7100695 gold=D fp16=A ternary=A WRONG
+[056/299] id=MSA_2013_8_3 gold=D fp16=D ternary=D CORRECT
+[057/299] id=NYSEDREGENTS_2014_4_19 gold=B fp16=B ternary=B CORRECT
+[058/299] id=MCAS_2013_8_29432 gold=B fp16=B ternary=D WRONG
+[059/299] id=Mercury_7042700 gold=D fp16=A ternary=B WRONG
+[060/299] id=Mercury_7201705 gold=A fp16=A ternary=A CORRECT
+[061/299] id=MCAS_1998_8_13 gold=D fp16=A ternary=A WRONG
+[062/299] id=Mercury_7138513 gold=A fp16=D ternary=D WRONG
+[063/299] id=Mercury_SC_401663 gold=B fp16=B ternary=B CORRECT
+[064/299] id=NCEOGA_2013_8_4 gold=D fp16=D ternary=B WRONG
+[065/299] id=Mercury_7235813 gold=D fp16=B ternary=A WRONG
+[066/299] id=Mercury_7011270 gold=B fp16=A ternary=B CORRECT
+[067/299] id=Mercury_7228603 gold=C fp16=C ternary=B WRONG
+[068/299] id=Mercury_SC_400339 gold=C fp16=A ternary=B WRONG
+[069/299] id=Mercury_SC_406705 gold=B fp16=B ternary=B CORRECT
+[070/299] id=MCAS_2010_5_11998 gold=A fp16=A ternary=A CORRECT
+[071/299] id=Mercury_7029505 gold=C fp16=C ternary=C CORRECT
+[072/299] id=Mercury_SC_401286 gold=B fp16=B ternary=D WRONG
+[073/299] id=Mercury_7120908 gold=D fp16=D ternary=D CORRECT
+[074/299] id=MCAS_2010_8_12010 gold=C fp16=C ternary=B WRONG
+[075/299] id=Mercury_7008138 gold=B fp16=B ternary=B CORRECT
+[076/299] id=Mercury_7018148 gold=B fp16=B ternary=B CORRECT
+[077/299] id=MCAS_2004_8_28 gold=A fp16=A ternary=A CORRECT
+[078/299] id=Mercury_176015 gold=D fp16=A ternary=A WRONG
+[079/299] id=Mercury_7189035 gold=D fp16=A ternary=B WRONG
+[080/299] id=Mercury_7207410 gold=C fp16=B ternary=B WRONG
+[081/299] id=Mercury_7233678 gold=A fp16=A ternary=A CORRECT
+[082/299] id=Mercury_SC_402101 gold=D fp16=B ternary=B WRONG
+[083/299] id=Mercury_SC_402104 gold=D fp16=D ternary=D CORRECT
+[084/299] id=Mercury_7183015 gold=A fp16=A ternary=A CORRECT
+[085/299] id=Mercury_7238963 gold=A fp16=D ternary=B WRONG
+[086/299] id=NYSEDREGENTS_2014_4_14 gold=A fp16=A ternary=A CORRECT
+[087/299] id=Mercury_7004410 gold=B fp16=B ternary=B CORRECT
+[088/299] id=Mercury_SC_406939 gold=C fp16=B ternary=B WRONG
+[089/299] id=Mercury_7270200 gold=A fp16=A ternary=A CORRECT
+[090/299] id=NYSEDREGENTS_2014_8_20 gold=2 fp16=2 ternary=2 CORRECT
+[091/299] id=Mercury_7135310 gold=C fp16=A ternary=A WRONG
+[092/299] id=Mercury_400885 gold=D fp16=A ternary=A WRONG
+[093/299] id=Mercury_412551 gold=D fp16=D ternary=D CORRECT
+[094/299] id=Mercury_7193043 gold=B fp16=A ternary=A WRONG
+[095/299] id=Mercury_7181685 gold=A fp16=A ternary=A CORRECT
+[096/299] id=LEAP_2006_8_10412 gold=B fp16=A ternary=B CORRECT
+[097/299] id=Mercury_7215180 gold=C fp16=C ternary=C CORRECT
+[098/299] id=NYSEDREGENTS_2014_8_38 gold=1 fp16=2 ternary=2 WRONG
+[099/299] id=Mercury_7145513 gold=B fp16=A ternary=A WRONG
+[100/299] id=MEA_2010_8_11 gold=A fp16=A ternary=B WRONG
+[101/299] id=Mercury_7241115 gold=C fp16=A ternary=A WRONG
+[102/299] id=NYSEDREGENTS_2014_4_17 gold=C fp16=A ternary=B WRONG
+[103/299] id=NYSEDREGENTS_2014_4_13 gold=B fp16=B ternary=B CORRECT
+[104/299] id=Mercury_7033653 gold=C fp16=C ternary=C CORRECT
+[105/299] id=AKDE&ED_2008_8_44 gold=A fp16=A ternary=A CORRECT
+[106/299] id=Mercury_SC_415026 gold=C fp16=A ternary=C CORRECT
+[107/299] id=Mercury_7219415 gold=C fp16=C ternary=B WRONG
+[108/299] id=Mercury_400934 gold=C fp16=A ternary=A WRONG
+[109/299] id=Mercury_7139493 gold=B fp16=B ternary=B CORRECT
+[110/299] id=Mercury_7032340 gold=D fp16=B ternary=B WRONG
+[111/299] id=MEAP_2005_5_1 gold=C fp16=C ternary=C CORRECT
+[112/299] id=ACTAAP_2007_7_25 gold=A fp16=D ternary=B WRONG
+[113/299] id=Mercury_SC_415348 gold=D fp16=B ternary=B WRONG
+[114/299] id=Mercury_7171938 gold=D fp16=B ternary=B WRONG
+[115/299] id=NYSEDREGENTS_2014_4_1 gold=B fp16=B ternary=B CORRECT
+[116/299] id=Mercury_7185133 gold=A fp16=A ternary=D WRONG
+[117/299] id=Mercury_SC_411306 gold=D fp16=D ternary=D CORRECT
+[118/299] id=Mercury_SC_LBS10666 gold=B fp16=B ternary=B CORRECT
+[119/299] id=Mercury_SC_401294 gold=B fp16=C ternary=C WRONG
+[120/299] id=MCAS_2005_5_21 gold=D fp16=D ternary=B WRONG
+[121/299] id=MCAS_2004_9_13 gold=D fp16=A ternary=A WRONG
+[122/299] id=Mercury_7251685 gold=B fp16=B ternary=B CORRECT
+[123/299] id=MDSA_2011_5_20 gold=D fp16=D ternary=D CORRECT
+[124/299] id=MCAS_2006_5_29 gold=D fp16=D ternary=D CORRECT
+[125/299] id=VASoL_2008_5_19 gold=D fp16=A ternary=A WRONG
+[126/299] id=Mercury_7246348 gold=A fp16=D ternary=D WRONG
+[127/299] id=MCAS_2006_9_33 gold=D fp16=D ternary=D CORRECT
+[128/299] id=Mercury_SC_LBS10598 gold=A fp16=A ternary=B WRONG
+[129/299] id=MDSA_2008_5_24 gold=C fp16=A ternary=A WRONG
+[130/299] id=Mercury_7141400 gold=A fp16=D ternary=A CORRECT
+[131/299] id=Mercury_SC_415366 gold=B fp16=B ternary=B CORRECT
+[132/299] id=Mercury_408809 gold=C fp16=D ternary=D WRONG
+[133/299] id=MDSA_2007_5_39 gold=D fp16=D ternary=A WRONG
+[134/299] id=Mercury_7164850 gold=A fp16=A ternary=B WRONG
+[135/299] id=MCAS_2006_9_31-v1 gold=C fp16=C ternary=A WRONG
+[136/299] id=MCAS_2002_5_6 gold=D fp16=A ternary=A WRONG
+[137/299] id=MEA_2016_5_6 gold=C fp16=C ternary=C CORRECT
+[138/299] id=Mercury_180058 gold=A fp16=D ternary=A CORRECT
+[139/299] id=Mercury_7133858 gold=B fp16=B ternary=B CORRECT
+[140/299] id=Mercury_7130603 gold=C fp16=A ternary=A WRONG
+[141/299] id=Mercury_7018008 gold=A fp16=A ternary=A CORRECT
+[142/299] id=AIMS_2009_4_29 gold=D fp16=B ternary=B WRONG
+[143/299] id=Mercury_189490 gold=A fp16=A ternary=A CORRECT
+[144/299] id=Mercury_7138688 gold=D fp16=D ternary=D CORRECT
+[145/299] id=Mercury_409529 gold=B fp16=B ternary=B CORRECT
+[146/299] id=Mercury_7092295 gold=C fp16=A ternary=B WRONG
+[147/299] id=Mercury_7044678 gold=A fp16=A ternary=A CORRECT
+[148/299] id=MCAS_1998_4_8 gold=B fp16=B ternary=B CORRECT
+[149/299] id=LEAP_2004_8_10397 gold=B fp16=B ternary=B CORRECT
+[150/299] id=Mercury_7112753 gold=B fp16=B ternary=B CORRECT
+[151/299] id=Mercury_7097318 gold=D fp16=A ternary=A WRONG
+[152/299] id=Mercury_7158673 gold=D fp16=D ternary=D CORRECT
+[153/299] id=Mercury_7038273 gold=A fp16=A ternary=B WRONG
+[154/299] id=ACTAAP_2010_5_10 gold=A fp16=A ternary=A CORRECT
+[155/299] id=VASoL_2008_5_28 gold=C fp16=C ternary=B WRONG
+[156/299] id=Mercury_177818 gold=C fp16=C ternary=C CORRECT
+[157/299] id=NYSEDREGENTS_2014_8_12 gold=1 fp16=2 ternary=2 WRONG
+[158/299] id=Mercury_7139790 gold=C fp16=C ternary=D WRONG
+[159/299] id=MCAS_2003_8_25 gold=B fp16=A ternary=A WRONG
+[160/299] id=Mercury_7003955 gold=D fp16=A ternary=A WRONG
+[161/299] id=Mercury_176838 gold=A fp16=D ternary=D WRONG
+[162/299] id=Mercury_SC_407314 gold=A fp16=A ternary=A CORRECT
+[163/299] id=Mercury_SC_400845 gold=B fp16=A ternary=D WRONG
+[164/299] id=Mercury_7245193 gold=C fp16=C ternary=C CORRECT
+[165/299] id=Mercury_7068863 gold=C fp16=D ternary=A WRONG
+[166/299] id=NCEOGA_2013_8_38 gold=C fp16=A ternary=C CORRECT
+[167/299] id=Mercury_7090720 gold=B fp16=D ternary=B CORRECT
+[168/299] id=MCAS_2006_9_35 gold=A fp16=D ternary=D WRONG
+[169/299] id=Mercury_7144795 gold=D fp16=C ternary=A WRONG
+[170/299] id=Mercury_SC_LBS10915 gold=B fp16=B ternary=B CORRECT
+[171/299] id=MCAS_2009_8_5 gold=D fp16=A ternary=A WRONG
+[172/299] id=Mercury_7175455 gold=D fp16=D ternary=D CORRECT
+[173/299] id=Mercury_7100608 gold=B fp16=B ternary=B CORRECT
+[174/299] id=Mercury_177398 gold=B fp16=A ternary=B CORRECT
+[175/299] id=Mercury_SC_415491 gold=C fp16=D ternary=B WRONG
+[176/299] id=Mercury_SC_400047 gold=B fp16=B ternary=B CORRECT
+[177/299] id=Mercury_7218750 gold=C fp16=A ternary=B WRONG
+[178/299] id=Mercury_7115395 gold=A fp16=A ternary=A CORRECT
+[179/299] id=Mercury_7205555 gold=A fp16=A ternary=A CORRECT
+[180/299] id=Mercury_7093975 gold=D fp16=D ternary=D CORRECT
+[181/299] id=MCAS_2012_5_23632 gold=C fp16=C ternary=C CORRECT
+[182/299] id=Mercury_7130883 gold=B fp16=B ternary=B CORRECT
+[183/299] id=Mercury_416648 gold=A fp16=A ternary=B WRONG
+[184/299] id=Mercury_7006790 gold=B fp16=B ternary=B CORRECT
+[185/299] id=Mercury_SC_401244 gold=D fp16=D ternary=C WRONG
+[186/299] id=Mercury_7141908 gold=C fp16=A ternary=B WRONG
+[187/299] id=Mercury_7186148 gold=B fp16=A ternary=A WRONG
+[188/299] id=Mercury_7124338 gold=D fp16=D ternary=A WRONG
+[189/299] id=Mercury_184258 gold=A fp16=A ternary=A CORRECT
+[190/299] id=Mercury_SC_400178 gold=C fp16=A ternary=D WRONG
+[191/299] id=Mercury_7007875 gold=B fp16=A ternary=A WRONG
+[192/299] id=Mercury_7221865 gold=C fp16=B ternary=B WRONG
+[193/299] id=Mercury_7269238 gold=D fp16=D ternary=D CORRECT
+[194/299] id=NCEOGA_2013_8_40 gold=C fp16=C ternary=C CORRECT
+[195/299] id=Mercury_SC_415735 gold=C fp16=C ternary=C CORRECT
+[196/299] id=Mercury_7115273 gold=C fp16=C ternary=D WRONG
+[197/299] id=Mercury_7233660 gold=C fp16=D ternary=D WRONG
+[198/299] id=Mercury_7026198 gold=A fp16=A ternary=A CORRECT
+[199/299] id=Mercury_7044100 gold=C fp16=A ternary=A WRONG
+[200/299] id=Mercury_SC_408859 gold=A fp16=A ternary=A CORRECT
+[201/299] id=LEAP_2012_8_10441 gold=C fp16=A ternary=A WRONG
+[202/299] id=Mercury_7220378 gold=C fp16=C ternary=B WRONG
+[203/299] id=TIMSS_2003_8_pg14 gold=B fp16=D ternary=D WRONG
+[204/299] id=Mercury_SC_405973 gold=B fp16=B ternary=B CORRECT
+[205/299] id=OHAT_2011_8_3 gold=D fp16=D ternary=C WRONG
+[206/299] id=Mercury_412683 gold=D fp16=A ternary=A WRONG
+[207/299] id=MCAS_1998_8_2 gold=C fp16=C ternary=C CORRECT
+[208/299] id=Mercury_7005478 gold=B fp16=A ternary=B CORRECT
+[209/299] id=Mercury_7105123 gold=C fp16=C ternary=C CORRECT
+[210/299] id=Mercury_7154263 gold=B fp16=A ternary=B CORRECT
+[211/299] id=TIMSS_2003_8_pg29 gold=E fp16=A ternary=B WRONG
+[212/299] id=Mercury_7245053 gold=B fp16=B ternary=B CORRECT
+[213/299] id=TIMSS_2007_4_pg26 gold=B fp16=A ternary=D WRONG
+[214/299] id=NYSEDREGENTS_2014_4_9 gold=A fp16=D ternary=B WRONG
+[215/299] id=Mercury_414131 gold=C fp16=B ternary=B WRONG
+[216/299] id=Mercury_SC_407574 gold=A fp16=D ternary=D WRONG
+[217/299] id=Mercury_7018515 gold=C fp16=A ternary=A WRONG
+[218/299] id=TIMSS_2003_8_pg31 gold=B fp16=B ternary=B CORRECT
+[219/299] id=Mercury_7015435 gold=A fp16=A ternary=A CORRECT
+[220/299] id=Mercury_7166880 gold=D fp16=A ternary=B WRONG
+[221/299] id=Mercury_7251668 gold=D fp16=A ternary=A WRONG
+[222/299] id=Mercury_415263 gold=C fp16=C ternary=C CORRECT
+[223/299] id=MEA_2013_5_3 gold=D fp16=D ternary=D CORRECT
+[224/299] id=Mercury_7205345 gold=D fp16=D ternary=D CORRECT
+[225/299] id=Mercury_7250023 gold=A fp16=A ternary=A CORRECT
+[226/299] id=ACTAAP_2009_5_5 gold=B fp16=D ternary=D WRONG
+[227/299] id=Mercury_406781 gold=C fp16=A ternary=A WRONG
+[228/299] id=Mercury_7086013 gold=D fp16=B ternary=B WRONG
+[229/299] id=Mercury_7057313 gold=A fp16=A ternary=A CORRECT
+[230/299] id=Mercury_SC_LBS10472 gold=B fp16=D ternary=B CORRECT
+[231/299] id=Mercury_7190155 gold=B fp16=B ternary=B CORRECT
+[232/299] id=Mercury_7081760 gold=B fp16=C ternary=C WRONG
+[233/299] id=Mercury_7075145 gold=A fp16=A ternary=A CORRECT
+[234/299] id=Mercury_7037573 gold=D fp16=C ternary=C WRONG
+[235/299] id=NYSEDREGENTS_2014_8_41 gold=4 fp16=2 ternary=2 WRONG
+[236/299] id=Mercury_SC_408700 gold=C fp16=C ternary=C CORRECT
+[237/299] id=Mercury_7284043 gold=C fp16=D ternary=C CORRECT
+[238/299] id=Mercury_7103180 gold=B fp16=B ternary=B CORRECT
+[239/299] id=Mercury_7099768 gold=D fp16=C ternary=A WRONG
+[240/299] id=Mercury_7133648 gold=C fp16=A ternary=A WRONG
+[241/299] id=NYSEDREGENTS_2014_4_22 gold=A fp16=A ternary=A CORRECT
+[242/299] id=NYSEDREGENTS_2014_4_28 gold=B fp16=A ternary=B CORRECT
+[243/299] id=Mercury_SC_406029 gold=D fp16=C ternary=C WRONG
+[244/299] id=Mercury_7267593 gold=A fp16=A ternary=B WRONG
+[245/299] id=Mercury_7085820 gold=D fp16=D ternary=B WRONG
+[246/299] id=MCAS_2011_5_17673 gold=A fp16=B ternary=B WRONG
+[247/299] id=Mercury_7090738 gold=A fp16=A ternary=A CORRECT
+[248/299] id=Mercury_7234483 gold=B fp16=B ternary=B CORRECT
+[249/299] id=NYSEDREGENTS_2014_4_20 gold=D fp16=D ternary=D CORRECT
+[250/299] id=Mercury_7141698 gold=B fp16=B ternary=B CORRECT
+[251/299] id=Mercury_SC_415354 gold=C fp16=A ternary=D WRONG
+[252/299] id=NYSEDREGENTS_2014_4_2 gold=D fp16=D ternary=D CORRECT
+[253/299] id=Mercury_7187058 gold=A fp16=A ternary=A CORRECT
+[254/299] id=Mercury_7221095 gold=A fp16=A ternary=A CORRECT
+[255/299] id=Mercury_7143518 gold=D fp16=D ternary=D CORRECT
+[256/299] id=Mercury_7014368 gold=C fp16=C ternary=C CORRECT
+[257/299] id=Mercury_7018445 gold=D fp16=D ternary=B WRONG
+[258/299] id=MCAS_2014_8_17 gold=D fp16=A ternary=A WRONG
+[259/299] id=Mercury_180443 gold=C fp16=A ternary=C CORRECT
+[260/299] id=Mercury_7120890 gold=A fp16=A ternary=A CORRECT
+[261/299] id=Mercury_7159268 gold=A fp16=B ternary=B WRONG
+[262/299] id=MCAS_1999_8_22 gold=B fp16=B ternary=B CORRECT
+[263/299] id=Mercury_SC_415397 gold=C fp16=C ternary=C CORRECT
+[264/299] id=Mercury_7042735 gold=C fp16=A ternary=B WRONG
+[265/299] id=Mercury_SC_400172 gold=A fp16=B ternary=B WRONG
+[266/299] id=Mercury_7008120 gold=A fp16=A ternary=A CORRECT
+[267/299] id=Mercury_7267995 gold=C fp16=C ternary=C CORRECT
+[268/299] id=Mercury_7038133 gold=B fp16=A ternary=D WRONG
+[269/299] id=Mercury_7026443 gold=D fp16=A ternary=B WRONG
+[270/299] id=Mercury_7099103 gold=D fp16=D ternary=D CORRECT
+[271/299] id=Mercury_7207620 gold=A fp16=A ternary=A CORRECT
+[272/299] id=NCEOGA_2013_5_43 gold=B fp16=B ternary=B CORRECT
+[273/299] id=Mercury_7166180 gold=B fp16=B ternary=B CORRECT
+[274/299] id=Mercury_7168123 gold=B fp16=B ternary=B CORRECT
+[275/299] id=MCAS_2012_8_23636 gold=D fp16=A ternary=A WRONG
+[276/299] id=MCAS_2013_8_29421 gold=A fp16=B ternary=B WRONG
+[277/299] id=Mercury_400397 gold=C fp16=D ternary=D WRONG
+[278/299] id=Mercury_184013 gold=C fp16=A ternary=A WRONG
+[279/299] id=MDSA_2007_8_15 gold=C fp16=A ternary=A WRONG
+[280/299] id=Mercury_SC_401714 gold=B fp16=B ternary=B CORRECT
+[281/299] id=Mercury_7246925 gold=D fp16=A ternary=A WRONG
+[282/299] id=Mercury_400905 gold=D fp16=D ternary=A WRONG
+[283/299] id=Mercury_7131828 gold=C fp16=A ternary=A WRONG
+[284/299] id=Mercury_7166530 gold=B fp16=B ternary=B CORRECT
+[285/299] id=Mercury_7074865 gold=C fp16=B ternary=B WRONG
+[286/299] id=Mercury_7246995 gold=C fp16=A ternary=C CORRECT
+[287/299] id=TIMSS_2011_8_pg63 gold=C fp16=C ternary=C CORRECT
+[288/299] id=Mercury_SC_400612 gold=C fp16=B ternary=B WRONG
+[289/299] id=MEA_2016_5_7 gold=B fp16=B ternary=B CORRECT
+[290/299] id=ACTAAP_2011_5_3 gold=C fp16=D ternary=B WRONG
+[291/299] id=Mercury_7264023 gold=D fp16=A ternary=D CORRECT
+[292/299] id=Mercury_SC_400050 gold=C fp16=A ternary=A WRONG
+[293/299] id=MCAS_2003_5_31 gold=D fp16=A ternary=A WRONG
+[294/299] id=Mercury_LBS10399 gold=D fp16=B ternary=B WRONG
+[295/299] id=Mercury_7090598 gold=C fp16=A ternary=B WRONG
+[296/299] id=OHAT_2007_5_24 gold=B fp16=B ternary=B CORRECT
+[297/299] id=Mercury_SC_402239 gold=C fp16=B ternary=B WRONG
+[298/299] id=Mercury_7245088 gold=D fp16=D ternary=D CORRECT
+[299/299] id=Mercury_7082145 gold=D fp16=D ternary=B WRONG
+
+CONDITION E RESULT
+Correct              : 155/299
+Accuracy             : 51.84%
+Delta vs FP16        : -3.68 pp
+Prediction agreement : 72.58%
+Changed predictions  : 82
+FP16 only correct    : 32
+Ternary only correct : 21
+McNemar exact p      : 0.168977822288
+
+====================================================================================================================================
+EXPERIMENT 021 — q_proj INTERACTION ATTRIBUTION
+====================================================================================================================================
+
+FP16 baseline: 166/299 (55.52%)
+
+ID   Condition          Matrices      Params     Cov%   Correct     Acc%     Delta    Agree%  Changed   FPonly   Tonly      McNemar p
+------------------------------------------------------------------------------------------------------------------------------------
+A    q_only                    1   4,194,304   0.5575       165    55.18    -0.33    77.26       68       23      22              1
+B    k_plus_q                  2   4,718,592   0.6271       166    55.52    +0.00    78.26       65       20      20              1
+C    out_plus_q                2   6,291,456   0.8362       148    49.50    -6.02    71.91       84       38      20       0.024746
+D    qkv_plus_q                2  10,485,760   1.3937       150    50.17    -5.35    75.25       74       34      18      0.0364834
+E    k_out_q                   3   6,815,744   0.9059       155    51.84    -3.68    72.58       82       32      21       0.168978
+
+==========================================================================================
+CONDITION F — k_qkv_q
+==========================================================================================
+  model.layers.3.self_attn.k_proj
+  model.layers.4.linear_attn.in_proj_qkv
+  model.layers.3.self_attn.q_proj
+
+Matrix count     : 3
+Parameters       : 11,010,048
+Coverage         : 1.4633%
+Mean error       : 0.467508925
+Max error        : 0.478280364
+Mean scale ratio : 1.345842208
+[001/299] id=Mercury_SC_407695 gold=D fp16=A ternary=D CORRECT
+[002/299] id=Mercury_7103565 gold=C fp16=C ternary=C CORRECT
+[003/299] id=MDSA_2009_5_16 gold=D fp16=B ternary=B WRONG
+[004/299] id=Mercury_7027230 gold=A fp16=A ternary=A CORRECT
+[005/299] id=Mercury_SC_405487 gold=B fp16=B ternary=B CORRECT
+[006/299] id=Mercury_7032743 gold=C fp16=A ternary=A WRONG
+[007/299] id=Mercury_7205135 gold=C fp16=C ternary=C CORRECT
+[008/299] id=MDSA_2007_4_52 gold=C fp16=C ternary=B WRONG
+[009/299] id=Mercury_7103215 gold=C fp16=C ternary=C CORRECT
+[010/299] id=Mercury_192168 gold=D fp16=A ternary=B WRONG
+[011/299] id=Mercury_SC_412337 gold=D fp16=A ternary=A WRONG
+[012/299] id=Mercury_7162838 gold=D fp16=D ternary=D CORRECT
+[013/299] id=Mercury_7159775 gold=A fp16=B ternary=B WRONG
+[014/299] id=Mercury_7195440 gold=B fp16=B ternary=B CORRECT
+[015/299] id=Mercury_7017990 gold=A fp16=A ternary=A CORRECT
+[016/299] id=TIMSS_2007_4_pg90 gold=C fp16=B ternary=C CORRECT
+[017/299] id=Mercury_7198380 gold=D fp16=A ternary=A WRONG
+[018/299] id=NAEP_2005_8_S11+14 gold=B fp16=D ternary=D WRONG
+[019/299] id=Mercury_192290 gold=D fp16=B ternary=B WRONG
+[020/299] id=Mercury_7192990 gold=A fp16=A ternary=A CORRECT
+[021/299] id=Mercury_7217053 gold=B fp16=A ternary=B CORRECT
+[022/299] id=Mercury_7179358 gold=B fp16=A ternary=A WRONG
+[023/299] id=MCAS_2005_8_5 gold=D fp16=B ternary=D CORRECT
+[024/299] id=MCAS_2000_8_10 gold=B fp16=B ternary=B CORRECT
+[025/299] id=Mercury_7187915 gold=A fp16=A ternary=D WRONG
+[026/299] id=Mercury_7189823 gold=A fp16=A ternary=A CORRECT
+[027/299] id=Mercury_405454 gold=D fp16=A ternary=D CORRECT
+[028/299] id=MCAS_2012_5_8 gold=B fp16=B ternary=B CORRECT
+[029/299] id=Mercury_SC_LBS10040 gold=D fp16=D ternary=D CORRECT
+[030/299] id=Mercury_7115063 gold=A fp16=A ternary=A CORRECT
+[031/299] id=MCAS_2015_8_7 gold=B fp16=A ternary=B CORRECT
+[032/299] id=Mercury_184765 gold=B fp16=B ternary=B CORRECT
+[033/299] id=ACTAAP_2013_7_17 gold=D fp16=D ternary=D CORRECT
+[034/299] id=Mercury_7248238 gold=D fp16=B ternary=B WRONG
+[035/299] id=Mercury_SC_410964 gold=D fp16=D ternary=D CORRECT
+[036/299] id=NYSEDREGENTS_2014_4_4 gold=A fp16=A ternary=A CORRECT
+[037/299] id=MCAS_8_2015_11 gold=A fp16=A ternary=A CORRECT
+[038/299] id=Mercury_7183733 gold=B fp16=B ternary=B CORRECT
+[039/299] id=MDSA_2010_5_18 gold=D fp16=D ternary=D CORRECT
+[040/299] id=LEAP__7_10354 gold=D fp16=D ternary=D CORRECT
+[041/299] id=Mercury_7282608 gold=C fp16=B ternary=B WRONG
+[042/299] id=Mercury_7071365 gold=D fp16=B ternary=B WRONG
+[043/299] id=Mercury_SC_407169 gold=D fp16=D ternary=D CORRECT
+[044/299] id=ACTAAP_2007_7_5 gold=B fp16=B ternary=B CORRECT
+[045/299] id=Mercury_7207358 gold=C fp16=C ternary=A WRONG
+[046/299] id=Mercury_7245893 gold=B fp16=B ternary=B CORRECT
+[047/299] id=Mercury_7223038 gold=C fp16=B ternary=B WRONG
+[048/299] id=Mercury_SC_415541 gold=D fp16=D ternary=D CORRECT
+[049/299] id=Mercury_7236023 gold=B fp16=A ternary=B CORRECT
+[050/299] id=Mercury_417146 gold=A fp16=A ternary=A CORRECT
+[051/299] id=Mercury_7128695 gold=C fp16=A ternary=A WRONG
+[052/299] id=Mercury_7270008 gold=C fp16=C ternary=B WRONG
+[053/299] id=Mercury_7242743 gold=D fp16=D ternary=D CORRECT
+[054/299] id=Mercury_SC_400655 gold=A fp16=A ternary=A CORRECT
+[055/299] id=Mercury_7100695 gold=D fp16=A ternary=A WRONG
+[056/299] id=MSA_2013_8_3 gold=D fp16=D ternary=D CORRECT
+[057/299] id=NYSEDREGENTS_2014_4_19 gold=B fp16=B ternary=B CORRECT
+[058/299] id=MCAS_2013_8_29432 gold=B fp16=B ternary=D WRONG
+[059/299] id=Mercury_7042700 gold=D fp16=A ternary=B WRONG
+[060/299] id=Mercury_7201705 gold=A fp16=A ternary=A CORRECT
+[061/299] id=MCAS_1998_8_13 gold=D fp16=A ternary=A WRONG
+[062/299] id=Mercury_7138513 gold=A fp16=D ternary=D WRONG
+[063/299] id=Mercury_SC_401663 gold=B fp16=B ternary=B CORRECT
+[064/299] id=NCEOGA_2013_8_4 gold=D fp16=D ternary=D CORRECT
+[065/299] id=Mercury_7235813 gold=D fp16=B ternary=B WRONG
+[066/299] id=Mercury_7011270 gold=B fp16=A ternary=D WRONG
+[067/299] id=Mercury_7228603 gold=C fp16=C ternary=D WRONG
+[068/299] id=Mercury_SC_400339 gold=C fp16=A ternary=A WRONG
+[069/299] id=Mercury_SC_406705 gold=B fp16=B ternary=B CORRECT
+[070/299] id=MCAS_2010_5_11998 gold=A fp16=A ternary=A CORRECT
+[071/299] id=Mercury_7029505 gold=C fp16=C ternary=C CORRECT
+[072/299] id=Mercury_SC_401286 gold=B fp16=B ternary=D WRONG
+[073/299] id=Mercury_7120908 gold=D fp16=D ternary=D CORRECT
+[074/299] id=MCAS_2010_8_12010 gold=C fp16=C ternary=B WRONG
+[075/299] id=Mercury_7008138 gold=B fp16=B ternary=A WRONG
+[076/299] id=Mercury_7018148 gold=B fp16=B ternary=D WRONG
+[077/299] id=MCAS_2004_8_28 gold=A fp16=A ternary=A CORRECT
+[078/299] id=Mercury_176015 gold=D fp16=A ternary=A WRONG
+[079/299] id=Mercury_7189035 gold=D fp16=A ternary=B WRONG
+[080/299] id=Mercury_7207410 gold=C fp16=B ternary=B WRONG
+[081/299] id=Mercury_7233678 gold=A fp16=A ternary=A CORRECT
+[082/299] id=Mercury_SC_402101 gold=D fp16=B ternary=B WRONG
+[083/299] id=Mercury_SC_402104 gold=D fp16=D ternary=D CORRECT
+[084/299] id=Mercury_7183015 gold=A fp16=A ternary=A CORRECT
+[085/299] id=Mercury_7238963 gold=A fp16=D ternary=B WRONG
+[086/299] id=NYSEDREGENTS_2014_4_14 gold=A fp16=A ternary=A CORRECT
+[087/299] id=Mercury_7004410 gold=B fp16=B ternary=B CORRECT
+[088/299] id=Mercury_SC_406939 gold=C fp16=B ternary=B WRONG
+[089/299] id=Mercury_7270200 gold=A fp16=A ternary=A CORRECT
+[090/299] id=NYSEDREGENTS_2014_8_20 gold=2 fp16=2 ternary=2 CORRECT
+[091/299] id=Mercury_7135310 gold=C fp16=A ternary=A WRONG
+[092/299] id=Mercury_400885 gold=D fp16=A ternary=A WRONG
+[093/299] id=Mercury_412551 gold=D fp16=D ternary=D CORRECT
+[094/299] id=Mercury_7193043 gold=B fp16=A ternary=A WRONG
+[095/299] id=Mercury_7181685 gold=A fp16=A ternary=A CORRECT
+[096/299] id=LEAP_2006_8_10412 gold=B fp16=A ternary=B CORRECT
+[097/299] id=Mercury_7215180 gold=C fp16=C ternary=C CORRECT
+[098/299] id=NYSEDREGENTS_2014_8_38 gold=1 fp16=2 ternary=2 WRONG
+[099/299] id=Mercury_7145513 gold=B fp16=A ternary=A WRONG
+[100/299] id=MEA_2010_8_11 gold=A fp16=A ternary=B WRONG
+[101/299] id=Mercury_7241115 gold=C fp16=A ternary=A WRONG
+[102/299] id=NYSEDREGENTS_2014_4_17 gold=C fp16=A ternary=D WRONG
+[103/299] id=NYSEDREGENTS_2014_4_13 gold=B fp16=B ternary=B CORRECT
+[104/299] id=Mercury_7033653 gold=C fp16=C ternary=C CORRECT
+[105/299] id=AKDE&ED_2008_8_44 gold=A fp16=A ternary=A CORRECT
+[106/299] id=Mercury_SC_415026 gold=C fp16=A ternary=D WRONG
+[107/299] id=Mercury_7219415 gold=C fp16=C ternary=B WRONG
+[108/299] id=Mercury_400934 gold=C fp16=A ternary=A WRONG
+[109/299] id=Mercury_7139493 gold=B fp16=B ternary=B CORRECT
+[110/299] id=Mercury_7032340 gold=D fp16=B ternary=B WRONG
+[111/299] id=MEAP_2005_5_1 gold=C fp16=C ternary=C CORRECT
+[112/299] id=ACTAAP_2007_7_25 gold=A fp16=D ternary=D WRONG
+[113/299] id=Mercury_SC_415348 gold=D fp16=B ternary=B WRONG
+[114/299] id=Mercury_7171938 gold=D fp16=B ternary=B WRONG
+[115/299] id=NYSEDREGENTS_2014_4_1 gold=B fp16=B ternary=B CORRECT
+[116/299] id=Mercury_7185133 gold=A fp16=A ternary=A CORRECT
+[117/299] id=Mercury_SC_411306 gold=D fp16=D ternary=D CORRECT
+[118/299] id=Mercury_SC_LBS10666 gold=B fp16=B ternary=B CORRECT
+[119/299] id=Mercury_SC_401294 gold=B fp16=C ternary=D WRONG
+[120/299] id=MCAS_2005_5_21 gold=D fp16=D ternary=D CORRECT
+[121/299] id=MCAS_2004_9_13 gold=D fp16=A ternary=B WRONG
+[122/299] id=Mercury_7251685 gold=B fp16=B ternary=B CORRECT
+[123/299] id=MDSA_2011_5_20 gold=D fp16=D ternary=D CORRECT
+[124/299] id=MCAS_2006_5_29 gold=D fp16=D ternary=D CORRECT
+[125/299] id=VASoL_2008_5_19 gold=D fp16=A ternary=A WRONG
+[126/299] id=Mercury_7246348 gold=A fp16=D ternary=D WRONG
+[127/299] id=MCAS_2006_9_33 gold=D fp16=D ternary=D CORRECT
+[128/299] id=Mercury_SC_LBS10598 gold=A fp16=A ternary=A CORRECT
+[129/299] id=MDSA_2008_5_24 gold=C fp16=A ternary=A WRONG
+[130/299] id=Mercury_7141400 gold=A fp16=D ternary=D WRONG
+[131/299] id=Mercury_SC_415366 gold=B fp16=B ternary=B CORRECT
+[132/299] id=Mercury_408809 gold=C fp16=D ternary=D WRONG
+[133/299] id=MDSA_2007_5_39 gold=D fp16=D ternary=D CORRECT
+[134/299] id=Mercury_7164850 gold=A fp16=A ternary=D WRONG
+[135/299] id=MCAS_2006_9_31-v1 gold=C fp16=C ternary=A WRONG
+[136/299] id=MCAS_2002_5_6 gold=D fp16=A ternary=A WRONG
+[137/299] id=MEA_2016_5_6 gold=C fp16=C ternary=C CORRECT
+[138/299] id=Mercury_180058 gold=A fp16=D ternary=D WRONG
+[139/299] id=Mercury_7133858 gold=B fp16=B ternary=B CORRECT
+[140/299] id=Mercury_7130603 gold=C fp16=A ternary=A WRONG
+[141/299] id=Mercury_7018008 gold=A fp16=A ternary=A CORRECT
+[142/299] id=AIMS_2009_4_29 gold=D fp16=B ternary=B WRONG
+[143/299] id=Mercury_189490 gold=A fp16=A ternary=A CORRECT
+[144/299] id=Mercury_7138688 gold=D fp16=D ternary=D CORRECT
+[145/299] id=Mercury_409529 gold=B fp16=B ternary=B CORRECT
+[146/299] id=Mercury_7092295 gold=C fp16=A ternary=B WRONG
+[147/299] id=Mercury_7044678 gold=A fp16=A ternary=A CORRECT
+[148/299] id=MCAS_1998_4_8 gold=B fp16=B ternary=B CORRECT
+[149/299] id=LEAP_2004_8_10397 gold=B fp16=B ternary=B CORRECT
+[150/299] id=Mercury_7112753 gold=B fp16=B ternary=B CORRECT
+[151/299] id=Mercury_7097318 gold=D fp16=A ternary=A WRONG
+[152/299] id=Mercury_7158673 gold=D fp16=D ternary=D CORRECT
+[153/299] id=Mercury_7038273 gold=A fp16=A ternary=B WRONG
+[154/299] id=ACTAAP_2010_5_10 gold=A fp16=A ternary=A CORRECT
+[155/299] id=VASoL_2008_5_28 gold=C fp16=C ternary=B WRONG
+[156/299] id=Mercury_177818 gold=C fp16=C ternary=C CORRECT
+[157/299] id=NYSEDREGENTS_2014_8_12 gold=1 fp16=2 ternary=2 WRONG
+[158/299] id=Mercury_7139790 gold=C fp16=C ternary=D WRONG
+[159/299] id=MCAS_2003_8_25 gold=B fp16=A ternary=A WRONG
+[160/299] id=Mercury_7003955 gold=D fp16=A ternary=A WRONG
+[161/299] id=Mercury_176838 gold=A fp16=D ternary=D WRONG
+[162/299] id=Mercury_SC_407314 gold=A fp16=A ternary=D WRONG
+[163/299] id=Mercury_SC_400845 gold=B fp16=A ternary=D WRONG
+[164/299] id=Mercury_7245193 gold=C fp16=C ternary=D WRONG
+[165/299] id=Mercury_7068863 gold=C fp16=D ternary=D WRONG
+[166/299] id=NCEOGA_2013_8_38 gold=C fp16=A ternary=A WRONG
+[167/299] id=Mercury_7090720 gold=B fp16=D ternary=B CORRECT
+[168/299] id=MCAS_2006_9_35 gold=A fp16=D ternary=D WRONG
+[169/299] id=Mercury_7144795 gold=D fp16=C ternary=D CORRECT
+[170/299] id=Mercury_SC_LBS10915 gold=B fp16=B ternary=B CORRECT
+[171/299] id=MCAS_2009_8_5 gold=D fp16=A ternary=A WRONG
+[172/299] id=Mercury_7175455 gold=D fp16=D ternary=D CORRECT
+[173/299] id=Mercury_7100608 gold=B fp16=B ternary=B CORRECT
+[174/299] id=Mercury_177398 gold=B fp16=A ternary=B CORRECT
+[175/299] id=Mercury_SC_415491 gold=C fp16=D ternary=B WRONG
+[176/299] id=Mercury_SC_400047 gold=B fp16=B ternary=B CORRECT
+[177/299] id=Mercury_7218750 gold=C fp16=A ternary=A WRONG
+[178/299] id=Mercury_7115395 gold=A fp16=A ternary=A CORRECT
+[179/299] id=Mercury_7205555 gold=A fp16=A ternary=A CORRECT
+[180/299] id=Mercury_7093975 gold=D fp16=D ternary=D CORRECT
+[181/299] id=MCAS_2012_5_23632 gold=C fp16=C ternary=C CORRECT
+[182/299] id=Mercury_7130883 gold=B fp16=B ternary=B CORRECT
+[183/299] id=Mercury_416648 gold=A fp16=A ternary=B WRONG
+[184/299] id=Mercury_7006790 gold=B fp16=B ternary=B CORRECT
+[185/299] id=Mercury_SC_401244 gold=D fp16=D ternary=D CORRECT
+[186/299] id=Mercury_7141908 gold=C fp16=A ternary=B WRONG
+[187/299] id=Mercury_7186148 gold=B fp16=A ternary=A WRONG
+[188/299] id=Mercury_7124338 gold=D fp16=D ternary=A WRONG
+[189/299] id=Mercury_184258 gold=A fp16=A ternary=A CORRECT
+[190/299] id=Mercury_SC_400178 gold=C fp16=A ternary=D WRONG
+[191/299] id=Mercury_7007875 gold=B fp16=A ternary=A WRONG
+[192/299] id=Mercury_7221865 gold=C fp16=B ternary=B WRONG
+[193/299] id=Mercury_7269238 gold=D fp16=D ternary=D CORRECT
+[194/299] id=NCEOGA_2013_8_40 gold=C fp16=C ternary=D WRONG
+[195/299] id=Mercury_SC_415735 gold=C fp16=C ternary=C CORRECT
+[196/299] id=Mercury_7115273 gold=C fp16=C ternary=D WRONG
+[197/299] id=Mercury_7233660 gold=C fp16=D ternary=D WRONG
+[198/299] id=Mercury_7026198 gold=A fp16=A ternary=A CORRECT
+[199/299] id=Mercury_7044100 gold=C fp16=A ternary=A WRONG
+[200/299] id=Mercury_SC_408859 gold=A fp16=A ternary=A CORRECT
+[201/299] id=LEAP_2012_8_10441 gold=C fp16=A ternary=A WRONG
+[202/299] id=Mercury_7220378 gold=C fp16=C ternary=D WRONG
+[203/299] id=TIMSS_2003_8_pg14 gold=B fp16=D ternary=D WRONG
+[204/299] id=Mercury_SC_405973 gold=B fp16=B ternary=B CORRECT
+[205/299] id=OHAT_2011_8_3 gold=D fp16=D ternary=D CORRECT
+[206/299] id=Mercury_412683 gold=D fp16=A ternary=B WRONG
+[207/299] id=MCAS_1998_8_2 gold=C fp16=C ternary=C CORRECT
+[208/299] id=Mercury_7005478 gold=B fp16=A ternary=B CORRECT
+[209/299] id=Mercury_7105123 gold=C fp16=C ternary=B WRONG
+[210/299] id=Mercury_7154263 gold=B fp16=A ternary=B CORRECT
+[211/299] id=TIMSS_2003_8_pg29 gold=E fp16=A ternary=B WRONG
+[212/299] id=Mercury_7245053 gold=B fp16=B ternary=B CORRECT
+[213/299] id=TIMSS_2007_4_pg26 gold=B fp16=A ternary=D WRONG
+[214/299] id=NYSEDREGENTS_2014_4_9 gold=A fp16=D ternary=D WRONG
+[215/299] id=Mercury_414131 gold=C fp16=B ternary=B WRONG
+[216/299] id=Mercury_SC_407574 gold=A fp16=D ternary=D WRONG
+[217/299] id=Mercury_7018515 gold=C fp16=A ternary=D WRONG
+[218/299] id=TIMSS_2003_8_pg31 gold=B fp16=B ternary=B CORRECT
+[219/299] id=Mercury_7015435 gold=A fp16=A ternary=A CORRECT
+[220/299] id=Mercury_7166880 gold=D fp16=A ternary=B WRONG
+[221/299] id=Mercury_7251668 gold=D fp16=A ternary=A WRONG
+[222/299] id=Mercury_415263 gold=C fp16=C ternary=D WRONG
+[223/299] id=MEA_2013_5_3 gold=D fp16=D ternary=D CORRECT
+[224/299] id=Mercury_7205345 gold=D fp16=D ternary=D CORRECT
+[225/299] id=Mercury_7250023 gold=A fp16=A ternary=A CORRECT
+[226/299] id=ACTAAP_2009_5_5 gold=B fp16=D ternary=D WRONG
+[227/299] id=Mercury_406781 gold=C fp16=A ternary=A WRONG
+[228/299] id=Mercury_7086013 gold=D fp16=B ternary=B WRONG
+[229/299] id=Mercury_7057313 gold=A fp16=A ternary=A CORRECT
+[230/299] id=Mercury_SC_LBS10472 gold=B fp16=D ternary=B CORRECT
+[231/299] id=Mercury_7190155 gold=B fp16=B ternary=B CORRECT
+[232/299] id=Mercury_7081760 gold=B fp16=C ternary=C WRONG
+[233/299] id=Mercury_7075145 gold=A fp16=A ternary=A CORRECT
+[234/299] id=Mercury_7037573 gold=D fp16=C ternary=C WRONG
+[235/299] id=NYSEDREGENTS_2014_8_41 gold=4 fp16=2 ternary=2 WRONG
+[236/299] id=Mercury_SC_408700 gold=C fp16=C ternary=C CORRECT
+[237/299] id=Mercury_7284043 gold=C fp16=D ternary=D WRONG
+[238/299] id=Mercury_7103180 gold=B fp16=B ternary=B CORRECT
+[239/299] id=Mercury_7099768 gold=D fp16=C ternary=A WRONG
+[240/299] id=Mercury_7133648 gold=C fp16=A ternary=A WRONG
+[241/299] id=NYSEDREGENTS_2014_4_22 gold=A fp16=A ternary=A CORRECT
+[242/299] id=NYSEDREGENTS_2014_4_28 gold=B fp16=A ternary=B CORRECT
+[243/299] id=Mercury_SC_406029 gold=D fp16=C ternary=B WRONG
+[244/299] id=Mercury_7267593 gold=A fp16=A ternary=B WRONG
+[245/299] id=Mercury_7085820 gold=D fp16=D ternary=B WRONG
+[246/299] id=MCAS_2011_5_17673 gold=A fp16=B ternary=A CORRECT
+[247/299] id=Mercury_7090738 gold=A fp16=A ternary=A CORRECT
+[248/299] id=Mercury_7234483 gold=B fp16=B ternary=B CORRECT
+[249/299] id=NYSEDREGENTS_2014_4_20 gold=D fp16=D ternary=D CORRECT
+[250/299] id=Mercury_7141698 gold=B fp16=B ternary=B CORRECT
+[251/299] id=Mercury_SC_415354 gold=C fp16=A ternary=D WRONG
+[252/299] id=NYSEDREGENTS_2014_4_2 gold=D fp16=D ternary=D CORRECT
+[253/299] id=Mercury_7187058 gold=A fp16=A ternary=A CORRECT
+[254/299] id=Mercury_7221095 gold=A fp16=A ternary=A CORRECT
+[255/299] id=Mercury_7143518 gold=D fp16=D ternary=D CORRECT
+[256/299] id=Mercury_7014368 gold=C fp16=C ternary=C CORRECT
+[257/299] id=Mercury_7018445 gold=D fp16=D ternary=D CORRECT
+[258/299] id=MCAS_2014_8_17 gold=D fp16=A ternary=A WRONG
+[259/299] id=Mercury_180443 gold=C fp16=A ternary=A WRONG
+[260/299] id=Mercury_7120890 gold=A fp16=A ternary=A CORRECT
+[261/299] id=Mercury_7159268 gold=A fp16=B ternary=B WRONG
+[262/299] id=MCAS_1999_8_22 gold=B fp16=B ternary=B CORRECT
+[263/299] id=Mercury_SC_415397 gold=C fp16=C ternary=C CORRECT
+[264/299] id=Mercury_7042735 gold=C fp16=A ternary=B WRONG
+[265/299] id=Mercury_SC_400172 gold=A fp16=B ternary=B WRONG
+[266/299] id=Mercury_7008120 gold=A fp16=A ternary=A CORRECT
+[267/299] id=Mercury_7267995 gold=C fp16=C ternary=C CORRECT
+[268/299] id=Mercury_7038133 gold=B fp16=A ternary=D WRONG
+[269/299] id=Mercury_7026443 gold=D fp16=A ternary=D CORRECT
+[270/299] id=Mercury_7099103 gold=D fp16=D ternary=D CORRECT
+[271/299] id=Mercury_7207620 gold=A fp16=A ternary=B WRONG
+[272/299] id=NCEOGA_2013_5_43 gold=B fp16=B ternary=B CORRECT
+[273/299] id=Mercury_7166180 gold=B fp16=B ternary=B CORRECT
+[274/299] id=Mercury_7168123 gold=B fp16=B ternary=B CORRECT
+[275/299] id=MCAS_2012_8_23636 gold=D fp16=A ternary=A WRONG
+[276/299] id=MCAS_2013_8_29421 gold=A fp16=B ternary=B WRONG
+[277/299] id=Mercury_400397 gold=C fp16=D ternary=D WRONG
+[278/299] id=Mercury_184013 gold=C fp16=A ternary=A WRONG
+[279/299] id=MDSA_2007_8_15 gold=C fp16=A ternary=D WRONG
+[280/299] id=Mercury_SC_401714 gold=B fp16=B ternary=D WRONG
+[281/299] id=Mercury_7246925 gold=D fp16=A ternary=A WRONG
+[282/299] id=Mercury_400905 gold=D fp16=D ternary=A WRONG
+[283/299] id=Mercury_7131828 gold=C fp16=A ternary=A WRONG
+[284/299] id=Mercury_7166530 gold=B fp16=B ternary=B CORRECT
+[285/299] id=Mercury_7074865 gold=C fp16=B ternary=B WRONG
+[286/299] id=Mercury_7246995 gold=C fp16=A ternary=A WRONG
+[287/299] id=TIMSS_2011_8_pg63 gold=C fp16=C ternary=D WRONG
+[288/299] id=Mercury_SC_400612 gold=C fp16=B ternary=B WRONG
+[289/299] id=MEA_2016_5_7 gold=B fp16=B ternary=B CORRECT
+[290/299] id=ACTAAP_2011_5_3 gold=C fp16=D ternary=D WRONG
+[291/299] id=Mercury_7264023 gold=D fp16=A ternary=D CORRECT
+[292/299] id=Mercury_SC_400050 gold=C fp16=A ternary=A WRONG
+[293/299] id=MCAS_2003_5_31 gold=D fp16=A ternary=A WRONG
+[294/299] id=Mercury_LBS10399 gold=D fp16=B ternary=B WRONG
+[295/299] id=Mercury_7090598 gold=C fp16=A ternary=A WRONG
+[296/299] id=OHAT_2007_5_24 gold=B fp16=B ternary=B CORRECT
+[297/299] id=Mercury_SC_402239 gold=C fp16=B ternary=B WRONG
+[298/299] id=Mercury_7245088 gold=D fp16=D ternary=D CORRECT
+[299/299] id=Mercury_7082145 gold=D fp16=D ternary=D CORRECT
+
+CONDITION F RESULT
+Correct              : 152/299
+Accuracy             : 50.84%
+Delta vs FP16        : -4.68 pp
+Prediction agreement : 74.92%
+Changed predictions  : 75
+FP16 only correct    : 32
+Ternary only correct : 18
+McNemar exact p      : 0.0649086470723
+
+====================================================================================================================================
+EXPERIMENT 021 — q_proj INTERACTION ATTRIBUTION
+====================================================================================================================================
+
+FP16 baseline: 166/299 (55.52%)
+
+ID   Condition          Matrices      Params     Cov%   Correct     Acc%     Delta    Agree%  Changed   FPonly   Tonly      McNemar p
+------------------------------------------------------------------------------------------------------------------------------------
+A    q_only                    1   4,194,304   0.5575       165    55.18    -0.33    77.26       68       23      22              1
+B    k_plus_q                  2   4,718,592   0.6271       166    55.52    +0.00    78.26       65       20      20              1
+C    out_plus_q                2   6,291,456   0.8362       148    49.50    -6.02    71.91       84       38      20       0.024746
+D    qkv_plus_q                2  10,485,760   1.3937       150    50.17    -5.35    75.25       74       34      18      0.0364834
+E    k_out_q                   3   6,815,744   0.9059       155    51.84    -3.68    72.58       82       32      21       0.168978
+F    k_qkv_q                   3  11,010,048   1.4633       152    50.84    -4.68    74.92       75       32      18      0.0649086
+
+==========================================================================================
+CONDITION G — out_qkv_q
+==========================================================================================
+  model.layers.4.linear_attn.out_proj
+  model.layers.4.linear_attn.in_proj_qkv
+  model.layers.3.self_attn.q_proj
+
+Matrix count     : 3
+Parameters       : 12,582,912
+Coverage         : 1.6724%
+Mean error       : 0.469427737
+Max error        : 0.481714656
+Mean scale ratio : 1.349603280
+[001/299] id=Mercury_SC_407695 gold=D fp16=A ternary=D CORRECT
+[002/299] id=Mercury_7103565 gold=C fp16=C ternary=A WRONG
+[003/299] id=MDSA_2009_5_16 gold=D fp16=B ternary=B WRONG
+[004/299] id=Mercury_7027230 gold=A fp16=A ternary=B WRONG
+[005/299] id=Mercury_SC_405487 gold=B fp16=B ternary=B CORRECT
+[006/299] id=Mercury_7032743 gold=C fp16=A ternary=A WRONG
+[007/299] id=Mercury_7205135 gold=C fp16=C ternary=C CORRECT
+[008/299] id=MDSA_2007_4_52 gold=C fp16=C ternary=B WRONG
+[009/299] id=Mercury_7103215 gold=C fp16=C ternary=C CORRECT
+[010/299] id=Mercury_192168 gold=D fp16=A ternary=B WRONG
+[011/299] id=Mercury_SC_412337 gold=D fp16=A ternary=A WRONG
+[012/299] id=Mercury_7162838 gold=D fp16=D ternary=D CORRECT
+[013/299] id=Mercury_7159775 gold=A fp16=B ternary=B WRONG
+[014/299] id=Mercury_7195440 gold=B fp16=B ternary=B CORRECT
+[015/299] id=Mercury_7017990 gold=A fp16=A ternary=A CORRECT
+[016/299] id=TIMSS_2007_4_pg90 gold=C fp16=B ternary=B WRONG
+[017/299] id=Mercury_7198380 gold=D fp16=A ternary=D CORRECT
+[018/299] id=NAEP_2005_8_S11+14 gold=B fp16=D ternary=D WRONG
+[019/299] id=Mercury_192290 gold=D fp16=B ternary=B WRONG
+[020/299] id=Mercury_7192990 gold=A fp16=A ternary=A CORRECT
+[021/299] id=Mercury_7217053 gold=B fp16=A ternary=B CORRECT
+[022/299] id=Mercury_7179358 gold=B fp16=A ternary=B CORRECT
+[023/299] id=MCAS_2005_8_5 gold=D fp16=B ternary=D CORRECT
+[024/299] id=MCAS_2000_8_10 gold=B fp16=B ternary=B CORRECT
+[025/299] id=Mercury_7187915 gold=A fp16=A ternary=D WRONG
+[026/299] id=Mercury_7189823 gold=A fp16=A ternary=B WRONG
+[027/299] id=Mercury_405454 gold=D fp16=A ternary=B WRONG
+[028/299] id=MCAS_2012_5_8 gold=B fp16=B ternary=B CORRECT
+[029/299] id=Mercury_SC_LBS10040 gold=D fp16=D ternary=D CORRECT
+[030/299] id=Mercury_7115063 gold=A fp16=A ternary=A CORRECT
+[031/299] id=MCAS_2015_8_7 gold=B fp16=A ternary=B CORRECT
+[032/299] id=Mercury_184765 gold=B fp16=B ternary=B CORRECT
+[033/299] id=ACTAAP_2013_7_17 gold=D fp16=D ternary=B WRONG
+[034/299] id=Mercury_7248238 gold=D fp16=B ternary=B WRONG
+[035/299] id=Mercury_SC_410964 gold=D fp16=D ternary=D CORRECT
+[036/299] id=NYSEDREGENTS_2014_4_4 gold=A fp16=A ternary=A CORRECT
+[037/299] id=MCAS_8_2015_11 gold=A fp16=A ternary=A CORRECT
+[038/299] id=Mercury_7183733 gold=B fp16=B ternary=B CORRECT
+[039/299] id=MDSA_2010_5_18 gold=D fp16=D ternary=D CORRECT
+[040/299] id=LEAP__7_10354 gold=D fp16=D ternary=D CORRECT
+[041/299] id=Mercury_7282608 gold=C fp16=B ternary=B WRONG
+[042/299] id=Mercury_7071365 gold=D fp16=B ternary=B WRONG
+[043/299] id=Mercury_SC_407169 gold=D fp16=D ternary=D CORRECT
+[044/299] id=ACTAAP_2007_7_5 gold=B fp16=B ternary=B CORRECT
+[045/299] id=Mercury_7207358 gold=C fp16=C ternary=A WRONG
+[046/299] id=Mercury_7245893 gold=B fp16=B ternary=B CORRECT
+[047/299] id=Mercury_7223038 gold=C fp16=B ternary=B WRONG
+[048/299] id=Mercury_SC_415541 gold=D fp16=D ternary=D CORRECT
+[049/299] id=Mercury_7236023 gold=B fp16=A ternary=B CORRECT
+[050/299] id=Mercury_417146 gold=A fp16=A ternary=B WRONG
+[051/299] id=Mercury_7128695 gold=C fp16=A ternary=A WRONG
+[052/299] id=Mercury_7270008 gold=C fp16=C ternary=C CORRECT
+[053/299] id=Mercury_7242743 gold=D fp16=D ternary=D CORRECT
+[054/299] id=Mercury_SC_400655 gold=A fp16=A ternary=A CORRECT
+[055/299] id=Mercury_7100695 gold=D fp16=A ternary=A WRONG
+[056/299] id=MSA_2013_8_3 gold=D fp16=D ternary=D CORRECT
+[057/299] id=NYSEDREGENTS_2014_4_19 gold=B fp16=B ternary=B CORRECT
+[058/299] id=MCAS_2013_8_29432 gold=B fp16=B ternary=B CORRECT
+[059/299] id=Mercury_7042700 gold=D fp16=A ternary=B WRONG
+[060/299] id=Mercury_7201705 gold=A fp16=A ternary=A CORRECT
+[061/299] id=MCAS_1998_8_13 gold=D fp16=A ternary=A WRONG
+[062/299] id=Mercury_7138513 gold=A fp16=D ternary=D WRONG
+[063/299] id=Mercury_SC_401663 gold=B fp16=B ternary=B CORRECT
+[064/299] id=NCEOGA_2013_8_4 gold=D fp16=D ternary=B WRONG
+[065/299] id=Mercury_7235813 gold=D fp16=B ternary=B WRONG
+[066/299] id=Mercury_7011270 gold=B fp16=A ternary=B CORRECT
+[067/299] id=Mercury_7228603 gold=C fp16=C ternary=D WRONG
+[068/299] id=Mercury_SC_400339 gold=C fp16=A ternary=B WRONG
+[069/299] id=Mercury_SC_406705 gold=B fp16=B ternary=B CORRECT
+[070/299] id=MCAS_2010_5_11998 gold=A fp16=A ternary=A CORRECT
+[071/299] id=Mercury_7029505 gold=C fp16=C ternary=C CORRECT
+[072/299] id=Mercury_SC_401286 gold=B fp16=B ternary=D WRONG
+[073/299] id=Mercury_7120908 gold=D fp16=D ternary=D CORRECT
+[074/299] id=MCAS_2010_8_12010 gold=C fp16=C ternary=C CORRECT
+[075/299] id=Mercury_7008138 gold=B fp16=B ternary=A WRONG
+[076/299] id=Mercury_7018148 gold=B fp16=B ternary=D WRONG
+[077/299] id=MCAS_2004_8_28 gold=A fp16=A ternary=B WRONG
+[078/299] id=Mercury_176015 gold=D fp16=A ternary=A WRONG
+[079/299] id=Mercury_7189035 gold=D fp16=A ternary=B WRONG
+[080/299] id=Mercury_7207410 gold=C fp16=B ternary=B WRONG
+[081/299] id=Mercury_7233678 gold=A fp16=A ternary=A CORRECT
+[082/299] id=Mercury_SC_402101 gold=D fp16=B ternary=B WRONG
+[083/299] id=Mercury_SC_402104 gold=D fp16=D ternary=D CORRECT
+[084/299] id=Mercury_7183015 gold=A fp16=A ternary=A CORRECT
+[085/299] id=Mercury_7238963 gold=A fp16=D ternary=D WRONG
+[086/299] id=NYSEDREGENTS_2014_4_14 gold=A fp16=A ternary=A CORRECT
+[087/299] id=Mercury_7004410 gold=B fp16=B ternary=B CORRECT
+[088/299] id=Mercury_SC_406939 gold=C fp16=B ternary=B WRONG
+[089/299] id=Mercury_7270200 gold=A fp16=A ternary=D WRONG
+[090/299] id=NYSEDREGENTS_2014_8_20 gold=2 fp16=2 ternary=2 CORRECT
+[091/299] id=Mercury_7135310 gold=C fp16=A ternary=A WRONG
+[092/299] id=Mercury_400885 gold=D fp16=A ternary=A WRONG
+[093/299] id=Mercury_412551 gold=D fp16=D ternary=D CORRECT
+[094/299] id=Mercury_7193043 gold=B fp16=A ternary=A WRONG
+[095/299] id=Mercury_7181685 gold=A fp16=A ternary=A CORRECT
+[096/299] id=LEAP_2006_8_10412 gold=B fp16=A ternary=B CORRECT
+[097/299] id=Mercury_7215180 gold=C fp16=C ternary=C CORRECT
+[098/299] id=NYSEDREGENTS_2014_8_38 gold=1 fp16=2 ternary=2 WRONG
+[099/299] id=Mercury_7145513 gold=B fp16=A ternary=B CORRECT
+[100/299] id=MEA_2010_8_11 gold=A fp16=A ternary=D WRONG
+[101/299] id=Mercury_7241115 gold=C fp16=A ternary=A WRONG
+[102/299] id=NYSEDREGENTS_2014_4_17 gold=C fp16=A ternary=D WRONG
+[103/299] id=NYSEDREGENTS_2014_4_13 gold=B fp16=B ternary=B CORRECT
+[104/299] id=Mercury_7033653 gold=C fp16=C ternary=C CORRECT
+[105/299] id=AKDE&ED_2008_8_44 gold=A fp16=A ternary=A CORRECT
+[106/299] id=Mercury_SC_415026 gold=C fp16=A ternary=C CORRECT
+[107/299] id=Mercury_7219415 gold=C fp16=C ternary=B WRONG
+[108/299] id=Mercury_400934 gold=C fp16=A ternary=A WRONG
+[109/299] id=Mercury_7139493 gold=B fp16=B ternary=B CORRECT
+[110/299] id=Mercury_7032340 gold=D fp16=B ternary=B WRONG
+[111/299] id=MEAP_2005_5_1 gold=C fp16=C ternary=C CORRECT
+[112/299] id=ACTAAP_2007_7_25 gold=A fp16=D ternary=B WRONG
+[113/299] id=Mercury_SC_415348 gold=D fp16=B ternary=B WRONG
+[114/299] id=Mercury_7171938 gold=D fp16=B ternary=B WRONG
+[115/299] id=NYSEDREGENTS_2014_4_1 gold=B fp16=B ternary=B CORRECT
+[116/299] id=Mercury_7185133 gold=A fp16=A ternary=D WRONG
+[117/299] id=Mercury_SC_411306 gold=D fp16=D ternary=D CORRECT
+[118/299] id=Mercury_SC_LBS10666 gold=B fp16=B ternary=B CORRECT
+[119/299] id=Mercury_SC_401294 gold=B fp16=C ternary=B CORRECT
+[120/299] id=MCAS_2005_5_21 gold=D fp16=D ternary=D CORRECT
+[121/299] id=MCAS_2004_9_13 gold=D fp16=A ternary=B WRONG
+[122/299] id=Mercury_7251685 gold=B fp16=B ternary=B CORRECT
+[123/299] id=MDSA_2011_5_20 gold=D fp16=D ternary=D CORRECT
+[124/299] id=MCAS_2006_5_29 gold=D fp16=D ternary=D CORRECT
+[125/299] id=VASoL_2008_5_19 gold=D fp16=A ternary=A WRONG
+[126/299] id=Mercury_7246348 gold=A fp16=D ternary=D WRONG
+[127/299] id=MCAS_2006_9_33 gold=D fp16=D ternary=D CORRECT
+[128/299] id=Mercury_SC_LBS10598 gold=A fp16=A ternary=B WRONG
+[129/299] id=MDSA_2008_5_24 gold=C fp16=A ternary=A WRONG
+[130/299] id=Mercury_7141400 gold=A fp16=D ternary=D WRONG
+[131/299] id=Mercury_SC_415366 gold=B fp16=B ternary=B CORRECT
+[132/299] id=Mercury_408809 gold=C fp16=D ternary=D WRONG
+[133/299] id=MDSA_2007_5_39 gold=D fp16=D ternary=D CORRECT
+[134/299] id=Mercury_7164850 gold=A fp16=A ternary=B WRONG
+[135/299] id=MCAS_2006_9_31-v1 gold=C fp16=C ternary=C CORRECT
+[136/299] id=MCAS_2002_5_6 gold=D fp16=A ternary=A WRONG
+[137/299] id=MEA_2016_5_6 gold=C fp16=C ternary=C CORRECT
+[138/299] id=Mercury_180058 gold=A fp16=D ternary=A CORRECT
+[139/299] id=Mercury_7133858 gold=B fp16=B ternary=B CORRECT
+[140/299] id=Mercury_7130603 gold=C fp16=A ternary=A WRONG
+[141/299] id=Mercury_7018008 gold=A fp16=A ternary=B WRONG
+[142/299] id=AIMS_2009_4_29 gold=D fp16=B ternary=B WRONG
+[143/299] id=Mercury_189490 gold=A fp16=A ternary=A CORRECT
+[144/299] id=Mercury_7138688 gold=D fp16=D ternary=D CORRECT
+[145/299] id=Mercury_409529 gold=B fp16=B ternary=B CORRECT
+[146/299] id=Mercury_7092295 gold=C fp16=A ternary=B WRONG
+[147/299] id=Mercury_7044678 gold=A fp16=A ternary=A CORRECT
+[148/299] id=MCAS_1998_4_8 gold=B fp16=B ternary=B CORRECT
+[149/299] id=LEAP_2004_8_10397 gold=B fp16=B ternary=B CORRECT
+[150/299] id=Mercury_7112753 gold=B fp16=B ternary=B CORRECT
+[151/299] id=Mercury_7097318 gold=D fp16=A ternary=A WRONG
+[152/299] id=Mercury_7158673 gold=D fp16=D ternary=D CORRECT
+[153/299] id=Mercury_7038273 gold=A fp16=A ternary=B WRONG
+[154/299] id=ACTAAP_2010_5_10 gold=A fp16=A ternary=A CORRECT
+[155/299] id=VASoL_2008_5_28 gold=C fp16=C ternary=B WRONG
+[156/299] id=Mercury_177818 gold=C fp16=C ternary=C CORRECT
+[157/299] id=NYSEDREGENTS_2014_8_12 gold=1 fp16=2 ternary=2 WRONG
+[158/299] id=Mercury_7139790 gold=C fp16=C ternary=C CORRECT
+[159/299] id=MCAS_2003_8_25 gold=B fp16=A ternary=A WRONG
+[160/299] id=Mercury_7003955 gold=D fp16=A ternary=A WRONG
+[161/299] id=Mercury_176838 gold=A fp16=D ternary=D WRONG
+[162/299] id=Mercury_SC_407314 gold=A fp16=A ternary=D WRONG
+[163/299] id=Mercury_SC_400845 gold=B fp16=A ternary=D WRONG
+[164/299] id=Mercury_7245193 gold=C fp16=C ternary=B WRONG
+[165/299] id=Mercury_7068863 gold=C fp16=D ternary=A WRONG
+[166/299] id=NCEOGA_2013_8_38 gold=C fp16=A ternary=C CORRECT
+[167/299] id=Mercury_7090720 gold=B fp16=D ternary=B CORRECT
+[168/299] id=MCAS_2006_9_35 gold=A fp16=D ternary=D WRONG
+[169/299] id=Mercury_7144795 gold=D fp16=C ternary=A WRONG
+[170/299] id=Mercury_SC_LBS10915 gold=B fp16=B ternary=B CORRECT
+[171/299] id=MCAS_2009_8_5 gold=D fp16=A ternary=A WRONG
+[172/299] id=Mercury_7175455 gold=D fp16=D ternary=D CORRECT
+[173/299] id=Mercury_7100608 gold=B fp16=B ternary=B CORRECT
+[174/299] id=Mercury_177398 gold=B fp16=A ternary=B CORRECT
+[175/299] id=Mercury_SC_415491 gold=C fp16=D ternary=B WRONG
+[176/299] id=Mercury_SC_400047 gold=B fp16=B ternary=B CORRECT
+[177/299] id=Mercury_7218750 gold=C fp16=A ternary=A WRONG
+[178/299] id=Mercury_7115395 gold=A fp16=A ternary=A CORRECT
+[179/299] id=Mercury_7205555 gold=A fp16=A ternary=A CORRECT
+[180/299] id=Mercury_7093975 gold=D fp16=D ternary=D CORRECT
+[181/299] id=MCAS_2012_5_23632 gold=C fp16=C ternary=C CORRECT
+[182/299] id=Mercury_7130883 gold=B fp16=B ternary=B CORRECT
+[183/299] id=Mercury_416648 gold=A fp16=A ternary=B WRONG
+[184/299] id=Mercury_7006790 gold=B fp16=B ternary=B CORRECT
+[185/299] id=Mercury_SC_401244 gold=D fp16=D ternary=C WRONG
+[186/299] id=Mercury_7141908 gold=C fp16=A ternary=B WRONG
+[187/299] id=Mercury_7186148 gold=B fp16=A ternary=A WRONG
+[188/299] id=Mercury_7124338 gold=D fp16=D ternary=A WRONG
+[189/299] id=Mercury_184258 gold=A fp16=A ternary=A CORRECT
+[190/299] id=Mercury_SC_400178 gold=C fp16=A ternary=A WRONG
+[191/299] id=Mercury_7007875 gold=B fp16=A ternary=A WRONG
+[192/299] id=Mercury_7221865 gold=C fp16=B ternary=B WRONG
+[193/299] id=Mercury_7269238 gold=D fp16=D ternary=B WRONG
+[194/299] id=NCEOGA_2013_8_40 gold=C fp16=C ternary=D WRONG
+[195/299] id=Mercury_SC_415735 gold=C fp16=C ternary=C CORRECT
+[196/299] id=Mercury_7115273 gold=C fp16=C ternary=D WRONG
+[197/299] id=Mercury_7233660 gold=C fp16=D ternary=D WRONG
+[198/299] id=Mercury_7026198 gold=A fp16=A ternary=A CORRECT
+[199/299] id=Mercury_7044100 gold=C fp16=A ternary=A WRONG
+[200/299] id=Mercury_SC_408859 gold=A fp16=A ternary=A CORRECT
+[201/299] id=LEAP_2012_8_10441 gold=C fp16=A ternary=A WRONG
+[202/299] id=Mercury_7220378 gold=C fp16=C ternary=B WRONG
+[203/299] id=TIMSS_2003_8_pg14 gold=B fp16=D ternary=D WRONG
+[204/299] id=Mercury_SC_405973 gold=B fp16=B ternary=B CORRECT
+[205/299] id=OHAT_2011_8_3 gold=D fp16=D ternary=D CORRECT
+[206/299] id=Mercury_412683 gold=D fp16=A ternary=B WRONG
+[207/299] id=MCAS_1998_8_2 gold=C fp16=C ternary=C CORRECT
+[208/299] id=Mercury_7005478 gold=B fp16=A ternary=B CORRECT
+[209/299] id=Mercury_7105123 gold=C fp16=C ternary=B WRONG
+[210/299] id=Mercury_7154263 gold=B fp16=A ternary=B CORRECT
+[211/299] id=TIMSS_2003_8_pg29 gold=E fp16=A ternary=B WRONG
+[212/299] id=Mercury_7245053 gold=B fp16=B ternary=B CORRECT
+[213/299] id=TIMSS_2007_4_pg26 gold=B fp16=A ternary=D WRONG
+[214/299] id=NYSEDREGENTS_2014_4_9 gold=A fp16=D ternary=D WRONG
+[215/299] id=Mercury_414131 gold=C fp16=B ternary=B WRONG
+[216/299] id=Mercury_SC_407574 gold=A fp16=D ternary=D WRONG
+[217/299] id=Mercury_7018515 gold=C fp16=A ternary=A WRONG
+[218/299] id=TIMSS_2003_8_pg31 gold=B fp16=B ternary=B CORRECT
+[219/299] id=Mercury_7015435 gold=A fp16=A ternary=A CORRECT
+[220/299] id=Mercury_7166880 gold=D fp16=A ternary=B WRONG
+[221/299] id=Mercury_7251668 gold=D fp16=A ternary=A WRONG
+[222/299] id=Mercury_415263 gold=C fp16=C ternary=C CORRECT
+[223/299] id=MEA_2013_5_3 gold=D fp16=D ternary=D CORRECT
+[224/299] id=Mercury_7205345 gold=D fp16=D ternary=D CORRECT
+[225/299] id=Mercury_7250023 gold=A fp16=A ternary=A CORRECT
+[226/299] id=ACTAAP_2009_5_5 gold=B fp16=D ternary=D WRONG
+[227/299] id=Mercury_406781 gold=C fp16=A ternary=A WRONG
+[228/299] id=Mercury_7086013 gold=D fp16=B ternary=B WRONG
+[229/299] id=Mercury_7057313 gold=A fp16=A ternary=A CORRECT
+[230/299] id=Mercury_SC_LBS10472 gold=B fp16=D ternary=B CORRECT
+[231/299] id=Mercury_7190155 gold=B fp16=B ternary=D WRONG
+[232/299] id=Mercury_7081760 gold=B fp16=C ternary=C WRONG
+[233/299] id=Mercury_7075145 gold=A fp16=A ternary=A CORRECT
+[234/299] id=Mercury_7037573 gold=D fp16=C ternary=C WRONG
+[235/299] id=NYSEDREGENTS_2014_8_41 gold=4 fp16=2 ternary=2 WRONG
+[236/299] id=Mercury_SC_408700 gold=C fp16=C ternary=C CORRECT
+[237/299] id=Mercury_7284043 gold=C fp16=D ternary=D WRONG
+[238/299] id=Mercury_7103180 gold=B fp16=B ternary=B CORRECT
+[239/299] id=Mercury_7099768 gold=D fp16=C ternary=A WRONG
+[240/299] id=Mercury_7133648 gold=C fp16=A ternary=A WRONG
+[241/299] id=NYSEDREGENTS_2014_4_22 gold=A fp16=A ternary=A CORRECT
+[242/299] id=NYSEDREGENTS_2014_4_28 gold=B fp16=A ternary=B CORRECT
+[243/299] id=Mercury_SC_406029 gold=D fp16=C ternary=B WRONG
+[244/299] id=Mercury_7267593 gold=A fp16=A ternary=B WRONG
+[245/299] id=Mercury_7085820 gold=D fp16=D ternary=B WRONG
+[246/299] id=MCAS_2011_5_17673 gold=A fp16=B ternary=A CORRECT
+[247/299] id=Mercury_7090738 gold=A fp16=A ternary=A CORRECT
+[248/299] id=Mercury_7234483 gold=B fp16=B ternary=B CORRECT
+[249/299] id=NYSEDREGENTS_2014_4_20 gold=D fp16=D ternary=D CORRECT
+[250/299] id=Mercury_7141698 gold=B fp16=B ternary=B CORRECT
+[251/299] id=Mercury_SC_415354 gold=C fp16=A ternary=D WRONG
+[252/299] id=NYSEDREGENTS_2014_4_2 gold=D fp16=D ternary=D CORRECT
+[253/299] id=Mercury_7187058 gold=A fp16=A ternary=A CORRECT
+[254/299] id=Mercury_7221095 gold=A fp16=A ternary=A CORRECT
+[255/299] id=Mercury_7143518 gold=D fp16=D ternary=D CORRECT
+[256/299] id=Mercury_7014368 gold=C fp16=C ternary=C CORRECT
+[257/299] id=Mercury_7018445 gold=D fp16=D ternary=B WRONG
+[258/299] id=MCAS_2014_8_17 gold=D fp16=A ternary=A WRONG
+[259/299] id=Mercury_180443 gold=C fp16=A ternary=B WRONG
+[260/299] id=Mercury_7120890 gold=A fp16=A ternary=A CORRECT
+[261/299] id=Mercury_7159268 gold=A fp16=B ternary=B WRONG
+[262/299] id=MCAS_1999_8_22 gold=B fp16=B ternary=B CORRECT
+[263/299] id=Mercury_SC_415397 gold=C fp16=C ternary=C CORRECT
+[264/299] id=Mercury_7042735 gold=C fp16=A ternary=B WRONG
+[265/299] id=Mercury_SC_400172 gold=A fp16=B ternary=B WRONG
+[266/299] id=Mercury_7008120 gold=A fp16=A ternary=A CORRECT
+[267/299] id=Mercury_7267995 gold=C fp16=C ternary=C CORRECT
+[268/299] id=Mercury_7038133 gold=B fp16=A ternary=D WRONG
+[269/299] id=Mercury_7026443 gold=D fp16=A ternary=C WRONG
+[270/299] id=Mercury_7099103 gold=D fp16=D ternary=D CORRECT
+[271/299] id=Mercury_7207620 gold=A fp16=A ternary=A CORRECT
+[272/299] id=NCEOGA_2013_5_43 gold=B fp16=B ternary=B CORRECT
+[273/299] id=Mercury_7166180 gold=B fp16=B ternary=B CORRECT
+[274/299] id=Mercury_7168123 gold=B fp16=B ternary=B CORRECT
+[275/299] id=MCAS_2012_8_23636 gold=D fp16=A ternary=A WRONG
+[276/299] id=MCAS_2013_8_29421 gold=A fp16=B ternary=B WRONG
+[277/299] id=Mercury_400397 gold=C fp16=D ternary=D WRONG
+[278/299] id=Mercury_184013 gold=C fp16=A ternary=A WRONG
+[279/299] id=MDSA_2007_8_15 gold=C fp16=A ternary=A WRONG
+[280/299] id=Mercury_SC_401714 gold=B fp16=B ternary=B CORRECT
+[281/299] id=Mercury_7246925 gold=D fp16=A ternary=A WRONG
+[282/299] id=Mercury_400905 gold=D fp16=D ternary=A WRONG
+[283/299] id=Mercury_7131828 gold=C fp16=A ternary=A WRONG
+[284/299] id=Mercury_7166530 gold=B fp16=B ternary=B CORRECT
+[285/299] id=Mercury_7074865 gold=C fp16=B ternary=B WRONG
+[286/299] id=Mercury_7246995 gold=C fp16=A ternary=C CORRECT
+[287/299] id=TIMSS_2011_8_pg63 gold=C fp16=C ternary=D WRONG
+[288/299] id=Mercury_SC_400612 gold=C fp16=B ternary=B WRONG
+[289/299] id=MEA_2016_5_7 gold=B fp16=B ternary=B CORRECT
+[290/299] id=ACTAAP_2011_5_3 gold=C fp16=D ternary=B WRONG
+[291/299] id=Mercury_7264023 gold=D fp16=A ternary=D CORRECT
+[292/299] id=Mercury_SC_400050 gold=C fp16=A ternary=A WRONG
+[293/299] id=MCAS_2003_5_31 gold=D fp16=A ternary=A WRONG
+[294/299] id=Mercury_LBS10399 gold=D fp16=B ternary=C WRONG
+[295/299] id=Mercury_7090598 gold=C fp16=A ternary=B WRONG
+[296/299] id=OHAT_2007_5_24 gold=B fp16=B ternary=B CORRECT
+[297/299] id=Mercury_SC_402239 gold=C fp16=B ternary=B WRONG
+[298/299] id=Mercury_7245088 gold=D fp16=D ternary=D CORRECT
+[299/299] id=Mercury_7082145 gold=D fp16=D ternary=D CORRECT
+
+CONDITION G RESULT
+Correct              : 150/299
+Accuracy             : 50.17%
+Delta vs FP16        : -5.35 pp
+Prediction agreement : 69.90%
+Changed predictions  : 90
+FP16 only correct    : 39
+Ternary only correct : 23
+McNemar exact p      : 0.0558972266997
+
+====================================================================================================================================
+EXPERIMENT 021 — q_proj INTERACTION ATTRIBUTION
+====================================================================================================================================
+
+FP16 baseline: 166/299 (55.52%)
+
+ID   Condition          Matrices      Params     Cov%   Correct     Acc%     Delta    Agree%  Changed   FPonly   Tonly      McNemar p
+------------------------------------------------------------------------------------------------------------------------------------
+A    q_only                    1   4,194,304   0.5575       165    55.18    -0.33    77.26       68       23      22              1
+B    k_plus_q                  2   4,718,592   0.6271       166    55.52    +0.00    78.26       65       20      20              1
+C    out_plus_q                2   6,291,456   0.8362       148    49.50    -6.02    71.91       84       38      20       0.024746
+D    qkv_plus_q                2  10,485,760   1.3937       150    50.17    -5.35    75.25       74       34      18      0.0364834
+E    k_out_q                   3   6,815,744   0.9059       155    51.84    -3.68    72.58       82       32      21       0.168978
+F    k_qkv_q                   3  11,010,048   1.4633       152    50.84    -4.68    74.92       75       32      18      0.0649086
+G    out_qkv_q                 3  12,582,912   1.6724       150    50.17    -5.35    69.90       90       39      23      0.0558972
+
+==========================================================================================
+CONDITION H — k_out_qkv_q
+==========================================================================================
+  model.layers.3.self_attn.k_proj
+  model.layers.4.linear_attn.out_proj
+  model.layers.4.linear_attn.in_proj_qkv
+  model.layers.3.self_attn.q_proj
+
+Matrix count     : 4
+Parameters       : 13,107,200
+Coverage         : 1.7421%
+Mean error       : 0.469781842
+Max error        : 0.481714656
+Mean scale ratio : 1.349739595
+[001/299] id=Mercury_SC_407695 gold=D fp16=A ternary=D CORRECT
+[002/299] id=Mercury_7103565 gold=C fp16=C ternary=B WRONG
+[003/299] id=MDSA_2009_5_16 gold=D fp16=B ternary=B WRONG
+[004/299] id=Mercury_7027230 gold=A fp16=A ternary=B WRONG
+[005/299] id=Mercury_SC_405487 gold=B fp16=B ternary=B CORRECT
+[006/299] id=Mercury_7032743 gold=C fp16=A ternary=A WRONG
+[007/299] id=Mercury_7205135 gold=C fp16=C ternary=C CORRECT
+[008/299] id=MDSA_2007_4_52 gold=C fp16=C ternary=B WRONG
+[009/299] id=Mercury_7103215 gold=C fp16=C ternary=C CORRECT
+[010/299] id=Mercury_192168 gold=D fp16=A ternary=B WRONG
+[011/299] id=Mercury_SC_412337 gold=D fp16=A ternary=A WRONG
+[012/299] id=Mercury_7162838 gold=D fp16=D ternary=D CORRECT
+[013/299] id=Mercury_7159775 gold=A fp16=B ternary=B WRONG
+[014/299] id=Mercury_7195440 gold=B fp16=B ternary=B CORRECT
+[015/299] id=Mercury_7017990 gold=A fp16=A ternary=B WRONG
+[016/299] id=TIMSS_2007_4_pg90 gold=C fp16=B ternary=B WRONG
+[017/299] id=Mercury_7198380 gold=D fp16=A ternary=B WRONG
+[018/299] id=NAEP_2005_8_S11+14 gold=B fp16=D ternary=D WRONG
+[019/299] id=Mercury_192290 gold=D fp16=B ternary=B WRONG
+[020/299] id=Mercury_7192990 gold=A fp16=A ternary=A CORRECT
+[021/299] id=Mercury_7217053 gold=B fp16=A ternary=B CORRECT
+[022/299] id=Mercury_7179358 gold=B fp16=A ternary=B CORRECT
+[023/299] id=MCAS_2005_8_5 gold=D fp16=B ternary=D CORRECT
+[024/299] id=MCAS_2000_8_10 gold=B fp16=B ternary=B CORRECT
+[025/299] id=Mercury_7187915 gold=A fp16=A ternary=D WRONG
+[026/299] id=Mercury_7189823 gold=A fp16=A ternary=B WRONG
+[027/299] id=Mercury_405454 gold=D fp16=A ternary=B WRONG
+[028/299] id=MCAS_2012_5_8 gold=B fp16=B ternary=B CORRECT
+[029/299] id=Mercury_SC_LBS10040 gold=D fp16=D ternary=D CORRECT
+[030/299] id=Mercury_7115063 gold=A fp16=A ternary=A CORRECT
+[031/299] id=MCAS_2015_8_7 gold=B fp16=A ternary=B CORRECT
+[032/299] id=Mercury_184765 gold=B fp16=B ternary=B CORRECT
+[033/299] id=ACTAAP_2013_7_17 gold=D fp16=D ternary=B WRONG
+[034/299] id=Mercury_7248238 gold=D fp16=B ternary=B WRONG
+[035/299] id=Mercury_SC_410964 gold=D fp16=D ternary=D CORRECT
+[036/299] id=NYSEDREGENTS_2014_4_4 gold=A fp16=A ternary=A CORRECT
+[037/299] id=MCAS_8_2015_11 gold=A fp16=A ternary=A CORRECT
+[038/299] id=Mercury_7183733 gold=B fp16=B ternary=B CORRECT
+[039/299] id=MDSA_2010_5_18 gold=D fp16=D ternary=D CORRECT
+[040/299] id=LEAP__7_10354 gold=D fp16=D ternary=D CORRECT
+[041/299] id=Mercury_7282608 gold=C fp16=B ternary=B WRONG
+[042/299] id=Mercury_7071365 gold=D fp16=B ternary=B WRONG
+[043/299] id=Mercury_SC_407169 gold=D fp16=D ternary=D CORRECT
+[044/299] id=ACTAAP_2007_7_5 gold=B fp16=B ternary=B CORRECT
+[045/299] id=Mercury_7207358 gold=C fp16=C ternary=A WRONG
+[046/299] id=Mercury_7245893 gold=B fp16=B ternary=C WRONG
+[047/299] id=Mercury_7223038 gold=C fp16=B ternary=B WRONG
+[048/299] id=Mercury_SC_415541 gold=D fp16=D ternary=D CORRECT
+[049/299] id=Mercury_7236023 gold=B fp16=A ternary=B CORRECT
+[050/299] id=Mercury_417146 gold=A fp16=A ternary=B WRONG
+[051/299] id=Mercury_7128695 gold=C fp16=A ternary=A WRONG
+[052/299] id=Mercury_7270008 gold=C fp16=C ternary=C CORRECT
+[053/299] id=Mercury_7242743 gold=D fp16=D ternary=D CORRECT
+[054/299] id=Mercury_SC_400655 gold=A fp16=A ternary=A CORRECT
+[055/299] id=Mercury_7100695 gold=D fp16=A ternary=A WRONG
+[056/299] id=MSA_2013_8_3 gold=D fp16=D ternary=D CORRECT
+[057/299] id=NYSEDREGENTS_2014_4_19 gold=B fp16=B ternary=B CORRECT
+[058/299] id=MCAS_2013_8_29432 gold=B fp16=B ternary=B CORRECT
+[059/299] id=Mercury_7042700 gold=D fp16=A ternary=B WRONG
+[060/299] id=Mercury_7201705 gold=A fp16=A ternary=A CORRECT
+[061/299] id=MCAS_1998_8_13 gold=D fp16=A ternary=A WRONG
+[062/299] id=Mercury_7138513 gold=A fp16=D ternary=D WRONG
+[063/299] id=Mercury_SC_401663 gold=B fp16=B ternary=B CORRECT
+[064/299] id=NCEOGA_2013_8_4 gold=D fp16=D ternary=B WRONG
+[065/299] id=Mercury_7235813 gold=D fp16=B ternary=B WRONG
+[066/299] id=Mercury_7011270 gold=B fp16=A ternary=B CORRECT
+[067/299] id=Mercury_7228603 gold=C fp16=C ternary=D WRONG
+[068/299] id=Mercury_SC_400339 gold=C fp16=A ternary=B WRONG
+[069/299] id=Mercury_SC_406705 gold=B fp16=B ternary=B CORRECT
+[070/299] id=MCAS_2010_5_11998 gold=A fp16=A ternary=A CORRECT
+[071/299] id=Mercury_7029505 gold=C fp16=C ternary=C CORRECT
+[072/299] id=Mercury_SC_401286 gold=B fp16=B ternary=D WRONG
+[073/299] id=Mercury_7120908 gold=D fp16=D ternary=D CORRECT
+[074/299] id=MCAS_2010_8_12010 gold=C fp16=C ternary=C CORRECT
+[075/299] id=Mercury_7008138 gold=B fp16=B ternary=A WRONG
+[076/299] id=Mercury_7018148 gold=B fp16=B ternary=D WRONG
+[077/299] id=MCAS_2004_8_28 gold=A fp16=A ternary=B WRONG
+[078/299] id=Mercury_176015 gold=D fp16=A ternary=A WRONG
+[079/299] id=Mercury_7189035 gold=D fp16=A ternary=B WRONG
+[080/299] id=Mercury_7207410 gold=C fp16=B ternary=B WRONG
+[081/299] id=Mercury_7233678 gold=A fp16=A ternary=A CORRECT
+[082/299] id=Mercury_SC_402101 gold=D fp16=B ternary=B WRONG
+[083/299] id=Mercury_SC_402104 gold=D fp16=D ternary=D CORRECT
+[084/299] id=Mercury_7183015 gold=A fp16=A ternary=A CORRECT
+[085/299] id=Mercury_7238963 gold=A fp16=D ternary=B WRONG
+[086/299] id=NYSEDREGENTS_2014_4_14 gold=A fp16=A ternary=A CORRECT
+[087/299] id=Mercury_7004410 gold=B fp16=B ternary=B CORRECT
+[088/299] id=Mercury_SC_406939 gold=C fp16=B ternary=B WRONG
+[089/299] id=Mercury_7270200 gold=A fp16=A ternary=A CORRECT
+[090/299] id=NYSEDREGENTS_2014_8_20 gold=2 fp16=2 ternary=2 CORRECT
+[091/299] id=Mercury_7135310 gold=C fp16=A ternary=A WRONG
+[092/299] id=Mercury_400885 gold=D fp16=A ternary=A WRONG
+[093/299] id=Mercury_412551 gold=D fp16=D ternary=D CORRECT
+[094/299] id=Mercury_7193043 gold=B fp16=A ternary=A WRONG
+[095/299] id=Mercury_7181685 gold=A fp16=A ternary=A CORRECT
+[096/299] id=LEAP_2006_8_10412 gold=B fp16=A ternary=B CORRECT
+[097/299] id=Mercury_7215180 gold=C fp16=C ternary=C CORRECT
+[098/299] id=NYSEDREGENTS_2014_8_38 gold=1 fp16=2 ternary=2 WRONG
+[099/299] id=Mercury_7145513 gold=B fp16=A ternary=B CORRECT
+[100/299] id=MEA_2010_8_11 gold=A fp16=A ternary=B WRONG
+[101/299] id=Mercury_7241115 gold=C fp16=A ternary=B WRONG
+[102/299] id=NYSEDREGENTS_2014_4_17 gold=C fp16=A ternary=D WRONG
+[103/299] id=NYSEDREGENTS_2014_4_13 gold=B fp16=B ternary=B CORRECT
+[104/299] id=Mercury_7033653 gold=C fp16=C ternary=C CORRECT
+[105/299] id=AKDE&ED_2008_8_44 gold=A fp16=A ternary=A CORRECT
+[106/299] id=Mercury_SC_415026 gold=C fp16=A ternary=C CORRECT
+[107/299] id=Mercury_7219415 gold=C fp16=C ternary=B WRONG
+[108/299] id=Mercury_400934 gold=C fp16=A ternary=A WRONG
+[109/299] id=Mercury_7139493 gold=B fp16=B ternary=B CORRECT
+[110/299] id=Mercury_7032340 gold=D fp16=B ternary=B WRONG
+[111/299] id=MEAP_2005_5_1 gold=C fp16=C ternary=C CORRECT
+[112/299] id=ACTAAP_2007_7_25 gold=A fp16=D ternary=B WRONG
+[113/299] id=Mercury_SC_415348 gold=D fp16=B ternary=B WRONG
+[114/299] id=Mercury_7171938 gold=D fp16=B ternary=B WRONG
+[115/299] id=NYSEDREGENTS_2014_4_1 gold=B fp16=B ternary=B CORRECT
+[116/299] id=Mercury_7185133 gold=A fp16=A ternary=D WRONG
+[117/299] id=Mercury_SC_411306 gold=D fp16=D ternary=B WRONG
+[118/299] id=Mercury_SC_LBS10666 gold=B fp16=B ternary=B CORRECT
+[119/299] id=Mercury_SC_401294 gold=B fp16=C ternary=B CORRECT
+[120/299] id=MCAS_2005_5_21 gold=D fp16=D ternary=B WRONG
+[121/299] id=MCAS_2004_9_13 gold=D fp16=A ternary=B WRONG
+[122/299] id=Mercury_7251685 gold=B fp16=B ternary=B CORRECT
+[123/299] id=MDSA_2011_5_20 gold=D fp16=D ternary=D CORRECT
+[124/299] id=MCAS_2006_5_29 gold=D fp16=D ternary=D CORRECT
+[125/299] id=VASoL_2008_5_19 gold=D fp16=A ternary=A WRONG
+[126/299] id=Mercury_7246348 gold=A fp16=D ternary=D WRONG
+[127/299] id=MCAS_2006_9_33 gold=D fp16=D ternary=D CORRECT
+[128/299] id=Mercury_SC_LBS10598 gold=A fp16=A ternary=B WRONG
+[129/299] id=MDSA_2008_5_24 gold=C fp16=A ternary=A WRONG
+[130/299] id=Mercury_7141400 gold=A fp16=D ternary=D WRONG
+[131/299] id=Mercury_SC_415366 gold=B fp16=B ternary=B CORRECT
+[132/299] id=Mercury_408809 gold=C fp16=D ternary=D WRONG
+[133/299] id=MDSA_2007_5_39 gold=D fp16=D ternary=D CORRECT
+[134/299] id=Mercury_7164850 gold=A fp16=A ternary=B WRONG
+[135/299] id=MCAS_2006_9_31-v1 gold=C fp16=C ternary=A WRONG
+[136/299] id=MCAS_2002_5_6 gold=D fp16=A ternary=B WRONG
+[137/299] id=MEA_2016_5_6 gold=C fp16=C ternary=C CORRECT
+[138/299] id=Mercury_180058 gold=A fp16=D ternary=A CORRECT
+[139/299] id=Mercury_7133858 gold=B fp16=B ternary=B CORRECT
+[140/299] id=Mercury_7130603 gold=C fp16=A ternary=B WRONG
+[141/299] id=Mercury_7018008 gold=A fp16=A ternary=B WRONG
+[142/299] id=AIMS_2009_4_29 gold=D fp16=B ternary=B WRONG
+[143/299] id=Mercury_189490 gold=A fp16=A ternary=A CORRECT
+[144/299] id=Mercury_7138688 gold=D fp16=D ternary=D CORRECT
+[145/299] id=Mercury_409529 gold=B fp16=B ternary=B CORRECT
+[146/299] id=Mercury_7092295 gold=C fp16=A ternary=B WRONG
+[147/299] id=Mercury_7044678 gold=A fp16=A ternary=A CORRECT
+[148/299] id=MCAS_1998_4_8 gold=B fp16=B ternary=B CORRECT
+[149/299] id=LEAP_2004_8_10397 gold=B fp16=B ternary=B CORRECT
+[150/299] id=Mercury_7112753 gold=B fp16=B ternary=B CORRECT
+[151/299] id=Mercury_7097318 gold=D fp16=A ternary=B WRONG
+[152/299] id=Mercury_7158673 gold=D fp16=D ternary=D CORRECT
+[153/299] id=Mercury_7038273 gold=A fp16=A ternary=B WRONG
+[154/299] id=ACTAAP_2010_5_10 gold=A fp16=A ternary=A CORRECT
+[155/299] id=VASoL_2008_5_28 gold=C fp16=C ternary=B WRONG
+[156/299] id=Mercury_177818 gold=C fp16=C ternary=C CORRECT
+[157/299] id=NYSEDREGENTS_2014_8_12 gold=1 fp16=2 ternary=2 WRONG
+[158/299] id=Mercury_7139790 gold=C fp16=C ternary=C CORRECT
+[159/299] id=MCAS_2003_8_25 gold=B fp16=A ternary=B CORRECT
+[160/299] id=Mercury_7003955 gold=D fp16=A ternary=A WRONG
+[161/299] id=Mercury_176838 gold=A fp16=D ternary=D WRONG
+[162/299] id=Mercury_SC_407314 gold=A fp16=A ternary=D WRONG
+[163/299] id=Mercury_SC_400845 gold=B fp16=A ternary=D WRONG
+[164/299] id=Mercury_7245193 gold=C fp16=C ternary=B WRONG
+[165/299] id=Mercury_7068863 gold=C fp16=D ternary=A WRONG
+[166/299] id=NCEOGA_2013_8_38 gold=C fp16=A ternary=A WRONG
+[167/299] id=Mercury_7090720 gold=B fp16=D ternary=B CORRECT
+[168/299] id=MCAS_2006_9_35 gold=A fp16=D ternary=D WRONG
+[169/299] id=Mercury_7144795 gold=D fp16=C ternary=D CORRECT
+[170/299] id=Mercury_SC_LBS10915 gold=B fp16=B ternary=B CORRECT
+[171/299] id=MCAS_2009_8_5 gold=D fp16=A ternary=A WRONG
+[172/299] id=Mercury_7175455 gold=D fp16=D ternary=D CORRECT
+[173/299] id=Mercury_7100608 gold=B fp16=B ternary=B CORRECT
+[174/299] id=Mercury_177398 gold=B fp16=A ternary=B CORRECT
+[175/299] id=Mercury_SC_415491 gold=C fp16=D ternary=B WRONG
+[176/299] id=Mercury_SC_400047 gold=B fp16=B ternary=B CORRECT
+[177/299] id=Mercury_7218750 gold=C fp16=A ternary=B WRONG
+[178/299] id=Mercury_7115395 gold=A fp16=A ternary=B WRONG
+[179/299] id=Mercury_7205555 gold=A fp16=A ternary=A CORRECT
+[180/299] id=Mercury_7093975 gold=D fp16=D ternary=D CORRECT
+[181/299] id=MCAS_2012_5_23632 gold=C fp16=C ternary=C CORRECT
+[182/299] id=Mercury_7130883 gold=B fp16=B ternary=B CORRECT
+[183/299] id=Mercury_416648 gold=A fp16=A ternary=B WRONG
+[184/299] id=Mercury_7006790 gold=B fp16=B ternary=B CORRECT
+[185/299] id=Mercury_SC_401244 gold=D fp16=D ternary=C WRONG
+[186/299] id=Mercury_7141908 gold=C fp16=A ternary=B WRONG
+[187/299] id=Mercury_7186148 gold=B fp16=A ternary=A WRONG
+[188/299] id=Mercury_7124338 gold=D fp16=D ternary=A WRONG
+[189/299] id=Mercury_184258 gold=A fp16=A ternary=B WRONG
+[190/299] id=Mercury_SC_400178 gold=C fp16=A ternary=D WRONG
+[191/299] id=Mercury_7007875 gold=B fp16=A ternary=A WRONG
+[192/299] id=Mercury_7221865 gold=C fp16=B ternary=B WRONG
+[193/299] id=Mercury_7269238 gold=D fp16=D ternary=D CORRECT
+[194/299] id=NCEOGA_2013_8_40 gold=C fp16=C ternary=D WRONG
+[195/299] id=Mercury_SC_415735 gold=C fp16=C ternary=C CORRECT
+[196/299] id=Mercury_7115273 gold=C fp16=C ternary=D WRONG
+[197/299] id=Mercury_7233660 gold=C fp16=D ternary=D WRONG
+[198/299] id=Mercury_7026198 gold=A fp16=A ternary=A CORRECT
+[199/299] id=Mercury_7044100 gold=C fp16=A ternary=A WRONG
+[200/299] id=Mercury_SC_408859 gold=A fp16=A ternary=B WRONG
+[201/299] id=LEAP_2012_8_10441 gold=C fp16=A ternary=A WRONG
+[202/299] id=Mercury_7220378 gold=C fp16=C ternary=B WRONG
+[203/299] id=TIMSS_2003_8_pg14 gold=B fp16=D ternary=D WRONG
+[204/299] id=Mercury_SC_405973 gold=B fp16=B ternary=B CORRECT
+[205/299] id=OHAT_2011_8_3 gold=D fp16=D ternary=C WRONG
+[206/299] id=Mercury_412683 gold=D fp16=A ternary=B WRONG
+[207/299] id=MCAS_1998_8_2 gold=C fp16=C ternary=C CORRECT
+[208/299] id=Mercury_7005478 gold=B fp16=A ternary=B CORRECT
+[209/299] id=Mercury_7105123 gold=C fp16=C ternary=B WRONG
+[210/299] id=Mercury_7154263 gold=B fp16=A ternary=B CORRECT
+[211/299] id=TIMSS_2003_8_pg29 gold=E fp16=A ternary=B WRONG
+[212/299] id=Mercury_7245053 gold=B fp16=B ternary=B CORRECT
+[213/299] id=TIMSS_2007_4_pg26 gold=B fp16=A ternary=D WRONG
+[214/299] id=NYSEDREGENTS_2014_4_9 gold=A fp16=D ternary=D WRONG
+[215/299] id=Mercury_414131 gold=C fp16=B ternary=B WRONG
+[216/299] id=Mercury_SC_407574 gold=A fp16=D ternary=D WRONG
+[217/299] id=Mercury_7018515 gold=C fp16=A ternary=A WRONG
+[218/299] id=TIMSS_2003_8_pg31 gold=B fp16=B ternary=B CORRECT
+[219/299] id=Mercury_7015435 gold=A fp16=A ternary=A CORRECT
+[220/299] id=Mercury_7166880 gold=D fp16=A ternary=B WRONG
+[221/299] id=Mercury_7251668 gold=D fp16=A ternary=A WRONG
+[222/299] id=Mercury_415263 gold=C fp16=C ternary=C CORRECT
+[223/299] id=MEA_2013_5_3 gold=D fp16=D ternary=D CORRECT
+[224/299] id=Mercury_7205345 gold=D fp16=D ternary=D CORRECT
+[225/299] id=Mercury_7250023 gold=A fp16=A ternary=A CORRECT
+[226/299] id=ACTAAP_2009_5_5 gold=B fp16=D ternary=D WRONG
+[227/299] id=Mercury_406781 gold=C fp16=A ternary=A WRONG
+[228/299] id=Mercury_7086013 gold=D fp16=B ternary=B WRONG
+[229/299] id=Mercury_7057313 gold=A fp16=A ternary=A CORRECT
+[230/299] id=Mercury_SC_LBS10472 gold=B fp16=D ternary=B CORRECT
+[231/299] id=Mercury_7190155 gold=B fp16=B ternary=B CORRECT
+[232/299] id=Mercury_7081760 gold=B fp16=C ternary=C WRONG
+[233/299] id=Mercury_7075145 gold=A fp16=A ternary=A CORRECT
+[234/299] id=Mercury_7037573 gold=D fp16=C ternary=C WRONG
+[235/299] id=NYSEDREGENTS_2014_8_41 gold=4 fp16=2 ternary=2 WRONG
+[236/299] id=Mercury_SC_408700 gold=C fp16=C ternary=C CORRECT
+[237/299] id=Mercury_7284043 gold=C fp16=D ternary=D WRONG
+[238/299] id=Mercury_7103180 gold=B fp16=B ternary=B CORRECT
+[239/299] id=Mercury_7099768 gold=D fp16=C ternary=A WRONG
+[240/299] id=Mercury_7133648 gold=C fp16=A ternary=A WRONG
+[241/299] id=NYSEDREGENTS_2014_4_22 gold=A fp16=A ternary=A CORRECT
+[242/299] id=NYSEDREGENTS_2014_4_28 gold=B fp16=A ternary=B CORRECT
+[243/299] id=Mercury_SC_406029 gold=D fp16=C ternary=B WRONG
+[244/299] id=Mercury_7267593 gold=A fp16=A ternary=B WRONG
+[245/299] id=Mercury_7085820 gold=D fp16=D ternary=B WRONG
+[246/299] id=MCAS_2011_5_17673 gold=A fp16=B ternary=B WRONG
+[247/299] id=Mercury_7090738 gold=A fp16=A ternary=A CORRECT
+[248/299] id=Mercury_7234483 gold=B fp16=B ternary=B CORRECT
+[249/299] id=NYSEDREGENTS_2014_4_20 gold=D fp16=D ternary=D CORRECT
+[250/299] id=Mercury_7141698 gold=B fp16=B ternary=B CORRECT
+[251/299] id=Mercury_SC_415354 gold=C fp16=A ternary=D WRONG
+[252/299] id=NYSEDREGENTS_2014_4_2 gold=D fp16=D ternary=D CORRECT
+[253/299] id=Mercury_7187058 gold=A fp16=A ternary=A CORRECT
+[254/299] id=Mercury_7221095 gold=A fp16=A ternary=D WRONG
+[255/299] id=Mercury_7143518 gold=D fp16=D ternary=D CORRECT
+[256/299] id=Mercury_7014368 gold=C fp16=C ternary=C CORRECT
+[257/299] id=Mercury_7018445 gold=D fp16=D ternary=B WRONG
+[258/299] id=MCAS_2014_8_17 gold=D fp16=A ternary=A WRONG
+[259/299] id=Mercury_180443 gold=C fp16=A ternary=B WRONG
+[260/299] id=Mercury_7120890 gold=A fp16=A ternary=A CORRECT
+[261/299] id=Mercury_7159268 gold=A fp16=B ternary=B WRONG
+[262/299] id=MCAS_1999_8_22 gold=B fp16=B ternary=B CORRECT
+[263/299] id=Mercury_SC_415397 gold=C fp16=C ternary=C CORRECT
+[264/299] id=Mercury_7042735 gold=C fp16=A ternary=B WRONG
+[265/299] id=Mercury_SC_400172 gold=A fp16=B ternary=B WRONG
+[266/299] id=Mercury_7008120 gold=A fp16=A ternary=A CORRECT
+[267/299] id=Mercury_7267995 gold=C fp16=C ternary=C CORRECT
+[268/299] id=Mercury_7038133 gold=B fp16=A ternary=D WRONG
+[269/299] id=Mercury_7026443 gold=D fp16=A ternary=C WRONG
+[270/299] id=Mercury_7099103 gold=D fp16=D ternary=D CORRECT
+[271/299] id=Mercury_7207620 gold=A fp16=A ternary=A CORRECT
+[272/299] id=NCEOGA_2013_5_43 gold=B fp16=B ternary=B CORRECT
+[273/299] id=Mercury_7166180 gold=B fp16=B ternary=B CORRECT
+[274/299] id=Mercury_7168123 gold=B fp16=B ternary=B CORRECT
+[275/299] id=MCAS_2012_8_23636 gold=D fp16=A ternary=A WRONG
+[276/299] id=MCAS_2013_8_29421 gold=A fp16=B ternary=B WRONG
+[277/299] id=Mercury_400397 gold=C fp16=D ternary=D WRONG
+[278/299] id=Mercury_184013 gold=C fp16=A ternary=A WRONG
+[279/299] id=MDSA_2007_8_15 gold=C fp16=A ternary=D WRONG
+[280/299] id=Mercury_SC_401714 gold=B fp16=B ternary=B CORRECT
+[281/299] id=Mercury_7246925 gold=D fp16=A ternary=A WRONG
+[282/299] id=Mercury_400905 gold=D fp16=D ternary=A WRONG
+[283/299] id=Mercury_7131828 gold=C fp16=A ternary=A WRONG
+[284/299] id=Mercury_7166530 gold=B fp16=B ternary=B CORRECT
+[285/299] id=Mercury_7074865 gold=C fp16=B ternary=B WRONG
+[286/299] id=Mercury_7246995 gold=C fp16=A ternary=C CORRECT
+[287/299] id=TIMSS_2011_8_pg63 gold=C fp16=C ternary=C CORRECT
+[288/299] id=Mercury_SC_400612 gold=C fp16=B ternary=B WRONG
+[289/299] id=MEA_2016_5_7 gold=B fp16=B ternary=B CORRECT
+[290/299] id=ACTAAP_2011_5_3 gold=C fp16=D ternary=B WRONG
+[291/299] id=Mercury_7264023 gold=D fp16=A ternary=D CORRECT
+[292/299] id=Mercury_SC_400050 gold=C fp16=A ternary=A WRONG
+[293/299] id=MCAS_2003_5_31 gold=D fp16=A ternary=A WRONG
+[294/299] id=Mercury_LBS10399 gold=D fp16=B ternary=C WRONG
+[295/299] id=Mercury_7090598 gold=C fp16=A ternary=B WRONG
+[296/299] id=OHAT_2007_5_24 gold=B fp16=B ternary=B CORRECT
+[297/299] id=Mercury_SC_402239 gold=C fp16=B ternary=B WRONG
+[298/299] id=Mercury_7245088 gold=D fp16=D ternary=D CORRECT
+[299/299] id=Mercury_7082145 gold=D fp16=D ternary=D CORRECT
+
+CONDITION H RESULT
+Correct              : 143/299
+Accuracy             : 47.83%
+Delta vs FP16        : -7.69 pp
+Prediction agreement : 65.55%
+Changed predictions  : 103
+FP16 only correct    : 45
+Ternary only correct : 22
+McNemar exact p      : 0.0067414473631
+
+====================================================================================================================================
+EXPERIMENT 021 — q_proj INTERACTION ATTRIBUTION
+====================================================================================================================================
+
+FP16 baseline: 166/299 (55.52%)
+
+ID   Condition          Matrices      Params     Cov%   Correct     Acc%     Delta    Agree%  Changed   FPonly   Tonly      McNemar p
+------------------------------------------------------------------------------------------------------------------------------------
+A    q_only                    1   4,194,304   0.5575       165    55.18    -0.33    77.26       68       23      22              1
+B    k_plus_q                  2   4,718,592   0.6271       166    55.52    +0.00    78.26       65       20      20              1
+C    out_plus_q                2   6,291,456   0.8362       148    49.50    -6.02    71.91       84       38      20       0.024746
+D    qkv_plus_q                2  10,485,760   1.3937       150    50.17    -5.35    75.25       74       34      18      0.0364834
+E    k_out_q                   3   6,815,744   0.9059       155    51.84    -3.68    72.58       82       32      21       0.168978
+F    k_qkv_q                   3  11,010,048   1.4633       152    50.84    -4.68    74.92       75       32      18      0.0649086
+G    out_qkv_q                 3  12,582,912   1.6724       150    50.17    -5.35    69.90       90       39      23      0.0558972
+H    k_out_qkv_q               4  13,107,200   1.7421       143    47.83    -7.69    65.55      103       45      22     0.00674145
+
+====================================================================================================================================
+EXPERIMENT 021 — q_proj INTERACTION ATTRIBUTION
+====================================================================================================================================
+
+FP16 baseline: 166/299 (55.52%)
+
+ID   Condition          Matrices      Params     Cov%   Correct     Acc%     Delta    Agree%  Changed   FPonly   Tonly      McNemar p
+------------------------------------------------------------------------------------------------------------------------------------
+A    q_only                    1   4,194,304   0.5575       165    55.18    -0.33    77.26       68       23      22              1
+B    k_plus_q                  2   4,718,592   0.6271       166    55.52    +0.00    78.26       65       20      20              1
+C    out_plus_q                2   6,291,456   0.8362       148    49.50    -6.02    71.91       84       38      20       0.024746
+D    qkv_plus_q                2  10,485,760   1.3937       150    50.17    -5.35    75.25       74       34      18      0.0364834
+E    k_out_q                   3   6,815,744   0.9059       155    51.84    -3.68    72.58       82       32      21       0.168978
+F    k_qkv_q                   3  11,010,048   1.4633       152    50.84    -4.68    74.92       75       32      18      0.0649086
+G    out_qkv_q                 3  12,582,912   1.6724       150    50.17    -5.35    69.90       90       39      23      0.0558972
+H    k_out_qkv_q               4  13,107,200   1.7421       143    47.83    -7.69    65.55      103       45      22     0.00674145
+
+Detailed results: results/021_qproj_interaction_arc.json
+Summary: results/021_qproj_interaction_arc_summary.txt
