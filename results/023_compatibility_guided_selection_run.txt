@@ -1,0 +1,85 @@
+========================================================================================================================
+EXPERIMENT 023 — COMPATIBILITY-GUIDED SELECTION ANALYSIS
+========================================================================================================================
+
+FP16 baseline: 166/299 (55.52%)
+
+FROZEN COMPATIBILITY RULE
+------------------------------------------------------------------------------------------------------------------------
+|Delta accuracy| <= 2.00 pp
+Prediction agreement >= 80.00%
+McNemar exact p >= 0.05
+
+PAIRWISE COMPATIBILITY
+------------------------------------------------------------------------------------------------------------------------
+#   Matrix A      Matrix B          Delta    Agree%           p     I_acc       Result
+------------------------------------------------------------------------------------------------------------------------
+1   k_proj        out_proj         +1.00    86.96      0.7011    -1.00   COMPATIBLE
+2   k_proj        in_proj_qkv      -1.67    85.95      0.4869    -0.33   COMPATIBLE
+3   k_proj        q_proj           +0.00    78.26           1    +0.00       REJECT
+4   k_proj        gate_proj        +2.68    76.25       0.302    +0.67       REJECT
+5   k_proj        down_proj        +4.35    70.57      0.1299    +0.67       REJECT
+6   k_proj        up_proj          +0.00    57.53           1    +0.00       REJECT
+7   out_proj      in_proj_qkv      +0.67    87.63       0.845    +0.67   COMPATIBLE
+8   out_proj      q_proj           -6.02    71.91     0.02475    -7.36       REJECT
+9   out_proj      gate_proj        -1.00    69.90      0.7948    -4.35       REJECT
+10  out_proj      down_proj        +3.34    64.21      0.2678    -1.67       REJECT
+11  out_proj      up_proj          +2.01    65.55      0.5614    +0.67       REJECT
+12  in_proj_qkv   q_proj           -5.35    75.25     0.03648    -3.34       REJECT
+13  in_proj_qkv   gate_proj        -2.01    69.90       0.519    -2.01       REJECT
+14  in_proj_qkv   down_proj        +2.01    64.88      0.5614    +0.33       REJECT
+15  in_proj_qkv   up_proj          -6.02    50.17     0.09824    -4.01       REJECT
+16  q_proj        gate_proj        -6.69    58.53     0.03524    -8.03       REJECT
+17  q_proj        down_proj        -2.01    56.86      0.5856    -5.02       REJECT
+18  q_proj        up_proj         -10.37    48.49    0.002929    -9.70       REJECT
+19  gate_proj     down_proj        +1.67    60.20      0.6353    -3.34       REJECT
+20  gate_proj     up_proj          -2.01    59.20      0.5856    -3.34       REJECT
+21  down_proj     up_proj          -4.01    44.15      0.3029    -7.02       REJECT
+
+COMPATIBILITY GRAPH
+------------------------------------------------------------------------------------------------------------------------
+Nodes              : 7
+Possible edges     : 21
+Compatible edges   : 3
+Rejected edges     : 18
+
+Node degrees:
+  k_proj       : 2
+  out_proj     : 2
+  in_proj_qkv  : 2
+  q_proj       : 0
+  gate_proj    : 0
+  down_proj    : 0
+  up_proj      : 0
+
+CLIQUES
+------------------------------------------------------------------------------------------------------------------------
+Size 2: 3
+  k_proj + out_proj
+  k_proj + in_proj_qkv
+  out_proj + in_proj_qkv
+Size 3: 1
+  k_proj + out_proj + in_proj_qkv
+
+Maximum clique size: 3
+
+Maximum clique(s):
+  k_proj + out_proj + in_proj_qkv
+
+Maximal clique(s):
+  k_proj + out_proj + in_proj_qkv
+
+RETROSPECTIVE CHECK AGAINST FROZEN EXP020
+------------------------------------------------------------------------------------------------------------------------
+k_proj + out_proj + in_proj_qkv
+  Exp020 accuracy : 52.17%
+  Delta           : -3.34 pp
+  Agreement       : 84.28%
+  Changed         : 47
+  McNemar p       : 0.121449
+
+========================================================================================================================
+OUTPUT
+========================================================================================================================
+JSON    : results/023_compatibility_guided_selection.json
+Summary : results/023_compatibility_guided_selection_summary.txt

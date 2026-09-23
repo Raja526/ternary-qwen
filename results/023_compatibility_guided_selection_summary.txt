@@ -1,0 +1,23 @@
+EXPERIMENT 023 — COMPATIBILITY-GUIDED SELECTION ANALYSIS
+================================================================================
+
+FP16 baseline: 166/299 (55.52%)
+
+Frozen compatibility rule:
+  |Delta accuracy| <= 2.00 pp
+  prediction agreement >= 80.00%
+  McNemar exact p >= 0.05
+
+Compatible edges: 3/21
+Maximum clique size: 3
+
+Maximum clique(s):
+  k_proj + out_proj + in_proj_qkv
+
+Retrospective Exp020 check:
+  k_proj + out_proj + in_proj_qkv
+    accuracy=52.17%
+    delta=-3.34 pp
+    agreement=84.28%
+    changed=47
+    McNemar p=0.121449

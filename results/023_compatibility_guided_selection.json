@@ -1,0 +1,326 @@
+{
+  "experiment": 23,
+  "description": "Offline compatibility-guided selection analysis using frozen Exp019, Exp020, and Exp022 results.",
+  "fp16_baseline": {
+    "correct": 166,
+    "total": 299,
+    "accuracy": 0.5551839464882943
+  },
+  "compatibility_rule": {
+    "max_abs_accuracy_difference": 0.02,
+    "min_prediction_agreement": 0.8,
+    "min_mcnemar_exact_p": 0.05,
+    "accuracy_interaction_used_for_filtering": false
+  },
+  "candidates": [
+    "k_proj",
+    "out_proj",
+    "in_proj_qkv",
+    "q_proj",
+    "gate_proj",
+    "down_proj",
+    "up_proj"
+  ],
+  "full_names": {
+    "k_proj": "model.layers.3.self_attn.k_proj",
+    "out_proj": "model.layers.4.linear_attn.out_proj",
+    "in_proj_qkv": "model.layers.4.linear_attn.in_proj_qkv",
+    "q_proj": "model.layers.3.self_attn.q_proj",
+    "gate_proj": "model.layers.6.mlp.gate_proj",
+    "down_proj": "model.layers.6.mlp.down_proj",
+    "up_proj": "model.layers.6.mlp.up_proj"
+  },
+  "pair_count": 21,
+  "compatible_edge_count": 3,
+  "compatible_edges": [
+    [
+      "in_proj_qkv",
+      "k_proj"
+    ],
+    [
+      "in_proj_qkv",
+      "out_proj"
+    ],
+    [
+      "k_proj",
+      "out_proj"
+    ]
+  ],
+  "degrees": {
+    "k_proj": 2,
+    "out_proj": 2,
+    "in_proj_qkv": 2,
+    "q_proj": 0,
+    "gate_proj": 0,
+    "down_proj": 0,
+    "up_proj": 0
+  },
+  "all_cliques": [
+    [
+      "k_proj",
+      "out_proj"
+    ],
+    [
+      "k_proj",
+      "in_proj_qkv"
+    ],
+    [
+      "out_proj",
+      "in_proj_qkv"
+    ],
+    [
+      "k_proj",
+      "out_proj",
+      "in_proj_qkv"
+    ]
+  ],
+  "maximal_cliques": [
+    [
+      "k_proj",
+      "out_proj",
+      "in_proj_qkv"
+    ]
+  ],
+  "maximum_clique_size": 3,
+  "maximum_cliques": [
+    [
+      "k_proj",
+      "out_proj",
+      "in_proj_qkv"
+    ]
+  ],
+  "retrospective_exp20": [
+    {
+      "clique": [
+        "k_proj",
+        "out_proj",
+        "in_proj_qkv"
+      ],
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj",
+        "model.layers.4.linear_attn.out_proj",
+        "model.layers.4.linear_attn.in_proj_qkv"
+      ],
+      "exp20_found": true,
+      "correct": 156,
+      "total": 299,
+      "accuracy": 0.5217391304347826,
+      "accuracy_difference": -0.03344481605351168,
+      "prediction_agreement": 0.842809364548495,
+      "changed_predictions": 47,
+      "mcnemar_exact_p": 0.12144948495551944
+    }
+  ],
+  "pair_results": [
+    {
+      "pair_id": 1,
+      "a_short": "k_proj",
+      "b_short": "out_proj",
+      "accuracy_difference": 0.010033444816053505,
+      "prediction_agreement": 0.8695652173913043,
+      "mcnemar_exact_p": 0.7011080384254456,
+      "accuracy_interaction": -0.010033444816053505,
+      "compatible": true
+    },
+    {
+      "pair_id": 2,
+      "a_short": "k_proj",
+      "b_short": "in_proj_qkv",
+      "accuracy_difference": -0.01672240802675584,
+      "prediction_agreement": 0.8595317725752508,
+      "mcnemar_exact_p": 0.48685024166479707,
+      "accuracy_interaction": -0.0033444816053511683,
+      "compatible": true
+    },
+    {
+      "pair_id": 3,
+      "a_short": "k_proj",
+      "b_short": "q_proj",
+      "accuracy_difference": 0.0,
+      "prediction_agreement": 0.782608695652174,
+      "mcnemar_exact_p": 1.0,
+      "accuracy_interaction": 0.0,
+      "compatible": false
+    },
+    {
+      "pair_id": 4,
+      "a_short": "k_proj",
+      "b_short": "gate_proj",
+      "accuracy_difference": 0.026755852842809347,
+      "prediction_agreement": 0.7625418060200668,
+      "mcnemar_exact_p": 0.3019956131896606,
+      "accuracy_interaction": 0.006688963210702337,
+      "compatible": false
+    },
+    {
+      "pair_id": 5,
+      "a_short": "k_proj",
+      "b_short": "down_proj",
+      "accuracy_difference": 0.0434782608695653,
+      "prediction_agreement": 0.705685618729097,
+      "mcnemar_exact_p": 0.1299179230225525,
+      "accuracy_interaction": 0.006688963210702337,
+      "compatible": false
+    },
+    {
+      "pair_id": 6,
+      "a_short": "k_proj",
+      "b_short": "up_proj",
+      "accuracy_difference": 0.0,
+      "prediction_agreement": 0.5752508361204014,
+      "mcnemar_exact_p": 1.0,
+      "accuracy_interaction": 0.0,
+      "compatible": false
+    },
+    {
+      "pair_id": 7,
+      "a_short": "out_proj",
+      "b_short": "in_proj_qkv",
+      "accuracy_difference": 0.006688963210702337,
+      "prediction_agreement": 0.8762541806020067,
+      "mcnemar_exact_p": 0.8450189828872681,
+      "accuracy_interaction": 0.006688963210702337,
+      "compatible": true
+    },
+    {
+      "pair_id": 8,
+      "a_short": "out_proj",
+      "b_short": "q_proj",
+      "accuracy_difference": -0.06020066889632103,
+      "prediction_agreement": 0.7190635451505016,
+      "mcnemar_exact_p": 0.024746035842440797,
+      "accuracy_interaction": -0.0735785953177257,
+      "compatible": false
+    },
+    {
+      "pair_id": 9,
+      "a_short": "out_proj",
+      "b_short": "gate_proj",
+      "accuracy_difference": -0.010033444816053505,
+      "prediction_agreement": 0.6989966555183946,
+      "mcnemar_exact_p": 0.7948436539828609,
+      "accuracy_interaction": -0.04347826086956519,
+      "compatible": false
+    },
+    {
+      "pair_id": 10,
+      "a_short": "out_proj",
+      "b_short": "down_proj",
+      "accuracy_difference": 0.033444816053511794,
+      "prediction_agreement": 0.6421404682274248,
+      "mcnemar_exact_p": 0.267811664846587,
+      "accuracy_interaction": -0.01672240802675584,
+      "compatible": false
+    },
+    {
+      "pair_id": 11,
+      "a_short": "out_proj",
+      "b_short": "up_proj",
+      "accuracy_difference": 0.02006688963210701,
+      "prediction_agreement": 0.6555183946488294,
+      "mcnemar_exact_p": 0.5613807442989819,
+      "accuracy_interaction": 0.006688963210702337,
+      "compatible": false
+    },
+    {
+      "pair_id": 12,
+      "a_short": "in_proj_qkv",
+      "b_short": "q_proj",
+      "accuracy_difference": -0.05351170568561869,
+      "prediction_agreement": 0.7525083612040133,
+      "mcnemar_exact_p": 0.03648340000835981,
+      "accuracy_interaction": -0.03344481605351168,
+      "compatible": false
+    },
+    {
+      "pair_id": 13,
+      "a_short": "in_proj_qkv",
+      "b_short": "gate_proj",
+      "accuracy_difference": -0.02006688963210701,
+      "prediction_agreement": 0.6989966555183946,
+      "mcnemar_exact_p": 0.5189580031896518,
+      "accuracy_interaction": -0.02006688963210701,
+      "compatible": false
+    },
+    {
+      "pair_id": 14,
+      "a_short": "in_proj_qkv",
+      "b_short": "down_proj",
+      "accuracy_difference": 0.02006688963210701,
+      "prediction_agreement": 0.6488294314381271,
+      "mcnemar_exact_p": 0.5613807442989819,
+      "accuracy_interaction": 0.0033444816053510573,
+      "compatible": false
+    },
+    {
+      "pair_id": 15,
+      "a_short": "in_proj_qkv",
+      "b_short": "up_proj",
+      "accuracy_difference": -0.06020066889632103,
+      "prediction_agreement": 0.5016722408026756,
+      "mcnemar_exact_p": 0.09824250442243802,
+      "accuracy_interaction": -0.04013377926421402,
+      "compatible": false
+    },
+    {
+      "pair_id": 16,
+      "a_short": "q_proj",
+      "b_short": "gate_proj",
+      "accuracy_difference": -0.06688963210702337,
+      "prediction_agreement": 0.5852842809364549,
+      "mcnemar_exact_p": 0.03524144017874745,
+      "accuracy_interaction": -0.08026755852842804,
+      "compatible": false
+    },
+    {
+      "pair_id": 17,
+      "a_short": "q_proj",
+      "b_short": "down_proj",
+      "accuracy_difference": -0.02006688963210701,
+      "prediction_agreement": 0.5685618729096991,
+      "mcnemar_exact_p": 0.5856467947212246,
+      "accuracy_interaction": -0.050167224080267636,
+      "compatible": false
+    },
+    {
+      "pair_id": 18,
+      "a_short": "q_proj",
+      "b_short": "up_proj",
+      "accuracy_difference": -0.10367892976588627,
+      "prediction_agreement": 0.48494983277591974,
+      "mcnemar_exact_p": 0.0029291945870261915,
+      "accuracy_interaction": -0.09698996655518394,
+      "compatible": false
+    },
+    {
+      "pair_id": 19,
+      "a_short": "gate_proj",
+      "b_short": "down_proj",
+      "accuracy_difference": 0.01672240802675584,
+      "prediction_agreement": 0.6020066889632107,
+      "mcnemar_exact_p": 0.6353076420876662,
+      "accuracy_interaction": -0.033444816053511794,
+      "compatible": false
+    },
+    {
+      "pair_id": 20,
+      "a_short": "gate_proj",
+      "b_short": "up_proj",
+      "accuracy_difference": -0.02006688963210701,
+      "prediction_agreement": 0.5919732441471572,
+      "mcnemar_exact_p": 0.5856467947212246,
+      "accuracy_interaction": -0.03344481605351168,
+      "compatible": false
+    },
+    {
+      "pair_id": 21,
+      "a_short": "down_proj",
+      "b_short": "up_proj",
+      "accuracy_difference": -0.04013377926421402,
+      "prediction_agreement": 0.44147157190635455,
+      "mcnemar_exact_p": 0.30287755263032495,
+      "accuracy_interaction": -0.07023411371237465,
+      "compatible": false
+    }
+  ]
+}
