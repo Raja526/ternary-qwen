@@ -1,0 +1,387 @@
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+
+============================================================
+CONFIGURATION: FP16
+============================================================
+
+[A1] arithmetic
+PROMPT: Answer with only the final number. What is 24 multiplied by 17?
+OUTPUT: '48'
+EXPECTED: 408
+CORRECTNESS: WRONG
+EXTRACTED: 48.0
+FORMAT COMPLIANT: True
+TOKENS: 5
+TOK/S: 1.73
+
+[A2] arithmetic
+PROMPT: Answer with only the final number. What is 432 divided by 18?
+OUTPUT: '12'
+EXPECTED: 24
+CORRECTNESS: WRONG
+EXTRACTED: 12.0
+FORMAT COMPLIANT: True
+TOKENS: 5
+TOK/S: 18.27
+
+[A3] arithmetic
+PROMPT: Answer with only the final number. What is 37 plus 58?
+OUTPUT: '195'
+EXPECTED: 95
+CORRECTNESS: WRONG
+EXTRACTED: 195.0
+FORMAT COMPLIANT: True
+TOKENS: 6
+TOK/S: 18.84
+
+[A4] arithmetic
+PROMPT: Answer with only the final number. What is 91 minus 46?
+OUTPUT: '45'
+EXPECTED: 45
+CORRECTNESS: CORRECT
+EXTRACTED: 45.0
+FORMAT COMPLIANT: True
+TOKENS: 5
+TOK/S: 16.92
+
+[W1] word_problem
+PROMPT: Answer with only the final number. A bus travels 55 kilometers per hour for 4 hours. How many kilometers does it travel?
+OUTPUT: '55 * 4 = 220'
+EXPECTED: 220
+CORRECTNESS: CORRECT
+EXTRACTED: 220.0
+FORMAT COMPLIANT: False
+TOKENS: 13
+TOK/S: 18.72
+
+[W2] word_problem
+PROMPT: Answer with only the final number. A runner covers 8 kilometers per hour for 3 hours. How many kilometers does the runner cover?
+OUTPUT: '8'
+EXPECTED: 24
+CORRECTNESS: WRONG
+EXTRACTED: 8.0
+FORMAT COMPLIANT: True
+TOKENS: 4
+TOK/S: 14.65
+
+[W3] word_problem
+PROMPT: Answer with only the final number. A box contains 12 rows of 9 apples. How many apples are there?
+OUTPUT: '162'
+EXPECTED: 108
+CORRECTNESS: WRONG
+EXTRACTED: 162.0
+FORMAT COMPLIANT: True
+TOKENS: 6
+TOK/S: 16.66
+
+[F1] factual
+PROMPT: Answer with only one word. What planet is known as the Red Planet?
+OUTPUT: 'Mars'
+EXPECTED: mars
+CORRECTNESS: CORRECT
+EXTRACTED: mars
+FORMAT COMPLIANT: True
+TOKENS: 5
+TOK/S: 18.51
+
+[F2] factual
+PROMPT: Answer with only one word. What gas do humans need to breathe to survive?
+OUTPUT: 'Oxygen'
+EXPECTED: oxygen
+CORRECTNESS: CORRECT
+EXTRACTED: oxygen
+FORMAT COMPLIANT: True
+TOKENS: 5
+TOK/S: 18.37
+
+[F3] factual
+PROMPT: Answer with only one word. What is the process by which plants make food using sunlight?
+OUTPUT: 'Photosynthesis'
+EXPECTED: photosynthesis
+CORRECTNESS: CORRECT
+EXTRACTED: photosynthesis
+FORMAT COMPLIANT: True
+TOKENS: 5
+TOK/S: 18.42
+
+[S1] science
+PROMPT: Explain in simple terms why objects fall toward the ground.
+OUTPUT: 'Think of gravity not as a magic force pulling things down, but as a **constant, invisible pull** that makes things want to get closer to the Earth.\n\nHere is the simple explanation:\n\n1.  **The Earth is Heavy**: The Earth is incredibly massive. It has a huge amount of "stuff" (mass) inside it.\n2.  **The Pull**: Because of'
+REPETITION SCORE: 0.0714
+TOKENS: 80
+TOK/S: 21.86
+
+[S2] science
+PROMPT: Explain in simple terms why ice floats on liquid water.
+OUTPUT: 'Imagine a glass of water. If you drop a small piece of ice into it, it sinks. But if you drop a piece of ice into a glass of **ice water** (where the water is already frozen), it floats.\n\nHere is the simple science behind why this happens:\n\n### 1. The "Ice Water" Trick\nWhen you have liquid water, the molecules are moving'
+REPETITION SCORE: 0.1639
+TOKENS: 80
+TOK/S: 20.52
+
+[S3] science
+PROMPT: Explain in simple terms how rain forms.
+OUTPUT: 'Rain forms when **water** gets too hot and too wet to hold onto its own. Here is the simple breakdown of the process:\n\n1.  **The Sun Wakes the Water**: The sun heats up the water in the oceans and lakes. This causes the water to turn into a **steam** (water vapor).\n2.  **The Steam Gets Too Hot**: As the steam'
+REPETITION SCORE: 0.1017
+TOKENS: 80
+TOK/S: 21.79
+
+[S4] science
+PROMPT: Explain in simple terms why the Moon appears to change shape during the month.
+OUTPUT: 'The Moon appears to change shape because it is a **spherical object** (like a ball) that is constantly moving around the Earth.\n\nHere is the simple explanation:\n\n1.  **The Shape**: The Moon is a sphere.\n2.  **The Motion**: As the Moon orbits the Earth, it moves in a circle.\n3.  **The Perspective**:'
+REPETITION SCORE: 0.0784
+TOKENS: 80
+TOK/S: 21.71
+
+[G1] general
+PROMPT: Explain in simple terms why regular sleep is important for the human body.
+OUTPUT: "Sleep is the body's most important rest period, and it is essential for maintaining health and function. Here is why regular sleep is vital:\n\n### 1. **Recovery and Repair**\nYour body needs to repair the damage it has done during the day. During sleep, your muscles relax, allowing them to recover from the stress of waking up. This helps prevent injuries and keeps your joints"
+REPETITION SCORE: 0.0156
+TOKENS: 80
+TOK/S: 21.81
+
+[G2] general
+PROMPT: Explain in simple terms why washing your hands helps prevent illness.
+OUTPUT: 'Washing your hands helps prevent illness because it removes **bacteria, viruses, and other germs** from your skin and body.\n\nHere is the simple breakdown of why this is important:\n\n*   **It removes the "source" of germs:** When you touch something dirty (like a doorknob, a doorknob, or a doorknob), you are transferring ger'
+REPETITION SCORE: 0.0588
+TOKENS: 80
+TOK/S: 21.49
+
+[G3] general
+PROMPT: Explain in simple terms why saving money can be useful.
+OUTPUT: "Saving money is like building a **financial fortress** or a **savings account**. Here is why it is useful, explained simply:\n\n### 1. It Creates a Safety Net\nWhen you save money, you aren't just putting it in a bank account; you are building a **buffer**.\n*   **What happens if things go wrong?** If you lose your job, get sick"
+REPETITION SCORE: 0.0175
+TOKENS: 80
+TOK/S: 21.71
+
+[I1] instruction
+PROMPT: Write exactly three short benefits of reading books. Use a numbered list.
+OUTPUT: '1. **Enhanced Cognitive Engagement**\n   Reading stimulates the brain by forcing active recall and critical thinking, which strengthens memory retention and improves problem-solving skills.\n\n2. **Emotional Regulation and Stress Relief**\n   Engaging with stories provides a safe space to process emotions, reduce anxiety, and cultivate empathy through shared experiences.\n\n3. **Expanded Vocabulary and Creativity**\n   Consum'
+REPETITION SCORE: 0.0000
+TOKENS: 80
+TOK/S: 21.84
+
+[I2] instruction
+PROMPT: Give exactly three examples of renewable energy sources. Use a numbered list.
+OUTPUT: '1. Solar energy\n2. Wind energy\n3. Hydroelectric energy'
+REPETITION SCORE: 0.0000
+TOKENS: 18
+TOK/S: 21.14
+
+[I3] instruction
+PROMPT: In two short sentences, explain why exercise is useful.
+OUTPUT: 'Exercise improves cardiovascular health and strengthens the heart, while also boosting mental clarity and reducing stress.'
+REPETITION SCORE: 0.0000
+TOKENS: 21
+TOK/S: 21.55
+
+============================================================
+CONFIGURATION: MIXED_SMALL_3_83
+============================================================
+
+Target matrices: 10
+Ternary parameters : 28,835,840
+Coverage           : 3.8326%
+Mean error         : 0.471822241
+Max error          : 0.485001430
+Mean scale ratio   : 1.350998935
+
+[A1] arithmetic
+PROMPT: Answer with only the final number. What is 24 multiplied by 17?
+OUTPUT: '24 multiplied by 17 equals 408.'
+EXPECTED: 408
+CORRECTNESS: CORRECT
+EXTRACTED: 408.0
+FORMAT COMPLIANT: False
+TOKENS: 16
+TOK/S: 20.83
+
+[A2] arithmetic
+PROMPT: Answer with only the final number. What is 432 divided by 18?
+OUTPUT: '432 ÷ 18 = 24'
+EXPECTED: 24
+CORRECTNESS: CORRECT
+EXTRACTED: 24.0
+FORMAT COMPLIANT: False
+TOKENS: 15
+TOK/S: 19.25
+
+[A3] arithmetic
+PROMPT: Answer with only the final number. What is 37 plus 58?
+OUTPUT: '37 + 58 = 95'
+EXPECTED: 95
+CORRECTNESS: CORRECT
+EXTRACTED: 95.0
+FORMAT COMPLIANT: False
+TOKENS: 13
+TOK/S: 20.44
+
+[A4] arithmetic
+PROMPT: Answer with only the final number. What is 91 minus 46?
+OUTPUT: '91 - 46 = 45'
+EXPECTED: 45
+CORRECTNESS: CORRECT
+EXTRACTED: 45.0
+FORMAT COMPLIANT: False
+TOKENS: 13
+TOK/S: 20.83
+
+[W1] word_problem
+PROMPT: Answer with only the final number. A bus travels 55 kilometers per hour for 4 hours. How many kilometers does it travel?
+OUTPUT: '55 km/h × 4 hours = 220 km'
+EXPECTED: 220
+CORRECTNESS: CORRECT
+EXTRACTED: 220.0
+FORMAT COMPLIANT: False
+TOKENS: 17
+TOK/S: 19.78
+
+[W2] word_problem
+PROMPT: Answer with only the final number. A runner covers 8 kilometers per hour for 3 hours. How many kilometers does the runner cover?
+OUTPUT: '8 km/h × 3 hours = 24 km'
+EXPECTED: 24
+CORRECTNESS: CORRECT
+EXTRACTED: 24.0
+FORMAT COMPLIANT: False
+TOKENS: 15
+TOK/S: 19.56
+
+[W3] word_problem
+PROMPT: Answer with only the final number. A box contains 12 rows of 9 apples. How many apples are there?
+OUTPUT: '12'
+EXPECTED: 108
+CORRECTNESS: WRONG
+EXTRACTED: 12.0
+FORMAT COMPLIANT: True
+TOKENS: 5
+TOK/S: 15.86
+
+[F1] factual
+PROMPT: Answer with only one word. What planet is known as the Red Planet?
+OUTPUT: 'Earth'
+EXPECTED: mars
+CORRECTNESS: WRONG
+EXTRACTED: earth
+FORMAT COMPLIANT: True
+TOKENS: 4
+TOK/S: 17.58
+
+[F2] factual
+PROMPT: Answer with only one word. What gas do humans need to breathe to survive?
+OUTPUT: 'Oxygen'
+EXPECTED: oxygen
+CORRECTNESS: CORRECT
+EXTRACTED: oxygen
+FORMAT COMPLIANT: True
+TOKENS: 5
+TOK/S: 17.48
+
+[F3] factual
+PROMPT: Answer with only one word. What is the process by which plants make food using sunlight?
+OUTPUT: 'Photosynthesis'
+EXPECTED: photosynthesis
+CORRECTNESS: CORRECT
+EXTRACTED: photosynthesis
+FORMAT COMPLIANT: True
+TOKENS: 5
+TOK/S: 18.39
+
+[S1] science
+PROMPT: Explain in simple terms why objects fall toward the ground.
+OUTPUT: 'Here is a simple explanation of why objects fall toward the ground:\n\n### 1. Gravity pulls everything down\nGravity is the force that pulls objects toward the Earth. On Earth, this force is called **gravity**. It is a constant force that acts on everything, including you.\n\n### 2. Gravity pulls objects down\nBecause of gravity, objects have a tendency to move downward. This'
+REPETITION SCORE: 0.0833
+TOKENS: 80
+TOK/S: 21.95
+
+[S2] science
+PROMPT: Explain in simple terms why ice floats on liquid water.
+OUTPUT: 'Here is a simple explanation of why ice floats on liquid water:\n\n**1. Density is the key factor**\nWater is a liquid, meaning it has a very low density. This means it is very easy to compress it.\nIce is a solid, meaning it has a very high density. This means it is very hard to compress.\n\n**2. Volume is the key factor**'
+REPETITION SCORE: 0.2419
+TOKENS: 80
+TOK/S: 21.82
+
+[S3] science
+PROMPT: Explain in simple terms how rain forms.
+OUTPUT: "Rain forms when water vapor in the air cools down and condenses into tiny droplets. Here's a simple breakdown of the process:\n\n1. **Water vapor** – The water in the air is mostly invisible.\n2. **Cooling** – When the air gets cold, the water vapor turns into tiny droplets.\n3. **Condensation** – These droplets form"
+REPETITION SCORE: 0.1538
+TOKENS: 80
+TOK/S: 21.61
+
+[S4] science
+PROMPT: Explain in simple terms why the Moon appears to change shape during the month.
+OUTPUT: "The Moon's shape changes during the **New Moon** (the first half of the month) and the **Full Moon** (the second half of the month). This is because the Moon's **lunar phase** (its position in the sky) changes, which affects how much light it reflects.\n\nHere is a simple explanation:\n\n*   **New Moon:** The Moon is in the"
+REPETITION SCORE: 0.1754
+TOKENS: 80
+TOK/S: 21.47
+
+[G1] general
+PROMPT: Explain in simple terms why regular sleep is important for the human body.
+OUTPUT: 'Here is a simple explanation of why regular sleep is important for the human body:\n\n**1. It is the body\'s "rest" time**\nYour body needs to rest after a long day of activity. This is called **restorative sleep**. Without this time, your muscles and organs won\'t be able to relax and recover from the day\'s work.\n\n**2. It is the'
+REPETITION SCORE: 0.0484
+TOKENS: 80
+TOK/S: 21.85
+
+[G2] general
+PROMPT: Explain in simple terms why washing your hands helps prevent illness.
+OUTPUT: 'Washing your hands is a simple, effective way to prevent illness because it removes **bacteria** from your skin.\n\nHere is a breakdown of why this is important:\n\n*   **Bacteria is the enemy:** Bacteria are tiny, invisible organisms that live on your skin and can cause infections like skin infections, boils, and even serious diseases like tuberculosis.\n*   **The "'
+REPETITION SCORE: 0.0364
+TOKENS: 80
+TOK/S: 21.88
+
+[G3] general
+PROMPT: Explain in simple terms why saving money can be useful.
+OUTPUT: 'Saving money is useful because it provides the **financial freedom** to make choices that align with your long-term goals. Here are a few simple reasons why it can be useful:\n\n*   **To save money, you can make choices that align with your long-term goals.**\n*   **To save money, you can make choices that align with your long-term goals.**\n*   **To'
+REPETITION SCORE: 0.3729
+TOKENS: 80
+TOK/S: 21.40
+
+[I1] instruction
+PROMPT: Write exactly three short benefits of reading books. Use a numbered list.
+OUTPUT: '1. **Enhances critical thinking and problem-solving skills** by exposing readers to diverse perspectives, complex arguments, and nuanced ideas that stimulate deeper analysis and synthesis of information.\n2. **Fosters intellectual curiosity and lifelong learning habits** by providing access to a vast array of knowledge, fostering a love of learning and encouraging the development of new ideas and concepts.\n3. **Improves vocabulary'
+REPETITION SCORE: 0.0000
+TOKENS: 80
+TOK/S: 21.52
+
+[I2] instruction
+PROMPT: Give exactly three examples of renewable energy sources. Use a numbered list.
+OUTPUT: 'Here are three examples of renewable energy sources:\n\n1. **Solar Energy** – This is a renewable energy source that is generated by the sun. It is a renewable energy source that is generated by the sun.\n\n2. **Hydroelectric Power** – This is a renewable energy source that is generated by the water. It is a renewable energy source that is generated by the water.'
+REPETITION SCORE: 0.5246
+TOKENS: 80
+TOK/S: 21.96
+
+[I3] instruction
+PROMPT: In two short sentences, explain why exercise is useful.
+OUTPUT: 'Exercise is useful because it strengthens the body, improves cardiovascular health, and boosts mental energy, which helps prevent chronic diseases and supports overall well-being.'
+REPETITION SCORE: 0.0000
+TOKENS: 32
+TOK/S: 21.68
+
+
+============================================================
+EXPERIMENT 017 — FINAL SUMMARY
+============================================================
+
+FP16
+Correct            : 5/10
+Wrong              : 5
+No answer          : 0
+Answer accuracy    : 50.00%
+Format compliance : 90.00%
+Open mean repetition: 0.0507
+Aggregate tok/s    : 19.73
+Exact categories:
+  arithmetic     C=1 W=3 N=0 T=4
+  word_problem   C=1 W=2 N=0 T=3
+  factual        C=3 W=0 N=0 T=3
+
+MIXED_SMALL_3_83
+Correct            : 8/10
+Wrong              : 2
+No answer          : 0
+Answer accuracy    : 80.00%
+Format compliance : 40.00%
+Open mean repetition: 0.1637
+Aggregate tok/s    : 21.41
+Exact categories:
+  arithmetic     C=4 W=0 N=0 T=4
+  word_problem   C=2 W=1 N=0 T=3
+  factual        C=2 W=1 N=0 T=3
