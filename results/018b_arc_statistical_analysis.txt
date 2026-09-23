@@ -1,0 +1,12 @@
+============================================================
+EXPERIMENT 018B — ARC-CHALLENGE PAIRED STATISTICAL ANALYSIS
+============================================================
+
+FP16 only correct     : 114
+Ternary only correct  : 35
+Discordant pairs      : 149
+
+Exact McNemar p-value : 5.79942476685e-11
+Chi-square (CC)       : 40.832215
+
+Result                 : Statistically significant
