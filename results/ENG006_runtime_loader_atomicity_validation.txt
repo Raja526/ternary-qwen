@@ -1,0 +1,39 @@
+
+================================================================================
+ENG006 — PACKED RUNTIME LOADER ATOMICITY VALIDATION
+================================================================================
+
+================================================================================
+TEST 1 — VALID SINGLE-MODULE REPLACEMENT
+================================================================================
+Replacement type        : PackedTernaryLinear
+Loaded module names     : ('layer1',)
+Replaced matrices       : 1
+Replaced parameters     : 256
+Persistent packed bytes : 68
+FP16 equivalent bytes   : 512
+Untargeted layer intact : True
+
+TEST 1: PASS
+
+================================================================================
+TEST 2 — INVALID SECOND TARGET MUST CAUSE ZERO MUTATION
+================================================================================
+Expected error          : 'Selected module is not present in packed checkpoint: does_not_exist'
+Layer1 unchanged        : True
+Layer2 unchanged        : True
+
+TEST 2: PASS
+
+================================================================================
+TEST 3 — WRONG MODEL NAME MUST CAUSE ZERO MUTATION
+================================================================================
+Expected error          : Checkpoint model-name mismatch: checkpoint='eng006-synthetic-model', expected='wrong-model-name'
+Layer1 unchanged        : True
+Layer2 unchanged        : True
+
+TEST 3: PASS
+
+================================================================================
+ENG006 LOADER ATOMICITY VALIDATION: PASS
+================================================================================

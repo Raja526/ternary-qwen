@@ -1,0 +1,103 @@
+
+====================================================================================================
+ENG006 — REAL QWEN PACKED RUNTIME INTEGRATION
+====================================================================================================
+Model                   : Qwen/Qwen3.5-0.8B
+Checkpoint              : results/ENG003_multimatrix_checkpoint.pt
+Selected target         : model.layers.3.self_attn.k_proj
+Rows/chunk              : 64
+
+====================================================================================================
+STEP 1 — LOAD AND VERIFY ENG003 CHECKPOINT
+====================================================================================================
+Checkpoint model        : Qwen/Qwen3.5-0.8B
+Checkpoint group size   : 128
+Threshold multiplier    : 0.5
+Checkpoint matrices     : 3
+  - model.layers.3.self_attn.k_proj
+  - model.layers.4.linear_attn.out_proj
+  - model.layers.4.linear_attn.in_proj_qkv
+
+Selected parameters     : 524288
+Packed code bytes       : 131072
+Scale bytes             : 8192
+Persistent packed bytes : 139264
+FP16 equivalent bytes   : 1048576
+Compression factor      : 7.529412x
+Input tokens            : 22
+
+====================================================================================================
+STEP 2 — PATH A: RECONSTRUCTED FP16 ORDINARY LINEAR
+====================================================================================================
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights:  45%|████▌     | 145/320 [00:00<00:00, 1430.39it/s]Loading weights:  90%|█████████ | 289/320 [00:00<00:00, 1431.62it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 1437.34it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+Original target type    : Linear
+Original weight shape   : (512, 1024)
+Original weight dtype   : torch.float16
+Reference logits shape  : (1, 22, 248320)
+Reference logits dtype  : torch.float16
+
+====================================================================================================
+STEP 3 — PATH B: REUSABLE PACKED RUNTIME LOADER
+====================================================================================================
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights:   0%|          | 1/320 [00:00<00:46,  6.91it/s]Loading weights:  75%|███████▌  | 241/320 [00:00<00:00, 1195.72it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 1084.39it/s]
+Before loader type      : Linear
+After loader type       : PackedTernaryLinear
+Object replaced         : True
+Loaded module names     : ('model.layers.3.self_attn.k_proj',)
+Replaced matrices       : 1
+Replaced parameters     : 524288
+Loader packed bytes     : 139264
+Loader FP16 bytes       : 1048576
+
+Full weight Parameter   : False
+Packed codes buffer     : True
+Scales buffer           : True
+Persistent weight bytes : 139264
+FP16 equivalent bytes   : 1048576
+Persistent compression  : 7.529412x
+
+Untargeted out_proj type: Linear
+Untargeted qkv type     : Linear
+
+====================================================================================================
+STEP 4 — FULL-MODEL LOGIT COMPARISON
+====================================================================================================
+Reference logits shape  : (1, 22, 248320)
+Runtime logits shape    : (1, 22, 248320)
+Compared logits         : 5463040
+Logit mismatches        : 0
+Max abs difference      : 0.0
+Mean abs difference     : 0.0
+Dtype match             : True
+
+====================================================================================================
+ENG006 FINAL SUMMARY
+====================================================================================================
+Real target             : model.layers.3.self_attn.k_proj
+Checkpoint matrices     : 3
+Runtime matrices loaded : 1
+Runtime parameters      : 524288
+Persistent packed bytes : 139264
+FP16 equivalent bytes   : 1048576
+Compression factor      : 7.529412x
+Persistent full weight  : False
+Compared logits         : 5463040
+Logit mismatches        : 0
+Max abs difference      : 0.0
+
+Scope:
+  The ENG003 checkpoint contains three packed matrices.
+  ENG006 selected and runtime-loaded exactly one matrix.
+  The selected matrix persists as packed codes + scales.
+  Temporary row chunks are reconstructed during forward execution.
+  No inference speedup is claimed.
+  No peak RAM/VRAM reduction is claimed.
+  No fused 2-bit CUDA kernel is claimed.
+  No whole-model compression is claimed.
+
+====================================================================================================
+ENG006 REAL QWEN PACKED RUNTIME INTEGRATION: PASS
+====================================================================================================
