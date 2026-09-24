@@ -1,0 +1,70 @@
+ENG008 — CPU MEMORY AND LATENCY BENCHMARK
+================================================================================
+
+Environment
+--------------------------------------------------------------------------------
+Model: Qwen/Qwen3.5-0.8B
+CPU: Intel Core i7-8850H @ 2.60 GHz
+Physical cores: 6
+Logical CPUs: 12
+PyTorch threads: 6
+PyTorch interop threads: 6
+PyTorch: 2.14.0+cu126
+Execution device: CPU
+Input tokens: 22
+Warmup forwards per process: 2
+Timed forwards per process: 5
+Independent processes per condition: 3
+Total timed forwards per condition: 15
+
+Selected-weight persistent representation
+--------------------------------------------------------------------------------
+Selected matrices: 3
+Selected parameters: 8912896
+Reference FP16 bytes: 17825792
+Packed persistent bytes: 2367488
+Bytes eliminated: 15458304
+Bytes eliminated MiB: 14.742188
+Selected-weight compression: 7.529412x
+
+Latency — 15 timed forwards per condition
+--------------------------------------------------------------------------------
+Reference mean ms: 1387.140
+Packed mean ms: 1382.390
+Mean latency change: -0.342%
+Reference median ms: 1353.973
+Packed median ms: 1333.052
+Reference std dev ms: 85.170
+Packed std dev ms: 89.378
+Reference min/max ms: 1302.164 / 1560.303
+Packed min/max ms: 1322.011 / 1559.641
+
+Process RSS — mean across 3 independent processes
+--------------------------------------------------------------------------------
+Reference ready RSS MiB: 2358.664
+Packed ready RSS MiB: 2333.026
+Ready RSS difference MiB: -25.638
+Reference timed-max RSS MiB: 2383.888
+Packed timed-max RSS MiB: 2383.172
+Timed-max RSS difference MiB: -0.716
+Reference GNU max RSS KB: 3854713.333
+Packed GNU max RSS KB: 3854964.000
+GNU max RSS difference KB: +250.667
+
+Interpretation
+--------------------------------------------------------------------------------
+1. The three selected matrices retain the previously validated 7.529412x persistent selected-weight storage compression.
+2. Packed ready-state RSS was lower in these runs, but this is not interpreted as a peak-memory reduction.
+3. Timed-max process RSS and GNU maximum RSS were effectively similar between the two representations.
+4. The observed mean latency difference was small relative to run-to-run latency variation; ENG008 therefore does not establish a meaningful CPU latency advantage or penalty.
+5. The current PackedTernaryLinear implementation temporarily unpacks ternary codes and reconstructs FP16 row chunks during forward execution.
+
+Scope
+--------------------------------------------------------------------------------
+No inference speedup claim.
+No peak RAM reduction claim.
+No peak VRAM reduction claim.
+No fused 2-bit CUDA kernel claim.
+No whole-model compression claim.
+
+ENG008 CPU MEMORY AND LATENCY BENCHMARK: PASS
