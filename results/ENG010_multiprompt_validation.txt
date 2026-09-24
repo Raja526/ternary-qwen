@@ -1,0 +1,214 @@
+
+====================================================================================================
+ENG010-D — FIXED MULTI-PROMPT DIRECT TERNARY VALIDATION
+====================================================================================================
+Model                   : Qwen/Qwen3.5-0.8B
+Checkpoint              : results/ENG003_multimatrix_checkpoint.pt
+Selected matrices       : 3
+Rows/chunk              : 64
+Prompt count            : 10
+Selected parameters     : 8912896
+Persistent packed bytes : 2367488
+FP16 equivalent bytes   : 17825792
+Persistent compression  : 7.529412x
+
+====================================================================================================
+PATH A — RECONSTRUCTED FP16 REFERENCE
+====================================================================================================
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights:  51%|█████▏    | 164/320 [00:00<00:00, 1615.63it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 1646.52it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+Reference prompt 01: 22 tokens
+Reference prompt 02: 10 tokens
+Reference prompt 03: 10 tokens
+Reference prompt 04: 17 tokens
+Reference prompt 05: 5 tokens
+Reference prompt 06: 21 tokens
+Reference prompt 07: 8 tokens
+Reference prompt 08: 14 tokens
+Reference prompt 09: 9 tokens
+Reference prompt 10: 18 tokens
+
+====================================================================================================
+PATH B — DIRECT TERNARY RUNTIME
+====================================================================================================
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights:   0%|          | 1/320 [00:00<00:39,  8.14it/s]Loading weights:  85%|████████▌ | 273/320 [00:00<00:00, 1438.89it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 1264.03it/s]
+Direct prompt    01: 22 tokens
+Direct prompt    02: 10 tokens
+Direct prompt    03: 10 tokens
+Direct prompt    04: 17 tokens
+Direct prompt    05: 5 tokens
+Direct prompt    06: 21 tokens
+Direct prompt    07: 8 tokens
+Direct prompt    08: 14 tokens
+Direct prompt    09: 9 tokens
+Direct prompt    10: 18 tokens
+
+====================================================================================================
+PER-PROMPT RESULTS
+====================================================================================================
+
+Prompt 01
+Text                    : A box contains 12 red balls and 8 blue balls. How many balls are in the box?
+Tokens                  : 22
+Compared logits         : 5463040
+Mismatch percent        : 79.2942391049672
+Max abs difference      : 0.02734375
+Mean abs difference     : 0.0032219059059100494
+RMSE                    : 0.004264558472858993
+Cosine similarity       : 0.9999993262607223
+Top-1 agreement         : 100.000000%
+Differing positions     : []
+
+Prompt 02
+Text                    : What is 17 multiplied by 6?
+Tokens                  : 10
+Compared logits         : 2483200
+Mismatch percent        : 82.74500644329896
+Max abs difference      : 0.02490234375
+Mean abs difference     : 0.0030211332926440254
+RMSE                    : 0.003932095962235119
+Cosine similarity       : 0.9999990934996936
+Top-1 agreement         : 100.000000%
+Differing positions     : []
+
+Prompt 03
+Text                    : Explain in one sentence why plants need sunlight.
+Tokens                  : 10
+Compared logits         : 2483200
+Mismatch percent        : 83.43995650773196
+Max abs difference      : 0.0546875
+Mean abs difference     : 0.003326702401637263
+RMSE                    : 0.004483820612792221
+Cosine similarity       : 0.9999987838144557
+Top-1 agreement         : 100.000000%
+Differing positions     : []
+
+Prompt 04
+Text                    : Complete the sequence: 2, 4, 8, 16,
+Tokens                  : 17
+Compared logits         : 4221440
+Mismatch percent        : 83.38517188447544
+Max abs difference      : 0.044921875
+Mean abs difference     : 0.0034706011136091245
+RMSE                    : 0.004649599018038146
+Cosine similarity       : 0.9999988213130302
+Top-1 agreement         : 100.000000%
+Differing positions     : []
+
+Prompt 05
+Text                    : The capital of France is
+Tokens                  : 5
+Compared logits         : 1241600
+Mismatch percent        : 77.26353092783505
+Max abs difference      : 0.0205078125
+Mean abs difference     : 0.003055999114360545
+RMSE                    : 0.004024435000774124
+Cosine similarity       : 0.9999993865143839
+Top-1 agreement         : 100.000000%
+Differing positions     : []
+
+Prompt 06
+Text                    : If a train travels 60 miles in one hour, how far does it travel in three hours?
+Tokens                  : 21
+Compared logits         : 5214720
+Mismatch percent        : 80.67802298109966
+Max abs difference      : 0.03125
+Mean abs difference     : 0.003275359984122447
+RMSE                    : 0.004293988924770775
+Cosine similarity       : 0.9999992275832307
+Top-1 agreement         : 100.000000%
+Differing positions     : []
+
+Prompt 07
+Text                    : Write a short greeting to a friend.
+Tokens                  : 8
+Compared logits         : 1986560
+Mismatch percent        : 78.21238724226804
+Max abs difference      : 0.05078125
+Mean abs difference     : 0.0035983585717442165
+RMSE                    : 0.005105943545324506
+Cosine similarity       : 0.9999990431185377
+Top-1 agreement         : 100.000000%
+Differing positions     : []
+
+Prompt 08
+Text                    : Which is larger: 3/4 or 2/3?
+Tokens                  : 14
+Compared logits         : 3476480
+Mismatch percent        : 83.78336708394698
+Max abs difference      : 0.03564453125
+Mean abs difference     : 0.003300047218175509
+RMSE                    : 0.004360711074293674
+Cosine similarity       : 0.9999989118895328
+Top-1 agreement         : 100.000000%
+Differing positions     : []
+
+Prompt 09
+Text                    : Water freezes at what temperature in degrees Celsius?
+Tokens                  : 9
+Compared logits         : 2234880
+Mismatch percent        : 82.7209514604811
+Max abs difference      : 0.03515625
+Mean abs difference     : 0.003555036324555351
+RMSE                    : 0.004634208143091588
+Cosine similarity       : 0.9999990458377186
+Top-1 agreement         : 100.000000%
+Differing positions     : []
+
+Prompt 10
+Text                    : A student has 25 pencils and gives 7 away. How many pencils remain?
+Tokens                  : 18
+Compared logits         : 4469760
+Mismatch percent        : 81.3606994558992
+Max abs difference      : 0.02734375
+Mean abs difference     : 0.003224046272705741
+RMSE                    : 0.004191649627668117
+Cosine similarity       : 0.9999991973544622
+Top-1 agreement         : 100.000000%
+Differing positions     : []
+
+====================================================================================================
+ENG010-D MULTI-PROMPT SUMMARY
+====================================================================================================
+Prompts                 : 10
+Selected matrices       : 3
+Selected parameters     : 8912896
+Persistent packed bytes : 2367488
+FP16 equivalent bytes   : 17825792
+Persistent compression  : 7.529412x
+
+Total logits compared   : 33274880
+Exact FP16 mismatches   : 27096863
+Mismatch percent        : 81.43339059374519
+Global max abs diff     : 0.0546875
+Weighted mean abs diff  : 0.0033017817201542953
+Global RMSE             : 0.004384330259094787
+Mean prompt cosine      : 0.9999990837185768
+Minimum prompt cosine   : 0.9999987838144557
+
+Prompt positions        : 134
+Top-1 matches           : 134
+Top-1 agreement         : 100.000000%
+Differing top-1 pos.    : 0
+Prompts with differences: 0
+
+Persistent FP16 weights : False
+Temporary FP16 weights  : False
+
+Scope:
+  - Fixed 10-prompt numerical validation suite.
+  - Three frozen ENG003 matrices only.
+  - Same packed checkpoint used by both paths.
+  - Direct path does not reconstruct FP16 weight tensors.
+  - Packed codes are still decoded to temporary int8 tensors.
+  - Temporary arithmetic tensors are still created.
+  - Top-1 agreement is descriptive for this fixed suite only.
+  - No general behavioral-equivalence claim.
+  - No inference-speedup claim.
+  - No peak RAM/VRAM reduction claim.
+  - No fused 2-bit kernel claim.
+  - No whole-model compression claim.
+
+ENG010-D MULTI-PROMPT VALIDATION: COMPLETE
