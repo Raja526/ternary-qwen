@@ -1,0 +1,150 @@
+====================================================================================================
+ENG004 — REAL QWEN HYBRID LOADER VALIDATION
+====================================================================================================
+
+Model                    : Qwen/Qwen3.5-0.8B
+Checkpoint               : results/ENG003_multimatrix_checkpoint.pt
+Group size               : 128
+Threshold multiplier     : 0.5
+Expected target matrices : 3
+Expected target params   : 8912896
+
+----------------------------------------------------------------------------------------------------
+CHECKPOINT IDENTITY
+----------------------------------------------------------------------------------------------------
+Expected SHA-256 : 8e35aaea4e47a68363a8951fa425874a1e35929a19c277335a260bb20a9cb546
+Actual SHA-256   : 8e35aaea4e47a68363a8951fa425874a1e35929a19c277335a260bb20a9cb546
+Checksum match   : True
+
+----------------------------------------------------------------------------------------------------
+CHECKPOINT CONTENT
+----------------------------------------------------------------------------------------------------
+Checkpoint model : Qwen/Qwen3.5-0.8B
+Weight count     : 3
+  - model.layers.3.self_attn.k_proj
+  - model.layers.4.linear_attn.out_proj
+  - model.layers.4.linear_attn.in_proj_qkv
+
+Loading tokenizer...
+Input token count        : 22
+
+====================================================================================================
+PATH A — DIRECT FROZEN QUANTIZER
+====================================================================================================
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+Direct matrices replaced : 3
+Direct params replaced   : 8912896
+
+----------------------------------------------------------------------------------------------------
+DIRECT vs PACKED CHECKPOINT WEIGHTS
+----------------------------------------------------------------------------------------------------
+
+model.layers.3.self_attn.k_proj
+  mismatches          : 0
+  max abs difference  : 0.0
+  mean abs difference : 0.0
+
+model.layers.4.linear_attn.out_proj
+  mismatches          : 0
+  max abs difference  : 0.0
+  mean abs difference : 0.0
+
+model.layers.4.linear_attn.in_proj_qkv
+  mismatches          : 0
+  max abs difference  : 0.0
+  mean abs difference : 0.0
+
+Running reference forward pass...
+Reference logits shape   : (1, 22, 248320)
+
+====================================================================================================
+PATH B — PACKED CHECKPOINT HYBRID LOADER
+====================================================================================================
+
+----------------------------------------------------------------------------------------------------
+PRE-INJECTION CONTROL CHECK
+----------------------------------------------------------------------------------------------------
+model.layers.3.self_attn.q_proj                         mismatches=0
+model.layers.4.linear_attn.in_proj_z                    mismatches=0
+model.layers.4.mlp.gate_proj                            mismatches=0
+
+Applying packed checkpoint...
+
+Loader matrix count      : 3
+Loader parameter count   : 8912896
+Loader module names      : ('model.layers.3.self_attn.k_proj', 'model.layers.4.linear_attn.out_proj', 'model.layers.4.linear_attn.in_proj_qkv')
+
+====================================================================================================
+TARGET WEIGHT VALIDATION
+====================================================================================================
+
+model.layers.3.self_attn.k_proj
+  values              : 524288
+  mismatches          : 0
+  max abs difference  : 0.0
+  mean abs difference : 0.0
+  shape match         : True
+  dtype match         : True
+
+model.layers.4.linear_attn.out_proj
+  values              : 2097152
+  mismatches          : 0
+  max abs difference  : 0.0
+  mean abs difference : 0.0
+  shape match         : True
+  dtype match         : True
+
+model.layers.4.linear_attn.in_proj_qkv
+  values              : 6291456
+  mismatches          : 0
+  max abs difference  : 0.0
+  mean abs difference : 0.0
+  shape match         : True
+  dtype match         : True
+
+====================================================================================================
+UNTOUCHED CONTROL VALIDATION
+====================================================================================================
+
+model.layers.3.self_attn.q_proj
+  changed values       : 0
+  max abs difference   : 0.0
+
+model.layers.4.linear_attn.in_proj_z
+  changed values       : 0
+  max abs difference   : 0.0
+
+model.layers.4.mlp.gate_proj
+  changed values       : 0
+  max abs difference   : 0.0
+
+Running hybrid forward pass...
+
+====================================================================================================
+FORWARD OUTPUT VALIDATION
+====================================================================================================
+Reference shape         : (1, 22, 248320)
+Hybrid shape            : (1, 22, 248320)
+Logit mismatches        : 0
+Max abs logit difference: 0.0
+Mean abs logit difference: 0.0
+Shape match             : True
+Dtype match             : True
+
+====================================================================================================
+FINAL ACCEPTANCE
+====================================================================================================
+Checkpoint checksum     : PASS
+Target matrices         : 3
+Target parameters       : 8912896
+Target mismatches       : 0
+Target global max diff  : 0.0
+Untouched control changes: 0
+Direct vs checkpoint    : EXACT MATCH
+Hybrid target injection : EXACT MATCH
+Untouched controls      : EXACT MATCH
+Forward logits          : EXACT MATCH
+
+====================================================================================================
+ENG004 REAL HYBRID LOADER VALIDATION: PASS
+====================================================================================================
