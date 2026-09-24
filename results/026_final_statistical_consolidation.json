@@ -1,0 +1,1438 @@
+{
+  "experiment": 26,
+  "title": "Final Statistical Consolidation",
+  "model": "Qwen/Qwen3.5-0.8B",
+  "source_experiments": [
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25
+  ],
+  "new_model_evaluation": false,
+  "new_ternarization": false,
+  "new_configuration_search": false,
+  "unit_normalization": {
+    "exp019_024_accuracy": "fraction -> percent",
+    "exp019_024_accuracy_difference": "fraction -> percentage points",
+    "exp019_024_prediction_agreement": "fraction -> percent",
+    "exp022_accuracy_interaction": "fraction -> percentage points",
+    "exp019_024_coverage_percent": "already percentage units; unchanged",
+    "exp025_accuracy": "already percent; unchanged",
+    "exp025_accuracy_difference": "already percentage points; unchanged",
+    "exp025_prediction_agreement_percent": "already percent; unchanged",
+    "reconstruction_error": "unchanged"
+  },
+  "descriptive_thresholds": {
+    "accuracy_preservation_pp": 1.0,
+    "behavior_agreement_percent": 90.0,
+    "low_coverage_percent": 1.0
+  },
+  "arc_observation_count": 50,
+  "arc_observations": [
+    {
+      "experiment": 19,
+      "category": "individual_matrix",
+      "label": "q_proj",
+      "matrix_names": [
+        "model.layers.3.self_attn.q_proj"
+      ],
+      "matrix_count": 1,
+      "coverage_percent": 0.5574618405818712,
+      "mean_error": 0.46442937494872627,
+      "max_error": 0.46442937494872627,
+      "accuracy_percent": 55.18394648829431,
+      "accuracy_difference_pp": -0.33444816053511683,
+      "prediction_agreement_percent": 77.25752508361204,
+      "changed_predictions": 68,
+      "mcnemar_exact_p": 1.0
+    },
+    {
+      "experiment": 19,
+      "category": "individual_matrix",
+      "label": "k_proj",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj"
+      ],
+      "matrix_count": 1,
+      "coverage_percent": 0.0696827300727339,
+      "mean_error": 0.4782803641119928,
+      "max_error": 0.4782803641119928,
+      "accuracy_percent": 55.852842809364546,
+      "accuracy_difference_pp": 0.33444816053511683,
+      "prediction_agreement_percent": 93.31103678929766,
+      "changed_predictions": 20,
+      "mcnemar_exact_p": 1.0
+    },
+    {
+      "experiment": 19,
+      "category": "individual_matrix",
+      "label": "v_proj",
+      "matrix_names": [
+        "model.layers.3.self_attn.v_proj"
+      ],
+      "matrix_count": 1,
+      "coverage_percent": 0.0696827300727339,
+      "mean_error": 0.4820139940885491,
+      "max_error": 0.4820139940885491,
+      "accuracy_percent": 51.17056856187291,
+      "accuracy_difference_pp": -4.347826086956519,
+      "prediction_agreement_percent": 79.26421404682274,
+      "changed_predictions": 62,
+      "mcnemar_exact_p": 0.08543313315739454
+    },
+    {
+      "experiment": 19,
+      "category": "individual_matrix",
+      "label": "o_proj",
+      "matrix_names": [
+        "model.layers.3.self_attn.o_proj"
+      ],
+      "matrix_count": 1,
+      "coverage_percent": 0.2787309202909356,
+      "mean_error": 0.4850014302796034,
+      "max_error": 0.4850014302796034,
+      "accuracy_percent": 48.16053511705686,
+      "accuracy_difference_pp": -7.35785953177257,
+      "prediction_agreement_percent": 66.88963210702342,
+      "changed_predictions": 99,
+      "mcnemar_exact_p": 0.012774595538064903
+    },
+    {
+      "experiment": 19,
+      "category": "individual_matrix",
+      "label": "out_proj",
+      "matrix_names": [
+        "model.layers.4.linear_attn.out_proj"
+      ],
+      "matrix_count": 1,
+      "coverage_percent": 0.2787309202909356,
+      "mean_error": 0.4817146563730736,
+      "max_error": 0.4817146563730736,
+      "accuracy_percent": 57.19063545150501,
+      "accuracy_difference_pp": 1.6722408026755842,
+      "prediction_agreement_percent": 87.29096989966555,
+      "changed_predictions": 38,
+      "mcnemar_exact_p": 0.4048728942871094
+    },
+    {
+      "experiment": 19,
+      "category": "individual_matrix",
+      "label": "in_proj_qkv",
+      "matrix_names": [
+        "model.layers.4.linear_attn.in_proj_qkv"
+      ],
+      "matrix_count": 1,
+      "coverage_percent": 0.8361927608728068,
+      "mean_error": 0.4686643379331054,
+      "max_error": 0.4686643379331054,
+      "accuracy_percent": 53.84615384615385,
+      "accuracy_difference_pp": -1.6722408026755842,
+      "prediction_agreement_percent": 89.29765886287625,
+      "changed_predictions": 32,
+      "mcnemar_exact_p": 0.42435622215270996
+    },
+    {
+      "experiment": 19,
+      "category": "individual_matrix",
+      "label": "in_proj_z",
+      "matrix_names": [
+        "model.layers.4.linear_attn.in_proj_z"
+      ],
+      "matrix_count": 1,
+      "coverage_percent": 0.2787309202909356,
+      "mean_error": 0.46565545800643826,
+      "max_error": 0.46565545800643826,
+      "accuracy_percent": 42.474916387959865,
+      "accuracy_difference_pp": -13.043478260869563,
+      "prediction_agreement_percent": 69.56521739130434,
+      "changed_predictions": 91,
+      "mcnemar_exact_p": 5.268675318129165e-06
+    },
+    {
+      "experiment": 19,
+      "category": "individual_matrix",
+      "label": "gate_proj",
+      "matrix_names": [
+        "model.layers.6.mlp.gate_proj"
+      ],
+      "matrix_count": 1,
+      "coverage_percent": 0.4877791105091373,
+      "mean_error": 0.4703150244798812,
+      "max_error": 0.47031502447988127,
+      "accuracy_percent": 57.19063545150501,
+      "accuracy_difference_pp": 1.6722408026755842,
+      "prediction_agreement_percent": 74.5819397993311,
+      "changed_predictions": 76,
+      "mcnemar_exact_p": 0.5758493477318467
+    },
+    {
+      "experiment": 19,
+      "category": "individual_matrix",
+      "label": "up_proj",
+      "matrix_names": [
+        "model.layers.6.mlp.up_proj"
+      ],
+      "matrix_count": 1,
+      "coverage_percent": 0.4877791105091373,
+      "mean_error": 0.473525459551129,
+      "max_error": 0.473525459551129,
+      "accuracy_percent": 55.18394648829431,
+      "accuracy_difference_pp": -0.33444816053511683,
+      "prediction_agreement_percent": 53.84615384615385,
+      "changed_predictions": 138,
+      "mcnemar_exact_p": 1.0
+    },
+    {
+      "experiment": 19,
+      "category": "individual_matrix",
+      "label": "down_proj",
+      "matrix_names": [
+        "model.layers.6.mlp.down_proj"
+      ],
+      "matrix_count": 1,
+      "coverage_percent": 0.4877791105091373,
+      "mean_error": 0.473450325077469,
+      "max_error": 0.473450325077469,
+      "accuracy_percent": 58.862876254180605,
+      "accuracy_difference_pp": 3.3444816053511794,
+      "prediction_agreement_percent": 66.22073578595318,
+      "changed_predictions": 101,
+      "mcnemar_exact_p": 0.2604354765766535
+    },
+    {
+      "experiment": 20,
+      "category": "progressive_combination",
+      "label": "step_1",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj"
+      ],
+      "matrix_count": 1,
+      "coverage_percent": 0.0696827300727339,
+      "mean_error": 0.4782803641119928,
+      "max_error": 0.4782803641119928,
+      "accuracy_percent": 55.852842809364546,
+      "accuracy_difference_pp": 0.33444816053511683,
+      "prediction_agreement_percent": 93.31103678929766,
+      "changed_predictions": 20,
+      "mcnemar_exact_p": 1.0
+    },
+    {
+      "experiment": 20,
+      "category": "progressive_combination",
+      "label": "step_2",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj",
+        "model.layers.4.linear_attn.out_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 0.3484136503636695,
+      "mean_error": 0.4810277979208575,
+      "max_error": 0.4817146563730736,
+      "accuracy_percent": 56.52173913043478,
+      "accuracy_difference_pp": 1.0033444816053505,
+      "prediction_agreement_percent": 86.95652173913044,
+      "changed_predictions": 39,
+      "mcnemar_exact_p": 0.7011080384254456
+    },
+    {
+      "experiment": 20,
+      "category": "progressive_combination",
+      "label": "step_3",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj",
+        "model.layers.4.linear_attn.out_proj",
+        "model.layers.4.linear_attn.in_proj_qkv"
+      ],
+      "matrix_count": 3,
+      "coverage_percent": 1.1846064112364763,
+      "mean_error": 0.472300649694209,
+      "max_error": 0.4817146563730736,
+      "accuracy_percent": 52.17391304347826,
+      "accuracy_difference_pp": -3.3444816053511683,
+      "prediction_agreement_percent": 84.2809364548495,
+      "changed_predictions": 47,
+      "mcnemar_exact_p": 0.12144948495551944
+    },
+    {
+      "experiment": 20,
+      "category": "progressive_combination",
+      "label": "step_4",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj",
+        "model.layers.4.linear_attn.out_proj",
+        "model.layers.4.linear_attn.in_proj_qkv",
+        "model.layers.3.self_attn.q_proj"
+      ],
+      "matrix_count": 4,
+      "coverage_percent": 1.7420682518183475,
+      "mean_error": 0.4697818417756545,
+      "max_error": 0.4817146563730736,
+      "accuracy_percent": 47.82608695652174,
+      "accuracy_difference_pp": -7.692307692307687,
+      "prediction_agreement_percent": 65.55183946488295,
+      "changed_predictions": 103,
+      "mcnemar_exact_p": 0.006741447363103126
+    },
+    {
+      "experiment": 20,
+      "category": "progressive_combination",
+      "label": "step_5",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj",
+        "model.layers.4.linear_attn.out_proj",
+        "model.layers.4.linear_attn.in_proj_qkv",
+        "model.layers.3.self_attn.q_proj",
+        "model.layers.6.mlp.gate_proj"
+      ],
+      "matrix_count": 5,
+      "coverage_percent": 2.229847362327485,
+      "mean_error": 0.4698984754922041,
+      "max_error": 0.4817146563730736,
+      "accuracy_percent": 45.48494983277592,
+      "accuracy_difference_pp": -10.03344481605351,
+      "prediction_agreement_percent": 58.52842809364549,
+      "changed_predictions": 124,
+      "mcnemar_exact_p": 0.0009010035205219422
+    },
+    {
+      "experiment": 20,
+      "category": "progressive_combination",
+      "label": "step_6",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj",
+        "model.layers.4.linear_attn.out_proj",
+        "model.layers.4.linear_attn.in_proj_qkv",
+        "model.layers.3.self_attn.q_proj",
+        "model.layers.6.mlp.gate_proj",
+        "model.layers.6.mlp.down_proj"
+      ],
+      "matrix_count": 6,
+      "coverage_percent": 2.717626472836622,
+      "mean_error": 0.470535986956226,
+      "max_error": 0.4817146563730736,
+      "accuracy_percent": 49.163879598662206,
+      "accuracy_difference_pp": -6.35451505016722,
+      "prediction_agreement_percent": 56.856187290969906,
+      "changed_predictions": 129,
+      "mcnemar_exact_p": 0.04752488925653181
+    },
+    {
+      "experiment": 20,
+      "category": "progressive_combination",
+      "label": "step_7",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj",
+        "model.layers.4.linear_attn.out_proj",
+        "model.layers.4.linear_attn.in_proj_qkv",
+        "model.layers.3.self_attn.q_proj",
+        "model.layers.6.mlp.gate_proj",
+        "model.layers.6.mlp.down_proj",
+        "model.layers.6.mlp.up_proj"
+      ],
+      "matrix_count": 7,
+      "coverage_percent": 3.2054055833457595,
+      "mean_error": 0.4709909066989287,
+      "max_error": 0.4817146563730736,
+      "accuracy_percent": 46.48829431438127,
+      "accuracy_difference_pp": -9.030100334448154,
+      "prediction_agreement_percent": 52.84280936454849,
+      "changed_predictions": 141,
+      "mcnemar_exact_p": 0.006105521074524772
+    },
+    {
+      "experiment": 21,
+      "category": "qproj_interaction",
+      "label": "q_only",
+      "matrix_names": [
+        "model.layers.3.self_attn.q_proj"
+      ],
+      "matrix_count": 1,
+      "coverage_percent": 0.5574618405818712,
+      "mean_error": 0.46442937494872627,
+      "max_error": 0.46442937494872627,
+      "accuracy_percent": 55.18394648829431,
+      "accuracy_difference_pp": -0.33444816053511683,
+      "prediction_agreement_percent": 77.25752508361204,
+      "changed_predictions": 68,
+      "mcnemar_exact_p": 1.0
+    },
+    {
+      "experiment": 21,
+      "category": "qproj_interaction",
+      "label": "k_plus_q",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj",
+        "model.layers.3.self_attn.q_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 0.6271445706546052,
+      "mean_error": 0.4659683737446448,
+      "max_error": 0.4782803641119928,
+      "accuracy_percent": 55.51839464882943,
+      "accuracy_difference_pp": 0.0,
+      "prediction_agreement_percent": 78.26086956521739,
+      "changed_predictions": 65,
+      "mcnemar_exact_p": 1.0
+    },
+    {
+      "experiment": 21,
+      "category": "qproj_interaction",
+      "label": "out_plus_q",
+      "matrix_names": [
+        "model.layers.4.linear_attn.out_proj",
+        "model.layers.3.self_attn.q_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 0.8361927608728068,
+      "mean_error": 0.4701911354235087,
+      "max_error": 0.4817146563730736,
+      "accuracy_percent": 49.49832775919732,
+      "accuracy_difference_pp": -6.020066889632103,
+      "prediction_agreement_percent": 71.90635451505017,
+      "changed_predictions": 84,
+      "mcnemar_exact_p": 0.024746035842440797
+    },
+    {
+      "experiment": 21,
+      "category": "qproj_interaction",
+      "label": "qkv_plus_q",
+      "matrix_names": [
+        "model.layers.4.linear_attn.in_proj_qkv",
+        "model.layers.3.self_attn.q_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 1.393654601454678,
+      "mean_error": 0.4669703527393537,
+      "max_error": 0.4686643379331054,
+      "accuracy_percent": 50.16722408026756,
+      "accuracy_difference_pp": -5.351170568561869,
+      "prediction_agreement_percent": 75.25083612040133,
+      "changed_predictions": 74,
+      "mcnemar_exact_p": 0.03648340000835981
+    },
+    {
+      "experiment": 21,
+      "category": "qproj_interaction",
+      "label": "k_out_q",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj",
+        "model.layers.4.linear_attn.out_proj",
+        "model.layers.3.self_attn.q_proj"
+      ],
+      "matrix_count": 3,
+      "coverage_percent": 0.9058754909455408,
+      "mean_error": 0.4708133837841614,
+      "max_error": 0.4817146563730736,
+      "accuracy_percent": 51.83946488294314,
+      "accuracy_difference_pp": -3.678929765886285,
+      "prediction_agreement_percent": 72.5752508361204,
+      "changed_predictions": 82,
+      "mcnemar_exact_p": 0.16897782228771874
+    },
+    {
+      "experiment": 21,
+      "category": "qproj_interaction",
+      "label": "k_qkv_q",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj",
+        "model.layers.4.linear_attn.in_proj_qkv",
+        "model.layers.3.self_attn.q_proj"
+      ],
+      "matrix_count": 3,
+      "coverage_percent": 1.4633373315274119,
+      "mean_error": 0.4675089247094794,
+      "max_error": 0.4782803641119928,
+      "accuracy_percent": 50.836120401337794,
+      "accuracy_difference_pp": -4.682274247491636,
+      "prediction_agreement_percent": 74.91638795986621,
+      "changed_predictions": 75,
+      "mcnemar_exact_p": 0.06490864707227217
+    },
+    {
+      "experiment": 21,
+      "category": "qproj_interaction",
+      "label": "out_qkv_q",
+      "matrix_names": [
+        "model.layers.4.linear_attn.out_proj",
+        "model.layers.4.linear_attn.in_proj_qkv",
+        "model.layers.3.self_attn.q_proj"
+      ],
+      "matrix_count": 3,
+      "coverage_percent": 1.6723855217456136,
+      "mean_error": 0.46942773667830706,
+      "max_error": 0.4817146563730736,
+      "accuracy_percent": 50.16722408026756,
+      "accuracy_difference_pp": -5.351170568561869,
+      "prediction_agreement_percent": 69.89966555183946,
+      "changed_predictions": 90,
+      "mcnemar_exact_p": 0.05589722669971113
+    },
+    {
+      "experiment": 21,
+      "category": "qproj_interaction",
+      "label": "k_out_qkv_q",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj",
+        "model.layers.4.linear_attn.out_proj",
+        "model.layers.4.linear_attn.in_proj_qkv",
+        "model.layers.3.self_attn.q_proj"
+      ],
+      "matrix_count": 4,
+      "coverage_percent": 1.7420682518183475,
+      "mean_error": 0.4697818417756545,
+      "max_error": 0.4817146563730736,
+      "accuracy_percent": 47.82608695652174,
+      "accuracy_difference_pp": -7.692307692307687,
+      "prediction_agreement_percent": 65.55183946488295,
+      "changed_predictions": 103,
+      "mcnemar_exact_p": 0.006741447363103126
+    },
+    {
+      "experiment": 22,
+      "category": "pairwise_combination",
+      "label": "k_proj+out_proj",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj",
+        "model.layers.4.linear_attn.out_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 0.3484136503636695,
+      "mean_error": 0.4810277979208575,
+      "max_error": 0.4817146563730736,
+      "accuracy_percent": 56.52173913043478,
+      "accuracy_difference_pp": 1.0033444816053505,
+      "prediction_agreement_percent": 86.95652173913044,
+      "changed_predictions": 39,
+      "mcnemar_exact_p": 0.7011080384254456,
+      "accuracy_interaction_pp": -1.0033444816053505,
+      "individual_delta_a_pp": 0.33444816053511683,
+      "individual_delta_b_pp": 1.6722408026755842,
+      "expected_additive_delta_pp": 2.006688963210701
+    },
+    {
+      "experiment": 22,
+      "category": "pairwise_combination",
+      "label": "k_proj+in_proj_qkv",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj",
+        "model.layers.4.linear_attn.in_proj_qkv"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 0.9058754909455408,
+      "mean_error": 0.4694040322545583,
+      "max_error": 0.4782803641119928,
+      "accuracy_percent": 53.84615384615385,
+      "accuracy_difference_pp": -1.6722408026755842,
+      "prediction_agreement_percent": 85.95317725752508,
+      "changed_predictions": 42,
+      "mcnemar_exact_p": 0.48685024166479707,
+      "accuracy_interaction_pp": -0.33444816053511683,
+      "individual_delta_a_pp": 0.33444816053511683,
+      "individual_delta_b_pp": -1.6722408026755842,
+      "expected_additive_delta_pp": -1.3377926421404673
+    },
+    {
+      "experiment": 22,
+      "category": "pairwise_combination",
+      "label": "k_proj+q_proj",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj",
+        "model.layers.3.self_attn.q_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 0.6271445706546052,
+      "mean_error": 0.4659683737446448,
+      "max_error": 0.4782803641119928,
+      "accuracy_percent": 55.51839464882943,
+      "accuracy_difference_pp": 0.0,
+      "prediction_agreement_percent": 78.26086956521739,
+      "changed_predictions": 65,
+      "mcnemar_exact_p": 1.0,
+      "accuracy_interaction_pp": 0.0,
+      "individual_delta_a_pp": 0.33444816053511683,
+      "individual_delta_b_pp": -0.33444816053511683,
+      "expected_additive_delta_pp": 0.0
+    },
+    {
+      "experiment": 22,
+      "category": "pairwise_combination",
+      "label": "k_proj+gate_proj",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj",
+        "model.layers.6.mlp.gate_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 0.5574618405818712,
+      "mean_error": 0.4713106919338952,
+      "max_error": 0.4782803641119928,
+      "accuracy_percent": 58.19397993311036,
+      "accuracy_difference_pp": 2.6755852842809347,
+      "prediction_agreement_percent": 76.25418060200668,
+      "changed_predictions": 71,
+      "mcnemar_exact_p": 0.3019956131896606,
+      "accuracy_interaction_pp": 0.6688963210702337,
+      "individual_delta_a_pp": 0.33444816053511683,
+      "individual_delta_b_pp": 1.6722408026755842,
+      "expected_additive_delta_pp": 2.006688963210701
+    },
+    {
+      "experiment": 22,
+      "category": "pairwise_combination",
+      "label": "k_proj+down_proj",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj",
+        "model.layers.6.mlp.down_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 0.5574618405818712,
+      "mean_error": 0.47405407995678445,
+      "max_error": 0.4782803641119928,
+      "accuracy_percent": 59.86622073578596,
+      "accuracy_difference_pp": 4.34782608695653,
+      "prediction_agreement_percent": 70.5685618729097,
+      "changed_predictions": 88,
+      "mcnemar_exact_p": 0.1299179230225525,
+      "accuracy_interaction_pp": 0.6688963210702337,
+      "individual_delta_a_pp": 0.33444816053511683,
+      "individual_delta_b_pp": 3.3444816053511794,
+      "expected_additive_delta_pp": 3.6789297658862963
+    },
+    {
+      "experiment": 22,
+      "category": "pairwise_combination",
+      "label": "k_proj+up_proj",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj",
+        "model.layers.6.mlp.up_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 0.5574618405818712,
+      "mean_error": 0.474119822621237,
+      "max_error": 0.4782803641119928,
+      "accuracy_percent": 55.51839464882943,
+      "accuracy_difference_pp": 0.0,
+      "prediction_agreement_percent": 57.52508361204014,
+      "changed_predictions": 127,
+      "mcnemar_exact_p": 1.0,
+      "accuracy_interaction_pp": 0.0,
+      "individual_delta_a_pp": 0.33444816053511683,
+      "individual_delta_b_pp": -0.33444816053511683,
+      "expected_additive_delta_pp": 0.0
+    },
+    {
+      "experiment": 22,
+      "category": "pairwise_combination",
+      "label": "out_proj+in_proj_qkv",
+      "matrix_names": [
+        "model.layers.4.linear_attn.out_proj",
+        "model.layers.4.linear_attn.in_proj_qkv"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 1.1149236811637424,
+      "mean_error": 0.47192691754309746,
+      "max_error": 0.4817146563730736,
+      "accuracy_percent": 56.187290969899664,
+      "accuracy_difference_pp": 0.6688963210702337,
+      "prediction_agreement_percent": 87.62541806020067,
+      "changed_predictions": 37,
+      "mcnemar_exact_p": 0.8450189828872681,
+      "accuracy_interaction_pp": 0.6688963210702337,
+      "individual_delta_a_pp": 1.6722408026755842,
+      "individual_delta_b_pp": -1.6722408026755842,
+      "expected_additive_delta_pp": 0.0
+    },
+    {
+      "experiment": 22,
+      "category": "pairwise_combination",
+      "label": "out_proj+q_proj",
+      "matrix_names": [
+        "model.layers.4.linear_attn.out_proj",
+        "model.layers.3.self_attn.q_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 0.8361927608728068,
+      "mean_error": 0.4701911354235087,
+      "max_error": 0.4817146563730736,
+      "accuracy_percent": 49.49832775919732,
+      "accuracy_difference_pp": -6.020066889632103,
+      "prediction_agreement_percent": 71.90635451505017,
+      "changed_predictions": 84,
+      "mcnemar_exact_p": 0.024746035842440797,
+      "accuracy_interaction_pp": -7.35785953177257,
+      "individual_delta_a_pp": 1.6722408026755842,
+      "individual_delta_b_pp": -0.33444816053511683,
+      "expected_additive_delta_pp": 1.3377926421404673
+    },
+    {
+      "experiment": 22,
+      "category": "pairwise_combination",
+      "label": "out_proj+gate_proj",
+      "matrix_names": [
+        "model.layers.4.linear_attn.out_proj",
+        "model.layers.6.mlp.gate_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 0.766510030800073,
+      "mean_error": 0.47446034516831487,
+      "max_error": 0.4817146563730736,
+      "accuracy_percent": 54.515050167224075,
+      "accuracy_difference_pp": -1.0033444816053505,
+      "prediction_agreement_percent": 69.89966555183946,
+      "changed_predictions": 90,
+      "mcnemar_exact_p": 0.7948436539828609,
+      "accuracy_interaction_pp": -4.347826086956519,
+      "individual_delta_a_pp": 1.6722408026755842,
+      "individual_delta_b_pp": 1.6722408026755842,
+      "expected_additive_delta_pp": 3.3444816053511683
+    },
+    {
+      "experiment": 22,
+      "category": "pairwise_combination",
+      "label": "out_proj+down_proj",
+      "matrix_names": [
+        "model.layers.4.linear_attn.out_proj",
+        "model.layers.6.mlp.down_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 0.766510030800073,
+      "mean_error": 0.4764555364576888,
+      "max_error": 0.4817146563730736,
+      "accuracy_percent": 58.862876254180605,
+      "accuracy_difference_pp": 3.3444816053511794,
+      "prediction_agreement_percent": 64.21404682274247,
+      "changed_predictions": 107,
+      "mcnemar_exact_p": 0.267811664846587,
+      "accuracy_interaction_pp": -1.6722408026755842,
+      "individual_delta_a_pp": 1.6722408026755842,
+      "individual_delta_b_pp": 3.3444816053511794,
+      "expected_additive_delta_pp": 5.016722408026764
+    },
+    {
+      "experiment": 22,
+      "category": "pairwise_combination",
+      "label": "out_proj+up_proj",
+      "matrix_names": [
+        "model.layers.4.linear_attn.out_proj",
+        "model.layers.6.mlp.up_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 0.766510030800073,
+      "mean_error": 0.4765033493045634,
+      "max_error": 0.4817146563730736,
+      "accuracy_percent": 57.52508361204013,
+      "accuracy_difference_pp": 2.006688963210701,
+      "prediction_agreement_percent": 65.55183946488295,
+      "changed_predictions": 103,
+      "mcnemar_exact_p": 0.5613807442989819,
+      "accuracy_interaction_pp": 0.6688963210702337,
+      "individual_delta_a_pp": 1.6722408026755842,
+      "individual_delta_b_pp": -0.33444816053511683,
+      "expected_additive_delta_pp": 1.3377926421404673
+    },
+    {
+      "experiment": 22,
+      "category": "pairwise_combination",
+      "label": "in_proj_qkv+q_proj",
+      "matrix_names": [
+        "model.layers.4.linear_attn.in_proj_qkv",
+        "model.layers.3.self_attn.q_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 1.393654601454678,
+      "mean_error": 0.4669703527393537,
+      "max_error": 0.4686643379331054,
+      "accuracy_percent": 50.16722408026756,
+      "accuracy_difference_pp": -5.351170568561869,
+      "prediction_agreement_percent": 75.25083612040133,
+      "changed_predictions": 74,
+      "mcnemar_exact_p": 0.03648340000835981,
+      "accuracy_interaction_pp": -3.3444816053511683,
+      "individual_delta_a_pp": -1.6722408026755842,
+      "individual_delta_b_pp": -0.33444816053511683,
+      "expected_additive_delta_pp": -2.006688963210701
+    },
+    {
+      "experiment": 22,
+      "category": "pairwise_combination",
+      "label": "in_proj_qkv+gate_proj",
+      "matrix_names": [
+        "model.layers.4.linear_attn.in_proj_qkv",
+        "model.layers.6.mlp.gate_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 1.3239718713819442,
+      "mean_error": 0.4692724856082333,
+      "max_error": 0.47031502447988127,
+      "accuracy_percent": 53.51170568561873,
+      "accuracy_difference_pp": -2.006688963210701,
+      "prediction_agreement_percent": 69.89966555183946,
+      "changed_predictions": 90,
+      "mcnemar_exact_p": 0.5189580031896518,
+      "accuracy_interaction_pp": -2.006688963210701,
+      "individual_delta_a_pp": -1.6722408026755842,
+      "individual_delta_b_pp": 1.6722408026755842,
+      "expected_additive_delta_pp": 0.0
+    },
+    {
+      "experiment": 22,
+      "category": "pairwise_combination",
+      "label": "in_proj_qkv+down_proj",
+      "matrix_names": [
+        "model.layers.4.linear_attn.in_proj_qkv",
+        "model.layers.6.mlp.down_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 1.3239718713819442,
+      "mean_error": 0.47042759635471304,
+      "max_error": 0.473450325077469,
+      "accuracy_percent": 57.52508361204013,
+      "accuracy_difference_pp": 2.006688963210701,
+      "prediction_agreement_percent": 64.88294314381271,
+      "changed_predictions": 105,
+      "mcnemar_exact_p": 0.5613807442989819,
+      "accuracy_interaction_pp": 0.33444816053510573,
+      "individual_delta_a_pp": -1.6722408026755842,
+      "individual_delta_b_pp": 3.3444816053511794,
+      "expected_additive_delta_pp": 1.6722408026755953
+    },
+    {
+      "experiment": 22,
+      "category": "pairwise_combination",
+      "label": "in_proj_qkv+up_proj",
+      "matrix_names": [
+        "model.layers.4.linear_attn.in_proj_qkv",
+        "model.layers.6.mlp.up_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 1.3239718713819442,
+      "mean_error": 0.4704552774765877,
+      "max_error": 0.473525459551129,
+      "accuracy_percent": 49.49832775919732,
+      "accuracy_difference_pp": -6.020066889632103,
+      "prediction_agreement_percent": 50.16722408026756,
+      "changed_predictions": 149,
+      "mcnemar_exact_p": 0.09824250442243802,
+      "accuracy_interaction_pp": -4.013377926421402,
+      "individual_delta_a_pp": -1.6722408026755842,
+      "individual_delta_b_pp": -0.33444816053511683,
+      "expected_additive_delta_pp": -2.006688963210701
+    },
+    {
+      "experiment": 22,
+      "category": "pairwise_combination",
+      "label": "q_proj+gate_proj",
+      "matrix_names": [
+        "model.layers.3.self_attn.q_proj",
+        "model.layers.6.mlp.gate_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 1.0452409510910086,
+      "mean_error": 0.4671760113965986,
+      "max_error": 0.47031502447988127,
+      "accuracy_percent": 48.82943143812709,
+      "accuracy_difference_pp": -6.688963210702337,
+      "prediction_agreement_percent": 58.52842809364549,
+      "changed_predictions": 124,
+      "mcnemar_exact_p": 0.03524144017874745,
+      "accuracy_interaction_pp": -8.026755852842804,
+      "individual_delta_a_pp": -0.33444816053511683,
+      "individual_delta_b_pp": 1.6722408026755842,
+      "expected_additive_delta_pp": 1.3377926421404673
+    },
+    {
+      "experiment": 22,
+      "category": "pairwise_combination",
+      "label": "q_proj+down_proj",
+      "matrix_names": [
+        "model.layers.3.self_attn.q_proj",
+        "model.layers.6.mlp.down_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 1.0452409510910086,
+      "mean_error": 0.4686391516754728,
+      "max_error": 0.473450325077469,
+      "accuracy_percent": 53.51170568561873,
+      "accuracy_difference_pp": -2.006688963210701,
+      "prediction_agreement_percent": 56.856187290969906,
+      "changed_predictions": 129,
+      "mcnemar_exact_p": 0.5856467947212246,
+      "accuracy_interaction_pp": -5.016722408026764,
+      "individual_delta_a_pp": -0.33444816053511683,
+      "individual_delta_b_pp": 3.3444816053511794,
+      "expected_additive_delta_pp": 3.0100334448160626
+    },
+    {
+      "experiment": 22,
+      "category": "pairwise_combination",
+      "label": "q_proj+up_proj",
+      "matrix_names": [
+        "model.layers.3.self_attn.q_proj",
+        "model.layers.6.mlp.up_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 1.0452409510910086,
+      "mean_error": 0.4686742144298475,
+      "max_error": 0.473525459551129,
+      "accuracy_percent": 45.1505016722408,
+      "accuracy_difference_pp": -10.367892976588628,
+      "prediction_agreement_percent": 48.49498327759198,
+      "changed_predictions": 154,
+      "mcnemar_exact_p": 0.0029291945870261915,
+      "accuracy_interaction_pp": -9.698996655518394,
+      "individual_delta_a_pp": -0.33444816053511683,
+      "individual_delta_b_pp": -0.33444816053511683,
+      "expected_additive_delta_pp": -0.6688963210702337
+    },
+    {
+      "experiment": 22,
+      "category": "pairwise_combination",
+      "label": "gate_proj+down_proj",
+      "matrix_names": [
+        "model.layers.6.mlp.gate_proj",
+        "model.layers.6.mlp.down_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 0.9755582210182746,
+      "mean_error": 0.4718826747786751,
+      "max_error": 0.473450325077469,
+      "accuracy_percent": 57.19063545150501,
+      "accuracy_difference_pp": 1.6722408026755842,
+      "prediction_agreement_percent": 60.200668896321076,
+      "changed_predictions": 119,
+      "mcnemar_exact_p": 0.6353076420876662,
+      "accuracy_interaction_pp": -3.3444816053511794,
+      "individual_delta_a_pp": 1.6722408026755842,
+      "individual_delta_b_pp": 3.3444816053511794,
+      "expected_additive_delta_pp": 5.016722408026764
+    },
+    {
+      "experiment": 22,
+      "category": "pairwise_combination",
+      "label": "gate_proj+up_proj",
+      "matrix_names": [
+        "model.layers.6.mlp.gate_proj",
+        "model.layers.6.mlp.up_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 0.9755582210182746,
+      "mean_error": 0.47192024201550514,
+      "max_error": 0.473525459551129,
+      "accuracy_percent": 53.51170568561873,
+      "accuracy_difference_pp": -2.006688963210701,
+      "prediction_agreement_percent": 59.19732441471572,
+      "changed_predictions": 122,
+      "mcnemar_exact_p": 0.5856467947212246,
+      "accuracy_interaction_pp": -3.3444816053511683,
+      "individual_delta_a_pp": 1.6722408026755842,
+      "individual_delta_b_pp": -0.33444816053511683,
+      "expected_additive_delta_pp": 1.3377926421404673
+    },
+    {
+      "experiment": 22,
+      "category": "pairwise_combination",
+      "label": "down_proj+up_proj",
+      "matrix_names": [
+        "model.layers.6.mlp.down_proj",
+        "model.layers.6.mlp.up_proj"
+      ],
+      "matrix_count": 2,
+      "coverage_percent": 0.9755582210182746,
+      "mean_error": 0.47348789231429894,
+      "max_error": 0.473525459551129,
+      "accuracy_percent": 51.50501672240802,
+      "accuracy_difference_pp": -4.013377926421402,
+      "prediction_agreement_percent": 44.147157190635454,
+      "changed_predictions": 167,
+      "mcnemar_exact_p": 0.30287755263032495,
+      "accuracy_interaction_pp": -7.023411371237465,
+      "individual_delta_a_pp": 3.3444816053511794,
+      "individual_delta_b_pp": -0.33444816053511683,
+      "expected_additive_delta_pp": 3.0100334448160626
+    },
+    {
+      "experiment": 24,
+      "category": "safe_core_interaction",
+      "label": "core_plus_q_proj",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj",
+        "model.layers.4.linear_attn.out_proj",
+        "model.layers.4.linear_attn.in_proj_qkv",
+        "model.layers.3.self_attn.q_proj"
+      ],
+      "matrix_count": 4,
+      "coverage_percent": 1.7420682518183475,
+      "mean_error": 0.4697818417756545,
+      "max_error": 0.4817146563730736,
+      "accuracy_percent": 47.82608695652174,
+      "accuracy_difference_pp": -7.692307692307687,
+      "prediction_agreement_percent": 65.55183946488295,
+      "changed_predictions": 103,
+      "mcnemar_exact_p": 0.006741447363103126
+    },
+    {
+      "experiment": 24,
+      "category": "safe_core_interaction",
+      "label": "core_plus_gate_proj",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj",
+        "model.layers.4.linear_attn.out_proj",
+        "model.layers.4.linear_attn.in_proj_qkv",
+        "model.layers.6.mlp.gate_proj"
+      ],
+      "matrix_count": 4,
+      "coverage_percent": 1.6723855217456136,
+      "mean_error": 0.4717215090066967,
+      "max_error": 0.4817146563730736,
+      "accuracy_percent": 54.18060200668896,
+      "accuracy_difference_pp": -1.3377926421404673,
+      "prediction_agreement_percent": 70.23411371237458,
+      "changed_predictions": 89,
+      "mcnemar_exact_p": 0.6888797607233396
+    },
+    {
+      "experiment": 24,
+      "category": "safe_core_interaction",
+      "label": "core_plus_down_proj",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj",
+        "model.layers.4.linear_attn.out_proj",
+        "model.layers.4.linear_attn.in_proj_qkv",
+        "model.layers.6.mlp.down_proj"
+      ],
+      "matrix_count": 4,
+      "coverage_percent": 1.6723855217456136,
+      "mean_error": 0.47263597168099314,
+      "max_error": 0.4817146563730736,
+      "accuracy_percent": 56.52173913043478,
+      "accuracy_difference_pp": 1.0033444816053505,
+      "prediction_agreement_percent": 66.88963210702342,
+      "changed_predictions": 99,
+      "mcnemar_exact_p": 0.8099490529189247
+    },
+    {
+      "experiment": 24,
+      "category": "safe_core_interaction",
+      "label": "core_plus_up_proj",
+      "matrix_names": [
+        "model.layers.3.self_attn.k_proj",
+        "model.layers.4.linear_attn.out_proj",
+        "model.layers.4.linear_attn.in_proj_qkv",
+        "model.layers.6.mlp.up_proj"
+      ],
+      "matrix_count": 4,
+      "coverage_percent": 1.6723855217456136,
+      "mean_error": 0.4726578859024773,
+      "max_error": 0.4817146563730736,
+      "accuracy_percent": 49.49832775919732,
+      "accuracy_difference_pp": -6.020066889632103,
+      "prediction_agreement_percent": 64.54849498327759,
+      "changed_predictions": 106,
+      "mcnemar_exact_p": 0.05980833833431617
+    }
+  ],
+  "rq1": {
+    "question": "Does low ternarized parameter coverage guarantee functional preservation?",
+    "low_coverage_threshold_percent": 1.0,
+    "observations_total": 50,
+    "low_coverage_observations": 29,
+    "low_coverage_with_nontrivial_effect": 27,
+    "coverage_vs_absolute_accuracy_change": {
+      "n": 50,
+      "pearson_r": 0.4580596799926143,
+      "pearson_p": 0.0008229088765237241,
+      "spearman_rho": 0.49186499712876713,
+      "spearman_p": 0.0002859089480175952
+    },
+    "coverage_vs_prediction_disagreement": {
+      "n": 50,
+      "pearson_r": 0.4685634608197419,
+      "pearson_p": 0.0005994021948070617,
+      "spearman_rho": 0.4622328918162544,
+      "spearman_p": 0.0007264294144490194
+    },
+    "strongest_low_coverage_accuracy_effect": {
+      "experiment": 19,
+      "category": "individual_matrix",
+      "label": "in_proj_z",
+      "matrix_names": [
+        "model.layers.4.linear_attn.in_proj_z"
+      ],
+      "matrix_count": 1,
+      "coverage_percent": 0.2787309202909356,
+      "mean_error": 0.46565545800643826,
+      "max_error": 0.46565545800643826,
+      "accuracy_percent": 42.474916387959865,
+      "accuracy_difference_pp": -13.043478260869563,
+      "prediction_agreement_percent": 69.56521739130434,
+      "changed_predictions": 91,
+      "mcnemar_exact_p": 5.268675318129165e-06
+    },
+    "descriptive_conclusion": "Low parameter coverage does not guarantee functional preservation."
+  },
+  "rq2": {
+    "question": "Does individual or pairwise compatibility guarantee larger-combination preservation?",
+    "strongest_negative_pairwise_interaction": {
+      "pair": "q_proj+up_proj",
+      "individual_delta_a_pp": -0.33444816053511683,
+      "individual_delta_b_pp": -0.33444816053511683,
+      "expected_additive_delta_pp": -0.6688963210702337,
+      "observed_delta_pp": -10.367892976588628,
+      "accuracy_interaction_pp": -9.698996655518394,
+      "prediction_agreement_percent": 48.49498327759198,
+      "mcnemar_exact_p": 0.0029291945870261915
+    },
+    "strongest_positive_pairwise_interaction": {
+      "pair": "k_proj+gate_proj",
+      "observed_delta_pp": 2.6755852842809347,
+      "accuracy_interaction_pp": 0.6688963210702337
+    },
+    "compatible_edges": [
+      [
+        "in_proj_qkv",
+        "k_proj"
+      ],
+      [
+        "in_proj_qkv",
+        "out_proj"
+      ],
+      [
+        "k_proj",
+        "out_proj"
+      ]
+    ],
+    "maximum_clique_size": 3,
+    "maximum_cliques": [
+      [
+        "k_proj",
+        "out_proj",
+        "in_proj_qkv"
+      ]
+    ],
+    "retrospective_exp20": [
+      {
+        "clique": [
+          "k_proj",
+          "out_proj",
+          "in_proj_qkv"
+        ],
+        "matrix_names": [
+          "model.layers.3.self_attn.k_proj",
+          "model.layers.4.linear_attn.out_proj",
+          "model.layers.4.linear_attn.in_proj_qkv"
+        ],
+        "exp20_found": true,
+        "correct": 156,
+        "total": 299,
+        "accuracy": 0.5217391304347826,
+        "accuracy_difference": -0.03344481605351168,
+        "prediction_agreement": 0.842809364548495,
+        "changed_predictions": 47,
+        "mcnemar_exact_p": 0.12144948495551944
+      }
+    ],
+    "safe_core_plus_one": [
+      {
+        "added_matrix": "q_proj",
+        "accuracy_difference_pp": -7.692307692307687,
+        "prediction_agreement_percent": 65.55183946488295,
+        "changed_predictions": 103,
+        "mcnemar_exact_p": 0.006741447363103126
+      },
+      {
+        "added_matrix": "gate_proj",
+        "accuracy_difference_pp": -1.3377926421404673,
+        "prediction_agreement_percent": 70.23411371237458,
+        "changed_predictions": 89,
+        "mcnemar_exact_p": 0.6888797607233396
+      },
+      {
+        "added_matrix": "down_proj",
+        "accuracy_difference_pp": 1.0033444816053505,
+        "prediction_agreement_percent": 66.88963210702342,
+        "changed_predictions": 99,
+        "mcnemar_exact_p": 0.8099490529189247
+      },
+      {
+        "added_matrix": "up_proj",
+        "accuracy_difference_pp": -6.020066889632103,
+        "prediction_agreement_percent": 64.54849498327759,
+        "changed_predictions": 106,
+        "mcnemar_exact_p": 0.05980833833431617
+      }
+    ],
+    "descriptive_conclusion": "Individual and pairwise compatibility does not guarantee preservation in larger combinations."
+  },
+  "rq3": {
+    "question": "Does aggregate accuracy preservation imply prediction-level behavioral preservation?",
+    "accuracy_preservation_threshold_pp": 1.0,
+    "behavior_agreement_threshold_percent": 90.0,
+    "arc_accuracy_preserving_behavior_changing_cases": [
+      {
+        "experiment": 19,
+        "category": "individual_matrix",
+        "label": "q_proj",
+        "matrix_names": [
+          "model.layers.3.self_attn.q_proj"
+        ],
+        "matrix_count": 1,
+        "coverage_percent": 0.5574618405818712,
+        "mean_error": 0.46442937494872627,
+        "max_error": 0.46442937494872627,
+        "accuracy_percent": 55.18394648829431,
+        "accuracy_difference_pp": -0.33444816053511683,
+        "prediction_agreement_percent": 77.25752508361204,
+        "changed_predictions": 68,
+        "mcnemar_exact_p": 1.0
+      },
+      {
+        "experiment": 19,
+        "category": "individual_matrix",
+        "label": "up_proj",
+        "matrix_names": [
+          "model.layers.6.mlp.up_proj"
+        ],
+        "matrix_count": 1,
+        "coverage_percent": 0.4877791105091373,
+        "mean_error": 0.473525459551129,
+        "max_error": 0.473525459551129,
+        "accuracy_percent": 55.18394648829431,
+        "accuracy_difference_pp": -0.33444816053511683,
+        "prediction_agreement_percent": 53.84615384615385,
+        "changed_predictions": 138,
+        "mcnemar_exact_p": 1.0
+      },
+      {
+        "experiment": 21,
+        "category": "qproj_interaction",
+        "label": "q_only",
+        "matrix_names": [
+          "model.layers.3.self_attn.q_proj"
+        ],
+        "matrix_count": 1,
+        "coverage_percent": 0.5574618405818712,
+        "mean_error": 0.46442937494872627,
+        "max_error": 0.46442937494872627,
+        "accuracy_percent": 55.18394648829431,
+        "accuracy_difference_pp": -0.33444816053511683,
+        "prediction_agreement_percent": 77.25752508361204,
+        "changed_predictions": 68,
+        "mcnemar_exact_p": 1.0
+      },
+      {
+        "experiment": 21,
+        "category": "qproj_interaction",
+        "label": "k_plus_q",
+        "matrix_names": [
+          "model.layers.3.self_attn.k_proj",
+          "model.layers.3.self_attn.q_proj"
+        ],
+        "matrix_count": 2,
+        "coverage_percent": 0.6271445706546052,
+        "mean_error": 0.4659683737446448,
+        "max_error": 0.4782803641119928,
+        "accuracy_percent": 55.51839464882943,
+        "accuracy_difference_pp": 0.0,
+        "prediction_agreement_percent": 78.26086956521739,
+        "changed_predictions": 65,
+        "mcnemar_exact_p": 1.0
+      },
+      {
+        "experiment": 22,
+        "category": "pairwise_combination",
+        "label": "k_proj+q_proj",
+        "matrix_names": [
+          "model.layers.3.self_attn.k_proj",
+          "model.layers.3.self_attn.q_proj"
+        ],
+        "matrix_count": 2,
+        "coverage_percent": 0.6271445706546052,
+        "mean_error": 0.4659683737446448,
+        "max_error": 0.4782803641119928,
+        "accuracy_percent": 55.51839464882943,
+        "accuracy_difference_pp": 0.0,
+        "prediction_agreement_percent": 78.26086956521739,
+        "changed_predictions": 65,
+        "mcnemar_exact_p": 1.0,
+        "accuracy_interaction_pp": 0.0,
+        "individual_delta_a_pp": 0.33444816053511683,
+        "individual_delta_b_pp": -0.33444816053511683,
+        "expected_additive_delta_pp": 0.0
+      },
+      {
+        "experiment": 22,
+        "category": "pairwise_combination",
+        "label": "k_proj+up_proj",
+        "matrix_names": [
+          "model.layers.3.self_attn.k_proj",
+          "model.layers.6.mlp.up_proj"
+        ],
+        "matrix_count": 2,
+        "coverage_percent": 0.5574618405818712,
+        "mean_error": 0.474119822621237,
+        "max_error": 0.4782803641119928,
+        "accuracy_percent": 55.51839464882943,
+        "accuracy_difference_pp": 0.0,
+        "prediction_agreement_percent": 57.52508361204014,
+        "changed_predictions": 127,
+        "mcnemar_exact_p": 1.0,
+        "accuracy_interaction_pp": 0.0,
+        "individual_delta_a_pp": 0.33444816053511683,
+        "individual_delta_b_pp": -0.33444816053511683,
+        "expected_additive_delta_pp": 0.0
+      },
+      {
+        "experiment": 22,
+        "category": "pairwise_combination",
+        "label": "out_proj+in_proj_qkv",
+        "matrix_names": [
+          "model.layers.4.linear_attn.out_proj",
+          "model.layers.4.linear_attn.in_proj_qkv"
+        ],
+        "matrix_count": 2,
+        "coverage_percent": 1.1149236811637424,
+        "mean_error": 0.47192691754309746,
+        "max_error": 0.4817146563730736,
+        "accuracy_percent": 56.187290969899664,
+        "accuracy_difference_pp": 0.6688963210702337,
+        "prediction_agreement_percent": 87.62541806020067,
+        "changed_predictions": 37,
+        "mcnemar_exact_p": 0.8450189828872681,
+        "accuracy_interaction_pp": 0.6688963210702337,
+        "individual_delta_a_pp": 1.6722408026755842,
+        "individual_delta_b_pp": -1.6722408026755842,
+        "expected_additive_delta_pp": 0.0
+      }
+    ],
+    "hellaswag_accuracy_preserving_cases": [
+      {
+        "configuration": "K_ONLY",
+        "accuracy_difference_pp": 0.15000000000000568,
+        "prediction_agreement_percent": 98.65,
+        "changed_predictions": 27,
+        "fp16_only": 4,
+        "ternary_only": 7,
+        "mcnemar_exact_p": 0.548828125
+      },
+      {
+        "configuration": "SAFE_CORE",
+        "accuracy_difference_pp": 0.05000000000000426,
+        "prediction_agreement_percent": 94.05,
+        "changed_predictions": 119,
+        "fp16_only": 36,
+        "ternary_only": 37,
+        "mcnemar_exact_p": 1.0
+      },
+      {
+        "configuration": "CORE_PLUS_Q",
+        "accuracy_difference_pp": -0.7999999999999972,
+        "prediction_agreement_percent": 92.0,
+        "changed_predictions": 160,
+        "fp16_only": 56,
+        "ternary_only": 40,
+        "mcnemar_exact_p": 0.1253456971884924
+      }
+    ],
+    "descriptive_conclusion": "Similar aggregate accuracy can coexist with substantial prediction-level changes."
+  },
+  "rq4": {
+    "question": "Do ternarization sensitivity effects generalize across ARC and HellaSwag?",
+    "SAFE_CORE": {
+      "ARC": {
+        "questions": 299,
+        "accuracy_percent": 52.17391304347826,
+        "accuracy_difference_pp": -3.3444816053511683,
+        "prediction_agreement_percent": 84.2809364548495,
+        "changed_predictions": 47,
+        "mcnemar_exact_p": 0.12144948495551944
+      },
+      "HellaSwag": {
+        "questions": 2000,
+        "accuracy_percent": 41.35,
+        "accuracy_difference_pp": 0.05000000000000426,
+        "prediction_agreement_percent": 94.05,
+        "changed_predictions": 119,
+        "mcnemar_exact_p": 1.0
+      }
+    },
+    "CORE_PLUS_Q": {
+      "ARC": {
+        "questions": 299,
+        "accuracy_percent": 47.82608695652174,
+        "accuracy_difference_pp": -7.692307692307687,
+        "prediction_agreement_percent": 65.55183946488295,
+        "changed_predictions": 103,
+        "mcnemar_exact_p": 0.006741447363103126
+      },
+      "HellaSwag": {
+        "questions": 2000,
+        "accuracy_percent": 40.5,
+        "accuracy_difference_pp": -0.7999999999999972,
+        "prediction_agreement_percent": 92.0,
+        "changed_predictions": 160,
+        "mcnemar_exact_p": 0.1253456971884924
+      }
+    },
+    "HELLASWAG_K_ONLY": {
+      "accuracy_percent": 41.45,
+      "accuracy_difference_pp": 0.15000000000000568,
+      "prediction_agreement_percent": 98.65,
+      "changed_predictions": 27,
+      "mcnemar_exact_p": 0.548828125
+    },
+    "qproj_increment_relative_to_safe_core_pp": {
+      "ARC": -4.347826086956516,
+      "HellaSwag": -0.8500000000000014
+    },
+    "protocol_note": "ARC and HellaSwag use different frozen evaluation protocols. Their raw accuracies should not be compared as if they measured the same task.",
+    "descriptive_conclusion": "Adding q_proj to SAFE_CORE shifts accuracy downward on both benchmarks, but the magnitude differs substantially. Functional sensitivity is therefore task dependent."
+  },
+  "reconstruction_error_analysis": {
+    "observations": 50,
+    "mean_reconstruction_error": 0.4718416552157627,
+    "error_vs_absolute_accuracy_change": {
+      "n": 50,
+      "pearson_r": -0.19372401177180662,
+      "pearson_p": 0.1776588565827997,
+      "spearman_rho": -0.19808930663656835,
+      "spearman_p": 0.16789972461735028
+    },
+    "error_vs_prediction_disagreement": {
+      "n": 50,
+      "pearson_r": -0.21015459981659124,
+      "pearson_p": 0.14296278552506542,
+      "spearman_rho": -0.035225991097954386,
+      "spearman_p": 0.8081133793694059
+    },
+    "interpretation": "These correlations are descriptive only. The configurations overlap and are not statistically independent."
+  },
+  "final_evidence": [
+    {
+      "id": "E1",
+      "statement": "Parameter coverage alone is not a sufficient predictor of functional preservation."
+    },
+    {
+      "id": "E2",
+      "statement": "Matrix sensitivity is location- and interaction-dependent."
+    },
+    {
+      "id": "E3",
+      "statement": "Individual or pairwise compatibility does not guarantee compatibility in larger combinations."
+    },
+    {
+      "id": "E4",
+      "statement": "Aggregate accuracy preservation does not imply prediction-level behavioral preservation."
+    },
+    {
+      "id": "E5",
+      "statement": "Functional sensitivity is benchmark dependent."
+    },
+    {
+      "id": "E6",
+      "statement": "The current experiments demonstrate numerical ternarization behavior, not deployment-level compression or inference acceleration."
+    }
+  ]
+}

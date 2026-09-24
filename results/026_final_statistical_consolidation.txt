@@ -1,0 +1,148 @@
+==============================================================================================================
+EXPERIMENT 026 — FINAL STATISTICAL CONSOLIDATION
+==============================================================================================================
+
+Frozen experiments : 018–025
+Model              : Qwen/Qwen3.5-0.8B
+New model runs     : NO
+New ternarization  : NO
+New search         : NO
+
+
+RQ1 — PARAMETER COVERAGE
+--------------------------------------------------------------------------------------------------------------
+Does low ternarized parameter coverage guarantee functional preservation?
+
+ARC observations analyzed : 50
+Low coverage threshold    : <= 1.00%
+Low coverage observations : 29
+Low coverage with nontrivial effect: 27
+
+Strongest absolute accuracy effect at <=1% coverage:
+  Exp        : 19
+  Condition  : in_proj_z
+  Coverage   : 0.2787%
+  Delta      : -13.04 pp
+  Agreement  : 69.57%
+
+Conclusion: Low parameter coverage does not guarantee functional preservation.
+
+
+RQ2 — INTERACTION / COMBINATION SAFETY
+--------------------------------------------------------------------------------------------------------------
+Does individual or pairwise compatibility guarantee larger-combination preservation?
+
+Strongest negative descriptive pairwise interaction:
+  Pair                    : q_proj+up_proj
+  Individual delta A      : -0.33 pp
+  Individual delta B      : -0.33 pp
+  Expected additive delta : -0.67 pp
+  Observed pair delta     : -10.37 pp
+  Interaction deviation   : -9.70 pp
+  Agreement               : 48.49%
+
+Compatible pairwise edges : 3
+Maximum clique size       : 3
+Maximum clique(s)         : [['k_proj', 'out_proj', 'in_proj_qkv']]
+
+SAFE_CORE + one matrix:
+  q_proj       delta= -7.69 pp  agreement= 65.55%  changed=103  p=0.00674145
+  gate_proj    delta= -1.34 pp  agreement= 70.23%  changed= 89  p=0.68888
+  down_proj    delta= +1.00 pp  agreement= 66.89%  changed= 99  p=0.809949
+  up_proj      delta= -6.02 pp  agreement= 64.55%  changed=106  p=0.0598083
+
+Conclusion: Individual and pairwise compatibility does not guarantee preservation in larger combinations.
+
+
+RQ3 — ACCURACY VS BEHAVIOR
+--------------------------------------------------------------------------------------------------------------
+Does aggregate accuracy preservation imply prediction-level behavioral preservation?
+
+Accuracy-preservation threshold: |delta| <= 1.00 pp
+Behavior-change flag: agreement < 90.00%
+
+ARC accuracy-preserving but behavior-changing cases:
+  Exp019 q_proj                    delta= -0.33 pp  agreement= 77.26%  changed= 68
+  Exp019 up_proj                   delta= -0.33 pp  agreement= 53.85%  changed=138
+  Exp021 q_only                    delta= -0.33 pp  agreement= 77.26%  changed= 68
+  Exp021 k_plus_q                  delta= +0.00 pp  agreement= 78.26%  changed= 65
+  Exp022 k_proj+q_proj             delta= +0.00 pp  agreement= 78.26%  changed= 65
+  Exp022 k_proj+up_proj            delta= +0.00 pp  agreement= 57.53%  changed=127
+  Exp022 out_proj+in_proj_qkv      delta= +0.67 pp  agreement= 87.63%  changed= 37
+
+HellaSwag configurations with |delta| <= 1 pp:
+  K_ONLY         delta= +0.15 pp  agreement= 98.65%  changed=  27  p=0.548828
+  SAFE_CORE      delta= +0.05 pp  agreement= 94.05%  changed= 119  p=1
+  CORE_PLUS_Q    delta= -0.80 pp  agreement= 92.00%  changed= 160  p=0.125346
+
+Conclusion: Similar aggregate accuracy can coexist with substantial prediction-level changes.
+
+
+RQ4 — CROSS-BENCHMARK GENERALIZATION
+--------------------------------------------------------------------------------------------------------------
+Do ternarization sensitivity effects generalize across ARC and HellaSwag?
+
+SAFE_CORE
+  ARC        accuracy= 52.17%  delta= -3.34 pp  agreement= 84.28%  changed=  47  p=0.121449
+  HellaSwag  accuracy= 41.35%  delta= +0.05 pp  agreement= 94.05%  changed= 119  p=1
+
+CORE_PLUS_Q
+  ARC        accuracy= 47.83%  delta= -7.69 pp  agreement= 65.55%  changed= 103  p=0.00674145
+  HellaSwag  accuracy= 40.50%  delta= -0.80 pp  agreement= 92.00%  changed= 160  p=0.125346
+
+Observed effect of adding q_proj to SAFE_CORE:
+  ARC       : -4.35 pp
+  HellaSwag : -0.85 pp
+
+Protocol note: ARC and HellaSwag use different frozen evaluation protocols. Their raw accuracies should not be compared as if they measured the same task.
+
+Conclusion: Adding q_proj to SAFE_CORE shifts accuracy downward on both benchmarks, but the magnitude differs substantially. Functional sensitivity is therefore task dependent.
+
+
+RECONSTRUCTION ERROR — DESCRIPTIVE ASSOCIATIONS
+--------------------------------------------------------------------------------------------------------------
+Observations: 50
+
+Mean reconstruction error vs |accuracy delta|:
+  Pearson r    = -0.19372401177180662
+  Pearson p    = 0.1776588565827997
+  Spearman rho = -0.19808930663656835
+  Spearman p   = 0.16789972461735028
+
+Mean reconstruction error vs prediction disagreement:
+  Pearson r    = -0.21015459981659124
+  Pearson p    = 0.14296278552506542
+  Spearman rho = -0.035225991097954386
+  Spearman p   = 0.8081133793694059
+
+These correlations are descriptive only. The configurations overlap and are not statistically independent.
+
+
+FINAL EVIDENCE-SUPPORTED CONCLUSIONS
+--------------------------------------------------------------------------------------------------------------
+E1. Parameter coverage alone is not a sufficient predictor of functional preservation.
+E2. Matrix sensitivity is location- and interaction-dependent.
+E3. Individual or pairwise compatibility does not guarantee compatibility in larger combinations.
+E4. Aggregate accuracy preservation does not imply prediction-level behavioral preservation.
+E5. Functional sensitivity is benchmark dependent.
+E6. The current experiments demonstrate numerical ternarization behavior, not deployment-level compression or inference acceleration.
+
+
+LIMITATIONS
+--------------------------------------------------------------------------------------------------------------
+1. Results are specific to Qwen/Qwen3.5-0.8B and the tested matrices.
+2. The frozen quantizer uses optimized-scale groupwise ternarization, group size 128, and threshold multiplier 0.5.
+3. ARC-Challenge uses 299 validation questions.
+4. HellaSwag Exp025 uses the deterministic first 2,000 validation examples rather than all 10,042 validation examples.
+5. HellaSwag conclusions apply under the frozen length-normalized conditional continuation log-likelihood protocol used in Exp025.
+6. ARC and HellaSwag use different frozen evaluation protocols.
+7. McNemar p >= 0.05 does not establish statistical equivalence or prove preservation.
+8. Positive accuracy deltas do not establish that ternarization improves the model.
+9. The pairwise accuracy-interaction metric is a descriptive deviation from additive accuracy deltas, not a formal statistical interaction.
+10. Correlation analyses combine overlapping and heterogeneous configurations and therefore should be interpreted descriptively.
+11. No universal safe ternarization coverage threshold was established.
+12. Ternary values are reconstructed into FP16; packed ternary storage, custom kernels, actual VRAM compression, and inference acceleration were not evaluated.
+
+==============================================================================================================
+END OF EXPERIMENT 026
+==============================================================================================================
