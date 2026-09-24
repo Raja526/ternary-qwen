@@ -1,0 +1,250 @@
+
+====================================================================================================
+ENG005 — PACKED TERNARY LINEAR OPERATOR
+====================================================================================================
+Model                   : Qwen/Qwen3.5-0.8B
+Target                  : model.layers.3.self_attn.k_proj
+Group size              : 128
+Threshold multiplier    : 0.5
+Real rows/chunk         : 64
+
+====================================================================================================
+PART 1 — SYNTHETIC PACKED LINEAR VALIDATION
+====================================================================================================
+
+Test 01: W=(16,16) input=(4, 16) chunk=1 bias=False
+  padding               : 0
+  output mismatches     : 0
+  max abs difference    : 0.0
+  mean abs difference   : 0.0
+  full weight Parameter : False
+  packed codes buffer   : True
+  scales buffer         : True
+  persistent bytes      : 68
+  FP16 equivalent bytes : 512
+  compression factor    : 7.529412x
+
+Test 02: W=(16,16) input=(4, 16) chunk=4 bias=True
+  padding               : 0
+  output mismatches     : 0
+  max abs difference    : 0.0
+  mean abs difference   : 0.0
+  full weight Parameter : False
+  packed codes buffer   : True
+  scales buffer         : True
+  persistent bytes      : 68
+  FP16 equivalent bytes : 512
+  compression factor    : 7.529412x
+
+Test 03: W=(16,16) input=(4, 16) chunk=16 bias=False
+  padding               : 0
+  output mismatches     : 0
+  max abs difference    : 0.0
+  mean abs difference   : 0.0
+  full weight Parameter : False
+  packed codes buffer   : True
+  scales buffer         : True
+  persistent bytes      : 68
+  FP16 equivalent bytes : 512
+  compression factor    : 7.529412x
+
+Test 04: W=(31,17) input=(5, 17) chunk=1 bias=False
+  padding               : 113
+  output mismatches     : 0
+  max abs difference    : 0.0
+  mean abs difference   : 0.0
+  full weight Parameter : False
+  packed codes buffer   : True
+  scales buffer         : True
+  persistent bytes      : 170
+  FP16 equivalent bytes : 1054
+  compression factor    : 6.200000x
+
+Test 05: W=(31,17) input=(5, 17) chunk=7 bias=True
+  padding               : 113
+  output mismatches     : 0
+  max abs difference    : 0.0
+  mean abs difference   : 0.0
+  full weight Parameter : False
+  packed codes buffer   : True
+  scales buffer         : True
+  persistent bytes      : 170
+  FP16 equivalent bytes : 1054
+  compression factor    : 6.200000x
+
+Test 06: W=(31,17) input=(2, 3, 17) chunk=8 bias=False
+  padding               : 113
+  output mismatches     : 0
+  max abs difference    : 0.0
+  mean abs difference   : 0.0
+  full weight Parameter : False
+  packed codes buffer   : True
+  scales buffer         : True
+  persistent bytes      : 170
+  FP16 equivalent bytes : 1054
+  compression factor    : 6.200000x
+
+Test 07: W=(33,129) input=(3, 129) chunk=5 bias=True
+  padding               : 95
+  output mismatches     : 0
+  max abs difference    : 0.0
+  mean abs difference   : 0.0
+  full weight Parameter : False
+  packed codes buffer   : True
+  scales buffer         : True
+  persistent bytes      : 1156
+  FP16 equivalent bytes : 8514
+  compression factor    : 7.365052x
+
+Test 08: W=(33,129) input=(2, 2, 129) chunk=16 bias=False
+  padding               : 95
+  output mismatches     : 0
+  max abs difference    : 0.0
+  mean abs difference   : 0.0
+  full weight Parameter : False
+  packed codes buffer   : True
+  scales buffer         : True
+  persistent bytes      : 1156
+  FP16 equivalent bytes : 8514
+  compression factor    : 7.365052x
+
+Test 09: W=(257,513) input=(2, 513) chunk=32 bias=False
+  padding               : 127
+  output mismatches     : 0
+  max abs difference    : 0.0
+  mean abs difference   : 0.0
+  full weight Parameter : False
+  packed codes buffer   : True
+  scales buffer         : True
+  persistent bytes      : 35054
+  FP16 equivalent bytes : 263682
+  compression factor    : 7.522166x
+
+Test 10: W=(257,513) input=(2, 3, 513) chunk=64 bias=True
+  padding               : 127
+  output mismatches     : 0
+  max abs difference    : 0.0
+  mean abs difference   : 0.0
+  full weight Parameter : False
+  packed codes buffer   : True
+  scales buffer         : True
+  persistent bytes      : 35054
+  FP16 equivalent bytes : 263682
+  compression factor    : 7.522166x
+
+Synthetic tests         : 10
+Synthetic output values : 2975
+Synthetic mismatches    : 0
+Synthetic max diff      : 0.0
+Synthetic validation    : PASS
+
+====================================================================================================
+PREPARING REAL QWEN TARGET
+====================================================================================================
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]
+Loading weights:  42%|████▏     | 133/320 [00:00<00:00, 1328.03it/s]
+Loading weights:  86%|████████▋ | 276/320 [00:00<00:00, 1387.36it/s]
+Loading weights: 100%|██████████| 320/320 [00:00<00:00, 1398.27it/s]
+Weight shape            : (512, 1024)
+Weight dtype            : torch.float16
+Parameters              : 524288
+Bias present            : False
+Packed payload bytes    : 139264
+FP16 weight bytes       : 1048576
+Compression factor      : 7.529412x
+
+====================================================================================================
+PART 2 — REAL QWEN K_PROJ OPERATOR VALIDATION
+====================================================================================================
+Target                  : model.layers.3.self_attn.k_proj
+Weight shape            : (512, 1024)
+Parameters              : 524288
+Packed payload bytes    : 139264
+FP16 weight bytes       : 1048576
+Compression factor      : 7.529412x
+
+Input 1: shape=(4, 1024)
+  chunk=1   mismatches=0      max_diff=0.00000000 mean_diff=0.00000000
+  chunk=8   mismatches=0      max_diff=0.00000000 mean_diff=0.00000000
+  chunk=32  mismatches=0      max_diff=0.00000000 mean_diff=0.00000000
+  chunk=64  mismatches=0      max_diff=0.00000000 mean_diff=0.00000000
+  chunk=128 mismatches=0      max_diff=0.00000000 mean_diff=0.00000000
+  chunk=512 mismatches=0      max_diff=0.00000000 mean_diff=0.00000000
+
+Input 2: shape=(2, 7, 1024)
+  chunk=1   mismatches=0      max_diff=0.00000000 mean_diff=0.00000000
+  chunk=8   mismatches=0      max_diff=0.00000000 mean_diff=0.00000000
+  chunk=32  mismatches=0      max_diff=0.00000000 mean_diff=0.00000000
+  chunk=64  mismatches=0      max_diff=0.00000000 mean_diff=0.00000000
+  chunk=128 mismatches=0      max_diff=0.00000000 mean_diff=0.00000000
+  chunk=512 mismatches=0      max_diff=0.00000000 mean_diff=0.00000000
+
+Forward configurations  : 12
+Compared output values  : 55296
+Total mismatches        : 0
+Global max difference   : 0.0
+Real operator validation: PASS
+
+====================================================================================================
+PART 3 — FULL QWEN IN-MODEL VALIDATION
+====================================================================================================
+Input tokens            : 22
+
+Path A: ordinary Linear with reconstructed ternary FP16 weight
+
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/320 [00:00<00:38,  8.22it/s]
+Loading weights:  75%|███████▌  | 240/320 [00:00<00:00, 1288.94it/s]
+Loading weights: 100%|██████████| 320/320 [00:00<00:00, 1155.77it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+Reference logits shape  : (1, 22, 248320)
+
+Path B: PackedTernaryLinear
+
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/320 [00:00<00:58,  5.50it/s]
+Loading weights:  79%|███████▉  | 254/320 [00:00<00:00, 1108.22it/s]
+Loading weights: 100%|██████████| 320/320 [00:00<00:00, 976.16it/s]
+Fresh weight mismatches : 0
+Replacement type        : <class 'packed_ternary.packed_linear.PackedTernaryLinear'>
+Full weight Parameter   : False
+Packed codes buffer     : True
+Scales buffer           : True
+Persistent weight bytes : 139264
+FP16 equivalent bytes   : 1048576
+Persistent compression  : 7.529412x
+
+Compared logits         : 5463040
+Logit mismatches        : 0
+Max abs difference      : 0.0
+Mean abs difference     : 0.0
+Dtype match             : True
+
+Full-model validation   : PASS
+
+====================================================================================================
+ENG005 FINAL SUMMARY
+====================================================================================================
+Real target             : model.layers.3.self_attn.k_proj
+Target parameters       : 524288
+Persistent packed bytes : 139264
+FP16 equivalent bytes   : 1048576
+Compression factor      : 7.529412x
+Persistent full weight  : False
+Synthetic validation    : PASS
+Real operator validation: PASS
+Full-model validation   : PASS
+
+Scope:
+  Packed codes + scales are the persistent weight representation.
+  Temporary row chunks are reconstructed during forward execution.
+  No inference speedup is claimed.
+  No peak RAM/VRAM reduction is claimed.
+  No fused 2-bit CUDA kernel is claimed.
+
+====================================================================================================
+ENG005 PACKED TERNARY LINEAR VALIDATION: PASS
+====================================================================================================
