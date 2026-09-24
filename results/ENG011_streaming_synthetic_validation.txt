@@ -1,0 +1,96 @@
+ENG011-A STREAMING DIRECT TERNARY SYNTHETIC VALIDATION
+=====================================================
+
+TEST 1
+  Weight shape              : (8, 128)
+  Input shape               : (1, 128)
+  Rows per chunk            : 1
+  Outputs                   : 8
+  Mismatches                : 0
+  Max abs diff              : 0.0
+  Mean abs diff             : 0.0
+  ENG010 full decode bytes  : 1024
+  ENG011 max chunk bytes    : 128
+  Decode working-set ratio  : 8.000000x
+
+TEST 2
+  Weight shape              : (16, 256)
+  Input shape               : (3, 256)
+  Rows per chunk            : 4
+  Outputs                   : 48
+  Mismatches                : 0
+  Max abs diff              : 0.0
+  Mean abs diff             : 0.0
+  ENG010 full decode bytes  : 4096
+  ENG011 max chunk bytes    : 1024
+  Decode working-set ratio  : 4.000000x
+
+TEST 3
+  Weight shape              : (32, 512)
+  Input shape               : (2, 512)
+  Rows per chunk            : 8
+  Outputs                   : 64
+  Mismatches                : 0
+  Max abs diff              : 0.0
+  Mean abs diff             : 0.0
+  ENG010 full decode bytes  : 16384
+  ENG011 max chunk bytes    : 4096
+  Decode working-set ratio  : 4.000000x
+
+TEST 4
+  Weight shape              : (64, 1024)
+  Input shape               : (4, 1024)
+  Rows per chunk            : 16
+  Outputs                   : 256
+  Mismatches                : 0
+  Max abs diff              : 0.0
+  Mean abs diff             : 0.0
+  ENG010 full decode bytes  : 65536
+  ENG011 max chunk bytes    : 16384
+  Decode working-set ratio  : 4.000000x
+
+TEST 5
+  Weight shape              : (13, 256)
+  Input shape               : (2, 3, 256)
+  Rows per chunk            : 5
+  Outputs                   : 78
+  Mismatches                : 0
+  Max abs diff              : 0.0
+  Mean abs diff             : 0.0
+  ENG010 full decode bytes  : 3328
+  ENG011 max chunk bytes    : 1280
+  Decode working-set ratio  : 2.600000x
+
+TEST 6
+  Weight shape              : (17, 512)
+  Input shape               : (2, 5, 512)
+  Rows per chunk            : 7
+  Outputs                   : 170
+  Mismatches                : 0
+  Max abs diff              : 0.0
+  Mean abs diff             : 0.0
+  ENG010 full decode bytes  : 8704
+  ENG011 max chunk bytes    : 3584
+  Decode working-set ratio  : 2.428571x
+
+TEST 7
+  Weight shape              : (65, 1024)
+  Input shape               : (2, 1024)
+  Rows per chunk            : 64
+  Outputs                   : 130
+  Mismatches                : 0
+  Max abs diff              : 0.0
+  Mean abs diff             : 0.0
+  ENG010 full decode bytes  : 66560
+  ENG011 max chunk bytes    : 65536
+  Decode working-set ratio  : 1.015625x
+
+SUMMARY
+-------
+Tests                     : 7
+Total outputs             : 754
+Total mismatches          : 0
+Global max abs diff       : 0.0
+Bit-exact equivalence     : True
+
+ENG011-A STREAMING SYNTHETIC VALIDATION: PASS

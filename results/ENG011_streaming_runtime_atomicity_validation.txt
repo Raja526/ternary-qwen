@@ -1,0 +1,57 @@
+====================================================================================================
+ENG011 — DIRECT RUNTIME LOADER ATOMICITY VALIDATION
+====================================================================================================
+Checkpoint              : results/ENG011_streaming_atomicity_test.pt
+First parameters        : 2048
+Second parameters       : 2048
+
+====================================================================================================
+TEST 1 — VALID SINGLE REPLACEMENT
+====================================================================================================
+First type after        : StreamingDirectTernaryLinear
+Second type after       : Linear
+Control type after      : Linear
+First replaced          : True
+Second unchanged        : True
+Control unchanged       : True
+Loaded names            : ('first',)
+Replaced matrices       : 1
+Replaced parameters     : 2048
+Persistent packed bytes : 544
+FP16 equivalent bytes   : 4096
+Full weight Parameter   : False
+Packed codes buffer     : True
+Scales buffer           : True
+
+TEST 1: PASS
+
+====================================================================================================
+TEST 2 — INVALID SECOND TARGET ATOMICITY
+====================================================================================================
+Expected error          : ValueError
+Error message           : second: shape mismatch: model=(8, 128) checkpoint=(8, 256)
+First unchanged         : True
+Invalid second unchanged: True
+Control unchanged       : True
+
+TEST 2: PASS
+
+====================================================================================================
+TEST 3 — MODEL-NAME GUARD ATOMICITY
+====================================================================================================
+Expected error          : ValueError
+Error message           : Checkpoint model-name mismatch: checkpoint='ENG011_SYNTHETIC_MODEL', expected='WRONG_MODEL_NAME'
+First unchanged         : True
+Second unchanged        : True
+Control unchanged       : True
+
+TEST 3: PASS
+
+====================================================================================================
+ENG011 ATOMICITY SUMMARY
+====================================================================================================
+Valid replacement       : PASS
+Invalid-target atomicity: PASS
+Model-name atomicity    : PASS
+
+ENG011 DIRECT RUNTIME LOADER ATOMICITY: PASS
