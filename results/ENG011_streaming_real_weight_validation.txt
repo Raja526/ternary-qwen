@@ -1,0 +1,125 @@
+ENG011-B REAL-WEIGHT STREAMING VALIDATION
+=========================================
+
+Checkpoint       : results/ENG003_multimatrix_checkpoint.pt
+Target           : model.layers.3.self_attn.k_proj
+Shape            : (512, 1024)
+Parameters       : 524288
+Group size       : 128
+Packed bytes     : 139264
+FP16 bytes       : 1048576
+Compression      : 7.529412x
+
+INPUT SET 1
+  Shape: (4, 1024)
+
+  rows_per_chunk=1
+    Outputs                  : 2048
+    Mismatches               : 0
+    Max abs diff             : 0.0
+    Mean abs diff            : 0.0
+    ENG010 decode bytes      : 524288
+    ENG011 max chunk bytes   : 1024
+    Decode working-set ratio : 512.000000x
+  rows_per_chunk=8
+    Outputs                  : 2048
+    Mismatches               : 0
+    Max abs diff             : 0.0
+    Mean abs diff            : 0.0
+    ENG010 decode bytes      : 524288
+    ENG011 max chunk bytes   : 8192
+    Decode working-set ratio : 64.000000x
+  rows_per_chunk=32
+    Outputs                  : 2048
+    Mismatches               : 0
+    Max abs diff             : 0.0
+    Mean abs diff            : 0.0
+    ENG010 decode bytes      : 524288
+    ENG011 max chunk bytes   : 32768
+    Decode working-set ratio : 16.000000x
+  rows_per_chunk=64
+    Outputs                  : 2048
+    Mismatches               : 0
+    Max abs diff             : 0.0
+    Mean abs diff            : 0.0
+    ENG010 decode bytes      : 524288
+    ENG011 max chunk bytes   : 65536
+    Decode working-set ratio : 8.000000x
+  rows_per_chunk=128
+    Outputs                  : 2048
+    Mismatches               : 0
+    Max abs diff             : 0.0
+    Mean abs diff            : 0.0
+    ENG010 decode bytes      : 524288
+    ENG011 max chunk bytes   : 131072
+    Decode working-set ratio : 4.000000x
+  rows_per_chunk=512
+    Outputs                  : 2048
+    Mismatches               : 0
+    Max abs diff             : 0.0
+    Mean abs diff            : 0.0
+    ENG010 decode bytes      : 524288
+    ENG011 max chunk bytes   : 524288
+    Decode working-set ratio : 1.000000x
+
+INPUT SET 2
+  Shape: (2, 7, 1024)
+
+  rows_per_chunk=1
+    Outputs                  : 7168
+    Mismatches               : 0
+    Max abs diff             : 0.0
+    Mean abs diff            : 0.0
+    ENG010 decode bytes      : 524288
+    ENG011 max chunk bytes   : 1024
+    Decode working-set ratio : 512.000000x
+  rows_per_chunk=8
+    Outputs                  : 7168
+    Mismatches               : 0
+    Max abs diff             : 0.0
+    Mean abs diff            : 0.0
+    ENG010 decode bytes      : 524288
+    ENG011 max chunk bytes   : 8192
+    Decode working-set ratio : 64.000000x
+  rows_per_chunk=32
+    Outputs                  : 7168
+    Mismatches               : 0
+    Max abs diff             : 0.0
+    Mean abs diff            : 0.0
+    ENG010 decode bytes      : 524288
+    ENG011 max chunk bytes   : 32768
+    Decode working-set ratio : 16.000000x
+  rows_per_chunk=64
+    Outputs                  : 7168
+    Mismatches               : 0
+    Max abs diff             : 0.0
+    Mean abs diff            : 0.0
+    ENG010 decode bytes      : 524288
+    ENG011 max chunk bytes   : 65536
+    Decode working-set ratio : 8.000000x
+  rows_per_chunk=128
+    Outputs                  : 7168
+    Mismatches               : 0
+    Max abs diff             : 0.0
+    Mean abs diff            : 0.0
+    ENG010 decode bytes      : 524288
+    ENG011 max chunk bytes   : 131072
+    Decode working-set ratio : 4.000000x
+  rows_per_chunk=512
+    Outputs                  : 7168
+    Mismatches               : 0
+    Max abs diff             : 0.0
+    Mean abs diff            : 0.0
+    ENG010 decode bytes      : 524288
+    ENG011 max chunk bytes   : 524288
+    Decode working-set ratio : 1.000000x
+
+SUMMARY
+-------
+Configurations          : 12
+Total outputs           : 55296
+Total mismatches        : 0
+Global max abs diff     : 0.0
+Bit-exact equivalence   : True
+
+ENG011-B REAL-WEIGHT STREAMING VALIDATION: PASS

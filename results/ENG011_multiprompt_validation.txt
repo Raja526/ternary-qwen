@@ -1,0 +1,182 @@
+
+====================================================================================================
+ENG011-E — FIXED MULTI-PROMPT STREAMING EQUIVALENCE VALIDATION
+====================================================================================================
+Model                   : Qwen/Qwen3.5-0.8B
+Checkpoint              : results/ENG003_multimatrix_checkpoint.pt
+Selected matrices       : 3
+Rows/chunk              : 64
+Prompt count            : 10
+Selected parameters     : 8912896
+Persistent packed bytes : 2367488
+FP16 equivalent bytes   : 17825792
+Persistent compression  : 7.529412x
+
+====================================================================================================
+PATH A — ENG010 DIRECT TERNARY RUNTIME
+====================================================================================================
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+ENG010 prompt 01: 22 tokens
+ENG010 prompt 02: 10 tokens
+ENG010 prompt 03: 10 tokens
+ENG010 prompt 04: 17 tokens
+ENG010 prompt 05: 5 tokens
+ENG010 prompt 06: 21 tokens
+ENG010 prompt 07: 8 tokens
+ENG010 prompt 08: 14 tokens
+ENG010 prompt 09: 9 tokens
+ENG010 prompt 10: 18 tokens
+
+====================================================================================================
+PATH B — ENG011 STREAMING DIRECT RUNTIME
+====================================================================================================
+ENG011 prompt 01: 22 tokens
+ENG011 prompt 02: 10 tokens
+ENG011 prompt 03: 10 tokens
+ENG011 prompt 04: 17 tokens
+ENG011 prompt 05: 5 tokens
+ENG011 prompt 06: 21 tokens
+ENG011 prompt 07: 8 tokens
+ENG011 prompt 08: 14 tokens
+ENG011 prompt 09: 9 tokens
+ENG011 prompt 10: 18 tokens
+
+====================================================================================================
+PER-PROMPT EXACT EQUIVALENCE
+====================================================================================================
+
+Prompt 01
+Text                    : A box contains 12 red balls and 8 blue balls. How many balls are in the box?
+Tokens                  : 22
+Compared logits         : 5463040
+Logit mismatches        : 0
+Max abs difference      : 0.0
+Mean abs difference     : 0.0
+RMSE                    : 0.0
+Bit-exact logits        : True
+Top-1 matches           : 22/22
+
+Prompt 02
+Text                    : What is 17 multiplied by 6?
+Tokens                  : 10
+Compared logits         : 2483200
+Logit mismatches        : 0
+Max abs difference      : 0.0
+Mean abs difference     : 0.0
+RMSE                    : 0.0
+Bit-exact logits        : True
+Top-1 matches           : 10/10
+
+Prompt 03
+Text                    : Explain in one sentence why plants need sunlight.
+Tokens                  : 10
+Compared logits         : 2483200
+Logit mismatches        : 0
+Max abs difference      : 0.0
+Mean abs difference     : 0.0
+RMSE                    : 0.0
+Bit-exact logits        : True
+Top-1 matches           : 10/10
+
+Prompt 04
+Text                    : Complete the sequence: 2, 4, 8, 16,
+Tokens                  : 17
+Compared logits         : 4221440
+Logit mismatches        : 0
+Max abs difference      : 0.0
+Mean abs difference     : 0.0
+RMSE                    : 0.0
+Bit-exact logits        : True
+Top-1 matches           : 17/17
+
+Prompt 05
+Text                    : The capital of France is
+Tokens                  : 5
+Compared logits         : 1241600
+Logit mismatches        : 0
+Max abs difference      : 0.0
+Mean abs difference     : 0.0
+RMSE                    : 0.0
+Bit-exact logits        : True
+Top-1 matches           : 5/5
+
+Prompt 06
+Text                    : If a train travels 60 miles in one hour, how far does it travel in three hours?
+Tokens                  : 21
+Compared logits         : 5214720
+Logit mismatches        : 0
+Max abs difference      : 0.0
+Mean abs difference     : 0.0
+RMSE                    : 0.0
+Bit-exact logits        : True
+Top-1 matches           : 21/21
+
+Prompt 07
+Text                    : Write a short greeting to a friend.
+Tokens                  : 8
+Compared logits         : 1986560
+Logit mismatches        : 0
+Max abs difference      : 0.0
+Mean abs difference     : 0.0
+RMSE                    : 0.0
+Bit-exact logits        : True
+Top-1 matches           : 8/8
+
+Prompt 08
+Text                    : Which is larger: 3/4 or 2/3?
+Tokens                  : 14
+Compared logits         : 3476480
+Logit mismatches        : 0
+Max abs difference      : 0.0
+Mean abs difference     : 0.0
+RMSE                    : 0.0
+Bit-exact logits        : True
+Top-1 matches           : 14/14
+
+Prompt 09
+Text                    : Water freezes at what temperature in degrees Celsius?
+Tokens                  : 9
+Compared logits         : 2234880
+Logit mismatches        : 0
+Max abs difference      : 0.0
+Mean abs difference     : 0.0
+RMSE                    : 0.0
+Bit-exact logits        : True
+Top-1 matches           : 9/9
+
+Prompt 10
+Text                    : A student has 25 pencils and gives 7 away. How many pencils remain?
+Tokens                  : 18
+Compared logits         : 4469760
+Logit mismatches        : 0
+Max abs difference      : 0.0
+Mean abs difference     : 0.0
+RMSE                    : 0.0
+Bit-exact logits        : True
+Top-1 matches           : 18/18
+
+====================================================================================================
+ENG011-E MULTI-PROMPT SUMMARY
+====================================================================================================
+Prompts                 : 10
+Selected matrices       : 3
+Selected parameters     : 8912896
+Persistent packed bytes : 2367488
+FP16 equivalent bytes   : 17825792
+Persistent compression  : 7.529412x
+Rows/chunk              : 64
+
+Total logits compared   : 33274880
+Logit mismatches        : 0
+Global max abs diff     : 0.0
+Weighted mean abs diff  : 0.0
+Global RMSE             : 0.0
+All prompts bit-exact   : True
+
+Prompt positions        : 134
+Top-1 matches           : 134
+Top-1 agreement         : 100.000000%
+
+Controlled difference   : full-matrix decode -> row-chunk decode
+
+ENG011-E MULTI-PROMPT VALIDATION: PASS
