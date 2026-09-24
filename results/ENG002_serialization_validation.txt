@@ -1,0 +1,71 @@
+========================================================================================
+ENG002 — PACKED TERNARY SERIALIZATION VALIDATION
+========================================================================================
+
+Model : Qwen/Qwen3.5-0.8B
+Target: model.layers.3.self_attn.k_proj
+
+Loading FP16 model...
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+
+Weight shape             : (512, 1024)
+Weight dtype             : torch.float16
+Weight parameters        : 524288
+
+Running frozen scientific quantizer...
+Creating packed representation...
+Saving packed representation...
+Loading packed representation...
+Reconstructing loaded packed weight...
+
+----------------------------------------------------------------------------------------
+SERIALIZED METADATA
+----------------------------------------------------------------------------------------
+Original shape           : (512, 1024)
+Original numel           : 524288
+Padded numel             : 524288
+Group size               : 128
+Original dtype           : torch.float16
+Packed-code dtype        : torch.uint8
+Scale dtype              : torch.float16
+
+Metadata exact match     : True
+
+----------------------------------------------------------------------------------------
+RECONSTRUCTION AFTER SAVE/LOAD
+----------------------------------------------------------------------------------------
+Exact FP16 matches       : 524288
+FP16 mismatches          : 0
+Exact match percentage   : 100.00000000%
+Maximum abs difference   : 0.0
+Mean abs difference      : 0.0
+
+----------------------------------------------------------------------------------------
+STORAGE
+----------------------------------------------------------------------------------------
+Original FP16 bytes      : 1048576
+Packed code bytes        : 131072
+FP16 scale bytes         : 8192
+Logical payload bytes    : 139264
+Actual disk file bytes   : 141389
+Serialization overhead   : 2125 bytes
+Overhead vs payload      : 1.525879%
+
+Logical payload ratio    : 13.281250%
+Logical compression      : 7.529412x
+
+Actual disk ratio        : 13.483906%
+Actual disk compression  : 7.416249x
+
+----------------------------------------------------------------------------------------
+VALIDATION
+----------------------------------------------------------------------------------------
+Metadata preservation    : PASS
+Save/load reconstruction : EXACT MATCH
+Shape preservation       : PASS
+Dtype preservation       : PASS
+Disk measurement         : PASS
+
+========================================================================================
+ENG002 SERIALIZATION VALIDATION: PASS
+========================================================================================
