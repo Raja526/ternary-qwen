@@ -1,0 +1,66 @@
+========================================================================================
+ENG001 — REAL QWEN PACKED TERNARY VALIDATION
+========================================================================================
+
+Model : Qwen/Qwen3.5-0.8B
+Target: model.layers.3.self_attn.k_proj
+
+Loading FP16 model...
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+
+Weight shape             : (512, 1024)
+Weight dtype             : torch.float16
+Weight parameters        : 524288
+
+Running frozen scientific quantizer...
+Creating packed ternary representation...
+Reconstructing packed weight...
+
+----------------------------------------------------------------------------------------
+QUANTIZATION
+----------------------------------------------------------------------------------------
+Group size               : 128
+Groups                   : 4096
+Original numel           : 524288
+Padded numel             : 524288
+Padding values           : 0
+
+Negative codes           : 178918 (34.1259%)
+Zero codes               : 165826 (31.6288%)
+Positive codes           : 179544 (34.2453%)
+
+Frozen code stats match  : True
+Scientific alpha mean    : 0.012669249437749386
+Stored FP16 alpha mean   : 0.01266930066049099
+
+----------------------------------------------------------------------------------------
+RECONSTRUCTION
+----------------------------------------------------------------------------------------
+Exact FP16 matches       : 524288
+FP16 mismatches          : 0
+Exact match percentage   : 100.00000000%
+Maximum abs difference   : 0.0
+Mean abs difference      : 0.0
+
+----------------------------------------------------------------------------------------
+PACKED PAYLOAD STORAGE
+----------------------------------------------------------------------------------------
+Original FP16 bytes      : 1048576
+Packed code bytes        : 131072
+FP16 scale bytes         : 8192
+Packed payload bytes     : 139264
+Storage ratio            : 13.281250%
+Payload compression      : 7.529412x
+Scale share of payload   : 5.882353%
+
+----------------------------------------------------------------------------------------
+VALIDATION
+----------------------------------------------------------------------------------------
+Ternary code statistics  : PASS
+FP16 reconstruction      : EXACT MATCH
+Shape                    : PASS
+Dtype                    : PASS
+
+========================================================================================
+ENG001 REAL-WEIGHT VALIDATION: PASS
+========================================================================================
