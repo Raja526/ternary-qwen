@@ -1,0 +1,200 @@
+==============================================================================================================
+EXPERIMENT 025 — EXTERNAL HELLASWAG VALIDATION
+==============================================================================================================
+
+Model       : Qwen/Qwen3.5-0.8B
+Dataset     : Rowan/hellaswag
+Split       : validation
+Subset size : 2,000
+Device      : cuda
+Model dtype : torch.float16
+
+Full validation examples : 10,042
+Experiment subset        : 2,000
+Subset selection         : first 2,000 validation examples
+
+Collecting model metadata...
+Loading model: Qwen/Qwen3.5-0.8B
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+Total model parameters: 752,393,024
+
+==============================================================================================================
+CONFIGURATION: FP16
+==============================================================================================================
+Loading model: Qwen/Qwen3.5-0.8B
+
+Matrices ternarized : 0
+Ternary parameters  : 0
+Coverage            : 0.0000%
+
+[FP16       ]   100/2000  correct=   44  acc= 44.00%  speed=  1.44 ex/s  elapsed=   1.2m  ETA=  22.0m
+[FP16       ]   200/2000  correct=   86  acc= 43.00%  speed=  1.47 ex/s  elapsed=   2.3m  ETA=  20.4m
+[FP16       ]   300/2000  correct=  131  acc= 43.67%  speed=  1.48 ex/s  elapsed=   3.4m  ETA=  19.2m
+[FP16       ]   400/2000  correct=  173  acc= 43.25%  speed=  1.48 ex/s  elapsed=   4.5m  ETA=  18.1m
+[FP16       ]   500/2000  correct=  218  acc= 43.60%  speed=  1.50 ex/s  elapsed=   5.6m  ETA=  16.7m
+[FP16       ]   600/2000  correct=  265  acc= 44.17%  speed=  1.50 ex/s  elapsed=   6.7m  ETA=  15.5m
+[FP16       ]   700/2000  correct=  313  acc= 44.71%  speed=  1.50 ex/s  elapsed=   7.8m  ETA=  14.5m
+[FP16       ]   800/2000  correct=  353  acc= 44.12%  speed=  1.50 ex/s  elapsed=   8.9m  ETA=  13.4m
+[FP16       ]   900/2000  correct=  395  acc= 43.89%  speed=  1.49 ex/s  elapsed=  10.0m  ETA=  12.3m
+[FP16       ]  1000/2000  correct=  425  acc= 42.50%  speed=  1.49 ex/s  elapsed=  11.2m  ETA=  11.2m
+[FP16       ]  1100/2000  correct=  464  acc= 42.18%  speed=  1.50 ex/s  elapsed=  12.2m  ETA=  10.0m
+[FP16       ]  1200/2000  correct=  513  acc= 42.75%  speed=  1.50 ex/s  elapsed=  13.3m  ETA=   8.9m
+[FP16       ]  1300/2000  correct=  554  acc= 42.62%  speed=  1.51 ex/s  elapsed=  14.4m  ETA=   7.7m
+[FP16       ]  1400/2000  correct=  598  acc= 42.71%  speed=  1.50 ex/s  elapsed=  15.5m  ETA=   6.6m
+[FP16       ]  1500/2000  correct=  633  acc= 42.20%  speed=  1.51 ex/s  elapsed=  16.6m  ETA=   5.5m
+[FP16       ]  1600/2000  correct=  671  acc= 41.94%  speed=  1.50 ex/s  elapsed=  17.7m  ETA=   4.4m
+[FP16       ]  1700/2000  correct=  712  acc= 41.88%  speed=  1.51 ex/s  elapsed=  18.8m  ETA=   3.3m
+[FP16       ]  1800/2000  correct=  757  acc= 42.06%  speed=  1.50 ex/s  elapsed=  19.9m  ETA=   2.2m
+[FP16       ]  1900/2000  correct=  786  acc= 41.37%  speed=  1.51 ex/s  elapsed=  21.0m  ETA=   1.1m
+[FP16       ]  2000/2000  correct=  826  acc= 41.30%  speed=  1.51 ex/s  elapsed=  22.1m  ETA=   0.0m
+
+FP16 COMPLETE
+Correct  : 826/2000
+Accuracy : 41.30%
+Time     : 1326.78 sec
+Speed    : 1.51 examples/sec
+Checkpoint saved.
+
+==============================================================================================================
+CONFIGURATION: K_ONLY
+==============================================================================================================
+Loading model: Qwen/Qwen3.5-0.8B
+Ternarizing: model.layers.3.self_attn.k_proj
+
+Matrices ternarized : 1
+Ternary parameters  : 524,288
+Coverage            : 0.0697%
+
+[K_ONLY     ]   100/2000  correct=   44  acc= 44.00%  speed=  1.50 ex/s  elapsed=   1.1m  ETA=  21.1m
+[K_ONLY     ]   200/2000  correct=   86  acc= 43.00%  speed=  1.51 ex/s  elapsed=   2.2m  ETA=  19.9m
+[K_ONLY     ]   300/2000  correct=  131  acc= 43.67%  speed=  1.50 ex/s  elapsed=   3.3m  ETA=  18.9m
+[K_ONLY     ]   400/2000  correct=  173  acc= 43.25%  speed=  1.49 ex/s  elapsed=   4.5m  ETA=  17.9m
+[K_ONLY     ]   500/2000  correct=  219  acc= 43.80%  speed=  1.51 ex/s  elapsed=   5.5m  ETA=  16.5m
+[K_ONLY     ]   600/2000  correct=  266  acc= 44.33%  speed=  1.51 ex/s  elapsed=   6.6m  ETA=  15.4m
+[K_ONLY     ]   700/2000  correct=  315  acc= 45.00%  speed=  1.51 ex/s  elapsed=   7.7m  ETA=  14.4m
+[K_ONLY     ]   800/2000  correct=  354  acc= 44.25%  speed=  1.51 ex/s  elapsed=   8.9m  ETA=  13.3m
+[K_ONLY     ]   900/2000  correct=  396  acc= 44.00%  speed=  1.50 ex/s  elapsed=  10.0m  ETA=  12.2m
+[K_ONLY     ]  1000/2000  correct=  425  acc= 42.50%  speed=  1.50 ex/s  elapsed=  11.1m  ETA=  11.1m
+[K_ONLY     ]  1100/2000  correct=  464  acc= 42.18%  speed=  1.51 ex/s  elapsed=  12.1m  ETA=   9.9m
+[K_ONLY     ]  1200/2000  correct=  514  acc= 42.83%  speed=  1.51 ex/s  elapsed=  13.2m  ETA=   8.8m
+[K_ONLY     ]  1300/2000  correct=  555  acc= 42.69%  speed=  1.52 ex/s  elapsed=  14.3m  ETA=   7.7m
+[K_ONLY     ]  1400/2000  correct=  599  acc= 42.79%  speed=  1.51 ex/s  elapsed=  15.4m  ETA=   6.6m
+[K_ONLY     ]  1500/2000  correct=  634  acc= 42.27%  speed=  1.52 ex/s  elapsed=  16.5m  ETA=   5.5m
+[K_ONLY     ]  1600/2000  correct=  672  acc= 42.00%  speed=  1.51 ex/s  elapsed=  17.6m  ETA=   4.4m
+[K_ONLY     ]  1700/2000  correct=  714  acc= 42.00%  speed=  1.52 ex/s  elapsed=  18.7m  ETA=   3.3m
+[K_ONLY     ]  1800/2000  correct=  759  acc= 42.17%  speed=  1.51 ex/s  elapsed=  19.8m  ETA=   2.2m
+[K_ONLY     ]  1900/2000  correct=  789  acc= 41.53%  speed=  1.52 ex/s  elapsed=  20.9m  ETA=   1.1m
+[K_ONLY     ]  2000/2000  correct=  829  acc= 41.45%  speed=  1.52 ex/s  elapsed=  22.0m  ETA=   0.0m
+
+K_ONLY COMPLETE
+Correct  : 829/2000
+Accuracy : 41.45%
+Time     : 1318.90 sec
+Speed    : 1.52 examples/sec
+Checkpoint saved.
+
+==============================================================================================================
+CONFIGURATION: SAFE_CORE
+==============================================================================================================
+Loading model: Qwen/Qwen3.5-0.8B
+Ternarizing: model.layers.3.self_attn.k_proj
+Ternarizing: model.layers.4.linear_attn.out_proj
+Ternarizing: model.layers.4.linear_attn.in_proj_qkv
+
+Matrices ternarized : 3
+Ternary parameters  : 8,912,896
+Coverage            : 1.1846%
+
+[SAFE_CORE  ]   100/2000  correct=   43  acc= 43.00%  speed=  1.51 ex/s  elapsed=   1.1m  ETA=  21.0m
+[SAFE_CORE  ]   200/2000  correct=   82  acc= 41.00%  speed=  1.52 ex/s  elapsed=   2.2m  ETA=  19.8m
+[SAFE_CORE  ]   300/2000  correct=  128  acc= 42.67%  speed=  1.51 ex/s  elapsed=   3.3m  ETA=  18.8m
+[SAFE_CORE  ]   400/2000  correct=  171  acc= 42.75%  speed=  1.50 ex/s  elapsed=   4.4m  ETA=  17.8m
+[SAFE_CORE  ]   500/2000  correct=  215  acc= 43.00%  speed=  1.52 ex/s  elapsed=   5.5m  ETA=  16.4m
+[SAFE_CORE  ]   600/2000  correct=  262  acc= 43.67%  speed=  1.52 ex/s  elapsed=   6.6m  ETA=  15.3m
+[SAFE_CORE  ]   700/2000  correct=  309  acc= 44.14%  speed=  1.52 ex/s  elapsed=   7.7m  ETA=  14.3m
+[SAFE_CORE  ]   800/2000  correct=  351  acc= 43.88%  speed=  1.52 ex/s  elapsed=   8.8m  ETA=  13.2m
+[SAFE_CORE  ]   900/2000  correct=  395  acc= 43.89%  speed=  1.51 ex/s  elapsed=   9.9m  ETA=  12.1m
+[SAFE_CORE  ]  1000/2000  correct=  426  acc= 42.60%  speed=  1.51 ex/s  elapsed=  11.0m  ETA=  11.0m
+[SAFE_CORE  ]  1100/2000  correct=  462  acc= 42.00%  speed=  1.52 ex/s  elapsed=  12.1m  ETA=   9.9m
+[SAFE_CORE  ]  1200/2000  correct=  513  acc= 42.75%  speed=  1.52 ex/s  elapsed=  13.1m  ETA=   8.8m
+[SAFE_CORE  ]  1300/2000  correct=  555  acc= 42.69%  speed=  1.52 ex/s  elapsed=  14.2m  ETA=   7.7m
+[SAFE_CORE  ]  1400/2000  correct=  600  acc= 42.86%  speed=  1.52 ex/s  elapsed=  15.3m  ETA=   6.6m
+[SAFE_CORE  ]  1500/2000  correct=  635  acc= 42.33%  speed=  1.52 ex/s  elapsed=  16.4m  ETA=   5.5m
+[SAFE_CORE  ]  1600/2000  correct=  675  acc= 42.19%  speed=  1.52 ex/s  elapsed=  17.5m  ETA=   4.4m
+[SAFE_CORE  ]  1700/2000  correct=  715  acc= 42.06%  speed=  1.52 ex/s  elapsed=  18.6m  ETA=   3.3m
+[SAFE_CORE  ]  1800/2000  correct=  760  acc= 42.22%  speed=  1.52 ex/s  elapsed=  19.7m  ETA=   2.2m
+[SAFE_CORE  ]  1900/2000  correct=  789  acc= 41.53%  speed=  1.52 ex/s  elapsed=  20.8m  ETA=   1.1m
+[SAFE_CORE  ]  2000/2000  correct=  827  acc= 41.35%  speed=  1.52 ex/s  elapsed=  21.9m  ETA=   0.0m
+
+SAFE_CORE COMPLETE
+Correct  : 827/2000
+Accuracy : 41.35%
+Time     : 1312.57 sec
+Speed    : 1.52 examples/sec
+Checkpoint saved.
+
+==============================================================================================================
+CONFIGURATION: CORE_PLUS_Q
+==============================================================================================================
+Loading model: Qwen/Qwen3.5-0.8B
+Ternarizing: model.layers.3.self_attn.k_proj
+Ternarizing: model.layers.4.linear_attn.out_proj
+Ternarizing: model.layers.4.linear_attn.in_proj_qkv
+Ternarizing: model.layers.3.self_attn.q_proj
+
+Matrices ternarized : 4
+Ternary parameters  : 13,107,200
+Coverage            : 1.7421%
+
+[CORE_PLUS_Q]   100/2000  correct=   39  acc= 39.00%  speed=  1.51 ex/s  elapsed=   1.1m  ETA=  20.9m
+[CORE_PLUS_Q]   200/2000  correct=   81  acc= 40.50%  speed=  1.52 ex/s  elapsed=   2.2m  ETA=  19.7m
+[CORE_PLUS_Q]   300/2000  correct=  128  acc= 42.67%  speed=  1.51 ex/s  elapsed=   3.3m  ETA=  18.7m
+[CORE_PLUS_Q]   400/2000  correct=  168  acc= 42.00%  speed=  1.51 ex/s  elapsed=   4.4m  ETA=  17.7m
+[CORE_PLUS_Q]   500/2000  correct=  211  acc= 42.20%  speed=  1.53 ex/s  elapsed=   5.5m  ETA=  16.4m
+[CORE_PLUS_Q]   600/2000  correct=  256  acc= 42.67%  speed=  1.53 ex/s  elapsed=   6.5m  ETA=  15.3m
+[CORE_PLUS_Q]   700/2000  correct=  302  acc= 43.14%  speed=  1.52 ex/s  elapsed=   7.7m  ETA=  14.2m
+[CORE_PLUS_Q]   800/2000  correct=  342  acc= 42.75%  speed=  1.52 ex/s  elapsed=   8.8m  ETA=  13.2m
+[CORE_PLUS_Q]   900/2000  correct=  386  acc= 42.89%  speed=  1.52 ex/s  elapsed=   9.9m  ETA=  12.1m
+[CORE_PLUS_Q]  1000/2000  correct=  416  acc= 41.60%  speed=  1.52 ex/s  elapsed=  11.0m  ETA=  11.0m
+[CORE_PLUS_Q]  1100/2000  correct=  450  acc= 40.91%  speed=  1.53 ex/s  elapsed=  12.0m  ETA=   9.8m
+[CORE_PLUS_Q]  1200/2000  correct=  503  acc= 41.92%  speed=  1.53 ex/s  elapsed=  13.1m  ETA=   8.7m
+[CORE_PLUS_Q]  1300/2000  correct=  544  acc= 41.85%  speed=  1.53 ex/s  elapsed=  14.2m  ETA=   7.6m
+[CORE_PLUS_Q]  1400/2000  correct=  589  acc= 42.07%  speed=  1.53 ex/s  elapsed=  15.3m  ETA=   6.5m
+[CORE_PLUS_Q]  1500/2000  correct=  626  acc= 41.73%  speed=  1.53 ex/s  elapsed=  16.3m  ETA=   5.4m
+[CORE_PLUS_Q]  1600/2000  correct=  661  acc= 41.31%  speed=  1.53 ex/s  elapsed=  17.4m  ETA=   4.4m
+[CORE_PLUS_Q]  1700/2000  correct=  703  acc= 41.35%  speed=  1.53 ex/s  elapsed=  18.5m  ETA=   3.3m
+[CORE_PLUS_Q]  1800/2000  correct=  747  acc= 41.50%  speed=  1.53 ex/s  elapsed=  19.6m  ETA=   2.2m
+[CORE_PLUS_Q]  1900/2000  correct=  774  acc= 40.74%  speed=  1.53 ex/s  elapsed=  20.7m  ETA=   1.1m
+[CORE_PLUS_Q]  2000/2000  correct=  810  acc= 40.50%  speed=  1.53 ex/s  elapsed=  21.8m  ETA=   0.0m
+
+CORE_PLUS_Q COMPLETE
+Correct  : 810/2000
+Accuracy : 40.50%
+Time     : 1307.38 sec
+Speed    : 1.53 examples/sec
+Checkpoint saved.
+
+======================================================================================================================================================
+EXPERIMENT 025 — EXTERNAL HELLASWAG VALIDATION
+======================================================================================================================================================
+
+Model       : Qwen/Qwen3.5-0.8B
+Dataset     : Rowan/hellaswag
+Split       : validation
+Subset      : first 2,000 validation examples
+Questions   : 2,000
+
+Scoring     : mean conditional log probability per continuation token
+Execution   : four candidate endings scored sequentially
+
+FP16 baseline: 826/2000 (41.30%)
+
+Configuration      Matrices       Params     Cov%   Correct     Acc%     Delta    Agree%   Changed   FPonly    Tonly     McNemar p
+------------------------------------------------------------------------------------------------------------------------------------------------------
+K_ONLY                    1      524,288   0.0697       829    41.45     +0.15     98.65        27        4        7      0.548828
+SAFE_CORE                 3    8,912,896   1.1846       827    41.35     +0.05     94.05       119       36       37             1
+CORE_PLUS_Q               4   13,107,200   1.7421       810    40.50     -0.80     92.00       160       56       40      0.125346
+
+Detailed results : results/025_external_hellaswag_2000_validation.json
+Summary          : results/025_external_hellaswag_2000_validation_summary.txt
+Checkpoint       : results/025_hellaswag_2000_checkpoint.json

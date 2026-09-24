@@ -1,0 +1,20 @@
+======================================================================================================================================================
+EXPERIMENT 025 — EXTERNAL HELLASWAG VALIDATION
+======================================================================================================================================================
+
+Model       : Qwen/Qwen3.5-0.8B
+Dataset     : Rowan/hellaswag
+Split       : validation
+Subset      : first 2,000 validation examples
+Questions   : 2,000
+
+Scoring     : mean conditional log probability per continuation token
+Execution   : four candidate endings scored sequentially
+
+FP16 baseline: 826/2000 (41.30%)
+
+Configuration      Matrices       Params     Cov%   Correct     Acc%     Delta    Agree%   Changed   FPonly    Tonly     McNemar p
+------------------------------------------------------------------------------------------------------------------------------------------------------
+K_ONLY                    1      524,288   0.0697       829    41.45     +0.15     98.65        27        4        7      0.548828
+SAFE_CORE                 3    8,912,896   1.1846       827    41.35     +0.05     94.05       119       36       37             1
+CORE_PLUS_Q               4   13,107,200   1.7421       810    40.50     -0.80     92.00       160       56       40      0.125346

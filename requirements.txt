@@ -5,3 +5,4 @@ safetensors
 huggingface_hub
 sentencepiece
 git+https://github.com/huggingface/transformers.git@main
+scipy==1.15.3
