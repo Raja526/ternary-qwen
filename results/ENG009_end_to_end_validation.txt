@@ -1,0 +1,168 @@
+
+====================================================================================================
+ENG009 — FINAL END-TO-END PACKED TERNARY VALIDATION
+====================================================================================================
+Model                   : Qwen/Qwen3.5-0.8B
+Checkpoint              : results/ENG003_multimatrix_checkpoint.pt
+Runtime targets         : 3
+  - model.layers.3.self_attn.k_proj
+  - model.layers.4.linear_attn.out_proj
+  - model.layers.4.linear_attn.in_proj_qkv
+
+====================================================================================================
+STEP 1 — VERIFY FROZEN CHECKPOINT IDENTITY
+====================================================================================================
+Checkpoint disk bytes   : 2371165
+Checkpoint SHA256       : 8e35aaea4e47a68363a8951fa425874a1e35929a19c277335a260bb20a9cb546
+Checkpoint identity     : PASS
+
+====================================================================================================
+STEP 2 — VERIFY CHECKPOINT STRUCTURE AND STORAGE
+====================================================================================================
+Checkpoint model        : Qwen/Qwen3.5-0.8B
+Group size              : 128
+Threshold multiplier    : 0.5
+Matrix count            : 3
+
+Target                  : model.layers.3.self_attn.k_proj
+Shape                   : (512, 1024)
+Parameters              : 524288
+Packed bytes            : 139264
+FP16 bytes              : 1048576
+Compression             : 7.529412x
+
+Target                  : model.layers.4.linear_attn.out_proj
+Shape                   : (1024, 2048)
+Parameters              : 2097152
+Packed bytes            : 557056
+FP16 bytes              : 4194304
+Compression             : 7.529412x
+
+Target                  : model.layers.4.linear_attn.in_proj_qkv
+Shape                   : (6144, 1024)
+Parameters              : 6291456
+Packed bytes            : 1671168
+FP16 bytes              : 12582912
+Compression             : 7.529412x
+
+Total parameters        : 8912896
+Logical packed bytes    : 2367488
+FP16 equivalent bytes   : 17825792
+Logical compression     : 7.529412x
+Actual checkpoint bytes : 2371165
+Checkpoint overhead     : 3677
+Actual disk compression : 7.517736x
+
+====================================================================================================
+STEP 3 — PREPARE FROZEN INPUT
+====================================================================================================
+Input tokens            : 22
+
+====================================================================================================
+STEP 4 — RECONSTRUCT FP16 REFERENCE PATH
+====================================================================================================
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights:  42%|████▏     | 133/320 [00:00<00:00, 1307.60it/s]Loading weights:  85%|████████▌ | 273/320 [00:00<00:00, 1357.26it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 1369.10it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+
+Reference target        : model.layers.3.self_attn.k_proj
+Reconstruction mismatch : 0
+
+Reference target        : model.layers.4.linear_attn.out_proj
+Reconstruction mismatch : 0
+
+Reference target        : model.layers.4.linear_attn.in_proj_qkv
+Reconstruction mismatch : 0
+
+Reference logits shape  : (1, 22, 248320)
+Reference logits dtype  : torch.float16
+
+====================================================================================================
+STEP 5 — LOAD THREE PACKED RUNTIME MODULES
+====================================================================================================
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights:   0%|          | 1/320 [00:00<00:36,  8.76it/s]Loading weights:  80%|███████▉  | 255/320 [00:00<00:00, 1415.28it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 1257.79it/s]
+Loaded module names     : ('model.layers.3.self_attn.k_proj', 'model.layers.4.linear_attn.out_proj', 'model.layers.4.linear_attn.in_proj_qkv')
+Replaced matrices       : 3
+Replaced parameters     : 8912896
+Persistent packed bytes : 2367488
+FP16 equivalent bytes   : 17825792
+
+Runtime target          : model.layers.3.self_attn.k_proj
+Type                    : PackedTernaryLinear
+Object replaced         : True
+Persistent weight param : False
+Packed codes buffer     : True
+Scales buffer           : True
+
+Runtime target          : model.layers.4.linear_attn.out_proj
+Type                    : PackedTernaryLinear
+Object replaced         : True
+Persistent weight param : False
+Packed codes buffer     : True
+Scales buffer           : True
+
+Runtime target          : model.layers.4.linear_attn.in_proj_qkv
+Type                    : PackedTernaryLinear
+Object replaced         : True
+Persistent weight param : False
+Packed codes buffer     : True
+Scales buffer           : True
+
+====================================================================================================
+STEP 6 — FULL-MODEL EXACT LOGIT COMPARISON
+====================================================================================================
+Reference shape         : (1, 22, 248320)
+Runtime shape           : (1, 22, 248320)
+Compared logits         : 5463040
+Logit mismatches        : 0
+Max abs difference      : 0.0
+Mean abs difference     : 0.0
+Dtype match             : True
+
+====================================================================================================
+STEP 7 — VERIFY ENG008 BENCHMARK CONCLUSION
+====================================================================================================
+Selected-weight compression: 7.529412x                      : True
+Mean latency change: -0.342%                                : True
+No inference speedup claim.                                 : True
+No peak RAM reduction claim.                                : True
+No peak VRAM reduction claim.                               : True
+ENG008 CPU MEMORY AND LATENCY BENCHMARK: PASS               : True
+
+====================================================================================================
+ENG009 FINAL ENGINEERING SUMMARY
+====================================================================================================
+Checkpoint SHA256       : 8e35aaea4e47a68363a8951fa425874a1e35929a19c277335a260bb20a9cb546
+Selected matrices       : 3
+Selected parameters     : 8912896
+Logical packed bytes    : 2367488
+FP16 equivalent bytes   : 17825792
+Logical compression     : 7.529412x
+Actual checkpoint bytes : 2371165
+Actual disk compression : 7.517736x
+Runtime replacements    : 3
+Persistent FP16 weights : 0
+Compared logits         : 5463040
+Logit mismatches        : 0
+Max abs difference      : 0.0
+Mean abs difference     : 0.0
+
+Engineering conclusion:
+  The frozen three-matrix checkpoint can be stored compactly,
+  loaded into a fresh Qwen model as packed runtime modules,
+  and executed without persistent full FP16 weights in those
+  three modules while matching the same packed matrices
+  reconstructed into ordinary FP16 Linear weights exactly.
+
+Scope:
+  Demonstrated compression applies to the three selected weights.
+  No whole-model compression claim.
+  No inference speedup claim.
+  No peak RAM reduction claim.
+  No peak VRAM reduction claim.
+  No fused 2-bit CUDA kernel claim.
+
+====================================================================================================
+ENG009 END-TO-END ENGINEERING VALIDATION: PASS
+====================================================================================================
