@@ -1,0 +1,133 @@
+====================================================================================================
+ENG003 — REAL QWEN MULTI-MATRIX PACKED CHECKPOINT VALIDATION
+====================================================================================================
+
+Model               : Qwen/Qwen3.5-0.8B
+Group size          : 128
+Threshold multiplier: 0.5
+Target matrices     : 3
+  - model.layers.3.self_attn.k_proj
+  - model.layers.4.linear_attn.out_proj
+  - model.layers.4.linear_attn.in_proj_qkv
+
+Loading FP16 model...
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+
+----------------------------------------------------------------------------------------------------
+PACKING MATRICES
+----------------------------------------------------------------------------------------------------
+
+model.layers.3.self_attn.k_proj
+  shape              : (512, 1024)
+  parameters         : 524288
+  groups             : 4096
+  padding            : 0
+  packed code bytes  : 131072
+  scale bytes        : 8192
+  logical bytes      : 139264
+
+model.layers.4.linear_attn.out_proj
+  shape              : (1024, 2048)
+  parameters         : 2097152
+  groups             : 16384
+  padding            : 0
+  packed code bytes  : 524288
+  scale bytes        : 32768
+  logical bytes      : 557056
+
+model.layers.4.linear_attn.in_proj_qkv
+  shape              : (6144, 1024)
+  parameters         : 6291456
+  groups             : 49152
+  padding            : 0
+  packed code bytes  : 1572864
+  scale bytes        : 98304
+  logical bytes      : 1671168
+
+Saving multi-matrix checkpoint...
+Loading multi-matrix checkpoint...
+
+----------------------------------------------------------------------------------------------------
+RECONSTRUCTION VALIDATION
+----------------------------------------------------------------------------------------------------
+
+model.layers.3.self_attn.k_proj
+  values              : 524288
+  mismatches          : 0
+  max abs difference  : 0.0
+  mean abs difference : 0.0
+  shape match         : True
+  dtype match         : True
+  result              : PASS
+
+model.layers.4.linear_attn.out_proj
+  values              : 2097152
+  mismatches          : 0
+  max abs difference  : 0.0
+  mean abs difference : 0.0
+  shape match         : True
+  dtype match         : True
+  result              : PASS
+
+model.layers.4.linear_attn.in_proj_qkv
+  values              : 6291456
+  mismatches          : 0
+  max abs difference  : 0.0
+  mean abs difference : 0.0
+  shape match         : True
+  dtype match         : True
+  result              : PASS
+
+====================================================================================================
+CHECKPOINT METADATA
+====================================================================================================
+Format version          : 1
+Model name              : Qwen/Qwen3.5-0.8B
+Group size              : 128
+Threshold multiplier    : 0.5
+Weight count            : 3
+Metadata exact match    : True
+
+====================================================================================================
+AGGREGATE STORAGE
+====================================================================================================
+Matrices                : 3
+Parameters              : 8912896
+Original FP16 bytes     : 17825792
+
+Packed code bytes       : 2228224
+FP16 scale bytes        : 139264
+Logical payload bytes   : 2367488
+Scale share of payload  : 5.882353%
+
+Actual checkpoint bytes : 2371165
+Serialization overhead  : 3677 bytes
+Overhead vs payload     : 0.155312%
+
+Logical storage ratio   : 13.281250%
+Logical compression     : 7.529412x
+
+Actual disk ratio       : 13.301877%
+Actual disk compression : 7.517736x
+
+====================================================================================================
+AGGREGATE RECONSTRUCTION
+====================================================================================================
+Total values            : 8912896
+Total mismatches        : 0
+Global max difference   : 0.0
+All matrices pass       : True
+
+====================================================================================================
+VALIDATION
+====================================================================================================
+Checkpoint metadata     : PASS
+Target parameter count  : PASS
+Logical storage         : PASS
+Matrix reconstruction   : EXACT MATCH
+Aggregate reconstruction: EXACT MATCH
+Disk measurement        : PASS
+
+====================================================================================================
+ENG003 REAL MULTI-MATRIX CHECKPOINT VALIDATION: PASS
+====================================================================================================
