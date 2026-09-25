@@ -1,0 +1,78 @@
+==============================================================================
+OPT001 FINAL THREE-MATRIX CORRECTNESS VALIDATION
+==============================================================================
+
+------------------------------------------------------------------------------
+MATRIX 1: model.layers.3.self_attn.k_proj
+------------------------------------------------------------------------------
+Shape                 : (512, 1024)
+Parameters            : 524288
+Group size            : 128
+Packed bytes          : 139264
+FP16 equivalent bytes : 1048576
+Compression           : 7.529412x
+
+Compared values        : 1536
+Exact mismatches       : 855
+Mismatch percentage    : 55.6640625
+Max absolute diff      : 0.0009765625
+Mean absolute diff     : 9.753694757819176e-05
+Numerically close      : True
+
+------------------------------------------------------------------------------
+MATRIX 2: model.layers.4.linear_attn.out_proj
+------------------------------------------------------------------------------
+Shape                 : (1024, 2048)
+Parameters            : 2097152
+Group size            : 128
+Packed bytes          : 557056
+FP16 equivalent bytes : 4194304
+Compression           : 7.529412x
+
+Compared values        : 3072
+Exact mismatches       : 1702
+Mismatch percentage    : 55.403645833333336
+Max absolute diff      : 0.001251220703125
+Mean absolute diff     : 0.00013039579789619893
+Numerically close      : True
+
+------------------------------------------------------------------------------
+MATRIX 3: model.layers.4.linear_attn.in_proj_qkv
+------------------------------------------------------------------------------
+Shape                 : (6144, 1024)
+Parameters            : 6291456
+Group size            : 128
+Packed bytes          : 1671168
+FP16 equivalent bytes : 12582912
+Compression           : 7.529412x
+
+Compared values        : 18432
+Exact mismatches       : 10521
+Mismatch percentage    : 57.080078125
+Max absolute diff      : 0.001953125
+Mean absolute diff     : 0.0001523920800536871
+Numerically close      : True
+
+==============================================================================
+AGGREGATE
+==============================================================================
+Selected matrices       : 3
+Selected parameters     : 8912896
+Packed bytes            : 2367488
+FP16 equivalent bytes   : 17825792
+Persistent compression  : 7.529412x
+
+Compared values         : 23040
+Exact mismatches        : 13078
+Exact matches           : 9962
+Mismatch percentage     : 56.76215277777778
+Global max abs diff     : 0.001953125
+Weighted mean abs diff  : 0.00014580223360098897
+
+Decoded int8 tensors    : NOT CREATED BY OPT001
+Positive/negative masks : NOT CREATED BY OPT001
+Reconstructed FP16 W    : NOT CREATED BY OPT001
+
+==============================================================================
+OPT001 FINAL THREE-MATRIX CORRECTNESS: PASS
+==============================================================================
