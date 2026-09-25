@@ -1,0 +1,82 @@
+OPT006 — TABLE-DISPATCH PACKED-DECODE CPU BENCHMARK
+================================================================================
+
+Controlled comparison
+--------------------------------------------------------------------------------
+Baseline condition: OPT005 BranchReducedPackedTernaryLinear
+Candidate condition: OPT006 TableDispatchPackedTernaryLinear
+Controlled difference: comparison-mask ternary dispatch vs fixed lookup-table ternary dispatch; manual four-code unrolling and parallel scheduling are unchanged.
+Packed representation and ternary arithmetic remain unchanged.
+
+Environment and protocol
+--------------------------------------------------------------------------------
+Model: Qwen/Qwen3.5-0.8B
+Execution device: CPU
+PyTorch: 2.14.0+cu126
+PyTorch threads: 6
+PyTorch interop threads: 6
+Input tokens: 22
+Warmup forwards per process: 2
+Timed forwards per process: 5
+Independent processes per condition: 3
+Total timed forwards per condition: 15
+
+Selected-weight persistent representation
+--------------------------------------------------------------------------------
+Selected matrices: 3
+Selected parameters: 8912896
+FP16-equivalent bytes: 17825792
+Packed persistent bytes: 2367488
+Persistent compression: 7.529412x
+Persistent selected-weight representation is identical between both conditions.
+
+Latency — 15 timed forwards per condition
+--------------------------------------------------------------------------------
+Branch-reduced baseline mean ms: 2615.458
+Table-dispatch candidate mean ms: 1751.417
+Table-dispatch mean latency change: -33.036%
+Branch-reduced baseline median ms: 2589.112
+Table-dispatch candidate median ms: 1703.425
+Branch-reduced baseline std dev ms: 63.045
+Table-dispatch candidate std dev ms: 145.648
+Branch-reduced baseline min/max ms: 2560.119 / 2792.860
+Table-dispatch candidate min/max ms: 1662.025 / 2241.130
+
+Process RSS — mean across 3 independent processes
+--------------------------------------------------------------------------------
+Branch-reduced baseline ready RSS MiB: 2342.971
+Table-dispatch candidate ready RSS MiB: 2340.198
+Ready RSS difference MiB (table_dispatch - branch_reduced): -2.773
+
+Branch-reduced baseline after-warmup RSS MiB: 2372.764
+Table-dispatch candidate after-warmup RSS MiB: 2370.794
+After-warmup RSS difference MiB (table_dispatch - branch_reduced): -1.970
+
+Branch-reduced baseline timed-max RSS MiB: 2383.184
+Table-dispatch candidate timed-max RSS MiB: 2377.616
+Timed-max RSS difference MiB (table_dispatch - branch_reduced): -5.568
+
+Branch-reduced baseline GNU max RSS KB: 3864849.333
+Table-dispatch candidate GNU max RSS KB: 3862112.000
+GNU max RSS difference KB (table_dispatch - branch_reduced): -2737.333
+
+Interpretation
+--------------------------------------------------------------------------------
+1. OPT005 and OPT006 use the same persistent packed selected-weight representation.
+2. OPT006 changes only the source-level per-code ternary dispatch from comparison-mask accumulation to fixed lookup-table dispatch; manual four-code unrolling and parallel scheduling are unchanged.
+3. Separate equivalence validation established bit-exact operator and full-model outputs for the tested configuration.
+4. Table-dispatch source changed observed mean forward latency by -33.036% in these runs.
+5. Timed-max process RSS changed by -5.568 MiB, while GNU maximum RSS changed by -2737.333 KB on average.
+6. These measurements apply to this model, three selected matrices, 22-token input, six-thread CPU environment, and benchmark protocol.
+
+Scope
+--------------------------------------------------------------------------------
+No general inference speedup claim.
+No general peak RAM reduction claim.
+No peak VRAM reduction claim.
+No SIMD/vectorization claim.
+No claim about the exact generated instruction sequence without assembly inspection.
+No claim that the compiler implements the source LUT as a physical memory-table lookup.
+No whole-model compression claim.
+
+OPT006 TABLE-DISPATCH PACKED-DECODE CPU BENCHMARK: PASS
