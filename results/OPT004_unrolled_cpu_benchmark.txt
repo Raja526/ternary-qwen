@@ -1,0 +1,80 @@
+OPT004 — UNROLLED PACKED-DECODE CPU BENCHMARK
+================================================================================
+
+Controlled comparison
+--------------------------------------------------------------------------------
+Baseline condition: OPT003 ParallelPackedTernaryLinear
+Candidate condition: OPT004 UnrolledPackedTernaryLinear
+Controlled difference: looped four-code packed decode vs manually unrolled four-code packed decode; parallel scheduling is unchanged.
+Packed representation and ternary arithmetic remain unchanged.
+
+Environment and protocol
+--------------------------------------------------------------------------------
+Model: Qwen/Qwen3.5-0.8B
+Execution device: CPU
+PyTorch: 2.14.0+cu126
+PyTorch threads: 6
+PyTorch interop threads: 6
+Input tokens: 22
+Warmup forwards per process: 2
+Timed forwards per process: 5
+Independent processes per condition: 3
+Total timed forwards per condition: 15
+
+Selected-weight persistent representation
+--------------------------------------------------------------------------------
+Selected matrices: 3
+Selected parameters: 8912896
+FP16-equivalent bytes: 17825792
+Packed persistent bytes: 2367488
+Persistent compression: 7.529412x
+Persistent selected-weight representation is identical between both conditions.
+
+Latency — 15 timed forwards per condition
+--------------------------------------------------------------------------------
+Parallel baseline mean ms: 2740.276
+Unrolled candidate mean ms: 2509.241
+Unrolled mean latency change: -8.431%
+Parallel baseline median ms: 2770.730
+Unrolled candidate median ms: 2477.150
+Parallel baseline std dev ms: 236.350
+Unrolled candidate std dev ms: 76.416
+Parallel baseline min/max ms: 2391.684 / 3194.065
+Unrolled candidate min/max ms: 2439.425 / 2681.158
+
+Process RSS — mean across 3 independent processes
+--------------------------------------------------------------------------------
+Parallel baseline ready RSS MiB: 2339.999
+Unrolled candidate ready RSS MiB: 2340.251
+Ready RSS difference MiB (unrolled - parallel): +0.253
+
+Parallel baseline after-warmup RSS MiB: 2369.805
+Unrolled candidate after-warmup RSS MiB: 2370.681
+After-warmup RSS difference MiB (unrolled - parallel): +0.876
+
+Parallel baseline timed-max RSS MiB: 2380.227
+Unrolled candidate timed-max RSS MiB: 2381.104
+Timed-max RSS difference MiB (unrolled - parallel): +0.878
+
+Parallel baseline GNU max RSS KB: 3862022.667
+Unrolled candidate GNU max RSS KB: 3861808.000
+GNU max RSS difference KB (unrolled - parallel): -214.667
+
+Interpretation
+--------------------------------------------------------------------------------
+1. OPT003 and OPT004 use the same persistent packed selected-weight representation.
+2. OPT004 changes only the inner four-code packed decode from a four-iteration loop to explicit manual unrolling; parallel scheduling is unchanged.
+3. Separate equivalence validation established bit-exact operator and full-model outputs for the tested configuration.
+4. Manual four-code unrolling changed mean forward latency by -8.431% in these runs.
+5. Timed-max process RSS changed by +0.878 MiB, while GNU maximum RSS changed by -214.667 KB on average.
+6. These measurements apply to this model, three selected matrices, 22-token input, six-thread CPU environment, and benchmark protocol.
+
+Scope
+--------------------------------------------------------------------------------
+No general inference speedup claim.
+No general peak RAM reduction claim.
+No peak VRAM reduction claim.
+No SIMD/vectorization claim.
+No whole-model compression claim.
+
+OPT004 UNROLLED PACKED-DECODE CPU BENCHMARK: PASS
