@@ -1,0 +1,156 @@
+
+====================================================================================================
+ENG013 — FINAL PACKED TERNARY ENGINEERING CONSOLIDATION
+====================================================================================================
+Model                   : Qwen/Qwen3.5-0.8B
+Checkpoint              : results/ENG003_multimatrix_checkpoint.pt
+Selected matrices       : 3
+  - model.layers.3.self_attn.k_proj
+  - model.layers.4.linear_attn.out_proj
+  - model.layers.4.linear_attn.in_proj_qkv
+
+====================================================================================================
+STEP 1 — VERIFY FROZEN ENG003 CHECKPOINT IDENTITY
+====================================================================================================
+Checkpoint disk bytes   : 2371165
+Checkpoint SHA256       : 8e35aaea4e47a68363a8951fa425874a1e35929a19c277335a260bb20a9cb546
+Checkpoint identity     : PASS
+
+====================================================================================================
+STEP 2 — VERIFY CHECKPOINT STRUCTURE AND STORAGE
+====================================================================================================
+Checkpoint model        : Qwen/Qwen3.5-0.8B
+Group size              : 128
+Threshold multiplier    : 0.5
+Selected parameters     : 8912896
+Logical packed bytes    : 2367488
+FP16 equivalent bytes   : 17825792
+Logical compression     : 7.529412x
+Actual disk compression : 7.517736x
+
+====================================================================================================
+STEP 3 — PREPARE FROZEN INPUT
+====================================================================================================
+Input tokens            : 22
+
+====================================================================================================
+STEP 4 — LOAD FROZEN ENG010 DIRECT RUNTIME
+====================================================================================================
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+
+Direct target           : model.layers.3.self_attn.k_proj
+Type                    : DirectTernaryLinear
+Persistent weight param : False
+
+Direct target           : model.layers.4.linear_attn.out_proj
+Type                    : DirectTernaryLinear
+Persistent weight param : False
+
+Direct target           : model.layers.4.linear_attn.in_proj_qkv
+Type                    : DirectTernaryLinear
+Persistent weight param : False
+
+Direct logits shape     : (1, 22, 248320)
+Direct logits dtype     : torch.float16
+
+====================================================================================================
+STEP 5 — LOAD FROZEN ENG011 STREAMING RUNTIME
+====================================================================================================
+
+Streaming target        : model.layers.3.self_attn.k_proj
+Type                    : StreamingDirectTernaryLinear
+Persistent weight param : False
+Full decode bytes       : 524288
+Max chunk decode bytes  : 65536
+Decode working-set ratio: 8.000000x
+
+Streaming target        : model.layers.4.linear_attn.out_proj
+Type                    : StreamingDirectTernaryLinear
+Persistent weight param : False
+Full decode bytes       : 2097152
+Max chunk decode bytes  : 131072
+Decode working-set ratio: 16.000000x
+
+Streaming target        : model.layers.4.linear_attn.in_proj_qkv
+Type                    : StreamingDirectTernaryLinear
+Persistent weight param : False
+Full decode bytes       : 6291456
+Max chunk decode bytes  : 65536
+Decode working-set ratio: 96.000000x
+
+Sum full-decode bytes   : 8912896
+Sum max-chunk bytes     : 262144
+Accounting ratio        : 34.000000x
+
+====================================================================================================
+STEP 6 — EXACT ENG010 <-> ENG011 FULL-MODEL COMPARISON
+====================================================================================================
+Direct shape            : (1, 22, 248320)
+Streaming shape         : (1, 22, 248320)
+Compared logits         : 5463040
+Logit mismatches        : 0
+Max abs difference      : 0.0
+Mean abs difference     : 0.0
+Bit-exact               : True
+Top-1 matches           : 22/22
+
+====================================================================================================
+STEP 7 — VERIFY FROZEN ENG012 BENCHMARK EVIDENCE
+====================================================================================================
+Persistent compression: 7.529412x                                       : True
+Streaming mean latency change: +6.670%                                  : True
+Timed-max RSS difference MiB (streaming - direct): -6.490               : True
+GNU max RSS difference KB (streaming - direct): +18.667                 : True
+No general inference speedup claim.                                     : True
+No general peak RAM reduction claim.                                    : True
+No peak VRAM reduction claim.                                           : True
+No fused 2-bit kernel claim.                                            : True
+No whole-model compression claim.                                       : True
+ENG012 STREAMING MEMORY AND LATENCY BENCHMARK: PASS                     : True
+
+====================================================================================================
+ENG013 FINAL ENGINEERING SUMMARY
+====================================================================================================
+Checkpoint SHA256       : 8e35aaea4e47a68363a8951fa425874a1e35929a19c277335a260bb20a9cb546
+Selected matrices       : 3
+Selected parameters     : 8912896
+Logical packed bytes    : 2367488
+FP16 equivalent bytes   : 17825792
+Logical compression     : 7.529412x
+Actual checkpoint bytes : 2371165
+Actual disk compression : 7.517736x
+Rows per chunk          : 64
+Compared logits         : 5463040
+Logit mismatches        : 0
+Bit-exact ENG010/ENG011 : True
+Top-1 matches           : 22/22
+
+Frozen ENG012 measured evidence:
+  Streaming timed-max RSS difference : -6.490 MiB
+  Streaming mean latency change       : +6.670%
+  GNU max RSS difference              : +18.667 KB
+
+Engineering conclusion:
+  The frozen three-matrix packed checkpoint can be loaded into
+  Qwen3.5-0.8B as ENG011 streaming direct-compute modules,
+  retaining the 7.529412x selected-weight persistent storage
+  compression while avoiding ENG010's full selected-matrix
+  temporary int8 code decode.
+  On the frozen 22-token full-model validation, ENG011 is
+  bit-exact with ENG010.
+  ENG012 measured lower timed-max RSS for streaming in its
+  controlled CPU runs, with a 6.670% mean latency increase;
+  GNU maximum RSS was effectively unchanged.
+
+Scope:
+  Compression applies only to the three selected weights.
+  Decoded-code byte counts are tensor-size accounting only.
+  No whole-model compression claim.
+  No general inference speedup claim.
+  No general peak RAM reduction claim.
+  No peak VRAM reduction claim.
+  No fused 2-bit kernel claim.
+
+====================================================================================================
+ENG013 FINAL ENGINEERING CONSOLIDATION: PASS
+====================================================================================================
