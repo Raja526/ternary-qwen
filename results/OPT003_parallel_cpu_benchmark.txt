@@ -1,0 +1,80 @@
+OPT003 — PARALLEL COMPILED CPU BENCHMARK
+================================================================================
+
+Controlled comparison
+--------------------------------------------------------------------------------
+Scalar condition: OPT002 CompiledPackedTernaryLinear
+Parallel condition: OPT003 ParallelPackedTernaryLinear
+Controlled difference: sequential independent (batch, output-row) jobs vs parallel independent (batch, output-row) jobs.
+Packed representation and ternary arithmetic remain unchanged.
+
+Environment and protocol
+--------------------------------------------------------------------------------
+Model: Qwen/Qwen3.5-0.8B
+Execution device: CPU
+PyTorch: 2.14.0+cu126
+PyTorch threads: 6
+PyTorch interop threads: 6
+Input tokens: 22
+Warmup forwards per process: 2
+Timed forwards per process: 5
+Independent processes per condition: 3
+Total timed forwards per condition: 15
+
+Selected-weight persistent representation
+--------------------------------------------------------------------------------
+Selected matrices: 3
+Selected parameters: 8912896
+FP16-equivalent bytes: 17825792
+Packed persistent bytes: 2367488
+Persistent compression: 7.529412x
+Persistent selected-weight representation is identical between both conditions.
+
+Latency — 15 timed forwards per condition
+--------------------------------------------------------------------------------
+Scalar mean ms: 2518.705
+Parallel mean ms: 2446.388
+Parallel mean latency change: -2.871%
+Scalar median ms: 2492.907
+Parallel median ms: 2409.811
+Scalar std dev ms: 52.945
+Parallel std dev ms: 111.766
+Scalar min/max ms: 2460.067 / 2630.573
+Parallel min/max ms: 2348.173 / 2719.517
+
+Process RSS — mean across 3 independent processes
+--------------------------------------------------------------------------------
+Scalar ready RSS MiB: 2343.568
+Parallel ready RSS MiB: 2343.648
+Ready RSS difference MiB (parallel - scalar): +0.081
+
+Scalar after-warmup RSS MiB: 2373.688
+Parallel after-warmup RSS MiB: 2373.467
+After-warmup RSS difference MiB (parallel - scalar): -0.220
+
+Scalar timed-max RSS MiB: 2384.107
+Parallel timed-max RSS MiB: 2380.413
+Timed-max RSS difference MiB (parallel - scalar): -3.694
+
+Scalar GNU max RSS KB: 3865476.000
+Parallel GNU max RSS KB: 3865492.000
+GNU max RSS difference KB (parallel - scalar): +16.000
+
+Interpretation
+--------------------------------------------------------------------------------
+1. OPT002 and OPT003 use the same persistent packed selected-weight representation.
+2. OPT003 changes only scheduling of independent (batch, output-row) jobs from sequential execution to PyTorch CPU thread-pool parallel execution.
+3. Separate equivalence validation established bit-exact operator and full-model outputs for the tested configuration.
+4. Parallel execution changed mean forward latency by -2.871% in these runs.
+5. Timed-max process RSS changed by -3.694 MiB, while GNU maximum RSS changed by +16.000 KB on average.
+6. These measurements apply to this model, three selected matrices, 22-token input, six-thread CPU environment, and benchmark protocol.
+
+Scope
+--------------------------------------------------------------------------------
+No general inference speedup claim.
+No general peak RAM reduction claim.
+No peak VRAM reduction claim.
+No SIMD/vectorization claim.
+No whole-model compression claim.
+
+OPT003 PARALLEL COMPILED CPU BENCHMARK: PASS
