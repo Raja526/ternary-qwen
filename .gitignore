@@ -26,3 +26,6 @@ logs/
 # OS
 .DS_Store
 results/opt004_raw/
+
+# OPT005 local benchmark raw outputs
+results/opt005_raw/
