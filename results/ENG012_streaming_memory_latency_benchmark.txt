@@ -1,0 +1,80 @@
+ENG012 — STREAMING MEMORY AND LATENCY BENCHMARK
+================================================================================
+
+Controlled comparison
+--------------------------------------------------------------------------------
+Direct condition: ENG010 DirectTernaryLinear
+Streaming condition: ENG011 StreamingDirectTernaryLinear
+Controlled difference: full selected-matrix int8 decode vs output-row-chunk int8 decode.
+Direct ternary arithmetic otherwise remains unchanged.
+
+Environment and protocol
+--------------------------------------------------------------------------------
+Model: Qwen/Qwen3.5-0.8B
+Execution device: CPU
+PyTorch: 2.14.0+cu126
+PyTorch threads: 6
+PyTorch interop threads: 6
+Input tokens: 22
+Rows per chunk: 64
+Warmup forwards per process: 2
+Timed forwards per process: 5
+Independent processes per condition: 3
+Total timed forwards per condition: 15
+
+Selected-weight persistent representation
+--------------------------------------------------------------------------------
+Selected matrices: 3
+Selected parameters: 8912896
+FP16-equivalent bytes: 17825792
+Packed persistent bytes: 2367488
+Persistent compression: 7.529412x
+Persistent selected-weight representation is identical between both conditions.
+
+Latency — 15 timed forwards per condition
+--------------------------------------------------------------------------------
+Direct mean ms: 1946.002
+Streaming mean ms: 2075.806
+Streaming mean latency change: +6.670%
+Direct median ms: 1922.741
+Streaming median ms: 1979.052
+Direct std dev ms: 66.521
+Streaming std dev ms: 187.103
+Direct min/max ms: 1887.726 / 2109.545
+Streaming min/max ms: 1939.159 / 2572.553
+
+Process RSS — mean across 3 independent processes
+--------------------------------------------------------------------------------
+Direct ready RSS MiB: 2338.913
+Streaming ready RSS MiB: 2338.846
+Ready RSS difference MiB (streaming - direct): -0.066
+
+Direct after-warmup RSS MiB: 2379.777
+Streaming after-warmup RSS MiB: 2375.484
+After-warmup RSS difference MiB (streaming - direct): -4.293
+
+Direct timed-max RSS MiB: 2384.198
+Streaming timed-max RSS MiB: 2377.708
+Timed-max RSS difference MiB (streaming - direct): -6.490
+
+Direct GNU max RSS KB: 3860802.667
+Streaming GNU max RSS KB: 3860821.333
+GNU max RSS difference KB (streaming - direct): +18.667
+
+Interpretation
+--------------------------------------------------------------------------------
+1. ENG010 and ENG011 use the same persistent packed selected-weight representation.
+2. ENG011 changes temporary code decoding from a complete selected-matrix int8 decode to output-row-chunk decoding.
+3. Streaming reduced mean timed-max process RSS by 6.490 MiB in these runs, while GNU maximum RSS was effectively unchanged.
+4. Streaming increased mean forward latency by 6.670% in these runs and showed greater latency variability than ENG010.
+5. These measurements apply to this model, three selected matrices, 22-token input, rows_per_chunk=64, CPU environment, and benchmark protocol.
+
+Scope
+--------------------------------------------------------------------------------
+No general inference speedup claim.
+No general peak RAM reduction claim.
+No peak VRAM reduction claim.
+No fused 2-bit kernel claim.
+No whole-model compression claim.
+
+ENG012 STREAMING MEMORY AND LATENCY BENCHMARK: PASS
