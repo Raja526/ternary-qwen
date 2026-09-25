@@ -1,0 +1,188 @@
+
+====================================================================================================
+OPT002 — FIXED 10-PROMPT FULL-MODEL VALIDATION
+====================================================================================================
+Model                   : Qwen/Qwen3.5-0.8B
+Checkpoint              : results/ENG003_multimatrix_checkpoint.pt
+Prompts                 : 10
+Selected matrices       : 3
+
+====================================================================================================
+PATH A — ENG011 STREAMING RUNTIME
+====================================================================================================
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+ENG011 prompt 01: 22 tokens
+ENG011 prompt 02: 10 tokens
+ENG011 prompt 03: 10 tokens
+ENG011 prompt 04: 17 tokens
+ENG011 prompt 05: 5 tokens
+ENG011 prompt 06: 21 tokens
+ENG011 prompt 07: 8 tokens
+ENG011 prompt 08: 14 tokens
+ENG011 prompt 09: 9 tokens
+ENG011 prompt 10: 18 tokens
+
+====================================================================================================
+PATH B — OPT002 COMPILED RUNTIME
+====================================================================================================
+OPT002 prompt 01: 22 tokens
+OPT002 prompt 02: 10 tokens
+OPT002 prompt 03: 10 tokens
+OPT002 prompt 04: 17 tokens
+OPT002 prompt 05: 5 tokens
+OPT002 prompt 06: 21 tokens
+OPT002 prompt 07: 8 tokens
+OPT002 prompt 08: 14 tokens
+OPT002 prompt 09: 9 tokens
+OPT002 prompt 10: 18 tokens
+
+====================================================================================================
+PER-PROMPT NUMERICAL COMPARISON
+====================================================================================================
+
+Prompt 01
+Text                    : A box contains 12 red balls and 8 blue balls. How many balls are in the box?
+Tokens                  : 22
+Compared logits         : 5463040
+Exact mismatches        : 4319795
+Mismatch percentage     : 79.07309849461106
+Max abs difference      : 0.02734375
+Mean abs difference     : 0.0031527982711584256
+RMSE                    : 0.004145484608430164
+Cosine similarity       : 0.9999993642586349
+Top-1 matches           : 22/22
+
+Prompt 02
+Text                    : What is 17 multiplied by 6?
+Tokens                  : 10
+Compared logits         : 2483200
+Exact mismatches        : 2049426
+Mismatch percentage     : 82.53165270618557
+Max abs difference      : 0.02490234375
+Mean abs difference     : 0.0030088102163689347
+RMSE                    : 0.003942490903858377
+Cosine similarity       : 0.9999991134374769
+Top-1 matches           : 10/10
+
+Prompt 03
+Text                    : Explain in one sentence why plants need sunlight.
+Tokens                  : 10
+Compared logits         : 2483200
+Exact mismatches        : 2104087
+Mismatch percentage     : 84.73288498711341
+Max abs difference      : 0.0546875
+Mean abs difference     : 0.003520088111285658
+RMSE                    : 0.004687521052211842
+Cosine similarity       : 0.9999986630528042
+Top-1 matches           : 10/10
+
+Prompt 04
+Text                    : Complete the sequence: 2, 4, 8, 16,
+Tokens                  : 17
+Compared logits         : 4221440
+Exact mismatches        : 3483117
+Mismatch percentage     : 82.51016240903579
+Max abs difference      : 0.03857421875
+Mean abs difference     : 0.003207653216250114
+RMSE                    : 0.004242210940459139
+Cosine similarity       : 0.9999990251246764
+Top-1 matches           : 17/17
+
+Prompt 05
+Text                    : The capital of France is
+Tokens                  : 5
+Compared logits         : 1241600
+Exact mismatches        : 980258
+Mismatch percentage     : 78.95119201030928
+Max abs difference      : 0.01953125
+Mean abs difference     : 0.003131996187544668
+RMSE                    : 0.0040394590900741335
+Cosine similarity       : 0.9999993561390462
+Top-1 matches           : 5/5
+
+Prompt 06
+Text                    : If a train travels 60 miles in one hour, how far does it travel in three hours?
+Tokens                  : 21
+Compared logits         : 5214720
+Exact mismatches        : 4180831
+Mismatch percentage     : 80.17364307191949
+Max abs difference      : 0.03125
+Mean abs difference     : 0.003247044672313977
+RMSE                    : 0.00426600413108448
+Cosine similarity       : 0.9999992382134326
+Top-1 matches           : 21/21
+
+Prompt 07
+Text                    : Write a short greeting to a friend.
+Tokens                  : 8
+Compared logits         : 1986560
+Exact mismatches        : 1582374
+Mismatch percentage     : 79.65397471005154
+Max abs difference      : 0.05078125
+Mean abs difference     : 0.0037747928384540257
+RMSE                    : 0.005264109718689719
+Cosine similarity       : 0.999998982712383
+Top-1 matches           : 8/8
+
+Prompt 08
+Text                    : Which is larger: 3/4 or 2/3?
+Tokens                  : 14
+Compared logits         : 3476480
+Exact mismatches        : 2900652
+Mismatch percentage     : 83.43646446980854
+Max abs difference      : 0.03564453125
+Mean abs difference     : 0.0032664308763542577
+RMSE                    : 0.00434425597028167
+Cosine similarity       : 0.9999989148804203
+Top-1 matches           : 14/14
+
+Prompt 09
+Text                    : Water freezes at what temperature in degrees Celsius?
+Tokens                  : 9
+Compared logits         : 2234880
+Exact mismatches        : 1850385
+Mismatch percentage     : 82.79572057560138
+Max abs difference      : 0.03515625
+Mean abs difference     : 0.0035802896888254537
+RMSE                    : 0.004665495150481281
+Cosine similarity       : 0.9999990331624827
+Top-1 matches           : 9/9
+
+Prompt 10
+Text                    : A student has 25 pencils and gives 7 away. How many pencils remain?
+Tokens                  : 18
+Compared logits         : 4469760
+Exact mismatches        : 3625907
+Mismatch percentage     : 81.12084317726232
+Max abs difference      : 0.02734375
+Mean abs difference     : 0.003151111580156225
+RMSE                    : 0.0041472877696694015
+Cosine similarity       : 0.9999992005178808
+Top-1 matches           : 18/18
+
+====================================================================================================
+OPT002 MULTI-PROMPT SUMMARY
+====================================================================================================
+Prompts                 : 10
+Selected matrices       : 3
+Selected parameters     : 8912896
+Persistent packed bytes : 2367488
+FP16 equivalent bytes   : 17825792
+Persistent compression  : 7.529412x
+
+Total logits compared   : 33274880
+Exact mismatches        : 27076832
+Mismatch percentage     : 81.373192029543
+Global max abs diff     : 0.0546875
+Weighted mean abs diff  : 0.0032679071611450227
+Global RMSE             : 0.004331707786822189
+Mean prompt cosine      : 0.9999990891499237
+Minimum prompt cosine   : 0.9999986630528042
+
+Prompt positions        : 134
+Top-1 matches           : 134
+Top-1 agreement         : 100.000000%
+
+Controlled difference   : ENG011 PyTorch streaming compute -> OPT001/OPT002 compiled packed CPU compute
+
+OPT002 MULTI-PROMPT VALIDATION: PASS
