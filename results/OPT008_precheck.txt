@@ -1,0 +1,46 @@
+OPT008 Stage 1 — CPU / Compiler Precheck
+========================================
+
+Frozen parent:
+cd2f52b7ed36636cba24723f069b57d616df9ab2 OPT007: analyze compiler lowering and hardware counters
+
+CPU:
+Architecture:                            x86_64
+CPU(s):                                  12
+On-line CPU(s) list:                     0-11
+Model name:                              Intel(R) Core(TM) i7-8850H CPU @ 2.60GHz
+Thread(s) per core:                      2
+Core(s) per socket:                      6
+Socket(s):                               1
+NUMA node0 CPU(s):                       0-11
+
+Relevant ISA:
+avx
+avx2
+f16c
+fma
+sse
+sse2
+sse4_1
+sse4_2
+ssse3
+
+Compiler:
+g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+
+Frozen OPT006 flags:
+28:        extra_cflags=[
+29:            "-O2",
+
+OPT008 proposed flags:
+  -O2
+  -mavx2
+  -mno-fma
+
+Scientific constraint:
+  No -march=native
+  No FMA
+  No cache blocking changes
+  No thread scheduling changes
+  No packed-format changes
+  No group-size changes

@@ -1,0 +1,42 @@
+========================================================================
+OPT008 GATE 1 — OPERATOR EQUIVALENCE
+========================================================================
+
+shape: (1, 128, 1)
+outputs       : 1
+mismatches    : 0
+max abs error : 0.0
+
+shape: (3, 128, 7)
+outputs       : 21
+mismatches    : 0
+max abs error : 0.0
+
+shape: (5, 256, 13)
+outputs       : 65
+mismatches    : 0
+max abs error : 0.0
+
+shape: (7, 512, 31)
+outputs       : 217
+mismatches    : 0
+max abs error : 0.0
+
+shape: (22, 1024, 64)
+outputs       : 1408
+mismatches    : 0
+max abs error : 0.0
+
+shape: (22, 1024, 1024)
+outputs       : 22528
+mismatches    : 0
+max abs error : 0.0
+
+========================================================================
+AGGREGATE
+========================================================================
+total outputs    : 24240
+total mismatches : 0
+max abs error    : 0.0
+
+PASS: OPT008 operator is bit-exact with frozen OPT006.

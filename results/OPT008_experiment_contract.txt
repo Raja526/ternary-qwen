@@ -1,0 +1,78 @@
+OPT008 — Explicit AVX2 Ternary Compute
+======================================
+
+Frozen baseline
+---------------
+OPT007 commit:
+  cd2f52b
+
+Runtime baseline:
+  OPT006 table-dispatch packed ternary kernel
+
+Controlled scientific question
+------------------------------
+With the packed representation, table-dispatch semantics,
+group size 128, FP32 accumulation semantics, six-thread
+parallel scheduling, selected matrices, and benchmark
+protocol held constant, can explicit AVX2 processing reduce
+CPU inference latency while preserving validated behavior?
+
+Permitted OPT008 change
+-----------------------
+Introduce an explicit AVX2 compute path.
+
+Compiler target
+---------------
+-O2
+-mavx2
+-mno-fma
+
+Explicitly prohibited in this experiment
+----------------------------------------
+-march=native
+FMA
+AVX-512
+cache blocking changes
+thread-count changes
+parallel scheduling changes
+packed-format changes
+group-size changes
+quantizer changes
+selected-matrix changes
+benchmark protocol changes
+
+Correctness gates
+-----------------
+Gate 1:
+  AVX2 operator vs frozen OPT006 operator.
+
+Gate 2:
+  Full-model AVX2 runtime vs frozen OPT006 runtime.
+
+Gate 3:
+  Top-1 behavior must remain preserved under the established
+  validation protocol.
+
+Performance gate
+----------------
+Only after correctness gates pass:
+
+  OPT006 table-dispatch baseline
+      vs
+  OPT008 explicit AVX2 candidate
+
+No performance claim is permitted before correctness passes.
+
+Claim discipline
+----------------
+A successful result is specific to:
+  Qwen3.5-0.8B
+  selected packed matrices
+  Intel Core i7-8850H
+  tested input shape
+  six-thread CPU execution
+  frozen benchmark protocol
+
+No general CPU speedup claim.
+No GPU claim.
+No memory advantage claim unless separately measured.

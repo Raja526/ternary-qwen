@@ -1,0 +1,36 @@
+OPT008 Stage 2B — AVX2 Machine-Code Verification
+================================================
+
+Extension:
+  /home/raja/.cache/torch_extensions/py310_cu126/opt008_packed_ternary_cpu_avx2/opt008_packed_ternary_cpu_avx2.so
+
+Symbol:
+  000000000000dda0 T packed_ternary_linear_cpu_parallel(at::Tensor, at::Tensor, at::Tensor, long, long)
+
+Function boundaries:
+  0x000000000000dda0 -> 0x000000000000eff0
+
+Function size:
+  4688 bytes
+
+Instruction count:
+  1125
+
+AVX2 evidence inside packed_ternary_linear_cpu_parallel:
+  vpmovzxbd      : 1
+  vpand          : 4
+  vpsrld         : 3
+  YMM references : 13
+  vzeroupper     : 8
+
+Interpretation:
+  Explicit AVX2 instructions are present inside
+  the compiled ternary hot function.
+
+Correctness:
+  Gate 1 previously established bit-exact
+  operator equivalence with frozen OPT006.
+
+Claim boundary:
+  This proves execution code contains AVX2.
+  It does not establish a performance advantage.

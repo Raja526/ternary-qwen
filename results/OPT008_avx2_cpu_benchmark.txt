@@ -1,0 +1,79 @@
+OPT008 — EXPLICIT AVX2 PACKED-DECODE CPU BENCHMARK
+================================================================================
+
+Controlled comparison
+--------------------------------------------------------------------------------
+Baseline condition: OPT006 TableDispatchPackedTernaryLinear
+Candidate condition: OPT008 AVX2PackedTernaryLinear
+Controlled difference: explicit AVX2 packed-code decoding in OPT008 versus frozen OPT006 table-dispatch decoding.
+Packed representation, group size, selected matrices, FP32 accumulation order, parallel scheduling, model, input, and benchmark protocol are held constant.
+OPT008 was compiled with -O2 -mavx2 -mno-fma.
+
+Environment and protocol
+--------------------------------------------------------------------------------
+Model: Qwen/Qwen3.5-0.8B
+Execution device: CPU
+PyTorch: 2.14.0+cu126
+PyTorch threads: 6
+PyTorch interop threads: 6
+Input tokens: 22
+Warmup forwards per process: 2
+Timed forwards per process: 5
+Independent processes per condition: 3
+Total timed forwards per condition: 15
+
+Selected-weight persistent representation
+--------------------------------------------------------------------------------
+Selected matrices: 3
+Selected parameters: 8912896
+FP16-equivalent bytes: 17825792
+Packed persistent bytes: 2367488
+Persistent compression: 7.529412x
+Persistent selected-weight representation is identical between both conditions.
+
+Latency — 15 timed forwards per condition
+--------------------------------------------------------------------------------
+OPT006 baseline mean ms: 2175.356
+OPT008 AVX2 mean ms: 1994.648
+OPT008 mean latency change: -8.307%
+
+OPT006 median ms: 2117.194
+OPT008 median ms: 1981.365
+
+OPT006 std ms: 228.954
+OPT008 std ms: 37.023
+
+OPT006 min/max ms: 2006.847 / 2861.198
+OPT008 min/max ms: 1963.687 / 2103.123
+
+Process RSS — mean across 3 processes
+--------------------------------------------------------------------------------
+OPT006 ready RSS MiB: 2337.546
+OPT008 ready RSS MiB: 2343.263
+Ready RSS difference MiB: +5.717
+
+OPT006 after-warmup RSS MiB: 2369.039
+OPT008 after-warmup RSS MiB: 2372.928
+After-warmup RSS difference MiB: +3.889
+
+OPT006 timed-max RSS MiB: 2371.818
+OPT008 timed-max RSS MiB: 2379.875
+Timed-max RSS difference MiB: +8.057
+
+GNU time maximum RSS — mean across 3 processes
+--------------------------------------------------------------------------------
+OPT006 GNU max RSS KB: 3859530.667
+OPT008 GNU max RSS KB: 3865245.333
+GNU max RSS difference KB: +5714.667
+
+Correctness prerequisites
+--------------------------------------------------------------------------------
+Operator equivalence: PASS — bit-exact vs frozen OPT006.
+Machine-code verification: PASS — AVX2 instructions observed inside the compiled hot function.
+Full-model equivalence: PASS — 5,463,040 logits, 0 mismatches, top-1 22/22.
+
+Interpretation boundary
+--------------------------------------------------------------------------------
+This benchmark measures the observed latency difference for the tested Qwen3.5-0.8B three-matrix packed runtime on this CPU and protocol.
+It does not establish a general CPU inference speedup or a general memory advantage.
+A negative latency-change percentage means OPT008 was faster; a positive percentage means OPT008 was slower.
