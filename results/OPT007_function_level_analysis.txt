@@ -1,0 +1,309 @@
+OPT007 — FUNCTION-LEVEL COMPILER ANALYSIS
+=========================================
+
+Purpose:
+Compare compiler-generated machine code for the frozen OPT005
+comparison-mask formulation and frozen OPT006 lookup-table formulation.
+
+No kernel source or compiler flag was changed in OPT007.
+
+FUNCTION BOUNDARIES
+-------------------
+OPT005_START=0xdd10
+OPT005_END=0xe8e0
+OPT005_SIZE=3024
+OPT005_NAME=packed_ternary_linear_cpu_parallel(at::Tensor, at::Tensor, at::Tensor, long, long)
+OPT006_START=0xdd10
+OPT006_END=0xe880
+OPT006_SIZE=2928
+OPT006_NAME=packed_ternary_linear_cpu_parallel(at::Tensor, at::Tensor, at::Tensor, long, long)
+
+INSTRUCTION COMPARISON
+----------------------
+========================================================================
+OPT005_COMPARISON_MASK
+========================================================================
+total instructions       : 651
+conditional jumps        : 55
+setcc                    : 0
+cmov                     : 1
+mulss                    : 10
+addss                    : 13
+movss                    : 6
+scalar FP selected       : 35
+vector-like FP mnemonics : 20
+
+Most common instructions:
+  mov          149
+  lea          54
+  call         46
+  cmp          39
+  nop          33
+  jmp          31
+  movd         22
+  jne          20
+  shr          20
+  movaps       20
+  add          18
+  movzx        17
+  ja           17
+  test         16
+  and          15
+  xor          14
+  shl          13
+  je           13
+  addss        13
+  or           10
+  mulss        10
+  endbr64      7
+  push         6
+  imul         6
+  movss        6
+  subss        6
+  pop          6
+  jle          5
+  sar          3
+  cs           3
+
+Instructions involving SET/CMOV/FP/LUT-style indexed memory:
+  lea        r14,[rsp+0xa8]
+  lea        rax,[rsp+0xa0]
+  lea        rsi,[rsp+0xb0]
+  lea        rax,[rsp+0x98]
+  lea        rdi,[rsp+0x88]
+  lea        rdi,[rsp+0x90]
+  lea        rax,[r12+0x3]
+  movss      xmm6,dword ptr [rip+0x1b7ba]        # 29830 <std::__detail::__to_chars_10_impl<unsigned int>(char*, unsigned int, unsigned int)::__digits+0xd0>
+  cmovns     rax,r12
+  movss      xmm9,dword ptr [rip+0x1b7a4]        # 2982c <std::__detail::__to_chars_10_impl<unsigned int>(char*, unsigned int, unsigned int)::__digits+0xcc>
+  lea        r13,[rbx+rax*2]
+  movss      xmm10,dword ptr [rip+0x1b742]        # 2982c <std::__detail::__to_chars_10_impl<unsigned int>(char*, unsigned int, unsigned int)::__digits+0xcc>
+  lea        rcx,[rbx+rdx*2]
+  lea        rax,[rbx+rdx*2]
+  lea        r8,[rbp+rax*1+0x0]
+  movss      xmm8,dword ptr [rip+0x1b701]        # 29830 <std::__detail::__to_chars_10_impl<unsigned int>(char*, unsigned int, unsigned int)::__digits+0xd0>
+  movss      xmm7,dword ptr [rip+0x1b6f5]        # 2982c <std::__detail::__to_chars_10_impl<unsigned int>(char*, unsigned int, unsigned int)::__digits+0xcc>
+  lea        rdi,[r13+rbx*2+0x0]
+  subss      xmm3,xmm7
+  subss      xmm4,xmm7
+  subss      xmm4,xmm10
+  subss      xmm0,xmm9
+  mulss      xmm13,xmm5
+  addss      xmm1,xmm13
+  mulss      xmm2,xmm5
+  addss      xmm0,xmm3
+  addss      xmm1,xmm2
+  addss      xmm0,xmm12
+  mulss      xmm2,xmm5
+  addss      xmm1,xmm2
+  addss      xmm0,xmm4
+  mulss      xmm2,xmm5
+  addss      xmm1,xmm2
+  addss      xmm2,xmm0
+  subss      xmm1,xmm2
+  subss      xmm7,dword ptr [rip+0x1b4c7]        # 2982c <std::__detail::__to_chars_10_impl<unsigned int>(char*, unsigned int, unsigned int)::__digits+0xcc>
+  mulss      xmm1,xmm7
+  addss      xmm11,xmm1
+  movss      dword ptr [rbx+rax*4],xmm11
+  lea        rcx,[rip+0x17369]        # 257f0 <_fini+0x8dc>
+  lea        rsi,[rip+0x172d5]        # 25768 <_fini+0x854>
+  lea        rdi,[rip+0x171f6]        # 25690 <_fini+0x77c>
+  mulss      xmm0,xmm6
+  mulss      xmm4,xmm6
+  mulss      xmm12,xmm6
+  mulss      xmm3,xmm8
+  lea        rcx,[rip+0x174fe]        # 25a25 <_fini+0xb11>
+  lea        rsi,[rip+0x17235]        # 25768 <_fini+0x854>
+  lea        rdi,[rip+0x17156]        # 25690 <_fini+0x77c>
+  lea        rcx,[rip+0x174f3]        # 25a3a <_fini+0xb26>
+  lea        rsi,[rip+0x17215]        # 25768 <_fini+0x854>
+  lea        rdi,[rip+0x17136]        # 25690 <_fini+0x77c>
+  addss      xmm1,xmm14
+  addss      xmm1,xmm4
+  addss      xmm1,xmm12
+  addss      xmm1,xmm3
+  lea        rcx,[rip+0x174af]        # 25a56 <_fini+0xb42>
+  lea        rsi,[rip+0x171b5]        # 25768 <_fini+0x854>
+  lea        rdi,[rip+0x170d6]        # 25690 <_fini+0x77c>
+  lea        rcx,[rip+0x17201]        # 257c8 <_fini+0x8b4>
+  lea        rsi,[rip+0x17195]        # 25768 <_fini+0x854>
+  lea        rdi,[rip+0x170b6]        # 25690 <_fini+0x77c>
+  lea        rcx,[rip+0x17309]        # 258f0 <_fini+0x9dc>
+  lea        rsi,[rip+0x17175]        # 25768 <_fini+0x854>
+  lea        rdi,[rip+0x174c2]        # 25abc <_fini+0xba8>
+  lea        rcx,[rip+0x17405]        # 25a6c <_fini+0xb58>
+  lea        rsi,[rip+0x170f5]        # 25768 <_fini+0x854>
+  lea        rdi,[rip+0x17016]        # 25690 <_fini+0x77c>
+  lea        rcx,[rip+0x17141]        # 25818 <_fini+0x904>
+  lea        rsi,[rip+0x17085]        # 25768 <_fini+0x854>
+  lea        rdi,[rip+0x16fa6]        # 25690 <_fini+0x77c>
+  lea        rcx,[rip+0x17380]        # 25a87 <_fini+0xb73>
+  lea        rsi,[rip+0x17055]        # 25768 <_fini+0x854>
+  lea        rdi,[rip+0x16f76]        # 25690 <_fini+0x77c>
+  lea        rcx,[rip+0x17379]        # 25aa0 <_fini+0xb8c>
+  lea        rsi,[rip+0x17035]        # 25768 <_fini+0x854>
+  lea        rdi,[rip+0x16f56]        # 25690 <_fini+0x77c>
+  lea        rcx,[rip+0x170f9]        # 25840 <_fini+0x92c>
+  lea        rsi,[rip+0x17015]        # 25768 <_fini+0x854>
+  lea        rdi,[rip+0x16f36]        # 25690 <_fini+0x77c>
+  lea        rcx,[rip+0x170a9]        # 25870 <_fini+0x95c>
+  lea        rsi,[rip+0x16f95]        # 25768 <_fini+0x854>
+  lea        rdi,[rip+0x16eb6]        # 25690 <_fini+0x77c>
+  lea        rcx,[rip+0x17091]        # 25898 <_fini+0x984>
+  lea        rsi,[rip+0x16f55]        # 25768 <_fini+0x854>
+  lea        rdi,[rip+0x16e76]        # 25690 <_fini+0x77c>
+  lea        rcx,[rip+0x170a1]        # 258c8 <_fini+0x9b4>
+  lea        rsi,[rip+0x16f35]        # 25768 <_fini+0x854>
+  lea        rdi,[rip+0x16e56]        # 25690 <_fini+0x77c>
+  mulss      xmm7,dword ptr [rip+0x1afd6]        # 29830 <std::__detail::__to_chars_10_impl<unsigned int>(char*, unsigned int, unsigned int)::__digits+0xd0>
+
+========================================================================
+OPT006_TABLE_DISPATCH
+========================================================================
+total instructions       : 619
+conditional jumps        : 47
+setcc                    : 0
+cmov                     : 1
+mulss                    : 14
+addss                    : 9
+movss                    : 10
+scalar FP selected       : 39
+vector-like FP mnemonics : 5
+
+Most common instructions:
+  mov          152
+  lea          56
+  call         46
+  cmp          35
+  nop          29
+  jmp          23
+  movd         22
+  shr          20
+  and          19
+  add          18
+  movzx        17
+  ja           17
+  jne          16
+  xor          14
+  mulss        14
+  shl          13
+  test         12
+  movss        10
+  or           10
+  je           9
+  addss        9
+  endbr64      7
+  push         6
+  imul         6
+  subss        6
+  pop          6
+  jle          5
+  movaps       5
+  pxor         4
+  sar          3
+
+Instructions involving SET/CMOV/FP/LUT-style indexed memory:
+  lea        rax,[rsp+0xb8]
+  lea        r13,[rsp+0xb0]
+  lea        rsi,[rsp+0xc0]
+  lea        rax,[rsp+0xa8]
+  lea        rdi,[rsp+0x98]
+  lea        rdi,[rsp+0xa0]
+  lea        rax,[rbp+0x3]
+  movss      xmm8,dword ptr [rip+0x1b7ca]        # 29850 <std::__detail::__to_chars_10_impl<unsigned int>(char*, unsigned int, unsigned int)::__digits+0xd0>
+  cmovns     rax,rbp
+  lea        r12,[rip+0x1b09a]        # 29130 <packed_ternary_linear_cpu_parallel(at::tensor, at::tensor, at::tensor, long, long)::positive_lut>
+  lea        r13,[rip+0x1b083]        # 29120 <packed_ternary_linear_cpu_parallel(at::tensor, at::tensor, at::tensor, long, long)::negative_lut>
+  lea        rax,[rbx+rax*2]
+  movss      xmm9,dword ptr [rip+0x1b750]        # 2984c <std::__detail::__to_chars_10_impl<unsigned int>(char*, unsigned int, unsigned int)::__digits+0xcc>
+  lea        rcx,[rbx+rdx*2]
+  lea        rax,[rbx+rdx*2]
+  lea        r9,[r15+rax*1]
+  movss      xmm7,dword ptr [rip+0x1b70e]        # 29850 <std::__detail::__to_chars_10_impl<unsigned int>(char*, unsigned int, unsigned int)::__digits+0xd0>
+  movss      xmm6,dword ptr [rip+0x1b702]        # 2984c <std::__detail::__to_chars_10_impl<unsigned int>(char*, unsigned int, unsigned int)::__digits+0xcc>
+  lea        r8,[rdx+rbx*2]
+  subss      xmm5,xmm6
+  subss      xmm5,xmm6
+  subss      xmm4,xmm6
+  subss      xmm5,xmm9
+  movss      xmm11,dword ptr [r12+rdi*4]
+  movss      xmm4,dword ptr [r12+rsi*4]
+  mulss      xmm11,xmm3
+  mulss      xmm3,dword ptr [r13+rdi*4+0x0]
+  mulss      xmm4,xmm12
+  addss      xmm11,xmm2
+  addss      xmm2,xmm1
+  movss      xmm1,dword ptr [r12+rcx*4]
+  mulss      xmm1,xmm0
+  mulss      xmm0,dword ptr [r13+rcx*4+0x0]
+  addss      xmm1,xmm11
+  addss      xmm0,xmm2
+  movss      xmm2,dword ptr [r12+rdx*4]
+  addss      xmm4,xmm1
+  movss      xmm1,dword ptr [r13+rsi*4+0x0]
+  mulss      xmm2,xmm5
+  mulss      xmm5,dword ptr [r13+rdx*4+0x0]
+  mulss      xmm1,xmm12
+  addss      xmm2,xmm4
+  addss      xmm1,xmm0
+  addss      xmm1,xmm5
+  subss      xmm2,xmm1
+  subss      xmm7,dword ptr [rip+0x1b4dc]        # 2984c <std::__detail::__to_chars_10_impl<unsigned int>(char*, unsigned int, unsigned int)::__digits+0xcc>
+  mulss      xmm2,xmm7
+  addss      xmm10,xmm2
+  movss      dword ptr [rbx+rax*4],xmm10
+  lea        rcx,[rip+0x17359]        # 257f0 <_fini+0x93c>
+  lea        rsi,[rip+0x172c5]        # 25768 <_fini+0x8b4>
+  lea        rdi,[rip+0x171e6]        # 25690 <_fini+0x7dc>
+  mulss      xmm4,xmm8
+  mulss      xmm12,xmm8
+  mulss      xmm0,xmm7
+  mulss      xmm3,xmm7
+  lea        rcx,[rip+0x174e6]        # 25a25 <_fini+0xb71>
+  lea        rsi,[rip+0x1721d]        # 25768 <_fini+0x8b4>
+  lea        rdi,[rip+0x1713e]        # 25690 <_fini+0x7dc>
+  lea        rcx,[rip+0x174d3]        # 25a3a <_fini+0xb86>
+  lea        rsi,[rip+0x171f5]        # 25768 <_fini+0x8b4>
+  lea        rdi,[rip+0x17116]        # 25690 <_fini+0x7dc>
+  lea        rcx,[rip+0x174cf]        # 25a56 <_fini+0xba2>
+  lea        rsi,[rip+0x171d5]        # 25768 <_fini+0x8b4>
+  lea        rdi,[rip+0x170f6]        # 25690 <_fini+0x7dc>
+  lea        rcx,[rip+0x17221]        # 257c8 <_fini+0x914>
+  lea        rsi,[rip+0x171b5]        # 25768 <_fini+0x8b4>
+  lea        rdi,[rip+0x170d6]        # 25690 <_fini+0x7dc>
+  lea        rcx,[rip+0x17329]        # 258f0 <_fini+0xa3c>
+  lea        rsi,[rip+0x17195]        # 25768 <_fini+0x8b4>
+  lea        rdi,[rip+0x174e2]        # 25abc <_fini+0xc08>
+  lea        rcx,[rip+0x17425]        # 25a6c <_fini+0xbb8>
+  lea        rsi,[rip+0x17115]        # 25768 <_fini+0x8b4>
+  lea        rdi,[rip+0x17036]        # 25690 <_fini+0x7dc>
+  lea        rcx,[rip+0x171a1]        # 25818 <_fini+0x964>
+  lea        rsi,[rip+0x170e5]        # 25768 <_fini+0x8b4>
+  lea        rdi,[rip+0x17006]        # 25690 <_fini+0x7dc>
+  lea        rcx,[rip+0x173e0]        # 25a87 <_fini+0xbd3>
+  lea        rsi,[rip+0x170b5]        # 25768 <_fini+0x8b4>
+  lea        rdi,[rip+0x16fd6]        # 25690 <_fini+0x7dc>
+  lea        rcx,[rip+0x173d9]        # 25aa0 <_fini+0xbec>
+  lea        rsi,[rip+0x17095]        # 25768 <_fini+0x8b4>
+  lea        rdi,[rip+0x16fb6]        # 25690 <_fini+0x7dc>
+  lea        rcx,[rip+0x17159]        # 25840 <_fini+0x98c>
+  lea        rsi,[rip+0x17075]        # 25768 <_fini+0x8b4>
+  lea        rdi,[rip+0x16f96]        # 25690 <_fini+0x7dc>
+  lea        rcx,[rip+0x17109]        # 25870 <_fini+0x9bc>
+  lea        rsi,[rip+0x16ff5]        # 25768 <_fini+0x8b4>
+  lea        rdi,[rip+0x16f16]        # 25690 <_fini+0x7dc>
+  lea        rcx,[rip+0x170f1]        # 25898 <_fini+0x9e4>
+  lea        rsi,[rip+0x16fb5]        # 25768 <_fini+0x8b4>
+  lea        rdi,[rip+0x16ed6]        # 25690 <_fini+0x7dc>
+  lea        rcx,[rip+0x17101]        # 258c8 <_fini+0xa14>
+  lea        rsi,[rip+0x16f95]        # 25768 <_fini+0x8b4>
+  lea        rdi,[rip+0x16eb6]        # 25690 <_fini+0x7dc>
+  mulss      xmm7,dword ptr [rip+0x1b056]        # 29850 <std::__detail::__to_chars_10_impl<unsigned int>(char*, unsigned int, unsigned int)::__digits+0xd0>
+
+
+CAUTION
+-------
+Static assembly differences establish compiler lowering differences.
+They do not by themselves establish which difference caused the
+previously measured runtime latency change.
+Hardware-counter evidence would be required for stronger causal analysis.

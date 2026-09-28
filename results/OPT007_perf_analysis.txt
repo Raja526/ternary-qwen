@@ -1,0 +1,67 @@
+OPT007 — HARDWARE COUNTER ANALYSIS
+==================================
+
+Comparison:
+OPT005 frozen comparison-mask packed ternary operator
+OPT006 frozen fixed lookup-table packed ternary operator
+
+Configuration:
+CPU execution
+PyTorch threads: 6
+Inter-op threads: 6
+Warmups per process: 3
+Measured iterations per process: 20
+Independent processes per condition: 3
+
+Counters:
+cycles,instructions,branches,branch-misses
+
+============================================================================
+OPT007 HARDWARE COUNTER SUMMARY
+============================================================================
+
+cycles
+  OPT005 mean : 22,676,846,907.000
+  OPT006 mean : 12,628,081,727.667
+  change      : -44.313%
+  OPT005 std  : 78,839,336.212
+  OPT006 std  : 27,885,056.215
+
+instructions
+  OPT005 mean : 24,032,976,764.000
+  OPT006 mean : 22,615,946,265.667
+  change      : -5.896%
+  OPT005 std  : 37,527,868.151
+  OPT006 std  : 2,324,437.981
+
+branches
+  OPT005 mean : 4,555,346,596.333
+  OPT006 mean : 3,315,832,098.000
+  change      : -27.210%
+  OPT005 std  : 4,436,672.204
+  OPT006 std  : 184,084.835
+
+branch-misses
+  OPT005 mean : 424,503,012.333
+  OPT006 mean : 42,668,714.667
+  change      : -89.949%
+  OPT005 std  : 394,073.374
+  OPT006 std  : 157,983.732
+
+============================================================================
+DERIVED METRICS
+============================================================================
+OPT005 IPC: 1.059802
+OPT006 IPC: 1.790925
+OPT005 branch-miss rate: 9.318786%
+OPT006 branch-miss rate: 1.286818%
+
+NOTE:
+perf measures the complete benchmark process, including runtime overhead, not only the isolated hot function.
+
+INTERPRETATION LIMIT
+--------------------
+Hardware counters describe complete benchmark-process execution.
+Together with Stage-3 function-level disassembly they can support
+a stronger execution-level comparison, but causal attribution must
+remain limited to what the measurements directly establish.

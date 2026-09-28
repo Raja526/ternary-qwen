@@ -1,0 +1,77 @@
+OPT007 — COMPILER / ASSEMBLY ANALYSIS
+=====================================
+
+Base commit: b3371f9
+Branch: opt007-compiler-analysis
+
+SYSTEM
+------
+Linux raja-Precision-7530 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC  x86_64 x86_64 x86_64 GNU/Linux
+
+Architecture:                            x86_64
+CPU(s):                                  12
+On-line CPU(s) list:                     0-11
+Model name:                              Intel(R) Core(TM) i7-8850H CPU @ 2.60GHz
+Thread(s) per core:                      2
+Core(s) per socket:                      6
+Socket(s):                               1
+Flags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb pti ssbd ibrs ibpb stibp tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp vnmi md_clear flush_l1d arch_capabilities ibpb_exit_to_user
+NUMA node0 CPU(s):                       0-11
+
+COMPILER
+--------
+g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+GNU objdump (GNU Binutils for Ubuntu) 2.38
+
+PYTORCH
+-------
+PyTorch: 2.14.0+cu126
+CXX11 ABI: True
+Threads: 6
+Interop threads: 6
+
+EXTENSIONS
+----------
+OPT005: /home/raja/.cache/torch_extensions/py310_cu126/opt005_packed_ternary_cpu_branch_reduced/opt005_packed_ternary_cpu_branch_reduced.so
+OPT006: /home/raja/.cache/torch_extensions/py310_cu126/opt006_packed_ternary_cpu_table_dispatch/opt006_packed_ternary_cpu_table_dispatch.so
+
+STATIC INSTRUCTION SUMMARY
+--------------------------
+======================================================================
+OPT005_BRANCH_REDUCED
+======================================================================
+conditional_jumps       : 3558
+setcc                   : 19
+cmov                    : 52
+mulss                   : 10
+addss                   : 13
+movss                   : 6
+mulsd                   : 0
+addsd                   : 0
+xmm_mentions            : 289
+ymm_mentions            : 0
+zmm_mentions            : 0
+
+======================================================================
+OPT006_TABLE_DISPATCH
+======================================================================
+conditional_jumps       : 3542
+setcc                   : 19
+cmov                    : 52
+mulss                   : 14
+addss                   : 9
+movss                   : 10
+mulsd                   : 0
+addsd                   : 0
+xmm_mentions            : 266
+ymm_mentions            : 0
+zmm_mentions            : 0
+
+
+IMPORTANT INTERPRETATION RULE
+-----------------------------
+These counts cover extension disassembly and are descriptive.
+They are not by themselves proof of hot-loop behavior.
+Hot-function inspection is required before causal claims.
+
+OPT007 does not modify either frozen runtime kernel.

@@ -1,0 +1,124 @@
+OPT007 — HOT KERNEL / COMPILER ANALYSIS
+=======================================
+
+Frozen comparison:
+OPT005 = comparison-mask source formulation
+OPT006 = fixed lookup-table source formulation
+
+No runtime kernel was modified during OPT007.
+
+WHOLE-EXTENSION SUMMARY
+-----------------------
+======================================================================
+OPT005_BRANCH_REDUCED
+======================================================================
+conditional_jumps       : 3558
+setcc                   : 19
+cmov                    : 52
+mulss                   : 10
+addss                   : 13
+movss                   : 6
+mulsd                   : 0
+addsd                   : 0
+xmm_mentions            : 289
+ymm_mentions            : 0
+zmm_mentions            : 0
+
+======================================================================
+OPT006_TABLE_DISPATCH
+======================================================================
+conditional_jumps       : 3542
+setcc                   : 19
+cmov                    : 52
+mulss                   : 14
+addss                   : 9
+movss                   : 10
+mulsd                   : 0
+addsd                   : 0
+xmm_mentions            : 266
+ymm_mentions            : 0
+zmm_mentions            : 0
+
+
+MNEMONIC SUMMARY
+----------------
+======================================================================
+OPT005
+======================================================================
+jumps               : 3102
+setcc               : 19
+cmov                : 52
+scalar_fp           : 35
+xmm_ops             : 137
+ymm_avx             : 0
+
+Most common instructions:
+mov          7921
+call         2775
+lea          1905
+endbr64      1173
+je           1134
+jmp          1132
+push         915
+test         874
+pop          848
+nopl         762
+cmp          752
+jne          590
+sub          506
+movq         468
+add          463
+bnd          454
+xor          363
+nop          306
+ret          273
+movzbl       165
+nopw         152
+cs           134
+shr          103
+and          97
+cmpb         89
+
+======================================================================
+OPT006
+======================================================================
+jumps               : 3086
+setcc               : 19
+cmov                : 52
+scalar_fp           : 39
+xmm_ops             : 126
+ymm_avx             : 0
+
+Most common instructions:
+mov          7924
+call         2775
+lea          1907
+endbr64      1173
+je           1130
+jmp          1124
+push         915
+test         870
+pop          848
+nopl         756
+cmp          748
+jne          586
+sub          506
+movq         468
+add          463
+bnd          454
+xor          363
+nop          304
+ret          273
+movzbl       165
+nopw         155
+cs           132
+shr          103
+and          101
+cmpb         89
+
+
+INTERPRETATION LIMIT
+--------------------
+Whole-extension instruction totals include binding/runtime/template code.
+They cannot independently explain the measured latency difference.
+Function-level hot-loop disassembly must support any causal explanation.
