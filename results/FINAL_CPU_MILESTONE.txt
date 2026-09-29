@@ -1,0 +1,620 @@
+FINAL CPU MILESTONE — TERNARY QWEN
+===============================================================================
+
+STATUS
+------
+CPU optimization and validation phase: COMPLETE
+
+Final retained implementation:
+    OPT008 — Explicit AVX2 packed ternary CPU compute
+
+Retained implementation commit:
+    d3a870820d26e18bf0a40f5d21b3bc48c909e874
+
+Final CPU validation commit:
+    7331736422ec8321686e215ac53a1d9e33c25e59
+
+Model:
+    Qwen/Qwen3.5-0.8B
+
+
+===============================================================================
+1. CPU OPTIMIZATION LINEAGE
+===============================================================================
+
+Scientific experiments
+    ->
+Engineering ENG001–ENG013
+    ->
+OPT001 low-level packed ternary compute
+    ->
+OPT002 full-model integration
+    ->
+OPT003 parallel CPU compute
+    ->
+OPT004 manual four-code unrolling
+    ->
+OPT005 branch-reduced dispatch
+    ->
+OPT006 lookup-table dispatch
+    ->
+OPT007 compiler / hardware-counter analysis
+    ->
+OPT008 explicit AVX2 packed-code decoding
+    [RETAINED]
+    ->
+OPT009 output-row blocking
+    [REJECTED]
+    ->
+OPT010 parallel_for grain-size scheduling
+    [REJECTED]
+    ->
+Final CPU Validation
+    [PASS]
+    ->
+Final CPU Milestone
+
+
+===============================================================================
+2. FINAL SELECTED MATRICES
+===============================================================================
+
+The final CPU implementation ternarizes the following three matrices:
+
+1. model.layers.3.self_attn.k_proj
+2. model.layers.4.linear_attn.out_proj
+3. model.layers.4.linear_attn.in_proj_qkv
+
+Selected parameters:
+    8,912,896
+
+FP16-equivalent selected-weight bytes:
+    17,825,792
+
+Persistent packed selected-weight bytes:
+    2,367,488
+
+Selected-weight storage compression:
+    7.529412x
+
+This storage ratio applies only to the selected packed weights relative to
+their selected FP16 weight storage. It is NOT a whole-model compression ratio.
+
+
+===============================================================================
+3. RETAINED CPU IMPLEMENTATION — OPT008
+===============================================================================
+
+OPT008 introduced explicit AVX2 processing for packed ternary-code decoding.
+
+Compiler flags:
+    -O2
+    -mavx2
+    -mno-fma
+
+Important implementation boundary:
+
+    AVX2 is used for packed-code decoding.
+
+The result does NOT establish that the entire ternary dot product is
+vectorized.
+
+The implementation preserves scalar FP32 accumulation order required by the
+frozen arithmetic semantics.
+
+No FMA is enabled.
+
+The retained at::parallel_for grain-size argument is:
+    1
+
+
+===============================================================================
+4. FINAL CORRECTNESS VALIDATION
+===============================================================================
+
+Final validation status:
+    PASS
+
+Reference:
+    Frozen OPT006 lookup-table packed arithmetic
+
+Candidate:
+    Frozen OPT008 explicit AVX2 implementation
+
+
+Operator validation
+-------------------
+
+Total compared operator outputs:
+    24,240
+
+Exact mismatches:
+    0
+
+Maximum absolute difference:
+    0.0
+
+Result:
+    Bit-exact versus frozen OPT006
+
+
+Full-model validation
+---------------------
+
+Compared logits:
+    5,463,040
+
+Exact mismatches:
+    0
+
+Maximum absolute difference:
+    0.0
+
+Mean absolute difference:
+    0.0
+
+torch.equal:
+    True
+
+Top-1 agreement:
+    22 / 22
+
+Result:
+    PASS
+
+
+Multi-prompt behavioral validation
+----------------------------------
+
+Prompt categories:
+    short factual
+    arithmetic
+    reasoning
+    instruction
+    long context
+
+Number of prompts:
+    5
+
+Total compared logits:
+    44,449,280
+
+Exact mismatches:
+    0
+
+Global maximum absolute difference:
+    0.0
+
+Top-1 agreement:
+    179 / 179
+
+Result:
+    PASS — bit-exact versus frozen OPT006 packed arithmetic
+
+
+Correctness claim boundary
+--------------------------
+
+The exact comparisons above establish equivalence between OPT008 and the
+frozen OPT006 packed-arithmetic reference.
+
+They do NOT establish bit-exact equality between packed arithmetic and the
+historical reconstructed-FP16 implementation.
+
+Earlier experiments showed that packed arithmetic can differ numerically from
+the reconstructed-FP16 path because of arithmetic ordering while preserving
+the evaluated top-1 behavior.
+
+
+===============================================================================
+5. OPT008 PERFORMANCE EVIDENCE
+===============================================================================
+
+Frozen benchmark protocol:
+
+    Device:
+        CPU
+
+    CPU intra-op threads:
+        6
+
+    CPU inter-op threads:
+        6
+
+    Input tokens:
+        22
+
+    Warmup forwards/process:
+        2
+
+    Timed forwards/process:
+        5
+
+    Independent processes/condition:
+        3
+
+    Timed samples/condition:
+        15
+
+
+Original frozen OPT008 benchmark
+--------------------------------
+
+OPT006 mean latency:
+    2175.356 ms
+
+OPT008 mean latency:
+    1994.648 ms
+
+Observed mean-latency change:
+    -8.307%
+
+OPT006 median:
+    2117.194 ms
+
+OPT008 median:
+    1981.365 ms
+
+No meaningful memory advantage was established.
+
+
+Fresh final-validation benchmark
+--------------------------------
+
+OPT006:
+    Samples:       15
+    Mean:          1725.433 ms
+    Median:        1681.409 ms
+    Sample std:    92.676 ms
+    Min:           1663.043 ms
+    Max:           1982.820 ms
+
+OPT008:
+    Samples:       15
+    Mean:          1666.886 ms
+    Median:        1642.197 ms
+    Sample std:    56.445 ms
+    Min:           1625.607 ms
+    Max:           1827.294 ms
+
+Observed mean-latency change:
+    -3.393%
+
+Observed median-latency change:
+    -2.332%
+
+
+Memory observations from fresh validation
+-----------------------------------------
+
+Ready RSS difference:
+    +8.504 MiB
+
+After-warmup RSS difference:
+    +7.263 MiB
+
+Timed-max RSS difference:
+    +13.565 MiB
+
+GNU maximum RSS:
+
+    OPT006:
+        3,859,486.667 KB
+
+    OPT008:
+        3,868,289.333 KB
+
+    Difference:
+        +8,802.667 KB
+
+Conclusion:
+    No memory advantage is claimed.
+
+
+Performance interpretation
+--------------------------
+
+Two separate executions of the frozen benchmark protocol observed lower mean
+latency for OPT008 than OPT006:
+
+    Original experiment:
+        -8.307%
+
+    Final validation:
+        -3.393%
+
+These measurements are preserved separately.
+
+They are NOT averaged because they were collected in separate benchmark
+sessions.
+
+The defensible conclusion is that OPT008 showed lower observed latency than
+OPT006 under both executions of the specified benchmark protocol.
+
+This is NOT a claim of a universal CPU speedup.
+
+
+===============================================================================
+6. OPT009 — OUTPUT-ROW BLOCKING
+===============================================================================
+
+Frozen commit:
+    bf113565aa861c54d8f386bff5a311a503447d3a
+
+Controlled variable:
+    Output-row blocking of parallel jobs
+
+Tested block sizes:
+    4
+    8
+    16
+
+All other important implementation and benchmark conditions were held fixed.
+
+
+Correctness
+-----------
+
+Block 4:
+    Operator: PASS
+    Full model: PASS
+    Exact mismatches: 0
+    Top-1 agreement: 22/22
+
+Block 8:
+    Operator: PASS
+    Full model: PASS
+    Exact mismatches: 0
+    Top-1 agreement: 22/22
+
+Block 16:
+    Operator: PASS
+    Full model: PASS
+    Exact mismatches: 0
+    Top-1 agreement: 22/22
+
+
+Latency
+-------
+
+Frozen OPT008 block 1:
+    1858.941 ms
+
+Block 4:
+    1938.468 ms
+    +4.278%
+
+Block 8:
+    1922.738 ms
+    +3.432%
+
+Block 16:
+    1901.478 ms
+    +2.288%
+
+
+Decision
+--------
+
+REJECT OPT009.
+
+All tested blocking configurations preserved exact behavior, but none reduced
+observed mean latency relative to the frozen OPT008 reference under the tested
+protocol.
+
+No meaningful memory advantage was established.
+
+No broader block-size sweep was performed.
+
+This is a protocol-specific negative optimization result and does not establish
+that these block sizes are universally suboptimal.
+
+
+===============================================================================
+7. OPT010 — PARALLEL_FOR GRAIN-SIZE SCHEDULING
+===============================================================================
+
+Frozen commit:
+    368abf45fd77517f8a2f38d1800f7b585f9bbd08
+
+Controlled variable:
+    at::parallel_for grain-size argument
+
+Frozen reference:
+    OPT008 grain size 1
+
+Candidates:
+    16
+    64
+    256
+
+
+Correctness
+-----------
+
+All candidates:
+
+    Operator gate:
+        PASS
+
+    Full-model gate:
+        PASS
+
+    Compared logits/candidate:
+        5,463,040
+
+    Exact mismatches:
+        0
+
+    Maximum absolute difference:
+        0.0
+
+    Mean absolute difference:
+        0.0
+
+    Top-1 agreement:
+        22/22
+
+
+Latency
+-------
+
+OPT008 grain 1:
+    Mean: 1666.354 ms
+    Baseline
+
+OPT010 grain 16:
+    Mean: 1701.540 ms
+    +2.112%
+
+OPT010 grain 64:
+    Mean: 1686.401 ms
+    +1.203%
+
+OPT010 grain 256:
+    Mean: 1688.132 ms
+    +1.307%
+
+
+Decision
+--------
+
+REJECT OPT010.
+
+Retain the frozen OPT008 grain-size argument of 1.
+
+All tested grain-size candidates preserved exact behavior but increased
+observed mean latency under the frozen benchmark protocol.
+
+No meaningful memory advantage was observed.
+
+The result does NOT establish that larger parallel_for grain-size arguments
+are universally slower.
+
+
+===============================================================================
+8. FINAL CPU DECISION
+===============================================================================
+
+RETAIN:
+
+    OPT008 — explicit AVX2 packed ternary CPU compute
+
+Implementation commit:
+
+    d3a870820d26e18bf0a40f5d21b3bc48c909e874
+
+Validation commit:
+
+    7331736422ec8321686e215ac53a1d9e33c25e59
+
+
+REJECTED FOLLOW-UP OPTIMIZATIONS:
+
+    OPT009:
+        output-row blocking
+
+    OPT010:
+        parallel_for grain-size scheduling
+
+
+Reasons for retaining OPT008:
+
+    1. Exact equivalence to the frozen OPT006 packed-arithmetic reference
+       was preserved in operator validation.
+
+    2. Exact full-model equivalence to OPT006 was preserved.
+
+    3. Multi-prompt behavioral validation remained bit-exact to OPT006.
+
+    4. Explicit AVX2 instructions for packed-code decoding were verified
+       during OPT008.
+
+    5. Lower observed mean latency than OPT006 was reproduced in two
+       separate executions of the frozen benchmark protocol.
+
+    6. Neither OPT009 nor OPT010 improved observed mean latency under their
+       respective controlled benchmark protocols.
+
+
+===============================================================================
+9. CLAIM BOUNDARIES
+===============================================================================
+
+The completed CPU work supports the following statements:
+
+    - Selected ternary weights have a persistent packed representation.
+
+    - The selected packed weights require 2,367,488 bytes versus
+      17,825,792 FP16-equivalent bytes.
+
+    - This corresponds to 7.529412x selected-weight storage compression.
+
+    - OPT008 uses explicit AVX2 operations for packed-code decoding.
+
+    - OPT008 is bit-exact to the frozen OPT006 packed-arithmetic reference
+      in the performed operator, full-model, and multi-prompt validations.
+
+    - Under the specified CPU benchmark protocol, OPT008 showed lower
+      observed mean latency than OPT006 in both the original OPT008 benchmark
+      and the final validation benchmark.
+
+
+The completed CPU work does NOT establish:
+
+    - universal CPU speedup
+
+    - speedup on CPUs other than the tested system
+
+    - speedup for arbitrary prompts or workloads
+
+    - whole-model 7.529412x compression
+
+    - general peak-memory reduction
+
+    - GPU or CUDA acceleration
+
+    - AVX-512 acceleration
+
+    - FMA-based acceleration
+
+    - full ternary dot-product vectorization
+
+    - universal superiority of grain size 1
+
+    - universal inferiority of output-row blocking
+
+
+===============================================================================
+10. CPU PHASE STATUS
+===============================================================================
+
+Scientific phase:
+    FROZEN
+
+Engineering ENG001–ENG013:
+    FROZEN
+
+CPU optimization OPT001–OPT010:
+    COMPLETE
+
+Retained CPU optimization:
+    OPT008
+
+OPT009:
+    NEGATIVE RESULT / REJECTED
+
+OPT010:
+    NEGATIVE RESULT / REJECTED
+
+Final CPU validation:
+    PASS / FROZEN
+
+Final CPU consolidation:
+    THIS DOCUMENT
+
+
+No additional CPU micro-optimization experiment is part of this milestone.
+
+Any future GPU optimization work must be treated as a separate phase with its
+own branch, correctness gates, benchmark protocol, evidence, and claims.
