@@ -1,0 +1,363 @@
+FINAL CPU VALIDATION — RETAINED OPT008 AVX2 IMPLEMENTATION
+================================================================================
+
+Status
+--------------------------------------------------------------------------------
+PASS
+
+Retained implementation:
+    OPT008 — explicit AVX2 packed ternary CPU compute
+
+Frozen OPT008 implementation commit:
+    d3a870820d26e18bf0a40f5d21b3bc48c909e874
+
+Validation branch:
+    final-cpu-validation
+
+Model:
+    Qwen/Qwen3.5-0.8B
+
+Selected matrices:
+    model.layers.3.self_attn.k_proj
+    model.layers.4.linear_attn.out_proj
+    model.layers.4.linear_attn.in_proj_qkv
+
+Selected parameters:
+    8,912,896
+
+Persistent packed bytes:
+    2,367,488
+
+FP16-equivalent selected-weight bytes:
+    17,825,792
+
+Selected-weight storage compression:
+    7.529412x
+
+
+================================================================================
+GATE 1 — STRUCTURAL INTEGRITY
+================================================================================
+
+Result:
+    PASS
+
+Verified:
+    - retained OPT008 implementation files are present
+    - explicit AVX2 implementation is retained
+    - compiler flags include:
+          -O2
+          -mavx2
+          -mno-fma
+    - no -march=native requirement
+    - AVX2 decoding intrinsics are present
+    - at::parallel_for retained with grain-size argument 1
+    - three expected matrices are replaced
+    - persistent packed representation is retained
+    - reconstructed FP16 weight parameters are not stored in replaced modules
+
+The implementation itself was not modified during final validation.
+
+
+================================================================================
+GATE 2 — NUMERICAL CORRECTNESS
+================================================================================
+
+Result:
+    PASS
+
+Operator equivalence
+--------------------------------------------------------------------------------
+Reference:
+    frozen OPT006 table-dispatch operator
+
+Candidate:
+    retained OPT008 AVX2 operator
+
+Tested shapes:
+    (1, 128, 1)
+    (3, 128, 7)
+    (5, 256, 13)
+    (7, 512, 31)
+    (22, 1024, 64)
+    (22, 1024, 1024)
+
+Total outputs:
+    24,240
+
+Exact mismatches:
+    0
+
+Maximum absolute error:
+    0.0
+
+Conclusion:
+    OPT008 operator is bit-exact with frozen OPT006.
+
+
+Full-model equivalence
+--------------------------------------------------------------------------------
+Compared logits:
+    5,463,040
+
+Exact mismatches:
+    0
+
+Maximum absolute difference:
+    0.0
+
+Mean absolute difference:
+    0.0
+
+Bit-exact logits:
+    True
+
+Top-1 agreement:
+    22 / 22
+
+Conclusion:
+    Retained OPT008 full-model runtime is bit-exact with frozen OPT006
+    for the established validation input.
+
+
+================================================================================
+GATE 3 — MULTI-PROMPT BEHAVIORAL EQUIVALENCE
+================================================================================
+
+Result:
+    PASS
+
+Fixed prompt suite:
+    short factual
+    arithmetic
+    reasoning
+    instruction
+    long context
+
+Input-token lengths:
+    5
+    24
+    30
+    16
+    104
+
+Prompts validated:
+    5
+
+Total logits compared:
+    44,449,280
+
+Exact mismatches:
+    0
+
+Global maximum absolute error:
+    0.0
+
+Top-1 agreement:
+    179 / 179
+
+Conclusion:
+    Retained OPT008 remained bit-exact with frozen OPT006 across the
+    fixed multi-prompt validation suite.
+
+
+================================================================================
+GATE 4 — FINAL PERFORMANCE REPRODUCIBILITY
+================================================================================
+
+Result:
+    PASS
+
+Protocol
+--------------------------------------------------------------------------------
+CPU:
+    Intel Core i7-8850H system
+
+PyTorch intra-op threads:
+    6
+
+PyTorch inter-op threads:
+    6
+
+Input tokens:
+    22
+
+Warmup forwards per process:
+    2
+
+Timed forwards per process:
+    5
+
+Independent processes per condition:
+    3
+
+Total timed forwards per condition:
+    15
+
+
+Fresh final-validation measurement
+--------------------------------------------------------------------------------
+
+OPT006 table dispatch:
+
+    pooled samples:
+        15
+
+    mean:
+        1725.433 ms
+
+    median:
+        1681.409 ms
+
+    sample standard deviation:
+        92.676 ms
+
+    minimum:
+        1663.043 ms
+
+    maximum:
+        1982.820 ms
+
+
+OPT008 AVX2:
+
+    pooled samples:
+        15
+
+    mean:
+        1666.886 ms
+
+    median:
+        1642.197 ms
+
+    sample standard deviation:
+        56.445 ms
+
+    minimum:
+        1625.607 ms
+
+    maximum:
+        1827.294 ms
+
+
+Observed mean latency change:
+    -3.393%
+
+Observed median latency change:
+    -2.332%
+
+
+Memory
+--------------------------------------------------------------------------------
+Ready RSS difference:
+    +8.504 MiB
+
+After-warmup RSS difference:
+    +7.263 MiB
+
+Timed-max RSS difference:
+    +13.565 MiB
+
+GNU maximum RSS:
+
+    OPT006:
+        3,859,486.667 KB
+
+    OPT008:
+        3,868,289.333 KB
+
+    difference:
+        +8,802.667 KB
+
+Conclusion:
+    No memory advantage is claimed.
+
+
+================================================================================
+RELATION TO ORIGINAL FROZEN OPT008 BENCHMARK
+================================================================================
+
+Original frozen measurement:
+
+    OPT006 mean:
+        2175.356 ms
+
+    OPT008 mean:
+        1994.648 ms
+
+    observed mean latency change:
+        -8.307%
+
+
+Fresh final-validation measurement:
+
+    OPT006 mean:
+        1725.433 ms
+
+    OPT008 mean:
+        1666.886 ms
+
+    observed mean latency change:
+        -3.393%
+
+
+The original and final-validation measurements are retained as separate
+benchmark observations.
+
+They are not averaged together.
+
+Both controlled measurements showed lower observed mean latency for OPT008
+than frozen OPT006 under the documented benchmark protocol.
+
+The magnitude of the observed latency difference varied between benchmark
+sessions.
+
+
+================================================================================
+FINAL CONCLUSION
+================================================================================
+
+The retained OPT008 implementation passed structural, numerical,
+multi-prompt behavioral, and final performance-reproducibility validation.
+
+Correctness evidence includes:
+
+    - 24,240 operator outputs with zero mismatches
+    - 5,463,040 single-prompt full-model logits with zero mismatches
+    - 44,449,280 multi-prompt logits with zero mismatches
+    - 179 / 179 multi-prompt top-1 agreement
+
+Performance evidence includes two separate controlled benchmark sessions:
+
+    original OPT008 experiment:
+        -8.307% observed mean latency change
+
+    final CPU validation:
+        -3.393% observed mean latency change
+
+Therefore OPT008 remains the retained CPU implementation.
+
+No memory advantage is claimed.
+
+
+================================================================================
+CLAIM BOUNDARIES
+================================================================================
+
+These results do NOT establish:
+
+    - a universal CPU inference speedup
+    - performance on CPUs other than the tested system
+    - performance on arbitrary sequence lengths or workloads
+    - whole-model compression of 7.529412x
+    - a general peak-memory reduction
+    - GPU or CUDA performance
+    - AVX-512 performance
+    - FMA performance
+    - full ternary dot-product vectorization
+
+The 7.529412x storage figure applies only to the selected packed ternary
+weights relative to their selected FP16 weight bytes.
+
+The performance results are protocol-specific observations on the tested
+CPU and workload.

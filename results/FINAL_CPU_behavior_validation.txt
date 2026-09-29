@@ -1,0 +1,67 @@
+========================================================================================
+FINAL CPU VALIDATION — GATE 3
+MULTI-PROMPT BEHAVIORAL EQUIVALENCE
+========================================================================================
+
+Loading frozen OPT006 reference...
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+Loading retained OPT008 candidate...
+
+Prompt                 : short_factual
+Input tokens           : 5
+Compared logits        : 1241600
+Exact mismatches       : 0
+Max abs difference     : 0.0
+Mean abs difference    : 0.0
+Bit-exact              : True
+Top-1 matches          : 5/5
+
+Prompt                 : arithmetic
+Input tokens           : 24
+Compared logits        : 5959680
+Exact mismatches       : 0
+Max abs difference     : 0.0
+Mean abs difference    : 0.0
+Bit-exact              : True
+Top-1 matches          : 24/24
+
+Prompt                 : reasoning
+Input tokens           : 30
+Compared logits        : 7449600
+Exact mismatches       : 0
+Max abs difference     : 0.0
+Mean abs difference    : 0.0
+Bit-exact              : True
+Top-1 matches          : 30/30
+
+Prompt                 : instruction
+Input tokens           : 16
+Compared logits        : 3973120
+Exact mismatches       : 0
+Max abs difference     : 0.0
+Mean abs difference    : 0.0
+Bit-exact              : True
+Top-1 matches          : 16/16
+
+Prompt                 : long_context
+Input tokens           : 104
+Compared logits        : 25825280
+Exact mismatches       : 0
+Max abs difference     : 0.0
+Mean abs difference    : 0.0
+Bit-exact              : True
+Top-1 matches          : 104/104
+
+========================================================================================
+AGGREGATE
+========================================================================================
+Prompts validated       : 5
+Total logits compared   : 44449280
+Total mismatches        : 0
+Global max abs error    : 0.0
+Top-1 agreement         : 179/179
+
+========================================================================================
+FINAL CPU VALIDATION GATE 3 — PASS
+========================================================================================
+Retained OPT008 is bit-exact with frozen OPT006 across the fixed multi-prompt suite.

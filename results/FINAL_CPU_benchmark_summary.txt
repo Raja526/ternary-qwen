@@ -1,0 +1,47 @@
+OPT006 — TABLE DISPATCH
+------------------------------------------------------------------------
+samples             : 15
+mean ms             : 1725.433
+median ms           : 1681.409
+sample std ms       : 92.676
+min ms              : 1663.043
+max ms              : 1982.820
+mean ready RSS MiB  : 2337.589
+mean warmup RSS MiB : 2368.859
+mean timed RSS MiB  : 2372.333
+
+OPT008 — AVX2
+------------------------------------------------------------------------
+samples             : 15
+mean ms             : 1666.886
+median ms           : 1642.197
+sample std ms       : 56.445
+min ms              : 1625.607
+max ms              : 1827.294
+mean ready RSS MiB  : 2346.092
+mean warmup RSS MiB : 2376.122
+mean timed RSS MiB  : 2385.898
+
+========================================================================
+FINAL CPU VALIDATION — GATE 4
+========================================================================
+OPT006 pooled mean ms       : 1725.433
+OPT008 pooled mean ms       : 1666.886
+Mean latency change         : -3.393%
+OPT006 pooled median ms     : 1681.409
+OPT008 pooled median ms     : 1642.197
+Median latency change       : -2.332%
+Ready RSS difference MiB    : +8.504
+Warmup RSS difference MiB   : +7.263
+Timed-max RSS diff MiB      : +13.565
+OPT006 GNU max RSS mean KB  : 3859486.667
+OPT008 GNU max RSS mean KB  : 3868289.333
+GNU max RSS difference KB   : +8802.667
+
+Original frozen OPT008 result:
+  OPT006 mean               : 2175.356 ms
+  OPT008 mean               : 1994.648 ms
+  observed change           : -8.307%
+
+Fresh final-validation result:
+  observed change           : -3.393%
