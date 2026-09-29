@@ -1,0 +1,87 @@
+
+====================================================================================================
+OPT010 — FULL-MODEL THREAD-SCHEDULING EQUIVALENCE
+====================================================================================================
+Reference                : OPT008 grain-size 1
+Candidates               : grain 16 / 64 / 256
+CPU threads              : 6
+Checkpoint               : results/ENG003_multimatrix_checkpoint.pt
+Input tokens             : 22
+
+====================================================================================================
+REFERENCE — FROZEN OPT008 GRAIN-1
+====================================================================================================
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+Replaced matrices        : 3
+Replaced parameters      : 8912896
+Persistent packed bytes  : 2367488
+FP16 equivalent bytes    : 17825792
+Reference logits shape   : (1, 22, 248320)
+
+====================================================================================================
+CANDIDATE — OPT010 GRAIN-16
+====================================================================================================
+Replaced matrices        : 3
+Replaced parameters      : 8912896
+Persistent packed bytes  : 2367488
+FP16 equivalent bytes    : 17825792
+Candidate logits shape   : (1, 22, 248320)
+
+====================================================================================================
+OPT008 GRAIN-1 VS OPT010 GRAIN-16
+====================================================================================================
+Compared logits          : 5463040
+Exact mismatches         : 0
+Max abs difference       : 0.0
+Mean abs difference      : 0.0
+Bit-exact logits         : True
+Top-1 matches            : 22/22
+
+PASS: OPT010 GRAIN-16 is bit-exact with frozen OPT008.
+
+====================================================================================================
+CANDIDATE — OPT010 GRAIN-64
+====================================================================================================
+Replaced matrices        : 3
+Replaced parameters      : 8912896
+Persistent packed bytes  : 2367488
+FP16 equivalent bytes    : 17825792
+Candidate logits shape   : (1, 22, 248320)
+
+====================================================================================================
+OPT008 GRAIN-1 VS OPT010 GRAIN-64
+====================================================================================================
+Compared logits          : 5463040
+Exact mismatches         : 0
+Max abs difference       : 0.0
+Mean abs difference      : 0.0
+Bit-exact logits         : True
+Top-1 matches            : 22/22
+
+PASS: OPT010 GRAIN-64 is bit-exact with frozen OPT008.
+
+====================================================================================================
+CANDIDATE — OPT010 GRAIN-256
+====================================================================================================
+Replaced matrices        : 3
+Replaced parameters      : 8912896
+Persistent packed bytes  : 2367488
+FP16 equivalent bytes    : 17825792
+Candidate logits shape   : (1, 22, 248320)
+
+====================================================================================================
+OPT008 GRAIN-1 VS OPT010 GRAIN-256
+====================================================================================================
+Compared logits          : 5463040
+Exact mismatches         : 0
+Max abs difference       : 0.0
+Mean abs difference      : 0.0
+Bit-exact logits         : True
+Top-1 matches            : 22/22
+
+PASS: OPT010 GRAIN-256 is bit-exact with frozen OPT008.
+
+====================================================================================================
+OPT010 FULL-MODEL CORRECTNESS GATE — PASS
+====================================================================================================
+All three OPT010 grain-size variants are bit-exact with frozen OPT008.

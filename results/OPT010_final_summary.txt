@@ -1,0 +1,57 @@
+OPT010 — THREAD-SCHEDULING / GRAIN-SIZE FINAL SUMMARY
+==============================================================================
+
+Controlled variable:
+  at::parallel_for grain-size argument
+
+Frozen reference:
+  OPT008 explicit AVX2, grain size 1
+
+Candidates:
+  grain size 16, 64, 256
+
+Protocol:
+  CPU threads             : 6
+  Inter-op threads        : 6
+  Warmups/process         : 2
+  Timed forwards/process  : 5
+  Independent processes   : 3/condition
+  Samples/condition       : 15
+  Total timed forwards    : 60
+
+Correctness:
+  Operator gate           : PASS
+  Full-model gate         : PASS
+  Compared logits         : 5,463,040/candidate
+  Exact mismatches        : 0
+  Max abs difference      : 0.0
+  Mean abs difference     : 0.0
+  Top-1 matches           : 22/22
+
+Latency results:
+Mode                      N        Mean      Median         Std         Min         Max       Delta
+---------------------------------------------------------------------------------------------------
+OPT008 grain-1           15    1666.354    1668.741      30.753    1625.918    1751.172    baseline
+OPT010 grain-16          15    1701.540    1700.131      36.242    1646.474    1761.645     +2.112%
+OPT010 grain-64          15    1686.401    1677.211      30.301    1655.879    1763.963     +1.203%
+OPT010 grain-256         15    1688.132    1677.075      30.174    1663.283    1759.981     +1.307%
+
+Memory:
+  OPT008 grain-1       timed-max RSS mean 2380.521 MiB; GNU max RSS mean 3865518.667 KB
+  OPT010 grain-16      timed-max RSS mean 2374.867 MiB; GNU max RSS mean 3859373.333 KB
+  OPT010 grain-64      timed-max RSS mean 2382.378 MiB; GNU max RSS mean 3868301.333 KB
+  OPT010 grain-256     timed-max RSS mean 2377.628 MiB; GNU max RSS mean 3862146.667 KB
+
+Decision:
+  Retain frozen OPT008 grain size 1.
+
+Interpretation:
+  Under the frozen OPT010 benchmark protocol, grain sizes 16, 64, and 256
+  preserved exact behavior but increased observed mean latency by 2.112%,
+  1.203%, and 1.307%, respectively, versus frozen OPT008 grain size 1.
+  No meaningful memory advantage was observed.
+
+Claim boundary:
+  These are protocol-specific observations for the tested model, hardware,
+  six-thread configuration, selected matrices, and workload. They do not
+  establish that larger parallel_for grain-size arguments are universally slower.

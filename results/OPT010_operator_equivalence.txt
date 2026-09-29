@@ -1,0 +1,78 @@
+========================================================================
+OPT010 — THREAD-SCHEDULING OPERATOR EQUIVALENCE
+========================================================================
+
+Reference : OPT008 grain-size 1
+Candidates: grain 16 / 64 / 256
+CPU threads: 6
+Group size : 128
+
+shape=(1, 128, 1)
+  grain16  outputs=     1 mismatches=   0 max_abs=0.0
+  grain64  outputs=     1 mismatches=   0 max_abs=0.0
+  grain256 outputs=     1 mismatches=   0 max_abs=0.0
+shape=(3, 128, 15)
+  grain16  outputs=    45 mismatches=   0 max_abs=0.0
+  grain64  outputs=    45 mismatches=   0 max_abs=0.0
+  grain256 outputs=    45 mismatches=   0 max_abs=0.0
+shape=(3, 128, 16)
+  grain16  outputs=    48 mismatches=   0 max_abs=0.0
+  grain64  outputs=    48 mismatches=   0 max_abs=0.0
+  grain256 outputs=    48 mismatches=   0 max_abs=0.0
+shape=(3, 128, 17)
+  grain16  outputs=    51 mismatches=   0 max_abs=0.0
+  grain64  outputs=    51 mismatches=   0 max_abs=0.0
+  grain256 outputs=    51 mismatches=   0 max_abs=0.0
+shape=(3, 128, 63)
+  grain16  outputs=   189 mismatches=   0 max_abs=0.0
+  grain64  outputs=   189 mismatches=   0 max_abs=0.0
+  grain256 outputs=   189 mismatches=   0 max_abs=0.0
+shape=(3, 128, 64)
+  grain16  outputs=   192 mismatches=   0 max_abs=0.0
+  grain64  outputs=   192 mismatches=   0 max_abs=0.0
+  grain256 outputs=   192 mismatches=   0 max_abs=0.0
+shape=(3, 128, 65)
+  grain16  outputs=   195 mismatches=   0 max_abs=0.0
+  grain64  outputs=   195 mismatches=   0 max_abs=0.0
+  grain256 outputs=   195 mismatches=   0 max_abs=0.0
+shape=(3, 128, 255)
+  grain16  outputs=   765 mismatches=   0 max_abs=0.0
+  grain64  outputs=   765 mismatches=   0 max_abs=0.0
+  grain256 outputs=   765 mismatches=   0 max_abs=0.0
+shape=(3, 128, 256)
+  grain16  outputs=   768 mismatches=   0 max_abs=0.0
+  grain64  outputs=   768 mismatches=   0 max_abs=0.0
+  grain256 outputs=   768 mismatches=   0 max_abs=0.0
+shape=(3, 128, 257)
+  grain16  outputs=   771 mismatches=   0 max_abs=0.0
+  grain64  outputs=   771 mismatches=   0 max_abs=0.0
+  grain256 outputs=   771 mismatches=   0 max_abs=0.0
+shape=(5, 256, 31)
+  grain16  outputs=   155 mismatches=   0 max_abs=0.0
+  grain64  outputs=   155 mismatches=   0 max_abs=0.0
+  grain256 outputs=   155 mismatches=   0 max_abs=0.0
+shape=(7, 512, 64)
+  grain16  outputs=   448 mismatches=   0 max_abs=0.0
+  grain64  outputs=   448 mismatches=   0 max_abs=0.0
+  grain256 outputs=   448 mismatches=   0 max_abs=0.0
+shape=(22, 1024, 64)
+  grain16  outputs=  1408 mismatches=   0 max_abs=0.0
+  grain64  outputs=  1408 mismatches=   0 max_abs=0.0
+  grain256 outputs=  1408 mismatches=   0 max_abs=0.0
+shape=(22, 1024, 512)
+  grain16  outputs= 11264 mismatches=   0 max_abs=0.0
+  grain64  outputs= 11264 mismatches=   0 max_abs=0.0
+  grain256 outputs= 11264 mismatches=   0 max_abs=0.0
+shape=(22, 2048, 1024)
+  grain16  outputs= 22528 mismatches=   0 max_abs=0.0
+  grain64  outputs= 22528 mismatches=   0 max_abs=0.0
+  grain256 outputs= 22528 mismatches=   0 max_abs=0.0
+
+========================================================================
+AGGREGATE
+========================================================================
+grain16 : outputs=38828, mismatches=0, max_abs=0.0, bit_exact=True
+grain64 : outputs=38828, mismatches=0, max_abs=0.0, bit_exact=True
+grain256: outputs=38828, mismatches=0, max_abs=0.0, bit_exact=True
+
+PASS: grain-16, grain-64, and grain-256 are bit-exact with frozen OPT008.
