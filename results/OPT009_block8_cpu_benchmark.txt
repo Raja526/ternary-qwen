@@ -1,0 +1,56 @@
+========================================================================
+OPT009 — OUTPUT-ROW BLOCKING CPU BENCHMARK
+========================================================================
+
+Baseline  : OPT008 explicit AVX2 packed decode
+Candidate : OPT009 AVX2 + output-row block size 8
+
+Controlled variable:
+  output rows per parallel job: 1 -> 8
+
+PROTOCOL
+------------------------------------------------------------------------
+CPU threads              : 6
+Inter-op threads         : 6
+Input tokens             : 22
+Warmups/process          : 2
+Timed forwards/process   : 5
+Processes/condition      : 3
+Timed forwards/condition : 15
+Selected matrices        : 3
+Selected parameters      : 8912896
+FP16 equivalent bytes    : 17825792
+Packed bytes             : 2367488
+Compiler flags           : -O2 -mavx2 -mno-fma
+
+LATENCY
+------------------------------------------------------------------------
+OPT008 mean   : 1858.941 ms
+OPT009 mean   : 1922.738 ms
+Change        : +3.432%
+
+OPT008 median : 1784.666 ms
+OPT009 median : 1838.406 ms
+
+OPT008 std    : 177.762 ms
+OPT009 std    : 202.171 ms
+
+OPT008 min/max: 1697.961 / 2270.082 ms
+OPT009 min/max: 1693.367 / 2265.886 ms
+
+MEMORY
+------------------------------------------------------------------------
+Ready RSS mean: 2343.202 -> 2340.427 MiB (-2.775 MiB)
+After-warmup RSS mean: 2373.799 -> 2370.398 MiB (-3.401 MiB)
+Timed-max RSS mean: 2383.053 -> 2373.871 MiB (-9.182 MiB)
+GNU max RSS mean: 3865304.000 -> 3862257.333 KB (-3046.667 KB)
+
+CORRECTNESS
+------------------------------------------------------------------------
+Operator equivalence : PASS (35,555 outputs, 0 mismatches)
+Full-model logits    : PASS (5,463,040 logits, 0 mismatches)
+Top-1 behavior       : PASS (22/22)
+
+========================================================================
+OBSERVED RESULT: OPT009 block-8 increased mean latency under this controlled protocol.
+========================================================================

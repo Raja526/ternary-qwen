@@ -1,0 +1,32 @@
+========================================================================
+OPT009 — FULL-MODEL BLOCKING EQUIVALENCE
+========================================================================
+
+Reference : OPT008 explicit AVX2 decode
+Candidate : OPT009 AVX2 + output-row blocking
+Block rows: 8
+Model     : Qwen/Qwen3.5-0.8B
+CPU threads: 6
+Input tokens: 22
+
+Running PATH A — frozen OPT008...
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+
+PATH A statistics:
+
+Running PATH B — OPT009 blocked...
+
+PATH B statistics:
+
+========================================================================
+COMPARISON
+========================================================================
+Logits shape      : (1, 22, 248320)
+Compared logits   : 5463040
+Exact mismatches  : 0
+Max abs error     : 0.0
+Mean abs error    : 0.0
+Bit-exact logits  : True
+Top-1 matches     : 22/22
+
+PASS: OPT009 full-model behavior is bit-exact with frozen OPT008.

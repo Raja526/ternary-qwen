@@ -1,0 +1,198 @@
+OPT009 — OUTPUT-ROW BLOCKING / CACHE-LOCALITY EXPERIMENT
+========================================================
+
+Objective
+---------
+Evaluate whether grouping output rows into fixed-size parallel jobs improves
+CPU inference latency over the frozen OPT008 explicit-AVX2 implementation.
+
+Frozen reference
+----------------
+Reference: OPT008
+Compiler flags:
+    -O2
+    -mavx2
+    -mno-fma
+
+Frozen conditions:
+    CPU threads: 6
+    Inter-op threads: 6
+    Input tokens: 22
+    Warmups per process: 2
+    Timed forwards per process: 5
+    Independent processes per condition: 3
+    Timed forwards per condition: 15
+
+Selected matrices:
+    model.layers.3.self_attn.k_proj
+    model.layers.4.linear_attn.out_proj
+    model.layers.4.linear_attn.in_proj_qkv
+
+Selected parameters:
+    8,912,896
+
+FP16-equivalent selected bytes:
+    17,825,792
+
+Persistent packed selected bytes:
+    2,367,488
+
+
+Controlled variable
+-------------------
+OPT008:
+    One parallel job corresponds to one (batch, output_row).
+
+OPT009:
+    One parallel job corresponds to one
+    (batch, output_row_block).
+
+Tested output-row block sizes:
+    4
+    8
+    16
+
+The following were held constant:
+    - ternary quantization
+    - packed 2-bit representation
+    - group size 128
+    - reconstruction scales
+    - AVX2 packed-code decoding
+    - lookup-table ternary dispatch semantics
+    - scalar FP32 accumulation order per output row
+    - compiler flags
+    - thread count
+    - model
+    - selected matrices
+    - prompt
+    - benchmark protocol
+
+No FMA was enabled.
+
+
+Correctness
+-----------
+Block 4:
+    Operator equivalence: PASS
+    Full-model equivalence: PASS
+    Compared logits: 5,463,040
+    Exact mismatches: 0
+    Max absolute error: 0.0
+    Mean absolute error: 0.0
+    Bit-exact: True
+    Top-1 agreement: 22/22
+
+Block 8:
+    Operator equivalence: PASS
+    Full-model equivalence: PASS
+    Compared logits: 5,463,040
+    Exact mismatches: 0
+    Max absolute error: 0.0
+    Mean absolute error: 0.0
+    Bit-exact: True
+    Top-1 agreement: 22/22
+
+Block 16:
+    Operator equivalence: PASS
+    Full-model equivalence: PASS
+    Compared logits: 5,463,040
+    Exact mismatches: 0
+    Max absolute error: 0.0
+    Mean absolute error: 0.0
+    Bit-exact: True
+    Top-1 agreement: 22/22
+
+
+Latency results
+---------------
+Block 1 — frozen OPT008:
+    Mean: 1858.941 ms
+    Change vs OPT008: +0.000%
+
+Block 4:
+    Mean: 1938.468 ms
+    Median: 1926.015 ms
+    Std: 68.683 ms
+    Min: 1856.148 ms
+    Max: 2089.533 ms
+    Change vs OPT008: +4.278%
+
+Block 8:
+    Mean: 1922.738 ms
+    Change vs OPT008: +3.432%
+
+Block 16:
+    Mean: 1901.478 ms
+    Median: 1878.282 ms
+    Std: 43.261 ms
+    Min: 1853.261 ms
+    Max: 1986.980 ms
+    Change vs OPT008: +2.288%
+
+
+Block-4 memory observations
+---------------------------
+Ready RSS mean:
+    2340.548 MiB
+
+After-warmup RSS mean:
+    2370.617 MiB
+
+Timed-max RSS mean:
+    2375.090 MiB
+
+GNU maximum RSS mean:
+    3862705.333 KB
+
+
+Block-16 memory observations
+----------------------------
+Ready RSS mean:
+    2340.487 MiB
+
+After-warmup RSS mean:
+    2370.559 MiB
+
+Timed-max RSS mean:
+    2374.868 MiB
+
+GNU maximum RSS mean:
+    3862414.667 KB
+
+
+Interpretation
+--------------
+All tested output-row blocking configurations preserved exact model behavior.
+
+Under the frozen six-thread, 22-token CPU benchmark protocol, however,
+none of the tested blocking configurations reduced observed mean latency
+relative to OPT008.
+
+Observed mean-latency changes:
+
+    block 4:  +4.278%
+    block 8:  +3.432%
+    block 16: +2.288%
+
+The small RSS differences do not establish a meaningful memory advantage.
+
+No claim is made that these block sizes are universally suboptimal.
+The result applies to the tested implementation, hardware, model,
+selected matrices, and benchmark protocol.
+
+
+Decision
+--------
+Output-row blocking is NOT retained.
+
+Frozen OPT008 remains the CPU implementation carried forward to OPT010.
+
+The OPT009 block-size investigation stops at:
+    4
+    8
+    16
+
+No broader block-size sweep is performed.
+
+OPT009 is therefore recorded as a negative optimization result with
+successful bit-exact correctness preservation.
