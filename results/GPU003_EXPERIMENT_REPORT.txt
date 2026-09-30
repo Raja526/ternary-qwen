@@ -1,0 +1,282 @@
+GPU003 — PACKED TERNARY CUDA OPERATOR
+=====================================
+
+STATUS
+------
+PASS
+
+OBJECTIVE
+---------
+Implement the first correctness-oriented CUDA operator that directly
+consumes the frozen ENG001 2-bit packed ternary representation.
+
+GPU003 changes only the compute backend.
+
+It does NOT change:
+- ternary quantization
+- packed encoding
+- group size
+- reconstruction scales
+- selected matrices
+- model coverage
+- frozen CPU implementations
+
+
+BASE
+----
+Parent experiment:
+GPU002 — CUDA 12.6 extension toolchain
+
+Parent frozen commit:
+6138dfccbebb271c95de0bcf4e85abb5e4d61c05
+
+
+ENVIRONMENT
+-----------
+GPU:
+NVIDIA Quadro P1000
+
+Compute capability:
+6.1
+
+PyTorch:
+2.14.0+cu126
+
+PyTorch CUDA:
+12.6
+
+CUDA compiler:
+ /usr/local/cuda-12.6/bin/nvcc
+
+Compilation target:
+-gencode=arch=compute_61,code=sm_61
+
+
+FROZEN PACKED FORMAT
+--------------------
+Encoding:
+
+-1 -> 00
+ 0 -> 01
++1 -> 10
+11 -> reserved
+
+Four ternary values are stored per byte.
+
+Group size:
+128
+
+Scales:
+FP16 per-group reconstruction scales
+
+Input:
+FP16
+
+Accumulation:
+FP32
+
+Output:
+FP16
+
+
+GPU003 IMPLEMENTATION
+---------------------
+The CUDA kernel directly reads:
+
+1. FP16 activations
+2. uint8 packed ternary codes
+3. FP16 per-group scales
+
+For each output element it:
+
+1. identifies the batch/output row
+2. reads packed bytes directly
+3. extracts four 2-bit codes per byte
+4. accumulates positive and negative activation contributions
+5. applies the corresponding group scale
+6. accumulates group contributions in FP32
+7. converts the final result to FP16
+
+The persistent packed representation is used directly.
+
+GPU003 does not reconstruct a full FP16 weight matrix.
+
+
+COMPILE / LOAD GATE
+-------------------
+PASS
+
+CUDA source compiled with:
+
+/usr/local/cuda-12.6/bin/nvcc
+
+Architecture target:
+
+compute_61 / sm_61
+
+The resulting PyTorch extension loaded successfully and exposed:
+
+packed_ternary_linear
+
+
+SYNTHETIC OPERATOR CORRECTNESS
+------------------------------
+Reference:
+Frozen OPT006 CPU packed arithmetic
+
+Cases:
+5
+
+Test shapes:
+
+batch=1, in=128,  out=8
+batch=2, in=256,  out=16
+batch=3, in=512,  out=32
+batch=2, in=1024, out=64
+batch=4, in=2048, out=32
+
+Total outputs:
+392
+
+Exact mismatches:
+0
+
+Global maximum absolute difference:
+0.0000000000
+
+Result:
+Bit-exact vs OPT006
+
+GPU003 OPERATOR CORRECTNESS:
+PASS
+
+
+REAL FROZEN QWEN WEIGHT VALIDATION
+----------------------------------
+Checkpoint:
+
+results/ENG003_multimatrix_checkpoint.pt
+
+Frozen checkpoint SHA256:
+
+8e35aaea4e47a68363a8951fa425874a1e35929a19c277335a260bb20a9cb546
+
+Target:
+
+model.layers.3.self_attn.k_proj
+
+Shape:
+
+(512, 1024)
+
+Parameters:
+
+524,288
+
+Group size:
+
+128
+
+Packed storage:
+
+139,264 bytes
+
+FP16 equivalent selected-weight storage:
+
+1,048,576 bytes
+
+Selected-weight compression factor:
+
+7.529412x
+
+Input token/batch counts tested:
+
+1
+4
+14
+
+Total outputs:
+
+9,728
+
+Exact mismatches:
+
+0
+
+Global maximum absolute difference:
+
+0.0000000000
+
+Global mean absolute difference:
+
+0.0000000000
+
+Result:
+
+Bit-exact vs frozen OPT006 packed arithmetic
+
+GPU003 REAL-WEIGHT CORRECTNESS:
+PASS
+
+
+COMBINED CORRECTNESS EVIDENCE
+-----------------------------
+Synthetic outputs:
+392
+
+Real-weight outputs:
+9,728
+
+Combined compared outputs:
+10,120
+
+Combined exact mismatches:
+0
+
+
+CONCLUSION
+----------
+GPU003 demonstrates that the frozen ENG001 2-bit packed ternary
+representation can be consumed directly by a custom CUDA operator on
+the NVIDIA Quadro P1000.
+
+The CUDA implementation is bit-exact with the frozen OPT006 packed
+CPU arithmetic for all GPU003 synthetic validation cases and for the
+tested real frozen Qwen k_proj matrix/input sets.
+
+This establishes correctness of the first packed-ternary CUDA compute
+path.
+
+
+LIMITATIONS / CLAIM DISCIPLINE
+------------------------------
+GPU003 is a correctness experiment.
+
+No GPU performance benchmark was performed.
+
+No GPU latency improvement is claimed.
+
+No GPU throughput improvement is claimed.
+
+No GPU memory advantage is claimed.
+
+No whole-model GPU acceleration is claimed.
+
+No full-model GPU integration was performed.
+
+The kernel is intentionally correctness-oriented. One CUDA thread
+currently computes an output element using serial inner accumulation.
+
+Bit-exactness claims are specifically against the frozen OPT006 packed
+CPU arithmetic for the tested GPU003 cases.
+
+The 7.529412x compression value refers only to storage for the tested
+selected packed weight relative to its FP16 equivalent. It is not a
+whole-model compression claim.
+
+
+NEXT STEP
+---------
+GPU004 should integrate the validated GPU003 packed CUDA operator into
+the model/runtime and perform full-model correctness validation before
+any GPU performance claims are considered.

@@ -1,0 +1,46 @@
+===== GPU003 REAL-WEIGHT VALIDATION =====
+PyTorch: 2.14.0+cu126
+PyTorch CUDA: 12.6
+CUDA_HOME: /usr/local/cuda-12.6
+TORCH_CUDA_ARCH_LIST: 6.1
+GPU: Quadro P1000
+Capability: (6, 1)
+
+Checkpoint       : results/ENG003_multimatrix_checkpoint.pt
+Target           : model.layers.3.self_attn.k_proj
+Shape            : (512, 1024)
+Parameters       : 524288
+Group size       : 128
+Packed storage   : 139264 bytes
+FP16 equivalent  : 1048576 bytes
+Compression      : 7.529412x
+
+INPUT SET 1
+  Shape                  : (1, 1024)
+  Outputs                : 512
+  Exact mismatches       : 0
+  Max absolute difference: 0.0000000000
+  Mean absolute difference: 0.0000000000
+
+INPUT SET 2
+  Shape                  : (4, 1024)
+  Outputs                : 2048
+  Exact mismatches       : 0
+  Max absolute difference: 0.0000000000
+  Mean absolute difference: 0.0000000000
+
+INPUT SET 3
+  Shape                  : (14, 1024)
+  Outputs                : 7168
+  Exact mismatches       : 0
+  Max absolute difference: 0.0000000000
+  Mean absolute difference: 0.0000000000
+
+===== SUMMARY =====
+Input sets: 3
+Total outputs: 9728
+Total exact mismatches: 0
+Global max abs diff: 0.0000000000
+Global mean abs diff: 0.0000000000
+Bit-exact vs OPT006: YES
+GPU003 REAL-WEIGHT CORRECTNESS: PASS

@@ -1,0 +1,48 @@
+===== GPU003 OPERATOR VALIDATION =====
+PyTorch: 2.14.0+cu126
+PyTorch CUDA: 12.6
+CUDA_HOME: /usr/local/cuda-12.6
+TORCH_CUDA_ARCH_LIST: 6.1
+GPU: Quadro P1000
+Capability: (6, 1)
+
+Loading OPT006 CPU reference...
+Loading GPU003 CUDA candidate...
+
+case batch=1 in=128 out=8
+  outputs: 8
+  exact mismatches: 0
+  max abs diff: 0.0000000000
+  mean abs diff: 0.0000000000
+
+case batch=2 in=256 out=16
+  outputs: 32
+  exact mismatches: 0
+  max abs diff: 0.0000000000
+  mean abs diff: 0.0000000000
+
+case batch=3 in=512 out=32
+  outputs: 96
+  exact mismatches: 0
+  max abs diff: 0.0000000000
+  mean abs diff: 0.0000000000
+
+case batch=2 in=1024 out=64
+  outputs: 128
+  exact mismatches: 0
+  max abs diff: 0.0000000000
+  mean abs diff: 0.0000000000
+
+case batch=4 in=2048 out=32
+  outputs: 128
+  exact mismatches: 0
+  max abs diff: 0.0000000000
+  mean abs diff: 0.0000000000
+
+===== SUMMARY =====
+Cases: 5
+Total outputs: 392
+Total exact mismatches: 0
+Global max abs diff: 0.0000000000
+Bit-exact vs OPT006: YES
+GPU003 OPERATOR CORRECTNESS: PASS
