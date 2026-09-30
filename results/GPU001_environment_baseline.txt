@@ -1,0 +1,126 @@
+GPU001 — CUDA ENVIRONMENT BASELINE
+===============================================================================
+
+Objective
+---------
+Characterize the existing GPU hardware, PyTorch CUDA runtime, and local CUDA
+compiler environment before implementing a custom packed-ternary CUDA kernel.
+
+Starting point
+--------------
+Final frozen CPU milestone:
+    d1fe588c16a924915627a83a7b91e9d08dfa0094
+
+Branch:
+    gpu001-environment-baseline
+
+
+GPU hardware
+------------
+GPU:
+    NVIDIA Quadro P1000
+
+Compute capability:
+    6.1
+
+Reported VRAM:
+    4031.875 MiB
+
+
+Software environment
+--------------------
+PyTorch:
+    2.14.0+cu126
+
+PyTorch CUDA runtime:
+    12.6
+
+NVIDIA driver:
+    580.178.04
+
+nvidia-smi reported CUDA compatibility:
+    13.0
+
+System nvcc:
+    /usr/bin/nvcc
+
+System CUDA compiler:
+    CUDA 11.5
+    V11.5.119
+
+Detected CUDA_HOME:
+    /usr
+
+
+PyTorch CUDA runtime sanity test
+--------------------------------
+Operation:
+    1000 x 1000 CUDA matrix multiplication
+
+Result shape:
+    (1000, 1000)
+
+Finite result:
+    True
+
+Observed execution time:
+    0.05728422300001057 seconds
+
+Allocated GPU memory:
+    20.0 MiB
+
+Reserved GPU memory:
+    44.0 MiB
+
+Result:
+    PASS
+
+The installed PyTorch CUDA runtime can execute CUDA operations successfully
+on the Quadro P1000.
+
+
+CUDA compiler compatibility observation
+---------------------------------------
+PyTorch CUDA runtime:
+    12.6
+
+Available system nvcc:
+    11.5
+
+Versions match:
+    False
+
+Therefore the currently detected local CUDA compiler toolchain does not match
+the CUDA version used by the installed PyTorch build.
+
+
+Conclusion
+----------
+GPU001 successfully characterized the existing GPU environment.
+
+The CUDA runtime itself is operational.
+
+A matching CUDA extension compilation environment has NOT yet been
+established because:
+
+    PyTorch CUDA runtime = 12.6
+    system nvcc          = 11.5
+
+No custom ternary CUDA kernel was compiled during GPU001.
+
+No CUDA toolkit, NVIDIA driver, PyTorch package, quantizer, CPU implementation,
+or frozen CPU artifact was modified during this experiment.
+
+
+Next gate
+---------
+GPU002 should establish a CUDA 12.6-compatible extension compiler/toolkit
+environment while preserving:
+
+    - the existing NVIDIA driver
+    - the existing PyTorch 2.14.0+cu126 environment
+    - the frozen CPU milestone
+    - the frozen OPT008 CPU implementation
+
+Only after the compiler environment is validated should custom packed-ternary
+CUDA kernel development begin.
