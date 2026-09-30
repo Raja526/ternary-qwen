@@ -1,0 +1,95 @@
+GPU002 — CUDA 12.6 TOOLCHAIN ESTABLISHMENT
+========================================
+
+Status: PASS
+Branch: gpu002-cuda126-toolchain
+Parent: GPU001
+Date: 2026-09-30
+
+1. OBJECTIVE
+------------
+Establish a compatible CUDA 12.6 compiler environment for
+PyTorch CUDA extensions targeting the NVIDIA Quadro P1000.
+
+Preserve the existing NVIDIA driver, PyTorch installation,
+frozen CPU implementations, and GPU001 baseline.
+
+2. INITIAL CONDITION
+--------------------
+PyTorch: 2.14.0+cu126
+PyTorch CUDA runtime: 12.6
+Previous system nvcc: CUDA 11.5
+GPU: NVIDIA Quadro P1000
+Compute capability: 6.1
+
+3. INSTALLATION
+---------------
+NVIDIA CUDA Ubuntu 22.04 repository configured.
+
+Installed:
+cuda-compiler-12-6
+
+Installation dry-run:
+14 new packages
+0 upgrades
+0 removals
+53.3 MB download
+238 MB estimated additional disk usage
+
+CUDA compiler:
+CUDA 12.6, V12.6.85
+
+CUDA_HOME:
+/usr/local/cuda-12.6
+
+TORCH_CUDA_ARCH_LIST:
+6.1
+
+4. VALIDATION GATES
+-------------------
+Gate 1: CUDA compiler availability — PASS
+
+Gate 2: Native CUDA sm_61 kernel execution — PASS
+Expected: [2, 3, 4, 5]
+Actual:   [2, 3, 4, 5]
+
+Gate 3: PyTorch CUDA environment alignment — PASS
+PyTorch CUDA: 12.6
+CUDA_HOME: /usr/local/cuda-12.6
+GPU capability: (6, 1)
+
+Gate 4: PyTorch C++/CUDA extension — PASS
+C++ compilation successful.
+CUDA compilation successful.
+Explicit compute_61/sm_61 target verified in build command.
+Extension linking successful.
+Extension execution successful.
+
+Expected: [2, 3, 4, 5]
+Actual:   [2, 3, 4, 5]
+
+Permanent validation:
+scripts/gpu002_validate_cuda_toolchain.py
+
+Captured output:
+results/GPU002_cuda126_toolchain_validation.txt
+
+5. SCOPE AND LIMITATIONS
+-----------------------
+No ternary CUDA kernel implemented in GPU002.
+No packed ternary GPU operator benchmark performed.
+No GPU inference acceleration claim.
+No GPU memory reduction claim.
+
+The CUDA compiler was selected explicitly for the
+project/session. Global CUDA configuration changes
+were not required for validation.
+
+6. CONCLUSION
+-------------
+GPU002 PASS.
+
+CUDA 12.6 successfully compiles and executes a custom
+PyTorch CUDA extension targeting the Quadro P1000 sm_61.
+
+The toolchain prerequisite for GPU003 is established.
