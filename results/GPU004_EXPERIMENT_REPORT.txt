@@ -1,0 +1,535 @@
+GPU004 — FULL-MODEL PACKED TERNARY CUDA INTEGRATION
+===================================================
+
+STATUS
+------
+PASS
+
+OBJECTIVE
+---------
+Integrate the frozen GPU003 packed-ternary CUDA operator into the full
+Qwen/Qwen3.5-0.8B model for the same three frozen ENG003 matrices and
+validate full-model CUDA execution and behavioral correctness.
+
+GPU004 is a correctness/integration experiment.
+
+GPU004 does NOT benchmark or claim:
+- GPU latency improvement
+- GPU throughput improvement
+- GPU memory advantage
+- whole-model compression
+- broad GPU performance generalization
+
+
+FROZEN PARENT
+-------------
+GPU003 commit:
+
+65395f8c1103ea9e0cd9bc9f454dfee20f576d35
+
+GPU003 had already established direct packed-operator bit-exactness
+against frozen OPT006 arithmetic.
+
+
+CONTROLLED VARIABLE
+-------------------
+GPU004 changes only model integration of the already-validated GPU003
+CUDA packed operator.
+
+Unchanged:
+- model: Qwen/Qwen3.5-0.8B
+- ENG003 packed checkpoint
+- selected matrices
+- packed 2-bit code representation
+- ternary code mapping
+- FP16 scales
+- group size 128
+- frozen scientific quantizer
+- GPU003 CUDA arithmetic
+
+No quantizer change was made.
+No packed-format change was made.
+No group-size change was made.
+No target-coverage change was made.
+No CUDA-kernel optimization was introduced.
+
+
+HARDWARE / CUDA
+---------------
+GPU:
+NVIDIA Quadro P1000
+
+Compute capability:
+6.1
+
+PyTorch:
+2.14.0+cu126
+
+PyTorch CUDA:
+12.6
+
+CUDA extension toolchain:
+CUDA 12.6
+
+Target architecture:
+sm_61
+
+
+SELECTED MATRICES
+-----------------
+1.
+model.layers.3.self_attn.k_proj
+
+2.
+model.layers.4.linear_attn.out_proj
+
+3.
+model.layers.4.linear_attn.in_proj_qkv
+
+Total selected matrices:
+3
+
+Total selected parameters:
+8,912,896
+
+
+PACKED STORAGE
+--------------
+Persistent packed bytes:
+2,367,488
+
+FP16-equivalent selected-weight bytes:
+17,825,792
+
+Selected-weight storage compression:
+7.529412x
+
+This compression factor applies only to the three selected matrices.
+
+It is NOT a whole-model compression factor.
+
+
+GPU004 IMPLEMENTATION
+---------------------
+GPU004 introduced a PyTorch nn.Module wrapper around the frozen GPU003
+CUDA operator.
+
+Persistent representation:
+
+packed 2-bit ternary codes
++
+FP16 reconstruction scales
+
+The wrapper:
+- accepts CUDA FP16 activation tensors
+- preserves arbitrary leading activation dimensions
+- flattens activations to 2-D for the CUDA operator
+- invokes the frozen GPU003 packed CUDA operator
+- restores the original leading dimensions
+- supports optional bias
+- keeps packed codes and scales as registered buffers
+
+GPU004 also introduced an atomic runtime loader.
+
+Loader phases:
+
+Phase 1:
+validate every selected checkpoint entry and original model target
+
+Phase 2A:
+construct every CUDA packed replacement module
+
+Phase 2B:
+install replacements only after all validation and construction succeeds
+
+Therefore validation/construction failure does not partially mutate the
+model.
+
+
+GATE 1 — CUDA LINEAR WRAPPER
+----------------------------
+Target:
+model.layers.3.self_attn.k_proj
+
+Shape:
+512 x 1024
+
+Group size:
+128
+
+Input shape:
+2 x 7 x 1024
+
+Candidate output shape:
+2 x 7 x 512
+
+Compared outputs:
+7,168
+
+Exact mismatches:
+0
+
+Max absolute difference:
+0.0000000000
+
+Mean absolute difference:
+0.0000000000
+
+Bit-exact vs frozen OPT006 packed arithmetic:
+YES
+
+RESULT:
+PASS
+
+
+GATE 2 — THREE-MATRIX RUNTIME INTEGRATION
+-----------------------------------------
+Selected matrices:
+3
+
+Replaced matrices:
+3
+
+Replaced parameters:
+8,912,896
+
+Persistent packed bytes:
+2,367,488
+
+FP16-equivalent bytes:
+17,825,792
+
+Selected-weight storage compression:
+7.529412x
+
+Installed module type:
+CUDAPackedTernaryLinear
+
+All packed-code buffers:
+uint8
+
+All scale buffers:
+FP16
+
+CPU-resident replacement buffers before CUDA migration:
+PASS
+
+CUDA-resident replacement buffers after CUDA migration:
+PASS
+
+RESULT:
+PASS
+
+
+GATE 3 — SINGLE-PROMPT FULL-MODEL CUDA VALIDATION
+-------------------------------------------------
+Prompt:
+
+A box contains 12 red balls and 8 blue balls. How many balls are in the box?
+
+Input tokens:
+22
+
+Reference:
+frozen OPT006 packed runtime on CPU
+
+Candidate:
+GPU004 packed runtime with full surrounding model on CUDA
+
+Reference logits shape:
+1 x 22 x 248320
+
+Candidate logits shape:
+1 x 22 x 248320
+
+Logit dtype:
+FP16
+
+Compared logits:
+5,463,040
+
+Exact mismatches:
+4,354,880
+
+Exact logit agreement:
+20.284677%
+
+Maximum absolute difference:
+0.0273437500
+
+Mean absolute difference:
+0.0032623971
+
+Top-1 matches:
+22 / 22
+
+Top-1 agreement:
+100.000000%
+
+Candidate execution:
+finite
+
+CUDA OOM:
+NO
+
+Device mismatch:
+NO
+
+CUDA kernel failure:
+NO
+
+RESULT:
+PASS
+
+
+FULL-MODEL EXACTNESS INTERPRETATION
+----------------------------------
+GPU003 directly isolated the selected packed operator and established
+bit-exact arithmetic against frozen OPT006.
+
+GPU004 full-model validation executes the surrounding model on different
+devices:
+
+Reference:
+CPU
+
+Candidate:
+CUDA
+
+Therefore ordinary FP16 CPU-vs-CUDA numerical differences outside the
+three selected packed operators can cause full-model logit differences.
+
+For this reason GPU004 does NOT claim full-model bit-exactness between
+CPU and CUDA.
+
+The full-model comparison is used as a CUDA integration and behavioral
+correctness gate.
+
+
+GATE 4 — MULTI-PROMPT FULL-MODEL VALIDATION
+-------------------------------------------
+Prompts:
+5
+
+Prompt 1:
+The capital of France is
+
+Tokens:
+5
+
+Compared logits:
+1,241,600
+
+Exact agreement:
+21.412371%
+
+Max absolute difference:
+0.0234375000
+
+Mean absolute difference:
+0.0030603279
+
+Top-1:
+5 / 5
+
+
+Prompt 2:
+17 multiplied by 23 equals
+
+Tokens:
+8
+
+Compared logits:
+1,986,560
+
+Exact agreement:
+14.309812%
+
+Max absolute difference:
+0.0488281250
+
+Mean absolute difference:
+0.0038381385
+
+Top-1:
+8 / 8
+
+
+Prompt 3:
+Explain why regular exercise is important for health.
+
+Tokens:
+10
+
+Compared logits:
+2,483,200
+
+Exact agreement:
+17.912089%
+
+Max absolute difference:
+0.0468750000
+
+Mean absolute difference:
+0.0031885084
+
+Top-1:
+10 / 10
+
+
+Prompt 4:
+A train travels 60 miles per hour for 3 hours. How far does it travel?
+
+Tokens:
+20
+
+Compared logits:
+4,966,400
+
+Exact agreement:
+19.057627%
+
+Max absolute difference:
+0.0351562500
+
+Mean absolute difference:
+0.0034043707
+
+Top-1:
+20 / 20
+
+
+Prompt 5:
+Write a short sentence about artificial intelligence.
+
+Tokens:
+8
+
+Compared logits:
+1,986,560
+
+Exact agreement:
+16.930926%
+
+Max absolute difference:
+0.0517578125
+
+Mean absolute difference:
+0.0039814353
+
+Top-1:
+8 / 8
+
+
+MULTI-PROMPT AGGREGATE
+----------------------
+Total prompts:
+5
+
+Total compared logits:
+12,664,320
+
+Total exact mismatches:
+10,386,577
+
+Global exact agreement:
+17.985514%
+
+Global maximum absolute difference:
+0.0517578125
+
+Global mean absolute difference:
+0.0034868770
+
+All candidate logits finite:
+YES
+
+Total top-1 matches:
+51 / 51
+
+Top-1 agreement:
+100.000000%
+
+RESULT:
+PASS
+
+
+COMBINED GPU004 EVIDENCE
+------------------------
+Wrapper-level exact comparison:
+7,168 outputs
+0 mismatches
+bit-exact vs frozen OPT006 packed arithmetic
+
+Single-prompt full-model comparison:
+5,463,040 logits
+22 / 22 top-1 agreement
+
+Multi-prompt full-model comparison:
+12,664,320 logits
+51 / 51 top-1 agreement
+
+Full-model CUDA execution completed successfully using all three selected
+packed CUDA replacement modules.
+
+
+CLAIM DISCIPLINE
+----------------
+GPU004 supports the following claims:
+
+1. The frozen GPU003 packed CUDA operator can be integrated into
+   Qwen/Qwen3.5-0.8B as PyTorch replacement modules.
+
+2. The same three frozen ENG003 matrices can remain represented by packed
+   2-bit ternary codes plus FP16 scales during CUDA model execution.
+
+3. The GPU004 wrapper is bit-exact against frozen OPT006 packed arithmetic
+   for the isolated wrapper validation.
+
+4. Full-model CUDA execution succeeds with all three selected packed
+   replacement modules.
+
+5. Across the five-prompt validation set, candidate logits remained finite
+   and top-1 agreement with the frozen OPT006 CPU reference was 51/51.
+
+GPU004 does NOT support the following claims:
+
+- full-model CPU-vs-CUDA bit-exactness
+- GPU latency improvement
+- GPU throughput improvement
+- GPU memory advantage
+- whole-model compression
+- broad GPU performance generalization
+- exactness against reconstructed FP16 weights
+
+
+WARNINGS
+--------
+Transformers emitted the existing image_like_kwargs documentation warning.
+
+causal_conv1d was unavailable and Transformers used its reference PyTorch
+implementation.
+
+flash-linear-attention was unavailable and Transformers used its reference
+PyTorch implementation.
+
+These warnings did not prevent successful GPU004 correctness validation.
+
+
+CONCLUSION
+----------
+GPU004 successfully integrates the frozen GPU003 packed ternary CUDA
+operator into the full Qwen/Qwen3.5-0.8B model for all three frozen
+ENG003 target matrices.
+
+The isolated GPU004 wrapper remained bit-exact against frozen OPT006
+packed arithmetic.
+
+Full-model CUDA execution completed successfully.
+
+Across five validation prompts, all candidate logits were finite and
+top-1 agreement was 51/51.
+
+GPU004 therefore passes its correctness and model-integration objective.
+
+Performance evaluation is intentionally deferred to GPU005.

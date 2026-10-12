@@ -1,0 +1,12 @@
+===== GPU004 LINEAR WRAPPER VALIDATION =====
+Target: model.layers.3.self_attn.k_proj
+Shape: (512, 1024)
+Group size: 128
+Candidate shape: (2, 7, 512)
+Candidate dtype: torch.float16
+Compared outputs: 7168
+Exact mismatches: 0
+Max abs difference: 0.0000000000
+Mean abs difference: 0.0000000000
+Bit-exact vs OPT006: YES
+GPU004 LINEAR WRAPPER: PASS

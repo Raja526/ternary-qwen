@@ -1,0 +1,57 @@
+
+====================================================================================================
+GPU004 — FULL-MODEL CUDA CORRECTNESS
+====================================================================================================
+Model                   : Qwen/Qwen3.5-0.8B
+Checkpoint              : results/ENG003_multimatrix_checkpoint.pt
+Selected matrices       : 3
+CUDA available          : True
+GPU                     : Quadro P1000
+Capability              : (6, 1)
+Input tokens            : 22
+
+====================================================================================================
+PATH A — FROZEN OPT006 CPU PACKED REFERENCE
+====================================================================================================
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights:   9%|▉         | 30/320 [00:00<00:00, 299.64it/s]Loading weights:  69%|██████▉   | 221/320 [00:00<00:00, 1245.81it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 1176.63it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+Replaced matrices       : 3
+Replaced parameters     : 8912896
+Reference logits shape  : (1, 22, 248320)
+Reference logits dtype  : torch.float16
+
+====================================================================================================
+PATH B — GPU004 CUDA PACKED RUNTIME
+====================================================================================================
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights:   0%|          | 1/320 [00:00<01:11,  4.48it/s]Loading weights:  85%|████████▌ | 273/320 [00:00<00:00, 1047.01it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 890.92it/s] 
+Replaced matrices       : 3
+Replaced parameters     : 8912896
+Persistent packed bytes : 2367488
+FP16 equivalent bytes   : 17825792
+Candidate logits shape  : (1, 22, 248320)
+Candidate logits dtype  : torch.float16
+CUDA allocated before   : 1512944640
+CUDA allocated after    : 1521464320
+CUDA reserved before    : 1581252608
+CUDA reserved after     : 1625292800
+
+====================================================================================================
+OPT006 CPU VS GPU004 CUDA LOGIT COMPARISON
+====================================================================================================
+Compared logits         : 5463040
+Exact mismatches        : 4354880
+Exact logit agreement   : 20.284677%
+Max abs difference      : 0.0273437500
+Mean abs difference     : 0.0032623971
+Top-1 matches           : 22/22
+Top-1 agreement         : 100.000000%
+
+Interpretation:
+- GPU003 selected packed operator arithmetic was already validated bit-exact against OPT006.
+- This GPU004 comparison executes the surrounding model on different devices (CPU vs CUDA).
+- Therefore full-model CPU-vs-CUDA logit bit-exactness is not required by this gate.
+- No GPU performance or memory-advantage claim is made.
+
+GPU004 FULL-MODEL CUDA CORRECTNESS: PASS

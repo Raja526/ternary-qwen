@@ -1,0 +1,104 @@
+
+====================================================================================================
+GPU004 — MULTI-PROMPT CUDA VALIDATION
+====================================================================================================
+Model              : Qwen/Qwen3.5-0.8B
+Prompts            : 5
+Selected matrices  : 3
+GPU                : Quadro P1000
+Capability         : (6, 1)
+
+====================================================================================================
+PATH A — FROZEN OPT006 CPU PACKED REFERENCE
+====================================================================================================
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights:  45%|████▍     | 143/320 [00:00<00:00, 1429.08it/s]Loading weights:  89%|████████▉ | 286/320 [00:00<00:00, 1419.55it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 1429.25it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+Replaced matrices  : 3
+Reference prompt 1: (1, 5, 248320)
+Reference prompt 2: (1, 8, 248320)
+Reference prompt 3: (1, 10, 248320)
+Reference prompt 4: (1, 20, 248320)
+Reference prompt 5: (1, 8, 248320)
+
+====================================================================================================
+PATH B — GPU004 CUDA PACKED RUNTIME
+====================================================================================================
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights:   0%|          | 1/320 [00:00<00:49,  6.48it/s]Loading weights:  75%|███████▍  | 239/320 [00:00<00:00, 1145.91it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 1024.42it/s]
+Replaced matrices  : 3
+Candidate prompt 1: (1, 5, 248320)
+Candidate prompt 2: (1, 8, 248320)
+Candidate prompt 3: (1, 10, 248320)
+Candidate prompt 4: (1, 20, 248320)
+Candidate prompt 5: (1, 8, 248320)
+
+====================================================================================================
+PER-PROMPT COMPARISON
+====================================================================================================
+
+Prompt 1: The capital of France is
+  Shape                : (1, 5, 248320)
+  Candidate finite     : True
+  Compared logits      : 1241600
+  Exact mismatches     : 975744
+  Exact agreement      : 21.412371%
+  Max abs difference   : 0.0234375000
+  Mean abs difference  : 0.0030603279
+  Top-1 agreement      : 5/5 (100.000000%)
+
+Prompt 2: 17 multiplied by 23 equals
+  Shape                : (1, 8, 248320)
+  Candidate finite     : True
+  Compared logits      : 1986560
+  Exact mismatches     : 1702287
+  Exact agreement      : 14.309812%
+  Max abs difference   : 0.0488281250
+  Mean abs difference  : 0.0038381385
+  Top-1 agreement      : 8/8 (100.000000%)
+
+Prompt 3: Explain why regular exercise is important for health.
+  Shape                : (1, 10, 248320)
+  Candidate finite     : True
+  Compared logits      : 2483200
+  Exact mismatches     : 2038407
+  Exact agreement      : 17.912089%
+  Max abs difference   : 0.0468750000
+  Mean abs difference  : 0.0031885084
+  Top-1 agreement      : 10/10 (100.000000%)
+
+Prompt 4: A train travels 60 miles per hour for 3 hours. How far does it travel?
+  Shape                : (1, 20, 248320)
+  Candidate finite     : True
+  Compared logits      : 4966400
+  Exact mismatches     : 4019922
+  Exact agreement      : 19.057627%
+  Max abs difference   : 0.0351562500
+  Mean abs difference  : 0.0034043707
+  Top-1 agreement      : 20/20 (100.000000%)
+
+Prompt 5: Write a short sentence about artificial intelligence.
+  Shape                : (1, 8, 248320)
+  Candidate finite     : True
+  Compared logits      : 1986560
+  Exact mismatches     : 1650217
+  Exact agreement      : 16.930926%
+  Max abs difference   : 0.0517578125
+  Mean abs difference  : 0.0039814353
+  Top-1 agreement      : 8/8 (100.000000%)
+
+====================================================================================================
+AGGREGATE
+====================================================================================================
+Total prompts           : 5
+Total compared logits   : 12664320
+Total exact mismatches  : 10386577
+Global exact agreement  : 17.985514%
+Global max abs diff     : 0.0517578125
+Global mean abs diff    : 0.0034868770
+All candidate finite    : True
+Total top-1 agreement   : 51/51 (100.000000%)
+
+No GPU latency, throughput, or memory-advantage claim is made by GPU004.
+
+GPU004 MULTI-PROMPT VALIDATION: PASS

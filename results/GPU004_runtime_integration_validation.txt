@@ -1,0 +1,31 @@
+===== GPU004 RUNTIME INTEGRATION VALIDATION =====
+Model: Qwen/Qwen3.5-0.8B
+Checkpoint: results/ENG003_multimatrix_checkpoint.pt
+Selected matrices: 3
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights:   0%|          | 1/320 [00:00<04:31,  1.17it/s]Loading weights:  79%|███████▉  | 253/320 [00:00<00:00, 355.85it/s]Loading weights: 100%|██████████| 320/320 [00:01<00:00, 298.93it/s]
+
+Before replacement:
+model.layers.3.self_attn.k_proj Linear cpu torch.float16
+model.layers.4.linear_attn.out_proj Linear cpu torch.float16
+model.layers.4.linear_attn.in_proj_qkv Linear cpu torch.float16
+
+Load result:
+Loaded modules: ('model.layers.3.self_attn.k_proj', 'model.layers.4.linear_attn.out_proj', 'model.layers.4.linear_attn.in_proj_qkv')
+Replaced matrices: 3
+Replaced parameters: 8912896
+Persistent packed bytes: 2367488
+FP16 equivalent bytes: 17825792
+Selected-weight compression: 7.529412x
+
+After replacement:
+model.layers.3.self_attn.k_proj CUDAPackedTernaryLinear codes= (131072,) torch.uint8 cpu scales= (4096,) torch.float16 cpu
+model.layers.4.linear_attn.out_proj CUDAPackedTernaryLinear codes= (524288,) torch.uint8 cpu scales= (16384,) torch.float16 cpu
+model.layers.4.linear_attn.in_proj_qkv CUDAPackedTernaryLinear codes= (1572864,) torch.uint8 cpu scales= (49152,) torch.float16 cpu
+
+CUDA migration:
+model.layers.3.self_attn.k_proj codes= cuda:0 scales= cuda:0
+model.layers.4.linear_attn.out_proj codes= cuda:0 scales= cuda:0
+model.layers.4.linear_attn.in_proj_qkv codes= cuda:0 scales= cuda:0
+
+GPU004 RUNTIME INTEGRATION: PASS
