@@ -1,0 +1,118 @@
+GPU008 EXPERIMENT REPORT
+========================
+
+STATUS
+------
+PASS
+
+EXPERIMENT
+----------
+GPU008 — Full-model retained GPU003/GPU004 runtime validation
+
+FROZEN RESEARCH PARENT
+----------------------
+77eb4a94352eb7c166578d7602447efb338ae580
+
+DECISION CONTEXT
+----------------
+GPU007 was rejected because its single parallel-K CUDA strategy
+was slower than frozen GPU003 for all three selected matrices.
+GPU003/GPU004 remains the retained CUDA deployment implementation.
+GPU008 introduces no optimization.
+
+PROTOCOL
+--------
+Model: Qwen/Qwen3.5-0.8B
+GPU: Quadro P1000
+Compute capability: (6, 1)
+PyTorch: 2.14.0+cu126
+PyTorch CUDA: 12.6
+Warmups per prompt and condition: 3
+Timed forwards per prompt and condition: 10
+CUDA was synchronized immediately before and after every timed forward.
+The baseline and packed models were loaded as separate full-model conditions.
+
+CHECKPOINT IDENTITY
+-------------------
+Path: results/ENG003_multimatrix_checkpoint.pt
+SHA-256: 8e35aaea4e47a68363a8951fa425874a1e35929a19c277335a260bb20a9cb546
+Model metadata: Qwen/Qwen3.5-0.8B
+Selected matrices replaced: 3
+Selected parameters: 8,912,896
+Persistent packed bytes: 2,367,488
+FP16-equivalent selected-weight bytes: 17,825,792
+The selected-weight storage factor is not whole-model compression.
+
+PER-PROMPT RESULTS
+------------------
+short: What is 2 + 2?
+  Input tokens: 8
+  FP16 mean / median / stdev: 114.376822 / 114.362090 / 0.272749 ms
+  FP16 min / max: 113.963351 / 114.903444 ms
+  Packed mean / median / stdev: 117.373794 / 117.378481 / 0.331213 ms
+  Packed min / max: 116.876282 / 117.842799 ms
+  Mean latency change: +2.620%
+  Median latency change: +2.638%
+  FP16 ready / timed peak: 1459.099 / 1503.166 MiB
+  Packed ready / timed peak: 1451.856 / 1487.799 MiB
+  Ready allocation difference: -7.242 MiB
+  Timed peak allocation difference: -15.367 MiB
+  Finite FP16 / packed: True / True
+  Diagnostic top-1 agreement: 8/8
+
+medium: A box contains 12 red balls and 8 blue balls. How many balls are in the box?
+  Input tokens: 22
+  FP16 mean / median / stdev: 127.558327 / 127.452036 / 0.250137 ms
+  FP16 min / max: 127.341566 / 128.052219 ms
+  Packed mean / median / stdev: 137.117991 / 137.058855 / 0.304527 ms
+  Packed min / max: 136.741793 / 137.581672 ms
+  Mean latency change: +7.494%
+  Median latency change: +7.538%
+  FP16 ready / timed peak: 1467.224 / 1517.628 MiB
+  Packed ready / timed peak: 1451.856 / 1502.261 MiB
+  Ready allocation difference: -15.367 MiB
+  Timed peak allocation difference: -15.367 MiB
+  Finite FP16 / packed: True / True
+  Diagnostic top-1 agreement: 21/22
+
+long: Explain carefully how a small language model could compare two candidate answers, identify the relevant facts in a word problem, and produce a concise final response while avoiding unsupported claims. Use a clear sequence of reasoning steps and distinguish observations from conclusions.
+  Input tokens: 47
+  FP16 mean / median / stdev: 179.283418 / 179.290267 / 0.443425 ms
+  FP16 min / max: 178.630335 / 179.895106 ms
+  Packed mean / median / stdev: 198.708732 / 198.538640 / 0.688432 ms
+  Packed min / max: 197.983982 / 199.858433 ms
+  Mean latency change: +10.835%
+  Median latency change: +10.736%
+  FP16 ready / timed peak: 1467.224 / 1553.492 MiB
+  Packed ready / timed peak: 1451.856 / 1538.125 MiB
+  Ready allocation difference: -15.367 MiB
+  Timed peak allocation difference: -15.367 MiB
+  Finite FP16 / packed: True / True
+  Diagnostic top-1 agreement: 44/47
+
+VALIDATION GATES
+----------------
+- Exactly three selected matrices and exact target order: PASS
+- Checkpoint model and selected-target identity: PASS
+- Packed codes, scales, group size, and reserved-code validation: PASS
+- Retained GPU004 wrapper with frozen GPU003 CUDA operator: PASS
+- No GPU007 runtime selected: PASS
+- No ordinary FP16 fallback for selected packed matrices: PASS
+- Finite logits for all prompts and conditions: PASS
+- CUDA-synchronized timing with exact warmup/repetition counts: PASS
+- Top-1 comparison recorded as diagnostic only: PASS
+
+INTERPRETATION
+--------------
+All latency and memory observations are protocol-specific to the
+Quadro P1000. Lower allocated CUDA memory, if observed, is not
+automatically a general VRAM-reduction claim. Negative performance
+results remain valid research results.
+
+DECISION
+--------
+Retain GPU003/GPU004 as the CUDA deployment implementation.
+
+FINAL RESULT
+------------
+GPU008: PASS
