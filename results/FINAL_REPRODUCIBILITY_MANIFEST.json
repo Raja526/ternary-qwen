@@ -1,0 +1,108 @@
+{
+  "record": "FINAL_PROJECT_REPRODUCIBILITY_MANIFEST",
+  "status": "complete",
+  "final_parent": {
+    "experiment": "GPU008",
+    "sha": "e9c641cc4eafc9ed3541483ec0888f234a7f1b65"
+  },
+  "milestones": {
+    "scientific": "EXP001-EXP026",
+    "engineering": "ENG001-ENG013",
+    "cpu_optimization": "OPT001-OPT010 plus final CPU validation/consolidation",
+    "gpu": "GPU001-GPU008"
+  },
+  "frozen_gpu_commits": {
+    "GPU001": "f9851d990b77c48259be8587474bc51f496c31b8",
+    "GPU002": "6138dfccbebb271c95de0bcf4e85abb5e4d61c05",
+    "GPU003": "65395f8c1103ea9e0cd9bc9f454dfee20f576d35",
+    "GPU004": "ab900d32b68a54a353678eac373b713c1b2e150d",
+    "GPU005": "d51ecc241a9505049ccb09dc9c162cc4a4e7bcfa",
+    "GPU006": "627f37809cddaec7fd6f5900e07a90ae4ebb6fae",
+    "GPU007": "77eb4a94352eb7c166578d7602447efb338ae580",
+    "GPU008": "e9c641cc4eafc9ed3541483ec0888f234a7f1b65"
+  },
+  "cpu_commits": {
+    "OPT008": "d3a870820d26e18bf0a40f5d21b3bc48c909e874",
+    "final_cpu_validation": "7331736422ec8321686e215ac53a1d9e33c25e59",
+    "final_cpu_consolidation": "d1fe588c16a924915627a83a7b91e9d08dfa0094"
+  },
+  "retained_implementations": {
+    "quantizer": "ternary/quantizer.py",
+    "packing": "packed_ternary/packing.py",
+    "cpu": "OPT008 explicit AVX2 packed-code decode via packed_ternary/csrc/packed_ternary_cpu_avx2.cpp",
+    "cuda_operator": "packed_ternary/csrc/packed_ternary_cuda.cu",
+    "cuda_wrapper": "packed_ternary/gpu004_linear.py",
+    "cuda_loader": "packed_ternary/gpu004_runtime_loader.py",
+    "rejected_cuda": "GPU007 parallel-K strategy"
+  },
+  "quantization": {
+    "group_size": 128,
+    "threshold_multiplier": 0.5,
+    "codes": {
+      "-1": "00",
+      "0": "01",
+      "+1": "10",
+      "reserved": "11"
+    }
+  },
+  "selected_matrices": [
+    "model.layers.3.self_attn.k_proj",
+    "model.layers.4.linear_attn.out_proj",
+    "model.layers.4.linear_attn.in_proj_qkv"
+  ],
+  "selected_parameters": 8912896,
+  "checkpoint": {
+    "path": "results/ENG003_multimatrix_checkpoint.pt",
+    "sha256": "8e35aaea4e47a68363a8951fa425874a1e35929a19c277335a260bb20a9cb546",
+    "model": "Qwen/Qwen3.5-0.8B"
+  },
+  "storage": {
+    "fp16_selected_weight_bytes": 17825792,
+    "packed_selected_weight_bytes": 2367488,
+    "selected_weight_compression_factor": 7.529412,
+    "scope": "selected weights only"
+  },
+  "cpu_results": {
+    "original_opt008_mean_change_percent": -8.307,
+    "fresh_final_validation_mean_change_percent": -3.393,
+    "fresh_final_validation_median_change_percent": -2.332,
+    "interpretation": "separate protocol-specific measurements; not averaged"
+  },
+  "gpu_results": {
+    "GPU005_mean_change_percent": 7.511,
+    "GPU006_dominant_target": "model.layers.4.linear_attn.in_proj_qkv",
+    "GPU006_fp16_ms": 0.465736,
+    "GPU006_gpu003_ms": 8.300687,
+    "GPU006_change_percent": 1682.274,
+    "GPU007_decision": "rejected; correct but slower for all three matrices",
+    "GPU008_retained_runtime": "GPU004 wrapper with frozen GPU003 CUDA operator",
+    "GPU008": {
+      "short_8_tokens": {"fp16_ms": 114.376822, "packed_ms": 117.373794, "change_percent": 2.620},
+      "medium_22_tokens": {"fp16_ms": 127.558327, "packed_ms": 137.117991, "change_percent": 7.494},
+      "long_47_tokens": {"fp16_ms": 179.283418, "packed_ms": 198.708732, "change_percent": 10.835}
+    },
+    "hardware_scope": "Quadro P1000; protocol-specific observations"
+  },
+  "historical_result_roots": {
+    "scientific": "results/001_cpu_fp32_baseline.md through results/026_final_statistical_consolidation.txt/json",
+    "engineering": "results/ENG001_* through results/ENG013_*",
+    "cpu": "results/OPT001_* through results/OPT008_* plus final CPU reports",
+    "gpu": "results/GPU001_* through results/GPU008_*"
+  },
+  "final_artifacts": [
+    "results/FINAL_PROJECT_REPORT.md",
+    "results/FINAL_REPRODUCIBILITY_MANIFEST.json",
+    "results/FINAL_VALIDATION.txt"
+  ],
+  "claim_boundaries": [
+    "No universal ternary GPU speedup claim",
+    "No universal CPU speedup claim",
+    "No whole-model 7.529412x compression claim",
+    "No universal VRAM reduction claim",
+    "No modern-datacenter-GPU superiority claim",
+    "No FP16/ternary bit-exactness claim",
+    "No equivalence claim based merely on p >= 0.05",
+    "No accuracy improvement claim from positive deltas",
+    "No deployment speedup claim from numerical ternarization alone"
+  ]
+}

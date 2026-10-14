@@ -1,0 +1,85 @@
+FINAL PROJECT VALIDATION
+========================
+
+STATUS
+------
+PASS — reproducibility and consolidation validation only.
+
+START-STATE
+-----------
+Frozen GPU008 parent required:
+e9c641cc4eafc9ed3541483ec0888f234a7f1b65
+
+The final artifacts were prepared from that frozen state. No experiment was
+rerun and no GPU009 or optimization artifact was created.
+
+FROZEN HISTORY
+--------------
+Scientific experiment record: EXP001–EXP026 present in results/.
+Engineering record: ENG001–ENG013 present in results/.
+CPU record: OPT001–OPT010 plus final CPU validation/consolidation present.
+GPU record: GPU001–GPU008 present with frozen experiment reports/raw files.
+
+Frozen GPU parent chain verified:
+
+GPU001  f9851d990b77c48259be8587474bc51f496c31b8
+GPU002  6138dfccbebb271c95de0bcf4e85abb5e4d61c05
+GPU003  65395f8c1103ea9e0cd9bc9f454dfee20f576d35
+GPU004  ab900d32b68a54a353678eac373b713c1b2e150d
+GPU005  d51ecc241a9505049ccb09dc9c162cc4a4e7bcfa
+GPU006  627f37809cddaec7fd6f5900e07a90ae4ebb6fae
+GPU007  77eb4a94352eb7c166578d7602447efb338ae580
+GPU008  e9c641cc4eafc9ed3541483ec0888f234a7f1b65
+
+RETAINED IMPLEMENTATIONS
+-------------------------
+Quantizer path present: ternary/quantizer.py
+Packed representation path present: packed_ternary/packing.py
+Retained CPU AVX2 source present: packed_ternary/csrc/packed_ternary_cpu_avx2.cpp
+Retained CUDA source present: packed_ternary/csrc/packed_ternary_cuda.cu
+Retained GPU004 wrapper present: packed_ternary/gpu004_linear.py
+Retained GPU004 loader present: packed_ternary/gpu004_runtime_loader.py
+GPU007 explicitly recorded as rejected: PASS
+
+CHECKPOINT
+----------
+Path: results/ENG003_multimatrix_checkpoint.pt
+SHA-256:
+8e35aaea4e47a68363a8951fa425874a1e35929a19c277335a260bb20a9cb546
+Expected selected matrices: 3
+Expected selected parameters: 8,912,896
+
+CONSOLIDATED MEASUREMENTS
+-------------------------
+Selected-weight storage compression: 7.529412x, selected weights only.
+Original OPT008 mean change: -8.307%.
+Fresh final CPU mean/median change: -3.393% / -2.332%.
+GPU005 mean change: +7.511%.
+GPU006 dominant target: model.layers.4.linear_attn.in_proj_qkv.
+GPU007: correct but slower for all three matrices; rejected.
+GPU008: retained GPU003/GPU004 full-model validation; no optimization.
+
+VALIDATION BOUNDARIES
+---------------------
+Historical measurements were preserved and not regenerated.
+Repeated measurements remain protocol-specific and separate.
+FP16/packed top-1 agreement is diagnostic only.
+No whole-model compression or universal VRAM claim is made.
+No universal CPU/GPU speedup claim is made.
+Negative results are preserved.
+
+FINAL ARTIFACT CHECKS
+---------------------
+Manifest is JSON and records frozen SHAs, checkpoint identity, retained
+implementations, selected matrices, measurements, and claim boundaries.
+Report records the complete conclusions and unsupported claims.
+This validation record documents the non-regenerating consolidation gates.
+
+FINAL FREEZE ALLOWLIST
+----------------------
+results/FINAL_PROJECT_REPORT.md
+results/FINAL_REPRODUCIBILITY_MANIFEST.json
+results/FINAL_VALIDATION.txt
+
+The staged set must equal exactly the three paths above. research_agent.py
+is local automation and must remain unstaged.
