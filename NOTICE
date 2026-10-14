@@ -1,0 +1,13 @@
+Ternary Qwen: Packed 2-Bit Ternary Inference on CPU and CUDA
+
+Qwen3.5-0.8B is developed by the Qwen Team and is licensed under the
+Apache License 2.0. See the upstream model repository for its applicable
+license and terms.
+
+This repository contains independent research and engineering work on
+ternary quantization, packed representation, CPU execution, CUDA execution,
+benchmarking, and analysis built around Qwen3.5-0.8B.
+
+This project is not an official Qwen or Alibaba project and does not imply
+endorsement, affiliation, collaboration, or sponsorship by the Qwen Team,
+Alibaba, or the upstream model authors.
