@@ -1,0 +1,8 @@
+# CPU-first runtime requirements for the selected-matrix packed artifact.
+# The explicit CPU index and +cpu build prevent pip from resolving a CUDA
+# wheel when this file is installed on Linux.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.14.1+cpu
+transformers
+accelerate
+sentencepiece

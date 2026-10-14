@@ -1,0 +1,42 @@
+{
+  "format_version": 1,
+  "artifact_version": "v1.0",
+  "base_model": "Qwen/Qwen3.5-0.8B",
+  "checkpoint_sha256": "8e35aaea4e47a68363a8951fa425874a1e35929a19c277335a260bb20a9cb546",
+  "group_size": 128,
+  "threshold_multiplier": 0.5,
+  "encoding": {
+    "bits_per_value": 2,
+    "values": {
+      "-1": "00",
+      "0": "01",
+      "+1": "10",
+      "reserved": "11"
+    },
+    "scale_dtype": "float16"
+  },
+  "selected_parameter_count": 8912896,
+  "fp16_equivalent_bytes": 17825792,
+  "packed_selected_bytes": 2367488,
+  "selected_weight_compression": 7.529412,
+  "selected_modules": [
+    {
+      "name": "model.layers.3.self_attn.k_proj",
+      "shape": [512, 1024],
+      "parameters": 524288
+    },
+    {
+      "name": "model.layers.4.linear_attn.out_proj",
+      "shape": [1024, 2048],
+      "parameters": 2097152
+    },
+    {
+      "name": "model.layers.4.linear_attn.in_proj_qkv",
+      "shape": [6144, 1024],
+      "parameters": 6291456
+    }
+  ],
+  "research_freeze_commit": "8af66b4621dcff440f862a3b1c13af24577e8396",
+  "github_release_commit": "ad66654dce5e7fdc695f6ae2305d789e40292ec3",
+  "github_tag": "v1.0"
+}
