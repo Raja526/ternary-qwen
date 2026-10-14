@@ -1,0 +1,96 @@
+GPU006 EXPERIMENT REPORT
+========================
+
+STATUS
+------
+PASS
+
+EXPERIMENT
+----------
+GPU006 — CUDA kernel bottleneck characterization
+
+FROZEN RESEARCH PARENT
+----------------------
+d51ecc241a9505049ccb09dc9c162cc4a4e7bcfa
+
+BRANCH
+------
+gpu006-kernel-bottleneck-characterization
+
+OBJECTIVE
+---------
+Measure the existing frozen GPU004 packed CUDA path separately for
+the three frozen ENG003 matrices against ordinary FP16 CUDA linear
+operations using the same captured activation tensor per matrix.
+GPU006 is measurement-only and does not optimize the CUDA kernel.
+
+PROTOCOL
+--------
+Model: Qwen/Qwen3.5-0.8B
+GPU: Quadro P1000
+Compute capability: (6, 1)
+PyTorch: 2.14.0+cu126
+PyTorch CUDA: 12.6
+Prompt: A box contains 12 red balls and 8 blue balls. How many balls are in the box?
+Input tokens: 22
+Activation tensors were captured from the actual model forward.
+Each FP16/packed pair received the same captured CUDA tensor.
+CUDA was synchronized immediately before and after every timed call.
+Warmups per implementation per matrix: 10
+Timed repetitions per implementation per matrix: 50
+
+MATRIX RESULTS
+--------------
+1. model.layers.3.self_attn.k_proj
+   Activation shape: (1, 22, 1024)
+   FP16 mean / median: 0.075201 / 0.069369 ms
+   Packed mean / median: 0.435834 / 0.444982 ms
+   Mean latency delta: +0.360633 ms (+479.559%)
+   FP16 ready / peak allocated: 22.666 / 22.720 MiB
+   Packed ready / peak allocated: 22.666 / 22.720 MiB
+   Ready memory delta: +0.000 MiB
+   Peak memory delta: +0.000 MiB
+   Finite outputs: FP16=yes, packed=yes
+
+2. model.layers.4.linear_attn.out_proj
+   Activation shape: (1, 22, 2048)
+   FP16 mean / median: 0.182419 / 0.182194 ms
+   Packed mean / median: 1.698569 / 1.684982 ms
+   Mean latency delta: +1.516150 ms (+831.134%)
+   FP16 ready / peak allocated: 27.176 / 27.283 MiB
+   Packed ready / peak allocated: 27.176 / 27.283 MiB
+   Ready memory delta: +0.000 MiB
+   Peak memory delta: +0.000 MiB
+   Finite outputs: FP16=yes, packed=yes
+
+3. model.layers.4.linear_attn.in_proj_qkv
+   Activation shape: (1, 22, 1024)
+   FP16 mean / median: 0.465736 / 0.456575 ms
+   Packed mean / median: 8.300687 / 8.290823 ms
+   Mean latency delta: +7.834951 ms (+1682.274%)
+   FP16 ready / peak allocated: 37.727 / 38.371 MiB
+   Packed ready / peak allocated: 37.727 / 38.371 MiB
+   Ready memory delta: +0.000 MiB
+   Peak memory delta: +0.000 MiB
+   Finite outputs: FP16=yes, packed=yes
+
+DOMINANT BOTTLENECK
+-------------------
+By largest packed-minus-FP16 mean latency delta: model.layers.4.linear_attn.in_proj_qkv
+This identifies the dominant measured matrix under this protocol;
+it does not establish a universal kernel bottleneck or speedup claim.
+
+VALIDATION GATES
+----------------
+- Exactly three frozen target matrices and exact target order: PASS
+- Actual activation shapes captured before benchmarking: PASS
+- Same captured activation tensor used for each pair: PASS
+- 10 warmups and 50 timed repetitions for every implementation: PASS
+- CUDA synchronization immediately before and after every timed call: PASS
+- Structural validation of FP16 and packed matrix layouts: PASS
+- Finite outputs and matching output shapes: PASS
+- No CUDA optimization performed: PASS
+
+FINAL RESULT
+------------
+GPU006: PASS
