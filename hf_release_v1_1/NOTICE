@@ -1,0 +1,17 @@
+Ternary Qwen: Selected-Matrix Packed Ternary CPU Runtime
+
+Qwen3.5-0.8B is developed by the Qwen Team and is licensed under the
+Apache License 2.0. See the upstream model repository for its applicable
+license and terms.
+
+This package contains independent research and engineering work on ternary
+quantization, packed representation, and CPU execution built around
+Qwen3.5-0.8B. It distributes only a packed artifact for three selected
+matrices and does not distribute the full upstream Qwen model.
+
+Users must obtain Qwen3.5-0.8B separately from its official upstream
+repository and comply with the upstream model license and terms.
+
+This project is not an official Qwen or Alibaba project and does not imply
+endorsement, affiliation, collaboration, or sponsorship by the Qwen Team,
+Alibaba, or the upstream model authors.

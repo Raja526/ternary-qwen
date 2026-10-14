@@ -1,0 +1,9 @@
+# CPU-first dependencies for Ternary Qwen v1.1.
+# Transformers 5.19.0 is the stable Qwen3.5-compatible release selected here.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch>=2.4,<3
+transformers==5.19.0
+accelerate>=1.1.0
+sentencepiece
+huggingface_hub>=1.31.0,<3.0
+tokenizers>=0.23.1,<0.24.0
