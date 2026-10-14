@@ -1,0 +1,241 @@
+GPU005 EXPERIMENT REPORT
+========================
+
+STATUS
+------
+PASS
+
+EXPERIMENT
+----------
+GPU005 — CUDA performance characterization
+
+FROZEN RESEARCH PARENT
+----------------------
+ab900d32b68a54a353678eac373b713c1b2e150d
+
+BRANCH
+------
+gpu005-performance-characterization
+
+OBJECTIVE
+---------
+Characterize end-to-end CUDA inference behavior of the frozen GPU004
+packed ternary runtime against an ordinary FP16 CUDA model under one
+controlled local protocol.
+
+This is the first GPU performance-characterization experiment.
+
+GPU005 does not modify:
+- the frozen scientific quantizer,
+- the 2-bit packed representation,
+- group size,
+- selected matrix coverage,
+- GPU003 CUDA arithmetic,
+- GPU004 runtime implementation.
+
+MODEL
+-----
+Qwen/Qwen3.5-0.8B
+
+GPU
+---
+Quadro P1000
+
+Compute capability:
+(6, 1)
+
+PyTorch:
+2.14.0+cu126
+
+PyTorch CUDA:
+12.6
+
+SELECTED MATRICES
+-----------------
+1. model.layers.3.self_attn.k_proj
+2. model.layers.4.linear_attn.out_proj
+3. model.layers.4.linear_attn.in_proj_qkv
+
+Selected matrices replaced in candidate:
+3
+
+Selected parameters:
+8,912,896
+
+Persistent packed bytes:
+2,367,488
+
+FP16-equivalent selected-weight bytes:
+17,825,792
+
+Selected-weight storage compression factor:
+7.529412x
+
+IMPORTANT:
+The storage factor above applies only to the selected weights.
+It is not a whole-model compression factor and is not, by itself,
+a VRAM-reduction claim.
+
+PROTOCOL
+--------
+Prompt:
+A box contains 12 red balls and 8 blue balls. How many balls are in the box?
+
+Input tokens:
+22
+
+Warmup forwards per condition:
+3
+
+Timed forwards per condition:
+10
+
+Timing method:
+Python perf_counter with torch.cuda.synchronize immediately before
+and after each measured full-model forward.
+
+BASELINE
+--------
+Ordinary FP16 Qwen model on CUDA.
+
+No selected module is replaced by the custom packed runtime.
+
+Mean latency:
+127.268672 ms
+
+Median latency:
+127.111718 ms
+
+Sample standard deviation:
+0.390349 ms
+
+Minimum:
+126.848968 ms
+
+Maximum:
+127.911318 ms
+
+CUDA allocated at ready state:
+1459.099 MiB
+
+CUDA timed peak allocated:
+1517.628 MiB
+
+CANDIDATE
+---------
+Same model family and CUDA environment with exactly the three frozen
+selected matrices replaced by the GPU004 packed CUDA runtime.
+
+Mean latency:
+136.827887 ms
+
+Median latency:
+136.876597 ms
+
+Sample standard deviation:
+0.218637 ms
+
+Minimum:
+136.465588 ms
+
+Maximum:
+137.224636 ms
+
+CUDA allocated at ready state:
+1451.856 MiB
+
+CUDA timed peak allocated:
+1502.261 MiB
+
+OBSERVED LATENCY CHANGE
+-----------------------
+Mean:
++7.511%
+
+Median:
++7.682%
+
+Interpretation:
+Under this specific protocol, the GPU004 packed path observed 7.511% higher mean end-to-end forward latency than the ordinary FP16 CUDA baseline.
+
+MEMORY DIAGNOSTICS
+------------------
+Ready allocated change:
+-7.242 MiB
+
+Timed peak allocated change:
+-15.367 MiB
+
+Interpretation:
+The candidate observed lower CUDA allocated memory in both the ready-state and timed-peak diagnostics under this run. This remains a protocol-specific observation, not a broad GPU-memory claim.
+
+BEHAVIOR DIAGNOSTIC
+-------------------
+Both baseline and candidate produced finite logits.
+
+Top-1 agreement:
+21/22
+
+This top-1 comparison is diagnostic only.
+
+The ordinary FP16 baseline and packed ternary candidate do not contain
+identical selected weights. Therefore GPU005 does not interpret this
+comparison as an isolated custom-kernel benchmark.
+
+CORRECTNESS BASIS
+-----------------
+GPU005 relies on the already-frozen GPU003/GPU004 correctness evidence.
+
+GPU003 established isolated packed CUDA arithmetic agreement with the
+frozen OPT006 packed arithmetic.
+
+GPU004 established successful full-model integration of the same three
+packed matrices.
+
+GPU005 adds performance characterization; it does not replace those
+correctness experiments.
+
+ALLOWED CLAIMS
+--------------
+1. GPU005 executed an ordinary FP16 CUDA baseline and the frozen GPU004
+   packed CUDA runtime under the documented local protocol.
+
+2. The candidate retained the same three frozen packed matrices.
+
+3. Both paths produced finite outputs.
+
+4. The measured latency difference may be reported only as a
+   protocol-specific observed result.
+
+5. Selected-weight packed storage may be reported separately from
+   whole-model GPU memory.
+
+FORBIDDEN CLAIMS
+----------------
+GPU005 does NOT establish:
+- universal GPU acceleration,
+- isolated custom-kernel speedup,
+- whole-model compression,
+- general VRAM reduction,
+- bit-exactness against the ordinary FP16 model,
+- broad conclusions across GPU architectures,
+- performance on modern datacenter GPUs.
+
+The Quadro P1000 is the only GPU characterized here.
+
+NEGATIVE RESULTS
+----------------
+A slower packed candidate is a valid experimental result.
+
+GPU005 is considered complete when the benchmark executes correctly,
+all mandatory measurements are present, the candidate uses exactly
+the three frozen matrices, and the report accurately preserves the
+observed result.
+
+FINAL RESULT
+------------
+GPU005: PASS
+
+Under this specific protocol, the GPU004 packed path observed 7.511% higher mean end-to-end forward latency than the ordinary FP16 CUDA baseline.
+
+The candidate observed lower CUDA allocated memory in both the ready-state and timed-peak diagnostics under this run. This remains a protocol-specific observation, not a broad GPU-memory claim.
