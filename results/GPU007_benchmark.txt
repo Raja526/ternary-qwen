@@ -1,0 +1,16 @@
+[ERROR] `image_like_kwargs` is part of BaseImageProcessor.preprocess's signature, but not documented. Make sure to add it to the docstring of the function in /home/raja/AI-Learning/ternary-qwen/.venv/lib/python3.10/site-packages/transformers/image_processing_utils.py.
+GPU007 — PARALLEL CUDA PACKED-TERNARY KERNEL
+GPU: Quadro P1000
+model.layers.3.self_attn.k_proj GPU003 0.441437 ms GPU007 2.062623 ms +367.253% mismatches 0
+model.layers.4.linear_attn.out_proj GPU003 1.716003 ms GPU007 6.606163 ms +284.974% mismatches 0
+model.layers.4.linear_attn.in_proj_qkv GPU003 8.262222 ms GPU007 26.522645 ms +221.011% mismatches 0
+Dominant target: model.layers.4.linear_attn.in_proj_qkv
+Raw result: results/GPU007_raw.json
+GPU007 BENCHMARK: PASS
+
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]
+Loading weights:  36%|███▌      | 114/320 [00:00<00:00, 1130.01it/s]
+Loading weights:  90%|█████████ | 288/320 [00:00<00:00, 1486.37it/s]
+Loading weights: 100%|██████████| 320/320 [00:00<00:00, 1463.74it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.

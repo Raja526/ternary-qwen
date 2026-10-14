@@ -1,0 +1,110 @@
+GPU007 EXPERIMENT REPORT
+========================
+
+STATUS
+------
+PASS
+
+EXPERIMENT
+----------
+GPU007 — Parallel CUDA packed-ternary kernel
+
+FROZEN RESEARCH PARENT
+----------------------
+627f37809cddaec7fd6f5900e07a90ae4ebb6fae
+
+OBJECTIVE
+---------
+Evaluate exactly one optimization of the frozen packed CUDA path:
+one 256-thread CUDA block per (batch_row, output_row), with
+cooperative packed-K traversal and shared-memory FP32 reduction.
+
+PROTOCOL
+--------
+Model: Qwen/Qwen3.5-0.8B
+GPU: Quadro P1000
+Compute capability: (6, 1)
+PyTorch: 2.14.0+cu126
+PyTorch CUDA: 12.6
+Prompt: A box contains 12 red balls and 8 blue balls. How many balls are in the box?
+Input tokens: 22
+Actual model activations were captured before benchmarking.
+The same captured activation tensor was passed to GPU003 and GPU007.
+CUDA synchronization was performed immediately before and after each timed call.
+Warmups per implementation per matrix: 10
+Timed repetitions per implementation per matrix: 50
+
+CORRECTNESS TOLERANCE
+---------------------
+Absolute tolerance: 0.002
+Relative tolerance: 0.002
+Meaningful relative denominator: 0.002
+The tolerance was fixed before interpreting benchmark results.
+
+MATRIX RESULTS
+--------------
+1. model.layers.3.self_attn.k_proj
+   Activation shape: (1, 22, 1024)
+   GPU003 mean / median / stdev: 0.441437 / 0.448699 / 0.020094 ms
+   GPU003 min / max: 0.416044 / 0.490847 ms
+   GPU007 mean / median / stdev: 2.062623 / 2.035382 / 0.053324 ms
+   GPU007 min / max: 2.013583 / 2.216961 ms
+   Latency delta: +1.621187 ms (+367.253%)
+   GPU003 ready / peak allocated: 8.605 / 8.659 MiB
+   GPU007 ready / peak allocated: 8.605 / 8.659 MiB
+   Max absolute error: 0.0004882812
+   Mean absolute error: 0.0000000706
+   Max relative error (meaningful): 0.0009216590
+   Mismatches under tolerance: 0/11264
+   Finite GPU003/GPU007: True/True
+
+2. model.layers.4.linear_attn.out_proj
+   Activation shape: (1, 22, 2048)
+   GPU003 mean / median / stdev: 1.716003 / 1.691699 / 0.064779 ms
+   GPU003 min / max: 1.617819 / 1.877903 ms
+   GPU007 mean / median / stdev: 6.606163 / 6.574977 / 0.061738 ms
+   GPU007 min / max: 6.554777 / 6.829414 ms
+   Latency delta: +4.890160 ms (+284.974%)
+   GPU003 ready / peak allocated: 9.445 / 9.553 MiB
+   GPU007 ready / peak allocated: 9.445 / 9.553 MiB
+   Max absolute error: 0.0000152588
+   Mean absolute error: 0.0000000016
+   Max relative error (meaningful): 0.0007331378
+   Mismatches under tolerance: 0/22528
+   Finite GPU003/GPU007: True/True
+
+3. model.layers.4.linear_attn.in_proj_qkv
+   Activation shape: (1, 22, 1024)
+   GPU003 mean / median / stdev: 8.262222 / 8.254898 / 0.128695 ms
+   GPU003 min / max: 7.982286 / 8.505611 ms
+   GPU007 mean / median / stdev: 26.522645 / 26.527934 / 0.060099 ms
+   GPU007 min / max: 26.437162 / 26.707206 ms
+   Latency delta: +18.260423 ms (+221.011%)
+   GPU003 ready / peak allocated: 12.000 / 12.645 MiB
+   GPU007 ready / peak allocated: 12.000 / 12.645 MiB
+   Max absolute error: 0.0009765625
+   Mean absolute error: 0.0000000494
+   Max relative error (meaningful): 0.0009606148
+   Mismatches under tolerance: 0/135168
+   Finite GPU003/GPU007: True/True
+
+DOMINANT-TARGET RESULT
+----------------------
+Largest GPU007-minus-GPU003 mean latency delta: model.layers.4.linear_attn.in_proj_qkv
+GPU007 is evaluated only against frozen GPU003; no FP16 superiority claim is made.
+
+VALIDATION GATES
+----------------
+- Frozen GPU003 direct reference: PASS
+- Exact packed codes, scales, group size, and dimensions: PASS
+- No ordinary FP16 weight fallback: PASS
+- Same captured activation tensor per comparison: PASS
+- Finite outputs and matching output shapes: PASS
+- Zero mismatches under predeclared tolerance: PASS
+- 10 warmups and 50 timed repetitions per implementation: PASS
+- CUDA synchronization around every timed call: PASS
+- Exactly one parallel-K optimization evaluated: PASS
+
+FINAL RESULT
+------------
+GPU007: PASS
